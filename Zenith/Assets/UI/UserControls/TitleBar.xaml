@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Zenith.Assets.UI.UserControls.TitleBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="800">
+    <Grid Background="#FFDDE1E3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Button Name="searchButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="2" Visibility="{Binding IsDialog, ElementName= owner, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter='False'}">
+            <Image Source="/Zenith;component/Resources/Images/Common/search.png" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
+        <Button Name="menuButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="3" Visibility="{Binding IsDialog, ElementName= owner, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter='False'}">
+            <Image Source="/Zenith;component/Resources/Images/Common/menu.png" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
+        <Button Name="minimizeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="4" Visibility="{Binding IsDialog, ElementName= owner, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter='False'}">
+            <Image Source="/Zenith;component/Resources/Images/Common/minimize.png" Width="14" Height="14" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
+        <Button Name="closeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="5">
+            <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
+        <Rectangle Stroke="Silver" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
+        <StackPanel Orientation="Horizontal">
+            <Border Background="Transparent" BorderBrush="Silver" BorderThickness="0" MinWidth="120">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="داشبــورد" VerticalAlignment="Center" Margin="8,0"/>
+                </Grid>
+            </Border>
+            <Border Background="White" BorderBrush="Silver" BorderThickness="1,1,1,0" MinWidth="150">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="لیست خریدها" VerticalAlignment="Center" Margin="8,0"/>
+                    <TextBlock Text="×" VerticalAlignment="Center" FontSize="18" Grid.Column="1" Margin="16,0,8,0"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

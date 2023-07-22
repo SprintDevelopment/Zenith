@@ -7,4 +7,28 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Images\Common\close.png" />
+    <None Remove="Resources\Images\Common\menu.png" />
+    <None Remove="Resources\Images\Common\minimize.png" />
+    <None Remove="Resources\Images\Common\search.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" Version="19.4.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="19.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Common\close.png" />
+    <Resource Include="Resources\Images\Common\menu.png" />
+    <Resource Include="Resources\Images\Common\minimize.png" />
+    <Resource Include="Resources\Images\Common\search.png" />
+  </ItemGroup>
+
 </Project>
