@@ -4,14 +4,159 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Zenith"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:Zenith" xmlns:controls="clr-namespace:Zenith.Assets.UI.UserControls"
+                          mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
     </WindowChrome.WindowChrome>
-
-    <Grid>
-
+    <Window.Resources>
+        <Storyboard x:Key="ShowMenuStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="MenuContainerScrollViewer">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="280">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideMenuStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="MenuContainerScrollViewer">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowSearchStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="searchUserControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="280">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideSearchStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="searchUserControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Grid FlowDirection="RightToLeft">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Frame Grid.Column="1" x:Name="Frame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="1" x:Name="CreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
+        <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Effect="{DynamicResource CommonShadow}" Width="0">
+            <StackPanel Background="White">
+                <controls:MenuItem Icon="Resources/Images/Menu/1.png" Title="قراردادها">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="Contract"/>
+                            <controls:SubMenuItem PageOrOperation="ContractList"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/2.png" Title="دریافت و پرداخت">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="Recieve"/>
+                            <controls:SubMenuItem PageOrOperation="Payment"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/3.png" Title="اشخاص">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="PersonTransactionListPage"/>
+                            <controls:SubMenuItem PageOrOperation="RecieveableChequeList"/>
+                            <controls:SubMenuItem PageOrOperation="PayableChequeList"/>
+                            <controls:SubMenuItem PageOrOperation="Person"/>
+                            <controls:SubMenuItem PageOrOperation="PersonList"/>
+                            <controls:SubMenuItem PageOrOperation="PersonGroupList"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/4.png" Title="هزینه ها">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="OutgoList"/>
+                            <controls:SubMenuItem PageOrOperation="OutgoCatList"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/5.png" Title="پیامرسانی">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="SMSList"/>
+                            <controls:SubMenuItem PageOrOperation="SMS"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/6.png" Title="گزارشات">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="Dashboard"/>
+                            <controls:SubMenuItem PageOrOperation="ReportList"/>
+                            <!--<controls:SubMenuItem PageOrOperation="AccountTransactionReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="PersonTransactionReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="ProductCartexReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="ProductValueReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="LoanReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="OutgoIncomeReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="TaxReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="ChequeReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="BuySaleReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="OverallReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="FinanceTReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem PageOrOperation="GainLoseReport" UC_Clicked="SMIUC_Clicked"/>-->
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/7.png" Title="کاربران و سطوح دسترسی">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="UserList"/>
+                            <controls:SubMenuItem PageOrOperation="User"/>
+                            <controls:SubMenuItem PageOrOperation="UserPermission"/>
+                            <controls:SubMenuItem PageOrOperation="ChangePassword"/>
+                            <controls:SubMenuItem PageOrOperation="UserAccessLogList"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/8.png" Title="تنظیمات">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="NoteList"/>
+                            <controls:SubMenuItem PageOrOperation="Settings"/>
+                            <controls:SubMenuItem PageOrOperation="OpenLogFile" Command="{Binding OpenLogFile}"/>
+                            <controls:SubMenuItem PageOrOperation="ShortcutList"/>
+                            <controls:SubMenuItem PageOrOperation="Backup_Data"/>
+                            <controls:SubMenuItem PageOrOperation="Restore_Data"/>
+                            <controls:SubMenuItem PageOrOperation="ProductActivation"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/9.png" Title="راهنما و پشتیبانی">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem PageOrOperation="TextHelp"/>
+                            <controls:SubMenuItem PageOrOperation="AboutSoftware"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+            </StackPanel>
+        </ScrollViewer>
+        <!--<controls:SearchUserControl x:Name="searchUserControl" Grid.Row="1" HorizontalAlignment="Left" Width="0"/>-->
+        <!--<controls:DialogUserControl x:Name="dialogUserControl" Grid.ColumnSpan="2"/>-->
     </Grid>
 </baseclasses:TabbedWindow>

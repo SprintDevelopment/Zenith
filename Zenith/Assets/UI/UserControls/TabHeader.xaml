@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
         mc:Ignorable="d" x:Name="owner"
         d:DesignHeight="40" d:DesignWidth="150">
-    <Border x:Name="headerBorder" Background="Transparent" BorderBrush="Silver" BorderThickness="0" MinWidth="120">
+    <Border x:Name="headerBorder" Background="Transparent" Margin="0,4,0,2" CornerRadius="4" MinWidth="120">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

@@ -26,14 +26,12 @@ namespace Zenith.Assets.UI.UserControls
                 headerBorder.InputBindings.Add(new MouseBinding(ViewModel.SelectCommand, new MouseGesture(MouseAction.LeftClick)));
                 headerBorder.InputBindings.Add(new MouseBinding(ViewModel.CloseCommand, new MouseGesture(MouseAction.MiddleClick)));
 
-                this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.headerBorder.Background, x => x ? Brushes.White : new SolidColorBrush(Color.FromRgb(221, 225, 227))).DisposeWith(d);
-                this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.headerBorder.BorderThickness, x => x ? new Thickness(1,1,1,0) : new Thickness(0,0,1,0)).DisposeWith(d);
-                this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.headerBorder.Margin, x => x ? new Thickness(0) : new Thickness(0,0,0,1)).DisposeWith(d);
-                
+                this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.headerBorder.Background, x => x ? Brushes.White : Brushes.Transparent).DisposeWith(d);
+
                 Observable.FromEventPattern(headerBorder, nameof(headerBorder.MouseEnter))
                     .Do(_ => { if (!ViewModel.IsSelected) headerBorder.Background = new SolidColorBrush(Color.FromRgb(250, 250, 250)); })
                     .Subscribe().DisposeWith(d);
-                
+
                 Observable.FromEventPattern(headerBorder, nameof(headerBorder.MouseLeave))
                     .Do(_ => { if (!ViewModel.IsSelected) headerBorder.Background = new SolidColorBrush(Color.FromRgb(221, 225, 227)); })
                     .Subscribe().DisposeWith(d);

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
-    <Grid x:Name="titleBarGrid" Background="#FFDDE1E3">
+    <Grid x:Name="titleBarGrid" Background="#FFDEE1E6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -16,18 +16,17 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <Button Name="searchButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="2">
-            <Image Source="/Zenith;component/Resources/Images/Common/search.png" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Source="/Zenith;component/Resources/Images/Common/search.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
         <Button Name="menuButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="3">
-            <Image Source="/Zenith;component/Resources/Images/Common/menu.png" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Source="/Zenith;component/Resources/Images/Common/menu.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
         <Button Name="minimizeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="4">
-            <Image Source="/Zenith;component/Resources/Images/Common/minimize.png" Width="14" Height="14" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Source="/Zenith;component/Resources/Images/Common/minimize.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
         <Button Name="closeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="5">
-            <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="10" Height="10" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
-        <Rectangle Stroke="Silver" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
         <!--<StackPanel Orientation="Horizontal">
             <Border Background="Transparent" BorderBrush="Silver" BorderThickness="0" MinWidth="120">
                 <Grid>
