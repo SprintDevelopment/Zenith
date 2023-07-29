@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zenith.Assets.UI.BaseClasses;
+using Zenith.Views.ListViews;
 
 namespace Zenith
 {
@@ -30,6 +31,7 @@ namespace Zenith
             {
                 var storyboard = Resources["ShowMenuStoryboard"] as Storyboard;
                 storyboard.Begin();
+                Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
             };
         }
     }

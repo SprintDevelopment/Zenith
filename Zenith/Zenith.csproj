@@ -8,9 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Common\add-new.png" />
+    <None Remove="Resources\Images\Common\allSelection.png" />
     <None Remove="Resources\Images\Common\close.png" />
+    <None Remove="Resources\Images\Common\delete.png" />
+    <None Remove="Resources\Images\Common\down.png" />
+    <None Remove="Resources\Images\Common\edit.png" />
+    <None Remove="Resources\Images\Common\filter.png" />
     <None Remove="Resources\Images\Common\menu.png" />
     <None Remove="Resources\Images\Common\minimize.png" />
+    <None Remove="Resources\Images\Common\next.png" />
+    <None Remove="Resources\Images\Common\noSelection.png" />
+    <None Remove="Resources\Images\Common\partialSelection.png" />
+    <None Remove="Resources\Images\Common\previous.png" />
     <None Remove="Resources\Images\Common\search.png" />
     <None Remove="Resources\Images\Menu\1.png" />
     <None Remove="Resources\Images\Menu\10.png" />
@@ -26,9 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Attributes\" />
     <Folder Include="Assets\Values\Enums\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,9 +48,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\Common\add-new.png" />
+    <Resource Include="Resources\Images\Common\allSelection.png" />
     <Resource Include="Resources\Images\Common\close.png" />
+    <Resource Include="Resources\Images\Common\delete.png" />
+    <Resource Include="Resources\Images\Common\down.png" />
+    <Resource Include="Resources\Images\Common\edit.png" />
+    <Resource Include="Resources\Images\Common\filter.png" />
     <Resource Include="Resources\Images\Common\menu.png" />
     <Resource Include="Resources\Images\Common\minimize.png" />
+    <Resource Include="Resources\Images\Common\next.png" />
+    <Resource Include="Resources\Images\Common\noSelection.png" />
+    <Resource Include="Resources\Images\Common\partialSelection.png" />
+    <Resource Include="Resources\Images\Common\previous.png" />
     <Resource Include="Resources\Images\Common\search.png" />
     <Resource Include="Resources\Images\Menu\1.png" />
     <Resource Include="Resources\Images\Menu\2.png" />
