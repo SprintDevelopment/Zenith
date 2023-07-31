@@ -37,6 +37,7 @@ namespace Zenith.Assets.UI.UserControls
             {
                 ViewModel.Tabs
                     .ToObservableChangeSet()
+                    .ObserveOn(RxApp.MainThreadScheduler)
                     .Transform(tvm => new TabHeader { ViewModel = tvm })
                     .OnItemAdded(addedTabHeader => tabsPanel.Children.Add(addedTabHeader))
                     .OnItemRemoved(removedTabHeader => tabsPanel.Children.Remove(removedTabHeader))

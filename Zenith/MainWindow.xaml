@@ -56,9 +56,9 @@
         </Grid.ColumnDefinitions>
         <Frame Grid.Column="1" x:Name="Frame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <Frame Grid.Column="1" x:Name="CreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
-        <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Effect="{DynamicResource CommonShadow}" Width="0">
-            <StackPanel Background="White">
-                <controls:MenuItem Icon="Resources/Images/Menu/1.png" Title="قراردادها">
+        <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{DynamicResource CommonShadow}" Width="0">
+            <StackPanel Background="#FFFAFAFA" VerticalAlignment="Top">
+                <controls:MenuItem Icon="Resources/Images/Menu/1.png" Title="قراردادها" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="Contract"/>
@@ -66,7 +66,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/2.png" Title="دریافت و پرداخت">
+                <controls:MenuItem Icon="Resources/Images/Menu/2.png" Title="دریافت و پرداخت" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="Recieve"/>
@@ -74,7 +74,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/3.png" Title="اشخاص">
+                <controls:MenuItem Icon="Resources/Images/Menu/3.png" Title="اشخاص" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="PersonTransactionListPage"/>
@@ -86,7 +86,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/4.png" Title="هزینه ها">
+                <controls:MenuItem Icon="Resources/Images/Menu/4.png" Title="هزینه ها" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="OutgoList"/>
@@ -94,7 +94,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/5.png" Title="پیامرسانی">
+                <controls:MenuItem Icon="Resources/Images/Menu/5.png" Title="پیامرسانی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="SMSList"/>
@@ -102,7 +102,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/6.png" Title="گزارشات">
+                <controls:MenuItem Icon="Resources/Images/Menu/6.png" Title="گزارشات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="Dashboard"/>
@@ -122,7 +122,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/7.png" Title="کاربران و سطوح دسترسی">
+                <controls:MenuItem Icon="Resources/Images/Menu/7.png" Title="کاربران و سطوح دسترسی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="UserList"/>
@@ -133,7 +133,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/8.png" Title="تنظیمات">
+                <controls:MenuItem Icon="Resources/Images/Menu/8.png" Title="تنظیمات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="NoteList"/>
@@ -146,7 +146,7 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/9.png" Title="راهنما و پشتیبانی">
+                <controls:MenuItem Icon="Resources/Images/Menu/9.png" Title="راهنما و پشتیبانی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem PageOrOperation="TextHelp"/>

@@ -7,14 +7,36 @@
         xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
         mc:Ignorable="d" x:Name="owner"
         d:DesignHeight="40" d:DesignWidth="150">
-    <Border x:Name="headerBorder" CornerRadius="8,8,0,0" MinWidth="200">
+    <helpers:ActivatableUserControl.Resources>
+        <Storyboard x:Key="ShowStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="headerBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="200">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="headerBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </helpers:ActivatableUserControl.Resources>
+    <Border x:Name="headerBorder" CornerRadius="8,8,0,0" Width="0">
         <Grid Margin="0,2,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0"/>
-            <TextBlock Text="×" VerticalAlignment="Center" FontSize="18" Grid.Column="1" Margin="8,0"/>
+            <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="18" Height="18" Grid.Column="1" Margin="8,0">
+                <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="8" Height="8" RenderOptions.BitmapScalingMode="HighQuality"/>
+            </Button>
             <Path Fill="{Binding Background, ElementName=headerBorder}" Data="M 8,0 Q 8,8 0,8 L 8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-8,0"/>
             <Path Fill="{Binding Background, ElementName=headerBorder}" Data="M 0,0 Q 0,8 8,8 L 0,8" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-8,0"/>
         </Grid>
