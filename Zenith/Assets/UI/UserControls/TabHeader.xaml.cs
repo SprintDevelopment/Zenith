@@ -27,13 +27,14 @@ namespace Zenith.Assets.UI.UserControls
                 headerBorder.InputBindings.Add(new MouseBinding(ViewModel.CloseCommand, new MouseGesture(MouseAction.MiddleClick)));
 
                 this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.headerBorder.Background, x => x ? Brushes.White : Brushes.Transparent).DisposeWith(d);
+                this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.FontWeight, x => x ? FontWeights.SemiBold : FontWeights.Normal).DisposeWith(d);
 
                 Observable.FromEventPattern(headerBorder, nameof(headerBorder.MouseEnter))
                     .Do(_ => { if (!ViewModel.IsSelected) headerBorder.Background = new SolidColorBrush(Color.FromRgb(250, 250, 250)); })
                     .Subscribe().DisposeWith(d);
 
                 Observable.FromEventPattern(headerBorder, nameof(headerBorder.MouseLeave))
-                    .Do(_ => { if (!ViewModel.IsSelected) headerBorder.Background = new SolidColorBrush(Color.FromRgb(221, 225, 227)); })
+                    .Do(_ => { if (!ViewModel.IsSelected) headerBorder.Background = Brushes.Transparent; })
                     .Subscribe().DisposeWith(d);
             });
         }

@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
         mc:Ignorable="d" 
         d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel x:Name="tabsPanel" Orientation="Horizontal">
+    <StackPanel x:Name="tabsPanel" Orientation="Horizontal" Margin="8,0">
             
     </StackPanel>
 </helpers:ActivatableUserControl>
