@@ -47,9 +47,9 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
                 CreateOrUpdateCommand = ReactiveCommand.Create<Unit>(_ =>
                 {
-                    var cuCommandResult = IsNew ? Repository.Insert(pm) : Repository.Update(pm);
-                    if (cuCommandResult)
-                        ChangeSet.Add(pm);
+                    var cuCommandResult = IsNew ? Repository.Add(pm) : Repository.Update(pm);
+                    
+                    ChangeSet.Add(pm);
                 }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
 
                 createOrUpdateDisposable?.Dispose();
@@ -68,7 +68,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 if (key == null)
                     PageModel = new T();
                 else
-                    PageModel = Repository.GetSingle(key);
+                    PageModel = Repository.Single(key);
             });
         }
 

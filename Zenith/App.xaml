@@ -1,7 +1,9 @@
 ﻿<Application x:Class="Zenith.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Zenith" xmlns:converters="clr-namespace:Zenith.Assets.UI.Converters"
+             xmlns:local="clr-namespace:Zenith"
+             xmlns:converters="clr-namespace:Zenith.Assets.UI.Converters"
+             xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="SCWhite" Color="White"/>
@@ -14,6 +16,54 @@
         <converters:BoolConverter x:Key="boolConverter"/>
         <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
+
+        <Style TargetType="{x:Type baseclasses:JTextBox}">
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Margin" Value="24,16,24,0"/>
+            <Setter Property="MinHeight" Value="42"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type baseclasses:JTextBox}">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Title}" FontSize="12" Foreground="{Binding Stroke, ElementName=border}" VerticalAlignment="Top"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Bottom" Margin="12,16,0,0"/>
+                            <Rectangle x:Name="border" Stroke="#FFBDBDBD" StrokeThickness="1" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Opacity=".2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="#FF6EBDFF"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="#FF4AADFF"/>
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Red"/>
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
 
         <Style x:Key="TitleBarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -103,6 +153,39 @@
                                     <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="MinWidth" Value="70"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="2" Background="#FF3CA3F4" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF2196F3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF1F8DE4"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#FFF3F3F3"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

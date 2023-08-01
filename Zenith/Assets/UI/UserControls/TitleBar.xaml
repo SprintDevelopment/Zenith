@@ -27,26 +27,5 @@
         <Button Name="closeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="5">
             <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="10" Height="10" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
-        <!--<StackPanel Orientation="Horizontal">
-            <Border Background="Transparent" BorderBrush="Silver" BorderThickness="0" MinWidth="120">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="داشبــورد" VerticalAlignment="Center" Margin="8,0"/>
-                </Grid>
-            </Border>
-            <Border Background="White" BorderBrush="Silver" BorderThickness="1,1,1,0" MinWidth="150">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="لیست خریدها" VerticalAlignment="Center" Margin="8,0"/>
-                    <TextBlock Text="×" VerticalAlignment="Center" FontSize="18" Grid.Column="1" Margin="16,0,8,0"/>
-                </Grid>
-            </Border>
-        </StackPanel>-->
     </Grid>
 </UserControl>

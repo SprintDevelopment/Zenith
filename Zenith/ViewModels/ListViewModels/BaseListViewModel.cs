@@ -27,7 +27,7 @@ namespace Zenith.ViewModels.ListViewModels
             ViewTitle = $"لیست {modelAttributes.MultipleName}";
             Repository = repository;
 
-            SourceList = new SourceList<T>(Repository.Get().AsObservableChangeSet());
+            SourceList = new SourceList<T>(Repository.All().AsObservableChangeSet());
             void calculate()
             {
                 var itemsCount = ActiveList.Count();
@@ -102,7 +102,7 @@ namespace Zenith.ViewModels.ListViewModels
                     SourceList.Edit(updater =>
                     {
                         var toRemoveItems = ActiveList.Where(x => x.IsSelected);
-                        Repository.Delete(toRemoveItems);
+                        Repository.RemoveRange(toRemoveItems);
                         foreach (var item in toRemoveItems)
                         {
                             updater.Remove(item);

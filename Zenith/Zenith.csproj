@@ -16,6 +16,7 @@
     <None Remove="Resources\Images\Common\edit.png" />
     <None Remove="Resources\Images\Common\filter.png" />
     <None Remove="Resources\Images\Common\menu.png" />
+    <None Remove="Resources\Images\Common\mini-close.png" />
     <None Remove="Resources\Images\Common\minimize.png" />
     <None Remove="Resources\Images\Common\next.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
@@ -40,6 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ReactiveUI" Version="19.4.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
@@ -56,6 +63,7 @@
     <Resource Include="Resources\Images\Common\edit.png" />
     <Resource Include="Resources\Images\Common\filter.png" />
     <Resource Include="Resources\Images\Common\menu.png" />
+    <Resource Include="Resources\Images\Common\mini-close.png" />
     <Resource Include="Resources\Images\Common\minimize.png" />
     <Resource Include="Resources\Images\Common\next.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />

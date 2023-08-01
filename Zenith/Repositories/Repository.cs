@@ -1,49 +1,36 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Zenith.Assets.Extensions;
+using Zenith.Data;
 using Zenith.Models;
 
 namespace Zenith.Repositories
 {
     public class Repository<T> where T : Model
     {
-        public IEnumerable<T> Get(T selector = null)
+        protected static DbContext _context;
+        public Repository()
         {
-            return Enumerable.Empty<T>();
+            if (_context == null)
+                _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer("Server=.;Database=Zenith;Trusted_Connection=True;MultipleActiveResultSets=True;Encrypt=False").Options);
         }
 
-        public int GetCount(string searchCriteria)
-        {
-            return 1;
-        }
+        public IEnumerable<T> All() => _context.Set<T>().AsEnumerable();
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate) => _context.Set<T>().Where(predicate).AsEnumerable();
+        public T Single(dynamic id) => _context.Set<T>().Find(id);
 
-        public virtual T GetSingle(dynamic key, T selector = null)
-        {
-            return null;
-        }
+        public T Add(T entity) => _context.Set<T>().Add(entity).Entity;
+        public T Update(T entity) => _context.Set<T>().Update(entity).Entity;
+        public void Remove(T entity) => _context.Set<T>().Remove(entity);
 
-        public IEnumerable<T> Find(string searchCriteria, T selector = null)
-        {
-            return Enumerable.Empty<T>();
-        }
-
-        public virtual bool Insert(T modelToInsert, bool isKeyPropertyCare = false)
-        {
-            return false;
-        }
-
-        public virtual bool Update(T modelToUpdate)
-        {
-            return false;
-        }
-
-        public int Delete(IEnumerable<T> itemsToDelete)
-        {
-            return 1;
-        }
+        public void AddRange(IEnumerable<T> entities) => _context.Set<T>().AddRange(entities);
+        public void RemoveRange(IEnumerable<T> entities) => _context.Set<T>().RemoveRange(entities);
     }
 }

@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zenith" xmlns:controls="clr-namespace:Zenith.Assets.UI.UserControls"
-                          mc:Ignorable="d"
+        MinWidth="800"
+        mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
