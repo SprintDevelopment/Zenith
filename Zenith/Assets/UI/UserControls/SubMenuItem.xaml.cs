@@ -23,13 +23,6 @@ namespace Zenith.Assets.UI.UserControls
     /// </summary>
     public partial class SubMenuItem : UserControl
     {
-        public PagesOrOperations PageOrOperation
-        {
-            get { return (PagesOrOperations)base.GetValue(PageOrOperationProperty); }
-            set { base.SetValue(PageOrOperationProperty, value); }
-        }
-        public static readonly DependencyProperty PageOrOperationProperty = DependencyProperty.Register("PageOrOperation", typeof(PagesOrOperations), typeof(SubMenuItem), new FrameworkPropertyMetadata(PagesOrOperations.None, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PageOrOperationChanged));
-
         public ICommand Command
         {
             get { return (ICommand)base.GetValue(CommandProperty); }
@@ -37,34 +30,30 @@ namespace Zenith.Assets.UI.UserControls
         }
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(SubMenuItem), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public NavigationLinkAttribute NavigationLink { get; set; } = new NavigationLinkAttribute();
-
-        public static void PageOrOperationChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        public object CommandParameter
         {
-            var thisInstance = dependencyObject as SubMenuItem;
-
-            var navigationLink = ((PagesOrOperations)e.NewValue).GetAttribute<NavigationLinkAttribute>();
-
-            if (navigationLink != null)
-            {
-                thisInstance.NavigationLink.Title = navigationLink.Title;
-                thisInstance.NavigationLink.Shortcut = navigationLink.Shortcut;
-                thisInstance.NavigationLink.NavigationPageSource = navigationLink.NavigationPageSource;
-                thisInstance.NavigationLink.Icon = navigationLink.Icon;
-            }
+            get { return (ICommand)base.GetValue(CommandParameterProperty); }
+            set { base.SetValue(CommandParameterProperty, value); }
         }
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(SubMenuItem), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public string Title
+        {
+            get { return (string)base.GetValue(TitleProperty); }
+            set { base.SetValue(TitleProperty, value); }
+        }
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(SubMenuItem), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public string Shortcut
+        {
+            get { return (string)base.GetValue(ShortcutProperty); }
+            set { base.SetValue(ShortcutProperty, value); }
+        }
+        public static readonly DependencyProperty ShortcutProperty = DependencyProperty.Register("Shortcut", typeof(string), typeof(SubMenuItem), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public SubMenuItem()
         {
             InitializeComponent();
-        }
-
-        public event EventHandler Clicked;
-
-        private void NavigationButton_Click(object sender, RoutedEventArgs e)
-        {
-            Clicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              Name="owner" Height="50">
     <Grid>
-        <Button Style="{DynamicResource SimpleButtonStyle}" Click="NavigationButton_Click">
+        <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding Command, ElementName=owner}" CommandParameter="{Binding CommandParameter, ElementName=owner}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding NavigationLink.Title, ElementName=owner}" HorizontalAlignment="Left" Margin="32,0,0,0" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="{Binding NavigationLink.Shortcut, ElementName=owner}" HorizontalAlignment="Right" Margin="0,0,12,0" FontSize="13" VerticalAlignment="Center" Foreground="#FF3399FF" FontFamily="Candara" Background="#FFF3F3F3"/>
+                <TextBlock Text="{Binding Title, ElementName=owner}" HorizontalAlignment="Left" Margin="32,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="{Binding Shortcut, ElementName=owner}" HorizontalAlignment="Right" Margin="0,0,12,0" FontSize="13" VerticalAlignment="Center" Foreground="#FF3399FF" FontFamily="Candara" Background="#FFF3F3F3"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeDashArray="2 2"/>
             </Grid>
         </Button>

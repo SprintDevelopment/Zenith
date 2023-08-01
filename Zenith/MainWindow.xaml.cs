@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zenith.Assets.UI.BaseClasses;
 using Zenith.ViewModels;
+using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.ListViews;
 
 namespace Zenith
@@ -24,27 +26,30 @@ namespace Zenith
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : TabbedWindow
+    public partial class MainWindow : TabbedWindow, IViewFor<MainViewModel>
     {
-        MainViewModel ViewModel = App.MainViewModel;
-
         public MainWindow()
         {
             InitializeComponent();
 
-            Loaded += (s, e) =>
+            ViewModel = App.MainViewModel;
+
+            this.WhenActivated(d =>
             {
                 this.DataContext = ViewModel;
 
-                TitleBar.MenuClicked += (ss, ee) => { ViewModel.IsMenuVisible = !ViewModel.IsLocked && !ViewModel.IsMenuVisible; };
+                Observable.FromEventPattern(TitleBar, nameof(TitleBar.MenuClicked))
+                    .Do(_ => ViewModel.IsMenuVisible = !ViewModel.IsLocked && !ViewModel.IsMenuVisible)
+                    .Subscribe().DisposeWith(d);
 
-                ViewModel.WhenAnyValue(vm => vm.IsMenuVisible).Subscribe(isMenuVisible =>
-                {
-                    if (isMenuVisible)
-                        ViewModel.IsSearchVisible = false;
-                    var storyboard = Resources[isMenuVisible ? "ShowMenuStoryboard" : "HideMenuStoryboard"] as Storyboard;
-                    storyboard.Begin();
-                });
+                ViewModel.WhenAnyValue(vm => vm.IsMenuVisible)
+                    .Do(isMenuVisible =>
+                    {
+                        if (isMenuVisible)
+                            ViewModel.IsSearchVisible = false;
+                        var storyboard = Resources[isMenuVisible ? "ShowMenuStoryboard" : "HideMenuStoryboard"] as Storyboard;
+                        storyboard.Begin();
+                    }).Subscribe().DisposeWith(d);
 
                 //ViewModel.WhenAnyValue(vm => vm.IsSearchVisible).Subscribe(isSearchVisible =>
                 //{
@@ -89,7 +94,16 @@ namespace Zenith
 
                 Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
                 //CreateUpdateFrame.Navigate(new ContractPage() { FontFamily = this.FontFamily });
-            };
+            });
         }
+
+
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (MainViewModel)value; }
+        }
+
+        public MainViewModel ViewModel { get; set; }
     }
 }

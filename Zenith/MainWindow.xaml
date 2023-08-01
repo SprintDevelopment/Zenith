@@ -59,99 +59,99 @@
         <Frame Grid.Column="1" x:Name="CreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{DynamicResource CommonShadow}" Width="0">
             <StackPanel Background="#FFFAFAFA" VerticalAlignment="Top">
-                <controls:MenuItem Icon="Resources/Images/Menu/1.png" Title="قراردادها" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/1.png" Title="دریافت و پرداخت" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="Contract"/>
-                            <controls:SubMenuItem PageOrOperation="ContractList"/>
-                        </StackPanel>
-                    </controls:MenuItem.AdditionalContent>
-                </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/2.png" Title="دریافت و پرداخت" Margin="0,1">
-                    <controls:MenuItem.AdditionalContent>
-                        <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="Recieve"/>
-                            <controls:SubMenuItem PageOrOperation="Payment"/>
+                            <controls:SubMenuItem Title="Recieve" Command="{Binding OpenLogFile}" CommandParameter="GoalKeeper.txt"/>
+                            <controls:SubMenuItem Title="Payment" Command="{Binding OpenLogFile}" CommandParameter="file.txt"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/3.png" Title="اشخاص" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="PersonTransactionListPage"/>
-                            <controls:SubMenuItem PageOrOperation="RecieveableChequeList"/>
-                            <controls:SubMenuItem PageOrOperation="PayableChequeList"/>
-                            <controls:SubMenuItem PageOrOperation="Person"/>
-                            <controls:SubMenuItem PageOrOperation="PersonList"/>
-                            <controls:SubMenuItem PageOrOperation="PersonGroupList"/>
+                            <controls:SubMenuItem Title="PersonTransactionListPage"/>
+                            <controls:SubMenuItem Title="RecieveableChequeList"/>
+                            <controls:SubMenuItem Title="PayableChequeList"/>
+                            <controls:SubMenuItem Title="Person"/>
+                            <controls:SubMenuItem Title="PersonList"/>
+                            <controls:SubMenuItem Title="PersonGroupList"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/4.png" Title="هزینه ها" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="OutgoList"/>
-                            <controls:SubMenuItem PageOrOperation="OutgoCatList"/>
+                            <controls:SubMenuItem Title="OutgoList"/>
+                            <controls:SubMenuItem Title="OutgoCatList"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/materials.png" Title="محصولات" Margin="0,1">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem Title="Material"/>
+                            <controls:SubMenuItem Title="MaterialList"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/5.png" Title="پیامرسانی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="SMSList"/>
-                            <controls:SubMenuItem PageOrOperation="SMS"/>
+                            <controls:SubMenuItem Title="SMSList"/>
+                            <controls:SubMenuItem Title="SMS"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/6.png" Title="گزارشات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="Dashboard"/>
-                            <controls:SubMenuItem PageOrOperation="ReportList"/>
-                            <!--<controls:SubMenuItem PageOrOperation="AccountTransactionReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="PersonTransactionReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="ProductCartexReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="ProductValueReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="LoanReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="OutgoIncomeReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="TaxReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="ChequeReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="BuySaleReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="OverallReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="FinanceTReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem PageOrOperation="GainLoseReport" UC_Clicked="SMIUC_Clicked"/>-->
+                            <controls:SubMenuItem Title="Dashboard"/>
+                            <controls:SubMenuItem Title="ReportList"/>
+                            <!--<controls:SubMenuItem Title="AccountTransactionReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="PersonTransactionReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="ProductCartexReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="ProductValueReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="LoanReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="OutgoIncomeReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="TaxReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="ChequeReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="BuySaleReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="OverallReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="FinanceTReport" UC_Clicked="SMIUC_Clicked"/>
+                                <controls:SubMenuItem Title="GainLoseReport" UC_Clicked="SMIUC_Clicked"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/7.png" Title="کاربران و سطوح دسترسی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="UserList"/>
-                            <controls:SubMenuItem PageOrOperation="User"/>
-                            <controls:SubMenuItem PageOrOperation="UserPermission"/>
-                            <controls:SubMenuItem PageOrOperation="ChangePassword"/>
-                            <controls:SubMenuItem PageOrOperation="UserAccessLogList"/>
+                            <controls:SubMenuItem Title="UserList"/>
+                            <controls:SubMenuItem Title="User"/>
+                            <controls:SubMenuItem Title="UserPermission"/>
+                            <controls:SubMenuItem Title="ChangePassword"/>
+                            <controls:SubMenuItem Title="UserAccessLogList"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/8.png" Title="تنظیمات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="NoteList"/>
-                            <controls:SubMenuItem PageOrOperation="Settings"/>
-                            <controls:SubMenuItem PageOrOperation="OpenLogFile" Command="{Binding OpenLogFile}"/>
-                            <controls:SubMenuItem PageOrOperation="ShortcutList"/>
-                            <controls:SubMenuItem PageOrOperation="Backup_Data"/>
-                            <controls:SubMenuItem PageOrOperation="Restore_Data"/>
-                            <controls:SubMenuItem PageOrOperation="ProductActivation"/>
+                            <controls:SubMenuItem Title="NoteList"/>
+                            <controls:SubMenuItem Title="Settings"/>
+                            <controls:SubMenuItem Title="OpenLogFile" Command="{Binding OpenLogFile}"/>
+                            <controls:SubMenuItem Title="ShortcutList"/>
+                            <controls:SubMenuItem Title="Backup_Data"/>
+                            <controls:SubMenuItem Title="Restore_Data"/>
+                            <controls:SubMenuItem Title="ProductActivation"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/9.png" Title="راهنما و پشتیبانی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem PageOrOperation="TextHelp"/>
-                            <controls:SubMenuItem PageOrOperation="AboutSoftware"/>
+                            <controls:SubMenuItem Title="TextHelp"/>
+                            <controls:SubMenuItem Title="AboutSoftware"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

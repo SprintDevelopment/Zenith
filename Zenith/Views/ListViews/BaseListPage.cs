@@ -80,6 +80,5 @@ namespace Zenith.Views.ListViews
         }
 
         public BaseListViewModel<T> ViewModel { get; set; }
-
     }
 }

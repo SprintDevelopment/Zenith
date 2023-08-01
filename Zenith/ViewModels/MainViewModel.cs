@@ -38,9 +38,9 @@ namespace Zenith.ViewModels
                 return model;
             }, this.WhenAnyValue(vm => vm.IsLocked).Where(il => !il));
 
-            OpenLogFile = ReactiveCommand.Create<Unit>(_ =>
+            OpenLogFile = ReactiveCommand.Create<string>(_ =>
             {
-                Process.Start("notepad.exe", "C:\\file.txt");
+                Process.Start("notepad.exe", $"C:\\{_}");
             });
         }
 
@@ -91,7 +91,7 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> CreateUpdatePageReturned { get; set; }
         public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearch { get; set; }
         //
-        public ReactiveCommand<Unit, Unit> OpenLogFile { get; set; }
+        public ReactiveCommand<string, Unit> OpenLogFile { get; set; }
 
     }
 }

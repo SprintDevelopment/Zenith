@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,17 +17,27 @@ using Zenith.Assets.UI.UserControls;
 
 namespace Zenith.Assets.UI.BaseClasses
 {
-    public class TabbedWindow : Window
+    public class TabbedWindow : Window, IActivationForViewFetcher, ICanActivate
     {
+        #region Implements IActivationForViewFetcher
+        public int GetAffinityForView(Type view) => 1;
+        public IObservable<bool> GetActivationForView(IActivatableView view) => Observable.FromEventPattern(this, nameof(Loaded)).Select(x => true);
+        #endregion
+
+        #region Implements ICanActivate
+        public IObservable<Unit> Activated => Observable.FromEventPattern(this, nameof(Loaded)).Select(x => Unit.Default);
+        public IObservable<Unit> Deactivated => Observable.FromEventPattern(this, nameof(Unloaded)).Select(x => Unit.Default);
+        #endregion
+     
         public TitleBar TitleBar { get; private set; }
 
         public TabbedWindow()
         {
             base.Initialized += (sender, eventArgs) =>
             {
-                this.WindowState = WindowState.Maximized;
-                this.FontFamily = new FontFamily("Vazir FD");
-                this.FontSize = 14;
+                WindowState = WindowState.Maximized;
+                FontFamily = new FontFamily("Vazir FD");
+                FontSize = 14;
 
                 TitleBar = new TitleBar();
                 TitleBar.Closed += (s, e) => this.Close();
