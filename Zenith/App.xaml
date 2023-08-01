@@ -32,7 +32,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type baseclasses:JTextBox}">
                         <Grid>
-                            <TextBlock Text="{TemplateBinding Title}" FontSize="12" Foreground="{Binding Stroke, ElementName=border}" VerticalAlignment="Top"/>
+                            <TextBlock Text="{TemplateBinding Title}" FontSize="13" Foreground="{Binding Stroke, ElementName=border}" VerticalAlignment="Top"/>
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Bottom" Margin="12,16,0,0"/>
                             <Rectangle x:Name="border" Stroke="#FFBDBDBD" StrokeThickness="1" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Opacity=".2"/>
                         </Grid>

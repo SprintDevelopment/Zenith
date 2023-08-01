@@ -7,6 +7,7 @@ using Zenith.Assets.Extensions;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
+using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.CreateOrUpdateViews;
 
 namespace Zenith.Views.ListViews
@@ -25,7 +26,12 @@ namespace Zenith.Views.ListViews
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(SynchronizationContext.Current)
                 .Select(subject => new Func<Note, bool>(p => subject.IsNullOrWhiteSpace() || p.Subject.Contains(subject)));
 
-            Initialize(new NotePage(), new NoteRepository(), searchModel, dynamicFilter);
+            ViewModel = new BaseListViewModel<Note>(new NoteRepository(), searchModel, dynamicFilter)
+            {
+                CreateUpdatePage = new NotePage()
+            };
+
+            //Initialize(new NotePage(), new NoteRepository(), searchModel, dynamicFilter);
         }
     }
 }

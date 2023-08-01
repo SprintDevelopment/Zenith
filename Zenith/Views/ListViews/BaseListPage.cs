@@ -1,6 +1,9 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -10,31 +13,26 @@ using Zenith.Models;
 using Zenith.Repositories;
 using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.CreateOrUpdateViews;
+using Zenith.Assets.UI.Helpers;
 
 namespace Zenith.Views.ListViews
 {
-    public class BaseListPage<T> : Page where T : Model, new()
+    public class BaseListPage<T> : ActivatablePage, IViewFor<BaseListViewModel<T>> where T : Model, new()
     {
-        public BaseListViewModel<T> ViewModel { get; private set; }
         KeyEventHandler WindowPreviewKeyDownEventHandler;
 
         public BaseListPage()
         {
             var window = App.Current.MainWindow as MainWindow;
 
-            WindowPreviewKeyDownEventHandler = (s, e) => { ListBasePage_PreviewKeyDown(s, e); };
-            this.Loaded += (s, e) => { window.PreviewKeyDown += WindowPreviewKeyDownEventHandler; };
-            this.Unloaded += (s, e) => { window.PreviewKeyDown -= WindowPreviewKeyDownEventHandler; };
-        }
-
-        public void Initialize(BaseCreateOrUpdatePage<T> createUpdatePage, Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria)
-        {
-            ViewModel = new BaseListViewModel<T>(repository, searchModel, criteria)
+            this.WhenActivated(d =>
             {
-                CreateUpdatePage = createUpdatePage
-            };
-            this.Unloaded += (s, e) => { ViewModel.DisposeCommand.Execute().Subscribe(); };
-            this.DataContext = ViewModel;
+                this.DataContext = ViewModel;
+
+            });
+            //WindowPreviewKeyDownEventHandler = (s, e) => { ListBasePage_PreviewKeyDown(s, e); };
+            //this.Loaded += (s, e) => { window.PreviewKeyDown += WindowPreviewKeyDownEventHandler; };
+            //this.Unloaded += (s, e) => { window.PreviewKeyDown -= WindowPreviewKeyDownEventHandler; };
         }
 
         private void ListBasePage_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -74,5 +72,14 @@ namespace Zenith.Views.ListViews
                 e.Handled = true;
             }
         }
+        
+        object IViewFor.ViewModel 
+        {
+            get { return ViewModel; }
+            set { ViewModel = (BaseListViewModel<T>)value; }
+        }
+
+        public BaseListViewModel<T> ViewModel { get; set; }
+
     }
 }

@@ -10,7 +10,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="NotePage" FontSize="15">
 
-    <Grid Background="#60000000" FlowDirection="RightToLeft">
+    <Grid FlowDirection="RightToLeft">
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
