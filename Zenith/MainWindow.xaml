@@ -4,7 +4,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Zenith" xmlns:controls="clr-namespace:Zenith.Assets.UI.UserControls"
+        xmlns:local="clr-namespace:Zenith"
+        xmlns:listViews="clr-namespace:Zenith.Views.ListViews"
+        xmlns:controls="clr-namespace:Zenith.Assets.UI.UserControls"
         MinWidth="1400" MinHeight="800"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -90,8 +92,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/materials.png" Title="محصولات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Material"/>
-                            <controls:SubMenuItem Title="MaterialList"/>
+                            <controls:SubMenuItem Title="لیست محصولات"/>
+                            <controls:SubMenuItem Title="محصول جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -137,13 +139,13 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/8.png" Title="تنظیمات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="NoteList"/>
-                            <controls:SubMenuItem Title="Settings"/>
-                            <controls:SubMenuItem Title="OpenLogFile" Command="{Binding OpenLogFile}"/>
-                            <controls:SubMenuItem Title="ShortcutList"/>
-                            <controls:SubMenuItem Title="Backup_Data"/>
-                            <controls:SubMenuItem Title="Restore_Data"/>
-                            <controls:SubMenuItem Title="ProductActivation"/>
+                            <controls:SubMenuItem Title="یادداشت ها"/>
+                            <controls:SubMenuItem Title="تنظیمات"/>
+                            <controls:SubMenuItem Title="نمایش فایل لاگ" Command="{Binding OpenLogFile}"/>
+                            <controls:SubMenuItem Title="کلیدهای میانبر"/>
+                            <controls:SubMenuItem Title="پشتیبان گیری از داده ها"/>
+                            <controls:SubMenuItem Title="بازیابی فایل پشتیبان"/>
+                            <controls:SubMenuItem Title="فعالسازی نرم افزار"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

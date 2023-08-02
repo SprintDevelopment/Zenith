@@ -16,6 +16,7 @@ using Zenith.Assets.Values.Enums;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Attributes;
 using Zenith.Views.CreateOrUpdateViews;
+using System.Collections.ObjectModel;
 
 namespace Zenith.ViewModels.ListViewModels
 {
@@ -27,7 +28,7 @@ namespace Zenith.ViewModels.ListViewModels
             ViewTitle = $"لیست {modelAttributes.MultipleName}";
             Repository = repository;
 
-            SourceList = new SourceList<T>(Repository.All().AsObservableChangeSet());
+            //!!!!!!SourceList.AddRange(Repository.All());
             void calculate()
             {
                 var itemsCount = ActiveList.Count();
@@ -46,8 +47,8 @@ namespace Zenith.ViewModels.ListViewModels
                 }
             };
 
-            SourceList.AsObservableList().Connect()
-                 .Filter(criteria).Bind(ActiveList).Subscribe(_ =>
+            SourceList.Connect()
+                 .Bind(out ActiveList).Subscribe(_ =>
                  {
                      //var counter = 0;
                      //ActiveList.ForEach(item => item.Order = ++counter);
@@ -121,13 +122,7 @@ namespace Zenith.ViewModels.ListViewModels
                 {
                     if (!changeSet.IsNullOrEmpty())
                     {
-                        SourceList.Edit(updater =>
-                        {
-                            //foreach (var item in changeSet)
-                            //{
-                            //    updater.Add(item);
-                            //};
-                        });
+                        SourceList.AddRange(changeSet);
                     }
                     App.MainViewModel.CreateUpdatePageReturned.Execute().Subscribe();
                 });
@@ -177,7 +172,7 @@ namespace Zenith.ViewModels.ListViewModels
         }
 
         public SourceList<T> SourceList { get; set; } = new SourceList<T>();
-        public ObservableCollectionExtended<T> ActiveList { get; set; } = new ObservableCollectionExtended<T>();
+        public ReadOnlyObservableCollection<T> ActiveList;
 
         public ReactiveCommand<Unit, Unit> SelectAllCommand { get; set; }
         public ReactiveCommand<T, Unit> SelectOneCommand { get; set; }

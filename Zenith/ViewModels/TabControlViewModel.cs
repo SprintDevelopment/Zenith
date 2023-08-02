@@ -34,7 +34,7 @@ namespace Zenith.ViewModels
             _tabs.Connect()
                 .MergeMany(t => t.CloseCommand)
                 .Select(guid => _tabs.Items.FirstOrDefault(t => t.Guid == guid))
-                .Delay(TimeSpan.FromMilliseconds(300))
+                .Delay(TimeSpan.FromMilliseconds(100))
                 .Do(tabToRemove => _tabs.Remove(tabToRemove))
                 .Subscribe();
         }

@@ -36,6 +36,9 @@ namespace Zenith.Assets.UI.UserControls
 
                 this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.headerBorder.Background, x => x ? Brushes.White : Brushes.Transparent).DisposeWith(d);
                 this.OneWayBind(ViewModel, vm => vm.IsSelected, v => v.FontWeight, x => x ? FontWeights.SemiBold : FontWeights.Normal).DisposeWith(d);
+                this.WhenAnyValue(v => v.headerBorder.Background)
+                    .Do(bg => separatorLineRect.Visibility = bg != Brushes.Transparent ? Visibility.Hidden : Visibility.Visible)
+                    .Subscribe().DisposeWith(d);
 
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.closeButton).DisposeWith(d);
 

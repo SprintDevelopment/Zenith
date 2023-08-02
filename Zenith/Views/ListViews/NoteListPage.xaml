@@ -60,7 +60,7 @@
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
             </Grid>
 
-            <ItemsControl ItemsSource="{Binding ActiveList}" Grid.Row="1" Margin="0,1,0,0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
+            <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="{x:Type ItemsControl}">
                         <ScrollViewer CanContentScroll="True">

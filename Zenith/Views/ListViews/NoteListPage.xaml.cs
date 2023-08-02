@@ -31,6 +31,8 @@ namespace Zenith.Views.ListViews
                 CreateUpdatePage = new NotePage()
             };
 
+            this.WhenActivated(d => { listItemsControl.ItemsSource = ViewModel.ActiveList; });
+
             //Initialize(new NotePage(), new NoteRepository(), searchModel, dynamicFilter);
         }
     }

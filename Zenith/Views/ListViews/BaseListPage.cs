@@ -28,7 +28,6 @@ namespace Zenith.Views.ListViews
             this.WhenActivated(d =>
             {
                 this.DataContext = ViewModel;
-
             });
             //WindowPreviewKeyDownEventHandler = (s, e) => { ListBasePage_PreviewKeyDown(s, e); };
             //this.Loaded += (s, e) => { window.PreviewKeyDown += WindowPreviewKeyDownEventHandler; };

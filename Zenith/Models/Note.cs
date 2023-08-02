@@ -23,7 +23,7 @@ namespace Zenith.Models
         private string subject;
         private string comment = "";
         ////private NotifyTypes notifytType;
-        private DateTime notifyDateTime = DateTime.Today;
+        //private DateTime notifyDateTime = DateTime.Today;
 
         [DataMember]
         [Key]
@@ -59,12 +59,12 @@ namespace Zenith.Models
         ////    set { this.RaiseAndSetIfChanged(ref notifytType, value); }
         ////}
 
-        [DataMember]
-        public DateTime NotifyDateTime
-        {
-            get { return notifyDateTime; }
-            set { this.RaiseAndSetIfChanged(ref notifyDateTime, value); }
-        }
+        //[DataMember]
+        //public DateTime NotifyDateTime
+        //{
+        //    get { return notifyDateTime; }
+        //    set { this.RaiseAndSetIfChanged(ref notifyDateTime, value); }
+        //}
 
         public Note()
         {

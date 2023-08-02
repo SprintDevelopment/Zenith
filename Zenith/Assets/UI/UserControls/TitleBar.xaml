@@ -15,6 +15,20 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
+        <local:TabStackPanel x:Name="tabStackPanel"/>
+        <Button x:Name="addNewTabButton" Style="{StaticResource CircularButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="28" Height="28" Grid.Column="1">
+            <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+
         <Button Name="searchButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="2">
             <Image Source="/Zenith;component/Resources/Images/Common/search.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>

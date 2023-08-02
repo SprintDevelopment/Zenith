@@ -15,9 +15,9 @@ namespace Zenith.Assets.UI.UserControls
             InitializeComponent();
 
             var tabControlViewModel = new TabControlViewModel();
-            titleBarGrid.Children.Add(new TabStackPanel { ViewModel = tabControlViewModel });
+            tabStackPanel.ViewModel = tabControlViewModel;
 
-            //menuButton.Click += (s, e) => tabControlViewModel._tabs.Add(new TabViewModel { Guid = Guid.NewGuid(), Title = $"Title {DateTime.Now.ToString("T")}", IsSelected = true });
+            addNewTabButton.Click += (s, e) => tabControlViewModel._tabs.Add(new TabViewModel { Guid = Guid.NewGuid(), Title = $"Title {DateTime.Now.ToString("T")}", IsSelected = true });
             menuButton.Click += (s, e) => MenuClicked?.Invoke(this, EventArgs.Empty);
             menuButton.PreviewMouseLeftButtonDown += (s, e) => e.Handled = e.ClickCount == 2; // Prevent MenuButton clicked by double clicking
             minimizeButton.Click += (s, e) => Minimized?.Invoke(this, EventArgs.Empty);
