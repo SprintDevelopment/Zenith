@@ -16,6 +16,7 @@
         <converters:BoolConverter x:Key="boolConverter"/>
         <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
+        <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
 
         <Style TargetType="{x:Type baseclasses:JTextBox}">
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>

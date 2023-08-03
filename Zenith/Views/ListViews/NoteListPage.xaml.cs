@@ -32,8 +32,6 @@ namespace Zenith.Views.ListViews
             };
 
             this.WhenActivated(d => { listItemsControl.ItemsSource = ViewModel.ActiveList; });
-
-            //Initialize(new NotePage(), new NoteRepository(), searchModel, dynamicFilter);
         }
     }
 }

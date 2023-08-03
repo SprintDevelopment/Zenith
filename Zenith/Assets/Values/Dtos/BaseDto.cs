@@ -1,7 +1,9 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +16,12 @@ namespace Zenith.Assets.Values.Dtos
         public void Dispose() { }
         #endregion
 
-        private bool isSelected;
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set { this.RaiseAndSetIfChanged(ref isSelected, value); }
-        }
+        [Reactive]
+        [NotMapped]
+        public int DisplayOrder { get; set; }
+
+        [Reactive]
+        [NotMapped]
+        public bool IsSelected { get; set; }
     }
 }

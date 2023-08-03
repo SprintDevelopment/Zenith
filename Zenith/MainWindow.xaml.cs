@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zenith.Assets.UI.BaseClasses;
+using Zenith.Assets.UI.CustomEventArgs;
 using Zenith.ViewModels;
 using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.ListViews;
@@ -51,31 +52,38 @@ namespace Zenith
                         storyboard.Begin();
                     }).Subscribe().DisposeWith(d);
 
-                //ViewModel.WhenAnyValue(vm => vm.IsSearchVisible).Subscribe(isSearchVisible =>
-                //{
-                //    if (isSearchVisible)
-                //        ViewModel.IsMenuVisible = false;
-                //    var storyboard = Resources[isSearchVisible ? "ShowSearchStoryboard" : "HideSearchStoryboard"] as Storyboard;
-                //    storyboard.Begin();
-                //});
+                ViewModel.WhenAnyValue(vm => vm.IsSearchVisible).Subscribe(isSearchVisible =>
+                {
+                    if (isSearchVisible)
+                        ViewModel.IsMenuVisible = false;
+                    var storyboard = Resources[isSearchVisible ? "ShowSearchStoryboard" : "HideSearchStoryboard"] as Storyboard;
+                    storyboard.Begin();
+                });
 
-                //ViewModel.InitiateSearch.Subscribe(searchModel =>
-                //{
-                //    this.searchUserControl.Initialize(searchModel);
-                //});
+                ViewModel.InitiateSearch.Subscribe(searchModel =>
+                {
+                    this.searchUserControl.Initialize(searchModel);
+                });
 
-                //IDisposable disposable = null;
-                //ViewModel.WhenAnyValue(vm => vm.DialogDto).Where(dto => dto != null).Subscribe(dialogDto =>
-                //{
-                //    disposable?.Dispose();
-                //    disposable = Observable.FromEventPattern(dialogUserControl, nameof(dialogUserControl.Returned))
-                //    .Select(ea => ((DialogEventArgs)ea.EventArgs).DialogResult).Subscribe(dialogResult =>
-                //    {
-                //        ViewModel.DialogResult = dialogResult;
-                //    });
+                IDisposable disposable = null;
+                ViewModel.WhenAnyValue(vm => vm.DialogDto).Where(dto => dto != null).Subscribe(dialogDto =>
+                {
+                    disposable?.Dispose();
+                    disposable = Observable.FromEventPattern(dialogUserControl, nameof(dialogUserControl.Returned))
+                    .Select(ea => ((DialogEventArgs)ea.EventArgs).DialogResult).Subscribe(dialogResult =>
+                    {
+                        ViewModel.DialogResult = dialogResult;
+                    });
 
-                //    dialogUserControl.Initialize(dialogDto);
-                //});
+                    dialogUserControl.Initialize(dialogDto);
+                });
+
+                ViewModel.WhenAnyValue(vm => vm.ListPage).SkipWhile(page => page == null).Subscribe(listPage =>
+                {
+                    Frame.RemoveBackEntry();
+                    listPage.FontFamily = this.FontFamily;
+                    Frame.Navigate(listPage);
+                });
 
                 ViewModel.WhenAnyValue(vm => vm.CreateUpdatePage).SkipWhile(page => page == null).Subscribe(createUpdatePage =>
                 {

@@ -48,7 +48,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 CreateOrUpdateCommand = ReactiveCommand.Create<Unit>(_ =>
                 {
                     var cuCommandResult = IsNew ? Repository.Add(pm) : Repository.Update(pm);
-                    
+                    Repository.SaveChanges();
                     ChangeSet.Add(pm);
                 }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
 

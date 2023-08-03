@@ -1,13 +1,16 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 
@@ -21,6 +24,11 @@ namespace Zenith.ViewModels
             {
                 DialogResult = DialogResults.None;
                 DialogDto = dialogDto;
+            });
+
+            Navigate = ReactiveCommand.Create<Type>(type =>
+            {
+                ListPage = (Page)Activator.CreateInstance(type);
             });
 
             ShowCreateUpdatePage = ReactiveCommand.Create<Page>(page =>
@@ -65,29 +73,21 @@ namespace Zenith.ViewModels
             set { this.RaiseAndSetIfChanged(ref isLocked, value); }
         }
 
-        private DialogDto dialogDto;
-        public DialogDto DialogDto
-        {
-            get { return dialogDto; }
-            set { this.RaiseAndSetIfChanged(ref dialogDto, value); }
-        }
+        [Reactive]
+        public Page ListPage { get; set; }
 
-        private Page createUpdatePage;
-        public Page CreateUpdatePage
-        {
-            get { return createUpdatePage; }
-            set { this.RaiseAndSetIfChanged(ref createUpdatePage, value); }
-        }
+        [Reactive]
+        public Page CreateUpdatePage { get; set; }
 
-        private DialogResults dialogResult;
-        public DialogResults DialogResult
-        {
-            get { return dialogResult; }
-            set { this.RaiseAndSetIfChanged(ref dialogResult, value); }
-        }
+        [Reactive]
+        public DialogDto DialogDto { get; set; }
 
-        public ReactiveCommand<DialogDto, Unit> ShowDialog { get; set; }
+        [Reactive]
+        public DialogResults DialogResult { get; set; }
+
+        public ReactiveCommand<Type, Unit> Navigate { get; set; }
         public ReactiveCommand<Page, Unit> ShowCreateUpdatePage { get; set; }
+        public ReactiveCommand<DialogDto, Unit> ShowDialog { get; set; }
         public ReactiveCommand<Unit, Unit> CreateUpdatePageReturned { get; set; }
         public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearch { get; set; }
         //

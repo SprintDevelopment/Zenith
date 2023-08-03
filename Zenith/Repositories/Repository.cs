@@ -19,7 +19,7 @@ namespace Zenith.Repositories
         public Repository()
         {
             if (_context == null)
-                _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer("Server=.;Database=Zenith;Trusted_Connection=True;MultipleActiveResultSets=True;Encrypt=False").Options);
+                _context = new DbContextFactory().CreateDbContext(null);
         }
 
         public IEnumerable<T> All() => _context.Set<T>().AsEnumerable();
@@ -32,5 +32,8 @@ namespace Zenith.Repositories
 
         public void AddRange(IEnumerable<T> entities) => _context.Set<T>().AddRange(entities);
         public void RemoveRange(IEnumerable<T> entities) => _context.Set<T>().RemoveRange(entities);
+
+
+        public int SaveChanges() => _context.SaveChanges();
     }
 }

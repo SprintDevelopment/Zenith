@@ -110,18 +110,6 @@
                         <StackPanel>
                             <controls:SubMenuItem Title="Dashboard"/>
                             <controls:SubMenuItem Title="ReportList"/>
-                            <!--<controls:SubMenuItem Title="AccountTransactionReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="PersonTransactionReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="ProductCartexReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="ProductValueReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="LoanReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="OutgoIncomeReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="TaxReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="ChequeReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="BuySaleReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="OverallReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="FinanceTReport" UC_Clicked="SMIUC_Clicked"/>
-                                <controls:SubMenuItem Title="GainLoseReport" UC_Clicked="SMIUC_Clicked"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -139,8 +127,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/8.png" Title="تنظیمات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="یادداشت ها"/>
-                            <controls:SubMenuItem Title="تنظیمات"/>
+                            <controls:SubMenuItem Title="یادداشت ها" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:NoteListPage}"/>
+                            <controls:SubMenuItem Title="تنظیمات" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:Page1}"/>
                             <controls:SubMenuItem Title="نمایش فایل لاگ" Command="{Binding OpenLogFile}"/>
                             <controls:SubMenuItem Title="کلیدهای میانبر"/>
                             <controls:SubMenuItem Title="پشتیبان گیری از داده ها"/>
@@ -159,7 +147,7 @@
                 </controls:MenuItem>
             </StackPanel>
         </ScrollViewer>
-        <!--<controls:SearchUserControl x:Name="searchUserControl" Grid.Row="1" HorizontalAlignment="Left" Width="0"/>-->
-        <!--<controls:DialogUserControl x:Name="dialogUserControl" Grid.ColumnSpan="2"/>-->
+        <controls:SearchControl x:Name="searchUserControl" Grid.Row="1" HorizontalAlignment="Left" Width="0"/>
+        <controls:Dialog x:Name="dialogUserControl" Grid.ColumnSpan="2"/>
     </Grid>
 </baseclasses:TabbedWindow>

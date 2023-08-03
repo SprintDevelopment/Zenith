@@ -28,7 +28,7 @@ namespace Zenith.ViewModels.ListViewModels
             ViewTitle = $"لیست {modelAttributes.MultipleName}";
             Repository = repository;
 
-            //!!!!!!SourceList.AddRange(Repository.All());
+            SourceList.AddRange(Repository.All());
             void calculate()
             {
                 var itemsCount = ActiveList.Count();
@@ -48,12 +48,14 @@ namespace Zenith.ViewModels.ListViewModels
             };
 
             SourceList.Connect()
-                 .Bind(out ActiveList).Subscribe(_ =>
-                 {
-                     //var counter = 0;
-                     //ActiveList.ForEach(item => item.Order = ++counter);
-                     //calculate();
-                 });
+                .Filter(criteria, ListFilterPolicy.ClearAndReplace)
+                .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
+                .Bind(out ActiveList).Subscribe(_ =>
+                {
+                    //var counter = 0;
+                    //ActiveList.ForEach(item => item.Order = ++counter);
+                    //calculate();
+                });
 
             if (searchModel != null)
             {
@@ -100,15 +102,11 @@ namespace Zenith.ViewModels.ListViewModels
                 App.MainViewModel.ShowDialog.Execute(dialogDto).Subscribe();
                 removeDisposable = App.MainViewModel.WhenAnyValue(vm => vm.DialogResult).Where(dr => dr == DialogResults.Yes).Subscribe(dialogResult =>
                 {
-                    SourceList.Edit(updater =>
-                    {
-                        var toRemoveItems = ActiveList.Where(x => x.IsSelected);
-                        Repository.RemoveRange(toRemoveItems);
-                        foreach (var item in toRemoveItems)
-                        {
-                            updater.Remove(item);
-                        };
-                    });
+                    var toRemoveItems = ActiveList.Where(x => x.IsSelected);
+                    Repository.RemoveRange(toRemoveItems);
+                    Repository.SaveChanges();
+
+                    SourceList.RemoveMany(toRemoveItems);
                 });
                 return false;
             }, this.WhenAnyValue(vm => vm.SelectionMode).Select(selectionMode => selectionMode != SelectionModes.NoItemSelected));
