@@ -1,13 +1,9 @@
-﻿using DynamicData.Binding;
-using DynamicData;
+﻿using DynamicData;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using Zenith.Assets.Extensions;
 using Zenith.Models;
 using Zenith.Repositories;
@@ -17,6 +13,7 @@ using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Attributes;
 using Zenith.Views.CreateOrUpdateViews;
 using System.Collections.ObjectModel;
+using ReactiveUI.Fody.Helpers;
 
 namespace Zenith.ViewModels.ListViewModels
 {
@@ -180,12 +177,8 @@ namespace Zenith.ViewModels.ListViewModels
         public ReactiveCommand<Unit, Unit> SearchCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DisposeCommand { get; set; }
 
-        private SelectionModes selectionMode;
-        public SelectionModes SelectionMode
-        {
-            get { return selectionMode; }
-            set { this.RaiseAndSetIfChanged(ref selectionMode, value); }
-        }
+        [Reactive]
+        public SelectionModes SelectionMode { get; set; }
 
         public T SearchModel { get; set; }
         public BaseCreateOrUpdatePage<T> CreateUpdatePage { get; set; }

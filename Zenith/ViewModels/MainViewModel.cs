@@ -1,16 +1,11 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Data;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 
@@ -52,26 +47,14 @@ namespace Zenith.ViewModels
             });
         }
 
-        private bool isMenuVisible;
-        public bool IsMenuVisible
-        {
-            get { return isMenuVisible; }
-            set { this.RaiseAndSetIfChanged(ref isMenuVisible, value); }
-        }
+        [Reactive]
+        public bool IsMenuVisible { get; set; }
 
-        private bool isSearchVisible;
-        public bool IsSearchVisible
-        {
-            get { return isSearchVisible; }
-            set { this.RaiseAndSetIfChanged(ref isSearchVisible, value); }
-        }
+        [Reactive]
+        public bool IsSearchVisible { get; set; }
 
-        private bool isLocked = false;
-        public bool IsLocked
-        {
-            get { return isLocked; }
-            set { this.RaiseAndSetIfChanged(ref isLocked, value); }
-        }
+        [Reactive]
+        public bool IsLocked { get; set; }
 
         [Reactive]
         public Page ListPage { get; set; }

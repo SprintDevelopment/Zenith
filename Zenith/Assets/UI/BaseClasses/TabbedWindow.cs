@@ -48,7 +48,7 @@ namespace Zenith.Assets.UI.BaseClasses
                 titleBarPlaceHolder.MouseDoubleClick += (s, e) => { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
 
                 var newContent = new Grid() { Background = Brushes.Transparent };
-                newContent.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(42, GridUnitType.Pixel) });
+                newContent.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(38, GridUnitType.Pixel) });
                 newContent.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
                 newContent.Children.Add(titleBarPlaceHolder);
 

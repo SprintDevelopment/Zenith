@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,10 @@ namespace Zenith.ViewModels
         {
         }
 
-        private string viewTitle;
-        public string ViewTitle
-        {
-            get { return viewTitle; }
-            set { this.RaiseAndSetIfChanged(ref viewTitle, value); }
-        }
+        [Reactive]
+        public string ViewTitle { get; set; }
 
-        private string itemStatistics;
-        public string ItemsStatistics
-        {
-            get { return itemStatistics; }
-            set { this.RaiseAndSetIfChanged(ref itemStatistics, value); }
-        }
+        [Reactive]
+        public string ItemsStatistics { get; set; }
     }
 }
