@@ -33,7 +33,6 @@ namespace Zenith.Repositories
         public void AddRange(IEnumerable<T> entities) => _context.Set<T>().AddRange(entities);
         public void RemoveRange(IEnumerable<T> entities) => _context.Set<T>().RemoveRange(entities);
 
-
         public int SaveChanges() => _context.SaveChanges();
     }
 }

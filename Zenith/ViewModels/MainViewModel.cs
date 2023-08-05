@@ -75,6 +75,5 @@ namespace Zenith.ViewModels
         public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearch { get; set; }
         //
         public ReactiveCommand<string, Unit> OpenLogFile { get; set; }
-
     }
 }

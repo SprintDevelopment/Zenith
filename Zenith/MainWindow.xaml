@@ -92,7 +92,7 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/materials.png" Title="محصولات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="لیست محصولات" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
+                            <controls:SubMenuItem Title="لیست محصولات" Shortcut="Ctrl + M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
                             <controls:SubMenuItem Title="محصول جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
@@ -128,7 +128,7 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="یادداشت ها" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:NoteListPage}"/>
-                            <controls:SubMenuItem Title="تنظیمات" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:Page1}"/>
+                            <controls:SubMenuItem Title="تنظیمات" />
                             <controls:SubMenuItem Title="نمایش فایل لاگ" Command="{Binding OpenLogFile}"/>
                             <controls:SubMenuItem Title="کلیدهای میانبر"/>
                             <controls:SubMenuItem Title="پشتیبان گیری از داده ها"/>

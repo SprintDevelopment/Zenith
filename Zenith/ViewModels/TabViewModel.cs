@@ -2,6 +2,7 @@
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Reactive;
+using System.Windows.Controls;
 
 namespace Zenith.ViewModels
 {

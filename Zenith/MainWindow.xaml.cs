@@ -82,6 +82,7 @@ namespace Zenith
                 {
                     Frame.RemoveBackEntry();
                     listPage.FontFamily = this.FontFamily;
+                    listPage.FontSize = this.FontSize;
                     Frame.Navigate(listPage);
                 });
 
@@ -95,12 +96,13 @@ namespace Zenith
                     else
                     {
                         createUpdatePage.FontFamily = this.FontFamily;
+                        createUpdatePage.FontSize = this.FontSize;
                         CreateUpdateFrame.Navigate(createUpdatePage);
                         CreateUpdateFrame.Visibility = Visibility.Visible;
                     }
                 });
 
-                Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
+                //Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
                 //CreateUpdateFrame.Navigate(new ContractPage() { FontFamily = this.FontFamily });
             });
         }
