@@ -9,7 +9,7 @@
         xmlns:controls="clr-namespace:Zenith.Assets.UI.UserControls"
         MinWidth="1400" MinHeight="800"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ZENITH" Height="450" Width="800" Icon="/Resources/Images/App/icon.png">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
     </WindowChrome.WindowChrome>
