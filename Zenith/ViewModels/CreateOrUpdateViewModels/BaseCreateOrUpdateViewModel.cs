@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,16 +85,17 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
         public List<T> ChangeSet { get; set; }
 
+        [Reactive]
         public bool IsNew { get; set; }
+        
+        [Reactive]
         public bool StayOpen { get; set; }
+        
+        [Reactive]
         public string StayOpenTitle { get; set; }
 
-        private T pageModel;
-        public T PageModel
-        {
-            get { return pageModel; }
-            set { this.RaiseAndSetIfChanged(ref pageModel, value); }
-        }
+        [Reactive]
+        public T PageModel { get; set; }
 
         public Repository<T> Repository { get; set; }
     }

@@ -23,7 +23,8 @@ namespace Zenith.Views.ListViews
             var searchModel = new NoteSearchModel();
 
             IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Subject)
-                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(SynchronizationContext.Current)
+                .Throttle(TimeSpan.FromMilliseconds(250))
+                .ObserveOn(SynchronizationContext.Current)
                 .Select(subject => new Func<Note, bool>(p => subject.IsNullOrWhiteSpace() || p.Subject.Contains(subject)));
 
             ViewModel = new BaseListViewModel<Note>(new NoteRepository(), searchModel, dynamicFilter)

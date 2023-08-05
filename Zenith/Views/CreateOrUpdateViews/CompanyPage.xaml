@@ -1,5 +1,5 @@
-﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.NotePage"
-      x:TypeArguments="model:Note" 
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.CompanyPage"
+      x:TypeArguments="model:Company" 
       xmlns:model="clr-namespace:Zenith.Models"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,7 +7,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
-      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls">
+      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
+      Title="CompanyPage">
     <Grid FlowDirection="RightToLeft">
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
@@ -28,11 +29,18 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.Subject, UpdateSourceTrigger=PropertyChanged}" Title="عنوان یادداشت"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="آدرس" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" Title="شماره تلفن" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Fax, UpdateSourceTrigger=PropertyChanged}" Title="فکس" Margin="8,16,24,0" Grid.Column="1"/>
+                </Grid>
+                <baseclasses:JTextBox Text="{Binding PageModel.Email, UpdateSourceTrigger=PropertyChanged}" Title="ایمیل" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="آدرس" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
-                <!--<usercontrols:EnumMultiSelectUserControl EnumType="{x:Type enums:NotifyTypes}" Title="نحوه یادآوری" Value="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}"/>-->
-                <usercontrols:DatePicker />
-                <baseclasses:JTextBox Text="{Binding PageModel.MaxValidDebit, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:n0\}}" Title="ساعت یادآوری" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 

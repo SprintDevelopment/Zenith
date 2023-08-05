@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,8 @@ namespace Zenith.Models.SearchModels
 {
     public class NoteSearchModel : SearchBaseDto
     {
-        private string subject;
-
         [Search(Title = "موضوع یادداشت")]
-        public string Subject
-        {
-            get { return subject; }
-            set { this.RaiseAndSetIfChanged(ref subject, value); }
-        }
+        [Reactive]
+        public string Subject { get; set; }
     }
 }

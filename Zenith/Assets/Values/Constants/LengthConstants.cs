@@ -8,7 +8,7 @@ namespace Zenith.Assets.Values.Constants
 {
     public class LengthConstants
     {
-        public const int CALL_NUMBERS = 11,
+        public const int CALL_NUMBERS = 13,
                          SMALL_STRING = 16,
                          MEDIUM_STRING = 64,
                          LARGE_STRING = 256,

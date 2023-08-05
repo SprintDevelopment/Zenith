@@ -92,7 +92,7 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/materials.png" Title="محصولات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="لیست محصولات"/>
+                            <controls:SubMenuItem Title="لیست محصولات" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
                             <controls:SubMenuItem Title="محصول جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>

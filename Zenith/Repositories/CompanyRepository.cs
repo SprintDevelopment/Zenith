@@ -2,7 +2,7 @@
 
 namespace Zenith.Repositories
 {
-    public class NoteRepository : Repository<Note>
+    public class CompanyRepository : Repository<Company>
     {
     }
 }

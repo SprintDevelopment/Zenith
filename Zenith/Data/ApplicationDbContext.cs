@@ -15,6 +15,7 @@ namespace Zenith.Data
         {
         }
 
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Note> Notes { get; set; }
     }
 }
