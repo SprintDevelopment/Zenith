@@ -1,2 +1,5 @@
 ﻿Company, Personnel, Outgo, Note, Machine, Diesel
 Print
+
+Select suitable icons for MenuItems
+Create Outgoes, Poeple, 
