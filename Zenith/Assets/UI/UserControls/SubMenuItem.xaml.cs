@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,7 @@ namespace Zenith.Assets.UI.UserControls
 
         public object CommandParameter
         {
-            get { return (ICommand)base.GetValue(CommandParameterProperty); }
+            get { return (object)base.GetValue(CommandParameterProperty); }
             set { base.SetValue(CommandParameterProperty, value); }
         }
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(SubMenuItem), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -54,6 +56,10 @@ namespace Zenith.Assets.UI.UserControls
         public SubMenuItem()
         {
             InitializeComponent();
+
+            this.WhenAnyValue(vm => vm.Shortcut)
+                .Do(s => shortcutGrid.Visibility = !s.IsNullOrWhiteSpace() ? Visibility.Visible : Visibility.Collapsed)
+                .Subscribe();
         }
     }
 }

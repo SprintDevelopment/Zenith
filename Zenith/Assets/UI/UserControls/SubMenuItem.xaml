@@ -12,7 +12,10 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Title, ElementName=owner}" HorizontalAlignment="Left" Margin="32,0,0,0" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="{Binding Shortcut, ElementName=owner}" HorizontalAlignment="Right" Margin="0,0,12,0" FontSize="13" VerticalAlignment="Center" Foreground="#FF3399FF" FontFamily="Candara" Background="#FFF3F3F3"/>
+                <Grid x:Name="shortcutGrid" Grid.Column="1" HorizontalAlignment="Right" Margin="8,0" VerticalAlignment="Center">
+                    <Rectangle Fill="#FFF8F8F8" Stroke="#FFD4D4D4" RadiusX="4" RadiusY="4"/>
+                    <TextBlock Text="{Binding Shortcut, ElementName=owner}" Margin="8,4" FontSize="13" Foreground="DarkRed" FontFamily="Consolas"/>
+                </Grid>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeDashArray="2 2"/>
             </Grid>
         </Button>

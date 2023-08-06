@@ -18,9 +18,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zenith.Assets.UI.BaseClasses;
 using Zenith.Assets.UI.CustomEventArgs;
+using ZenithControls = Zenith.Assets.UI.UserControls;
 using Zenith.ViewModels;
 using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.ListViews;
+using Zenith.Assets.Extensions;
+using System.Collections;
 
 namespace Zenith
 {
@@ -102,6 +105,29 @@ namespace Zenith
                     }
                 });
 
+                var shortcutedMenuItems = menuContainerStackPanel.Children.OfType<ZenithControls.MenuItem>()
+                    .Select(mi => mi.AdditionalContent as StackPanel)
+                    .SelectMany(sp => sp.Children.OfType<ZenithControls.SubMenuItem>())
+                    .Select(mi => new { mi.Shortcut, mi.Command, mi.CommandParameter })
+                    .Where(mi => !mi.Shortcut.IsNullOrWhiteSpace())
+                    .Select(mi => new 
+                    {
+                        modifiers = (mi.Shortcut.Contains("Ctrl") ? ModifierKeys.Control : ModifierKeys.None) | (mi.Shortcut.Contains("Shift") ? ModifierKeys.Shift : ModifierKeys.None),
+                        keyChar = char.ToUpper(mi.Shortcut.Last()),
+                        mi.Command, 
+                        mi.CommandParameter 
+                    })
+                    .AsEnumerable();
+
+                Observable.FromEventPattern(this, nameof(Window.PreviewKeyDown))
+                    .Select(x => x.EventArgs as KeyEventArgs)
+                    .Select(x => new { eventArgs = x, shortcutedItem = shortcutedMenuItems.SingleOrDefault(smi => smi.modifiers == Keyboard.Modifiers && smi.keyChar == x.Key.ToChar()) })
+                    .Where(x => x.shortcutedItem is not null)
+                    .Do(x =>
+                    {
+                        x.eventArgs.Handled = true;
+                        x.shortcutedItem.Command.Execute(x.shortcutedItem.CommandParameter);
+                    }).Subscribe().DisposeWith(d);
                 //Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
                 //CreateUpdateFrame.Navigate(new ContractPage() { FontFamily = this.FontFamily });
             });
