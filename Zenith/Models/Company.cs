@@ -23,27 +23,27 @@ namespace Zenith.Models
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.CALL_NUMBERS)]
         [Reactive]
-        public string Tel { get; set; }
+        public string Tel { get; set; } = string.Empty;
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.CALL_NUMBERS)]
         [Reactive]
-        public string Fax { get; set; }
+        public string Fax { get; set; } = string.Empty;
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.LARGE_STRING)]
         [Reactive]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
         public Company()
         {

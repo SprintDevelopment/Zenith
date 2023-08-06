@@ -25,6 +25,13 @@ namespace Zenith.Assets.UI.BaseClasses
         }
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(JTextBox), new PropertyMetadata(""));
 
+        public bool LeftToRightText
+        {
+            get { return (bool)base.GetValue(LeftToRightTextProperty); }
+            set { base.SetValue(LeftToRightTextProperty, value); NotifyPropertyChanged(nameof(LeftToRightText)); }
+        }
+        public static readonly DependencyProperty LeftToRightTextProperty = DependencyProperty.Register("LeftToRightText", typeof(bool), typeof(JTextBox), new PropertyMetadata(false));
+
         public JTextBox()
         {
             this.GotFocus += (s, e) => { SelectAll(); };

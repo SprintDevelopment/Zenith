@@ -29,7 +29,7 @@ namespace Zenith.Models
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
         public Material()
         {

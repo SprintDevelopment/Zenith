@@ -35,10 +35,10 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" Title="شماره تلفن" Margin="24,16,8,0"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Fax, UpdateSourceTrigger=PropertyChanged}" Title="فکس" Margin="8,16,24,0" Grid.Column="1"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="شماره تلفن" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Fax, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="فکس" Margin="8,16,24,0" Grid.Column="1"/>
                 </Grid>
-                <baseclasses:JTextBox Text="{Binding PageModel.Email, UpdateSourceTrigger=PropertyChanged}" Title="ایمیل" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Email, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="ایمیل" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="آدرس" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
 

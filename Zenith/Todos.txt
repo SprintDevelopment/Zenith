@@ -1,4 +1,2 @@
-﻿Shortcuts
-ComboBox
-Company, Personnel, Outgo, Note, Machine, Diesel
+﻿Company, Personnel, Outgo, Note, Machine, Diesel
 Print
