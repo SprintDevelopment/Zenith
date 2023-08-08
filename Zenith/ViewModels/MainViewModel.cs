@@ -49,7 +49,7 @@ namespace Zenith.ViewModels
                 Process.Start("notepad.exe", $"C:\\{_}");
             });
 
-            Backup = ReactiveCommand.Create<Unit>(_ =>
+            Backup = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
                 var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
                 _alerts.Add(new AlertViewModel
