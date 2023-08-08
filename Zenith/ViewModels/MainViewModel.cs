@@ -1,11 +1,14 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Controls;
+using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 
@@ -40,11 +43,43 @@ namespace Zenith.ViewModels
             {
                 return model;
             }, this.WhenAnyValue(vm => vm.IsLocked).Where(il => !il));
-
+            
             OpenLogFile = ReactiveCommand.Create<string>(_ =>
             {
                 Process.Start("notepad.exe", $"C:\\{_}");
             });
+
+            Backup = ReactiveCommand.Create<Unit>(_ =>
+            {
+                var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
+                _alerts.Add(new AlertViewModel
+                {
+                    Guid = new Guid(),
+                    Title = backupResult.ResultTitle,
+                    Description = backupResult.ResultDescription,
+                    DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
+                    ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
+                        "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
+                    ActionCommand = ReactiveCommand.Create<Unit>(_ =>
+                    {
+                        if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
+                            Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
+                        else
+                            Process.Start("notepad.exe", @"C:\file.txt");
+                    })
+                });
+
+            });
+
+            _alerts.Connect()
+                .Bind(out Alerts)
+                .Subscribe();
+
+            _alerts.Connect()
+                .MergeMany(t => t.CloseCommand)
+                .Select(guid => _alerts.Items.FirstOrDefault(t => t.Guid == guid))
+                .Do(tabToRemove => _alerts.Remove(tabToRemove))
+                .Subscribe();
         }
 
         [Reactive]
@@ -68,6 +103,9 @@ namespace Zenith.ViewModels
         [Reactive]
         public DialogResults DialogResult { get; set; }
 
+        public SourceList<AlertViewModel> _alerts { get; private set; } = new SourceList<AlertViewModel>();
+        public ReadOnlyObservableCollection<AlertViewModel> Alerts;
+
         public ReactiveCommand<Type, Unit> Navigate { get; set; }
         public ReactiveCommand<Page, Unit> ShowCreateUpdatePage { get; set; }
         public ReactiveCommand<DialogDto, Unit> ShowDialog { get; set; }
@@ -75,5 +113,6 @@ namespace Zenith.ViewModels
         public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearch { get; set; }
         //
         public ReactiveCommand<string, Unit> OpenLogFile { get; set; }
+        public ReactiveCommand<Unit, Unit> Backup { get; set; }
     }
 }

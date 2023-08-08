@@ -24,6 +24,9 @@ using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.ListViews;
 using Zenith.Assets.Extensions;
 using System.Collections;
+using DynamicData.Binding;
+using Zenith.Assets.UI.UserControls;
+using DynamicData;
 
 namespace Zenith
 {
@@ -128,6 +131,15 @@ namespace Zenith
                         x.eventArgs.Handled = true;
                         x.shortcutedItem.Command.Execute(x.shortcutedItem.CommandParameter);
                     }).Subscribe().DisposeWith(d);
+
+                ViewModel.Alerts
+                    .ToObservableChangeSet()
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Transform(tvm => new Alert { ViewModel = tvm })
+                    .OnItemAdded(addedAlert => alertsStackPanel.Children.Add(addedAlert))
+                    .OnItemRemoved(removedAlert => alertsStackPanel.Children.Remove(removedAlert))
+                    .Subscribe().DisposeWith(d);
+
                 //Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
                 //CreateUpdateFrame.Navigate(new ContractPage() { FontFamily = this.FontFamily });
             });
