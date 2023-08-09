@@ -16,11 +16,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 {
     public class BaseCreateOrUpdateViewModel<T> : BaseViewModel<T> where T : Model, new()
     {
-        public BaseCreateOrUpdateViewModel()
-        {
-        }
-
-        public void Initialize(Repository<T> repository, bool containsDeleted = false)
+        public BaseCreateOrUpdateViewModel(Repository<T> repository, bool containsDeleted = false)
         {
             var modelAttributes = typeof(T).GetAttribute<ModelAttribute>();
             var modelKeyProperty = typeof(T).GetKeyProperty();

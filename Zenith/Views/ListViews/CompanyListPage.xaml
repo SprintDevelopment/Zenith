@@ -23,7 +23,7 @@
                 <TextBlock Margin="16,0,0,0" Text="{Binding ViewTitle}" FontSize="15"/>
                 <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="50" Style="{DynamicResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding CreateCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/add-new.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -34,31 +34,12 @@
                     <Image Source="/Zenith;component/Resources/Images/Common/delete.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
-            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeThickness="0.5"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="0,1,0,4" Background="#FFFDFDFD">
+        <Grid Grid.Row="1" Margin="0,0,0,4" Background="#FFFDFDFD" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid Background="White" Height="40" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="200"/>
-                </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
-                    <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
-                <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
-                <TextBlock HorizontalAlignment="Left" Text="عنوان" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="نحوه یادآوری" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="زمان یادآوری" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
-            </Grid>
-
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -74,27 +55,53 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <baseclasses:JGrid Height="40" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <baseclasses:JGrid Height="28" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                            <!--<TextBlock HorizontalAlignment="Left" Text="{Binding NotifyType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:NotifyTypes}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>-->
-                            <!--<TextBlock HorizontalAlignment="Left" Text="{Binding NotifyDateTime, Converter={StaticResource dateConverter}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>-->
-                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
-                            <Rectangle HorizontalAlignment="Left" Width="2" Fill="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" StrokeThickness="0" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Tel}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Fax}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Address}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <Rectangle Stroke="LightSkyBlue" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                            <!--<Rectangle HorizontalAlignment="Left" Width="2" Fill="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" StrokeThickness="0" />-->
                         </baseclasses:JGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            
+            <Grid x:Name="headerGrid" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border BorderBrush="Red" VerticalAlignment="Stretch" Grid.ColumnSpan="6" BorderThickness="0,1" Background="Azure"/>
+                <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}" Margin="1">
+                    <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" FontSize="15" Cursor="Hand"/>
+                <TextBlock HorizontalAlignment="Left" Text="نام شرکت" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" FontSize="15"/>
+                <TextBlock HorizontalAlignment="Left" Text="شماره تلفن" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" FontSize="15"/>
+                <TextBlock HorizontalAlignment="Left" Text="فکس" VerticalAlignment="Center" Grid.Column="4" FontSize="15" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="آدرس" VerticalAlignment="Center" Grid.Column="5" FontSize="15" Margin="8,0,0,0"/>
+            </Grid>
         </Grid>
     </Grid>
 </local:BaseListPage>

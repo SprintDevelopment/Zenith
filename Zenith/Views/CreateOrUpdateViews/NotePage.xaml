@@ -30,9 +30,8 @@
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Subject, UpdateSourceTrigger=PropertyChanged}" Title="عنوان یادداشت"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
-                <!--<usercontrols:EnumMultiSelectUserControl EnumType="{x:Type enums:NotifyTypes}" Title="نحوه یادآوری" Value="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}"/>-->
-                <usercontrols:DatePicker />
-                <baseclasses:JTextBox Text="{Binding PageModel.MaxValidDebit, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:n0\}}" Title="ساعت یادآوری" />
+                <ComboBox x:Name="notifyTypeComboBox" SelectedValue="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="یادآوری"/>
+                <usercontrols:DatePicker x:Name="notifyDateTimePicker" Title="تاریخ و ساعت یادآوری"/>
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 

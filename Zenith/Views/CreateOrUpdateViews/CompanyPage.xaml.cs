@@ -1,5 +1,6 @@
 ﻿using Zenith.Models;
 using Zenith.Repositories;
+using Zenith.ViewModels.CreateOrUpdateViewModels;
 
 namespace Zenith.Views.CreateOrUpdateViews
 {
@@ -11,8 +12,8 @@ namespace Zenith.Views.CreateOrUpdateViews
         public CompanyPage()
         {
             InitializeComponent();
-        
-            Initialize(new CompanyRepository());
+
+            ViewModel = new BaseCreateOrUpdateViewModel<Company>(new CompanyRepository());
         }
     }
 }

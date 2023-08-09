@@ -18,6 +18,26 @@
         <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
         <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
 
+        <Style TargetType="{x:Type baseclasses:JGrid}">
+            <Setter Property="ToolTipService.InitialShowDelay" Value="2000"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFF3F3F3" />
+                    <!--<Setter Property="Tag" Value="#FF3AB05A"/>-->
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="White" />
+                    <!--<Setter Property="Tag" Value="White"/>-->
+                </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FFF3FFF2" />
+                    <!--<Setter Property="Tag" Value="White"/>-->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="{x:Type baseclasses:JTextBox}">
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
             <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
@@ -110,7 +130,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderBrush="{DynamicResource SCWhiteSmoke}" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource SCWhite}" SnapsToDevicePixels="true">
+                        <Border x:Name="border" BorderBrush="{DynamicResource SCWhiteSmoke}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -363,7 +383,7 @@
                 <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="0" Background="White" />
                 <TextBlock Text="{TemplateBinding Tag}" FontSize="12" Foreground="{Binding Stroke, ElementName=border}" VerticalAlignment="Top"/>
                 <Rectangle x:Name="border" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Opacity=".2" Grid.ColumnSpan="2"/>
-                <Image x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Resources/Images/CommonIcons/Down.png" Stretch="Fill" Width="14" Height="14"/>
+                <Image x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Resources/Images/Common/Down.png" Stretch="Fill" Width="14" Height="14"/>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="false">

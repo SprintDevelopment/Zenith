@@ -6,6 +6,8 @@ using Zenith.Assets.Values.Constants;
 using ReactiveUI.Validation.Extensions;
 using Zenith.Assets.Extensions;
 using ReactiveUI.Fody.Helpers;
+using Zenith.Assets.Values.Enums;
+using System;
 
 namespace Zenith.Models
 {
@@ -26,23 +28,16 @@ namespace Zenith.Models
         [Reactive]
         public string Comment { get; set; } = string.Empty;
 
-        ////[Required]
-        ////public NotifyTypes NotifyType
-        ////{
-        ////    get { return notifytType; }
-        ////    set { this.RaiseAndSetIfChanged(ref notifytType, value); }
-        ////}
+        [Required]
+        [Reactive]
+        public NotifyTypes NotifyType { get; set; } = NotifyTypes.NoNeedToNotify;
 
-        //public DateTime NotifyDateTime
-        //{
-        //    get { return notifyDateTime; }
-        //    set { this.RaiseAndSetIfChanged(ref notifyDateTime, value); }
-        //}
+        [Reactive]
+        public DateTime NotifyDateTime { get; set; } = DateTime.Now;
 
         public Note()
         {
             this.ValidationRule(vm => vm.Subject, subject => !subject.IsNullOrWhiteSpace(), "موضوع نمی تواند خالی باشد");
-            ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 
         public override string ToString()

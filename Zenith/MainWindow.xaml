@@ -16,7 +16,7 @@
     <Window.Resources>
         <Storyboard x:Key="ShowMenuStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="MenuContainerScrollViewer">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="280">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="320">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <QuinticEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -34,7 +34,7 @@
         </Storyboard>
         <Storyboard x:Key="ShowSearchStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="searchUserControl">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="280">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="320">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <QuinticEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -92,6 +92,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/definitions.png" Title="تعاریف" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
+                            <controls:SubMenuItem Title="لیست شرکت ها" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
+                            <controls:SubMenuItem Title="شرکت جدید" Shortcut="Ctrl+Shift+M"/>
                             <controls:SubMenuItem Title="لیست محصولات" Shortcut="Ctrl+Shift+O" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
                             <controls:SubMenuItem Title="محصول جدید" Shortcut="Ctrl+Shift+M"/>
                         </StackPanel>

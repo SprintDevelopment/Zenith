@@ -13,38 +13,37 @@ using Zenith.ViewModels.CreateOrUpdateViewModels;
 using Zenith.Repositories;
 using ReactiveUI;
 using System.Windows.Shapes;
+using Zenith.Assets.UI.Helpers;
+using Zenith.ViewModels.ListViewModels;
 
 namespace Zenith.Views.CreateOrUpdateViews
 {
-    public class BaseCreateOrUpdatePage<T> : Page where T : Model, new()
+    public class BaseCreateOrUpdatePage<T> : ActivatablePage, IViewFor<BaseCreateOrUpdateViewModel<T>> where T : Model, new()
     {
-        public BaseCreateOrUpdateViewModel<T> ViewModel { get; private set; }
         KeyEventHandler WindowPreviewKeyDownEventHandler;
 
         public BaseCreateOrUpdatePage()
         {
             var window = App.Current.MainWindow as MainWindow;
 
-            WindowPreviewKeyDownEventHandler = (s, e) => { CreateUpdateBasePage_PreviewKeyDown(s, e); };
-            this.Loaded += (s, e) => { window.PreviewKeyDown += WindowPreviewKeyDownEventHandler; };
-            this.Unloaded += (s, e) => { window.PreviewKeyDown -= WindowPreviewKeyDownEventHandler; };
-        }
-
-        public void Initialize(Repository<T> repository)
-        {
-            ViewModel = new BaseCreateOrUpdateViewModel<T>();
-            ViewModel.Initialize(repository);
-            this.DataContext = ViewModel;
-
-            ViewModel.WhenAnyValue(vm => vm.PageModel).Subscribe(_ =>
+            this.WhenActivated(d =>
             {
-                ((Control)FindName("FirstEntryControl"))?.Focus();
+                this.DataContext = ViewModel;
+
+                ViewModel.WhenAnyValue(vm => vm.PageModel).Subscribe(_ =>
+                {
+                    ((Control)FindName("FirstEntryControl"))?.Focus();
+                });
+
+                var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
+                modalBackRect.InputBindings.Add(new MouseBinding(ViewModel.ReturnCommand, new MouseGesture(MouseAction.LeftClick)));
+
+                ((Grid)Content).Children.Insert(0, modalBackRect);
             });
 
-            var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
-            modalBackRect.InputBindings.Add(new MouseBinding(ViewModel.ReturnCommand, new MouseGesture(MouseAction.LeftClick)));
-
-            ((Grid)Content).Children.Insert(0,modalBackRect);
+            //WindowPreviewKeyDownEventHandler = (s, e) => { CreateUpdateBasePage_PreviewKeyDown(s, e); };
+            //this.Loaded += (s, e) => { window.PreviewKeyDown += WindowPreviewKeyDownEventHandler; };
+            //this.Unloaded += (s, e) => { window.PreviewKeyDown -= WindowPreviewKeyDownEventHandler; };
         }
 
         private void CreateUpdateBasePage_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -81,5 +80,13 @@ namespace Zenith.Views.CreateOrUpdateViews
                 e.Handled = true;
             }
         }
+
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (BaseCreateOrUpdateViewModel<T>)value; }
+        }
+
+        public BaseCreateOrUpdateViewModel<T> ViewModel { get; set; }
     }
 }

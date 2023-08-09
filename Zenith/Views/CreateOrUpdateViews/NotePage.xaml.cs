@@ -1,5 +1,12 @@
-﻿using Zenith.Models;
+﻿using ReactiveUI;
+using System;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
+using Zenith.Models;
 using Zenith.Repositories;
+using Zenith.ViewModels.CreateOrUpdateViewModels;
 
 namespace Zenith.Views.CreateOrUpdateViews
 {
@@ -12,7 +19,18 @@ namespace Zenith.Views.CreateOrUpdateViews
         {
             InitializeComponent();
 
-            Initialize(new NoteRepository());
+            ViewModel = new BaseCreateOrUpdateViewModel<Note>(new NoteRepository());
+
+            this.WhenActivated(d =>
+            {
+                notifyTypeComboBox.ItemsSource = typeof(NotifyTypes).ToCollection();
+
+                ViewModel.WhenAnyValue(vm => vm.PageModel)
+                    .Select(pm => pm.WhenAnyValue(pm => pm.NotifyType))
+                    .Switch()
+                    .Do(nt => notifyDateTimePicker.Visibility = (nt == NotifyTypes.FooterNotify).Viz())
+                    .Subscribe().DisposeWith(d);
+            });
         }
     }
 }

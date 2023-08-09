@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zenith.Assets.UI.BaseClasses;
 using Zenith.Assets.UI.Helpers;
 
 namespace Zenith.Assets.UI.UserControls
@@ -30,6 +31,13 @@ namespace Zenith.Assets.UI.UserControls
     /// </summary>
     public partial class DatePicker : ActivatableUserControl, IViewFor<DatePickerViewModel>
     {
+        public string Title
+        {
+            get { return (string)base.GetValue(TitleProperty); }
+            set { base.SetValue(TitleProperty, value); }
+        }
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(DatePicker), new PropertyMetadata(""));
+
         public DatePicker()
         {
             InitializeComponent();

@@ -6,14 +6,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls" xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
-             mc:Ignorable="d" Margin="24,16,24,0"
+             mc:Ignorable="d" Margin="24,16,24,0" x:Name="owner"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="42"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <baseclasses:JTextBox x:Name="dateTextBox" Title="تاریخ درج" MinWidth="300" Margin="0"/>
+        <baseclasses:JTextBox x:Name="dateTextBox" Title="{Binding Title, ElementName=owner}" MinWidth="300" Margin="0"/>
         <Button x:Name="showHidePopupButton" Width="42" HorizontalAlignment="Right" Margin="0,1" Style="{DynamicResource SimpleCenteredButtonStyle}" BorderThickness="0">
             <Image Source="/Zenith;component/Resources/Images/Common/down.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="14" Height="14"/>
         </Button>
