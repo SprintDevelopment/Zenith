@@ -17,23 +17,22 @@ using Zenith.Assets.Extensions;
 namespace Zenith.Views.ListViews
 {
     /// <summary>
-    /// Interaction logic for CompanyListPage.xaml
+    /// Interaction logic for MachineListPage.xaml
     /// </summary>
-    public partial class CompanyListPage : BaseListPage<Company>
+    public partial class MachineListPage : BaseListPage<Machine>
     {
-        public CompanyListPage()
+        public MachineListPage()
         {
             InitializeComponent();
-            var searchModel = new CompanySearchModel();
+            var searchModel = new MachineSearchModel();
 
-            IObservable<Func<Company, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name)
-                .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
-                .Select(subject => new Func<Company, bool>(p => subject.IsNullOrWhiteSpace() || p.Name.Contains(subject)));
+            IObservable<Func<Machine, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(SynchronizationContext.Current)
+                .Select(s => new { Title = s }).Select(s => new Func<Machine, bool>(p => true));
 
-            ViewModel = new BaseListViewModel<Company>(new CompanyRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Machine>(new MachineRepository(), searchModel, dynamicFilter)
             {
-                CreateUpdatePage = new CompanyPage()
+                CreateUpdatePage = new MachinePage()
             };
 
             this.WhenActivated(d => 

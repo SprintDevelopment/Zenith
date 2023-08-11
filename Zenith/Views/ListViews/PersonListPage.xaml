@@ -1,6 +1,7 @@
-﻿<local:BaseListPage x:Class="Zenith.Views.ListViews.CompanyListPage"
-      x:TypeArguments="model:Company"
+﻿<local:BaseListPage x:Class="Zenith.Views.ListViews.PersonListPage"
+      x:TypeArguments="model:Person"
       xmlns:model="clr-namespace:Zenith.Models"
+      xmlns:enums="clr-namespace:Zenith.Assets.Values.Enums"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +10,7 @@
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CompanyListPage">
+      Title="PersonListPage">
     <Grid FlowDirection="RightToLeft" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -62,17 +63,19 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Tel}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Fax}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Address}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding FullName}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Mobile}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Tel}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Job, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:Jobs}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Address}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                             <!--<Rectangle HorizontalAlignment="Left" Width="2" Fill="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" StrokeThickness="0" />-->
                         </baseclasses:JGrid>
                     </DataTemplate>
@@ -86,21 +89,23 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Border BorderBrush="WhiteSmoke" VerticalAlignment="Stretch" Grid.ColumnSpan="6" BorderThickness="0,1" Background="#FFFAFAFA"/>
+                <Border BorderBrush="WhiteSmoke" VerticalAlignment="Stretch" Grid.ColumnSpan="7" BorderThickness="0,1" Background="#FFFAFAFA"/>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}" Margin="1">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" FontSize="15" Cursor="Hand"/>
-                <TextBlock HorizontalAlignment="Left" Text="نام شرکت" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Left" Text="شماره تلفن" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Left" Text="فکس" VerticalAlignment="Center" Grid.Column="4" FontSize="15" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Text="آدرس" VerticalAlignment="Center" Grid.Column="5" FontSize="15" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="نام شخص" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" FontSize="15"/>
+                <TextBlock HorizontalAlignment="Left" Text="شماره موبایل" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" FontSize="15"/>
+                <TextBlock HorizontalAlignment="Left" Text="شماره تلفن" VerticalAlignment="Center" Grid.Column="4" FontSize="15" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="سمت کاری" VerticalAlignment="Center" Grid.Column="5" FontSize="15" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="آدرس" VerticalAlignment="Center" Grid.Column="6" FontSize="15" Margin="8,0,0,0"/>
             </Grid>
         </Grid>
     </Grid>

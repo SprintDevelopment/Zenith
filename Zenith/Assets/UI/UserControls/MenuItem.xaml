@@ -67,7 +67,7 @@
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeDashArray="2 2"/>
             </Grid>
         </Button>
-        <StackPanel Name="SubMenuStackPanel" Height="0" Grid.Row="1" Background="#FFF9F9F9">
+        <StackPanel Name="SubMenuStackPanel" Height="0" Grid.Row="1" Background="White">
             <ContentPresenter Content="{Binding AdditionalContent, ElementName=owner}" />
         </StackPanel>
     </Grid>

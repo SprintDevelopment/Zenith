@@ -22,10 +22,10 @@ namespace Zenith.Assets.Extensions
         {
             var enumValues = Enum.GetValues(enumType);
 
-            return (from object enumValue in enumValues select new EnumDto(enumValue, GetDescription((Enum)enumValue))).ToObservableCollection();
+            return (from object enumValue in enumValues select new EnumDto(enumValue, ((Enum)enumValue).GetDescription())).ToObservableCollection();
         }
 
-        private static string GetDescription(Enum enumValue)
+        public static string GetDescription(this Enum enumValue)
         {
             return enumValue.GetType().GetMember(enumValue.ToString()).First().GetCustomAttribute<DisplayAttribute>().GetName();
         }

@@ -60,7 +60,7 @@
         <Frame Grid.Column="1" x:Name="Frame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <Frame Grid.Column="1" x:Name="CreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{DynamicResource CommonShadow}" Width="0">
-            <StackPanel x:Name="menuContainerStackPanel" Background="#FFFAFAFA" VerticalAlignment="Top">
+            <StackPanel x:Name="menuContainerStackPanel" Background="White" VerticalAlignment="Top">
                 <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="دریافت و پرداخت" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
@@ -72,8 +72,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="اشخاص" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="PersonTransactionListPage"/>
-                            <controls:SubMenuItem Title="RecieveableChequeList"/>
+                            <controls:SubMenuItem Title="لیست اشخاص" Shortcut="Ctrl+Shift+P" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:PersonListPage}"/>
+                            <controls:SubMenuItem Title="شخص جدید"/>
                             <controls:SubMenuItem Title="PayableChequeList"/>
                             <controls:SubMenuItem Title="Person"/>
                             <controls:SubMenuItem Title="PersonList"/>
@@ -93,9 +93,11 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست شرکت ها" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
-                            <controls:SubMenuItem Title="شرکت جدید" Shortcut="Ctrl+Shift+M"/>
-                            <controls:SubMenuItem Title="لیست محصولات" Shortcut="Ctrl+Shift+O" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
-                            <controls:SubMenuItem Title="محصول جدید" Shortcut="Ctrl+Shift+M"/>
+                            <controls:SubMenuItem Title="شرکت جدید"/>
+                            <controls:SubMenuItem Title="لیست محصولات" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MaterialListPage}"/>
+                            <controls:SubMenuItem Title="محصول جدید"/>
+                            <controls:SubMenuItem Title="لیست ماشین ها" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MachineListPage}"/>
+                            <controls:SubMenuItem Title="ماشین جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

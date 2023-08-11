@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zenith.Assets.Attributes;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Utils;
 using Zenith.Models;
 using Zenith.Repositories;
 
@@ -44,7 +45,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
                 CreateOrUpdateCommand = ReactiveCommand.Create<Unit>(_ =>
                 {
-                    var cuCommandResult = IsNew ? Repository.Add(pm) : Repository.Update(pm);
+                    var cuCommandResult = IsNew ? Repository.Add(pm) : Repository.Update(pm, modelKeyId);
                     Repository.SaveChanges();
                     ChangeSet.Add(pm);
                 }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
@@ -65,7 +66,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 if (key == null)
                     PageModel = new T();
                 else
-                    PageModel = Repository.Single(key);
+                    PageModel = MapperUtil.Mapper.Map<T>(Repository.Single(key));
             });
         }
 

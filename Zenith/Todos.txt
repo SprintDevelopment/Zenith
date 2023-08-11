@@ -1,4 +1,9 @@
-﻿Company, Personnel, Outgo, Note, Machine, Diesel
+﻿Note - 1h
+Outgo Cat - 2h
+Outgo - 2h
+Users - 1h
+Permissions - 1h it is for the future.
+Company, Personnel, Outgo, Note, Machine, Diesel
 Print
 
 Select suitable icons for MenuItems

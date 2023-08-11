@@ -27,7 +27,14 @@ namespace Zenith.Repositories
         public T Single(dynamic id) => _context.Set<T>().Find(id);
 
         public T Add(T entity) => _context.Set<T>().Add(entity).Entity;
-        public T Update(T entity) => _context.Set<T>().Update(entity).Entity;
+        public T Update(T entity, dynamic entityId)
+        {
+            var old = Single(entityId);
+            _context.Entry(old).State = EntityState.Detached;
+            _context.Entry(entity).State = EntityState.Modified;
+
+            return entity;
+        }
         public void Remove(T entity) => _context.Set<T>().Remove(entity);
 
         public void AddRange(IEnumerable<T> entities) => _context.Set<T>().AddRange(entities);

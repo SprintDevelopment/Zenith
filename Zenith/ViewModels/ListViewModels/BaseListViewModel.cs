@@ -14,6 +14,8 @@ using Zenith.Assets.Attributes;
 using Zenith.Views.CreateOrUpdateViews;
 using System.Collections.ObjectModel;
 using ReactiveUI.Fody.Helpers;
+using AutoMapper;
+using Zenith.Assets.Utils;
 
 namespace Zenith.ViewModels.ListViewModels
 {
@@ -47,12 +49,9 @@ namespace Zenith.ViewModels.ListViewModels
             SourceList.Connect()
                 .Filter(criteria, ListFilterPolicy.ClearAndReplace)
                 .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
-                .Bind(out ActiveList).Subscribe(_ =>
-                {
-                    //var counter = 0;
-                    //ActiveList.ForEach(item => item.Order = ++counter);
-                    //calculate();
-                });
+                .Bind(out ActiveList)
+                .Do(_ => calculate())
+                .Subscribe();
 
             if (searchModel != null)
             {
@@ -134,14 +133,9 @@ namespace Zenith.ViewModels.ListViewModels
                 {
                     if (!changeSet.IsNullOrEmpty())
                     {
-                        SourceList.Edit(updater =>
-                        {
-                            var item = changeSet.FirstOrDefault();
-                            var index = updater.IndexOf(itemToUpdate);
-                            updater.RemoveAt(index);
-                            updater.Insert(index, item);
-                        });
+                        MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), itemToUpdate);
                     }
+
                     App.MainViewModel.CreateUpdatePageReturned.Execute().Subscribe();
                 });
 

@@ -17,22 +17,21 @@
         <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
         <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
+        <converters:EnumConverter x:Key="enumConverter"/>
 
         <Style TargetType="{x:Type baseclasses:JGrid}">
             <Setter Property="ToolTipService.InitialShowDelay" Value="2000"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFF3F3F3" />
-                    <!--<Setter Property="Tag" Value="#FF3AB05A"/>-->
-                </Trigger>
-
-                <Trigger Property="IsMouseOver" Value="False">
-                    <Setter Property="Background" Value="White" />
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FFFBFFFB" />
                     <!--<Setter Property="Tag" Value="White"/>-->
                 </Trigger>
-
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#FFF3FFF2" />
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFAFAFA" />
+                    <!--<Setter Property="Tag" Value="#FF3AB05A"/>-->
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="White" />
                     <!--<Setter Property="Tag" Value="White"/>-->
                 </Trigger>
             </Style.Triggers>
@@ -169,27 +168,27 @@
                         <Border x:Name="border" Background="Transparent" CornerRadius="25">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
-                            <!--<Image Source="{TemplateBinding Tag}" x:Name="alternativeImage" Stretch="None" />-->
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsDefaulted" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFFF2424"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
+                        <!--<Image Source="{TemplateBinding Tag}" x:Name="alternativeImage" Stretch="None" />-->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFFF2424"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="#FFECECEC"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="true">
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="#FFD8D8D8"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Background" TargetName="border" Value="#FFE4E4E4"/>
-                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#FFE4E4E4"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
