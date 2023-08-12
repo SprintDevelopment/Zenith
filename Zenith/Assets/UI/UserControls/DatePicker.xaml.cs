@@ -1,27 +1,12 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using ReactiveUI.Validation.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Zenith.Assets.UI.BaseClasses;
 using Zenith.Assets.UI.Helpers;
 
 namespace Zenith.Assets.UI.UserControls
@@ -53,8 +38,6 @@ namespace Zenith.Assets.UI.UserControls
                 this.OneWayBind(ViewModel, vm => vm.IsInMonthlyMode, v => v.monthsGrid.Visibility, i => i ? Visibility.Visible : Visibility.Collapsed).DisposeWith(d);
                 this.OneWayBind(ViewModel, vm => vm.DateTime, v => v.dateTextBox.Text, dt => dt.ToString("dd/MM/yyyy")).DisposeWith(d);
 
-                this.Bind(ViewModel, vm => vm.IsPopupVisible, v => v.dateSelectionPopup.IsOpen).DisposeWith(d);
-
                 ViewModel.WhenAnyValue(vm => vm.DateTime)
                     .Do(dt =>
                     {
@@ -68,7 +51,7 @@ namespace Zenith.Assets.UI.UserControls
                     .Subscribe().DisposeWith(d);
 
                 Observable.FromEventPattern(showHidePopupButton, nameof(Button.Click))
-                    .Do(_ => ViewModel.IsPopupVisible = !ViewModel.IsPopupVisible)
+                    .Do(_ => dateSelectionPopup.IsOpen = !dateSelectionPopup.IsOpen)
                     .Subscribe().DisposeWith(d);
 
                 Observable.FromEventPattern(preButton, nameof(Button.Click))
@@ -112,7 +95,7 @@ namespace Zenith.Assets.UI.UserControls
                 daysGrid.Children.OfType<Button>().Append(todayButton)
                     .Select(btn => Observable.FromEventPattern(btn, nameof(btn.Click))
                     .Select(e => (DateTime)((Button)e.Sender).Tag)
-                    .Do(date => { ViewModel.DateTime = date; ViewModel.IsPopupVisible = false; })
+                    .Do(date => { ViewModel.DateTime = date; dateSelectionPopup.IsOpen = false; })
                     .Subscribe().DisposeWith(d)).ToList();
 
                 monthsGrid.Children.OfType<Button>()
@@ -152,9 +135,6 @@ namespace Zenith.Assets.UI.UserControls
 
         [Reactive]
         public int Day { get; set; }
-
-        [Reactive]
-        public bool IsPopupVisible { get; set; }
 
         [Reactive]
         public bool IsInMonthlyMode { get; set; }

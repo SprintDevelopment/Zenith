@@ -19,6 +19,7 @@ namespace Zenith.Data
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<OutgoCategory> OutgoCategories { get; set; }
         public DbSet<Person> People { get; set; }
     }
 }

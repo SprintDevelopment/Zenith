@@ -32,10 +32,11 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
                 <ComboBox x:Name="notifyTypeComboBox" SelectedValue="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="یادآوری"/>
                 <usercontrols:DatePicker x:Name="notifyDateTimePicker" Title="تاریخ و ساعت یادآوری"/>
+                <usercontrols:TreeView x:Name="tv" Title="تاریخ و ساعت یادآوری"/>
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="تایید" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Button Content="تایید" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Click="Button_Click" />
             </StackPanel>
         </Grid>
     </Grid>

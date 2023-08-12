@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using System;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
@@ -30,7 +31,14 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Switch()
                     .Do(nt => notifyDateTimePicker.Visibility = (nt == NotifyTypes.FooterNotify).Viz())
                     .Subscribe().DisposeWith(d);
+
+                tv.ItemsSource = new OutgoCategoryRepository().All().GetHierarchyCollection();
             });
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            tv.SelectedItem = tv.ItemsSource.FirstOrDefault(tvi => tvi.Id.ToString() == "5");
         }
     }
 }
