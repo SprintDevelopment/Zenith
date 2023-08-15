@@ -139,7 +139,7 @@ namespace Zenith.ViewModels.ListViewModels
                     App.MainViewModel.CreateUpdatePageReturned.Execute().Subscribe();
                 });
 
-                CreateUpdatePage.ViewModel.PrepareCommand.Execute(typeof(T).GetKeyPropertyValue(itemToUpdate)).Subscribe();
+                CreateUpdatePage.ViewModel.PrepareCommand.Execute(itemToUpdate.GetKeyPropertyValue()).Subscribe();
                 App.MainViewModel.ShowCreateUpdatePage.Execute(CreateUpdatePage).Subscribe();
             });
 

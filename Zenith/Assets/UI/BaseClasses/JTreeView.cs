@@ -1,7 +1,9 @@
 ﻿using DynamicData;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
@@ -15,32 +17,22 @@ using Zenith.Assets.Extensions;
 using Zenith.Assets.UI.Helpers;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Models;
+using Zenith.ViewModels;
 
 namespace Zenith.Assets.UI.BaseClasses
 {
-    public class JTreeView<T> : ActivatableUserControl, IViewFor where T : Model, new()
+    public class JTreeViewBase : ActivatableUserControl
     {
         public string Title
         {
             get { return (string)base.GetValue(TitleProperty); }
             set { base.SetValue(TitleProperty, value); }
         }
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(JTreeView<T>), new PropertyMetadata(""));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(JTreeViewBase), new PropertyMetadata(""));
+    }
 
-        public T SelectedItem
-        {
-            get { return (T)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
-        }
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(T), typeof(JTreeView<T>), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        public IEnumerable<T> ItemsSource
-        {
-            get { return (IEnumerable<T>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
-        }
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable<T>), typeof(JTreeView<T>), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
+    public class JTreeView<T> : JTreeViewBase, IViewFor<JTreeViewModel<T>> where T : Model, new()
+    {
         JTextBox selectedItemTitleTextBox;
         Button showHidePopupButton;
         Popup treeViewPopup;
@@ -91,10 +83,11 @@ namespace Zenith.Assets.UI.BaseClasses
             itemsTreeView = new TreeView();
             itemsTreeView.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, false);
             popupContentGrid.Children.Add(itemsTreeView);
-
+            treeViewPopup.Child = popupContentGrid;
             contentGrid.Children.Add(treeViewPopup);
 
-
+            this.Content = contentGrid;
+            ViewModel = new JTreeViewModel<T>();
             this.WhenActivated(d =>
             {
                 Observable.FromEventPattern(showHidePopupButton, nameof(Button.Click))
@@ -109,28 +102,46 @@ namespace Zenith.Assets.UI.BaseClasses
                     .BindTo(this, v => v.treeViewPopup.Width)
                     .DisposeWith(d);
 
-                this.WhenAnyValue(v => v.ItemsSource)
+                ViewModel.WhenAnyValue(vm => vm.ItemsSource)
                     .WhereNotNull()
-                    .Do(items => itemsTreeView.ItemsSource = items.GetHierarchyCollection())
+                    .Select(i => i.GetHierarchyCollection())
+                    .Do(hi => itemsTreeView.ItemsSource = hi)
                     .Subscribe().DisposeWith(d);
+
+                //this.OneWayBind(ViewModel, vm => vm.ItemsSource, v => v.itemsTreeView.ItemsSource, i => i?.GetHierarchyCollection()).DisposeWith(d);
+                this.OneWayBind(ViewModel, vm => vm.SelectedItem, v => v.selectedItemTitleTextBox.Text, s => s?.ToString()).DisposeWith(d);
 
                 Observable.FromEventPattern(itemsTreeView, nameof(itemsTreeView.SelectedItemChanged))
-                    .Do(_ => SelectedItem = (T)itemsTreeView.SelectedItem)
+                    .Do(_ =>
+                    {
+                        ViewModel.SelectedItem = ViewModel.ItemsSource?.SingleOrDefault(item => item.GetKeyPropertyValue().ToString() == ((TreeViewItemDto)itemsTreeView.SelectedItem).Id.ToString());
+                        treeViewPopup.IsOpen = false;
+                    })
                     .Subscribe().DisposeWith(d);
 
-                //this.WhenAnyValue(v => v.SelectedItem)
-                //    .WhereNotNull()
-                //    .Where(x => x != itemsTreeView.SelectedValue)
-                //    .Do(x =>
-                //    {
-                //        x.IsSelected = true;
-                //        var node = x;
-                //        node.IsExpanded = true;
-                //    })
-                //    .Subscribe().DisposeWith(d);
+                ViewModel.WhenAnyValue(vm => vm.SelectedItem)
+                    .WhereNotNull()
+                    .Where(x => x != itemsTreeView.SelectedValue)
+                    .Select(x => ((IEnumerable<TreeViewItemDto>)itemsTreeView.ItemsSource).SearchInHierarchyCollection(x))
+                    .WhereNotNull()
+                    .Do(tvi => 
+                    {
+                        tvi.IsSelected = true;
+                        while (tvi.Parent is not null) 
+                        {
+                            tvi = tvi.Parent;
+                            tvi.IsExpanded = true;
+                        }
+                    }).Subscribe().DisposeWith(d);
             });
         }
 
-        public object? ViewModel { get; set; }
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (JTreeViewModel<T>)value; }
+        }
+
+        public JTreeViewModel<T> ViewModel { get; set; }
     }
 }

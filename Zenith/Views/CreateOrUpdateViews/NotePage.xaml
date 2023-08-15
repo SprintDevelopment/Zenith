@@ -7,7 +7,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
-      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls">
+      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
+      xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls">
     <Grid FlowDirection="RightToLeft">
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
@@ -32,7 +33,7 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
                 <ComboBox x:Name="notifyTypeComboBox" SelectedValue="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="یادآوری"/>
                 <usercontrols:DatePicker x:Name="notifyDateTimePicker" Title="تاریخ و ساعت یادآوری"/>
-                <usercontrols:OutgoCategoriesTreeView x:Name="tv"/>
+                <projUsercontrols:OutgoCategoriesTreeView x:Name="tv"/>
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 

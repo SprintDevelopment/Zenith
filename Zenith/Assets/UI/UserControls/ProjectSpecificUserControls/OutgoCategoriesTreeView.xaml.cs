@@ -23,7 +23,7 @@ using Zenith.Assets.UI.Helpers;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Models;
 
-namespace Zenith.Assets.UI.UserControls
+namespace Zenith.Assets.UI.UserControls.ProjectSpecificUserControls
 {
     /// <summary>
     /// Interaction logic for TreeView.xaml

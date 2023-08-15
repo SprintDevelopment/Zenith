@@ -34,7 +34,7 @@ namespace Zenith.Assets.Extensions
                 if (thisItemGroup != null)
                     item.Children = thisItemGroup.Select(x =>
                     {
-                        var children = new TreeViewItemDto { Id = keyProperty.GetValue(x), Title = x.ToString() };
+                        var children = new TreeViewItemDto { Parent = item, Id = keyProperty.GetValue(x), Title = x.ToString() };
                         queue.Enqueue(children);
 
                         return children;
@@ -42,6 +42,11 @@ namespace Zenith.Assets.Extensions
             }
 
             return result;
+        }
+        public static TreeViewItemDto SearchInHierarchyCollection<T>(this IEnumerable<TreeViewItemDto> hierarchyEnumerable, T searchedItem)
+        {
+            return hierarchyEnumerable.SingleOrDefault(item => item.Id.ToString() == searchedItem.GetKeyPropertyValue().ToString())
+                ?? (hierarchyEnumerable.Any() ? SearchInHierarchyCollection(hierarchyEnumerable.SelectMany(i => i.Children), searchedItem) : null);
         }
 
         public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> list)

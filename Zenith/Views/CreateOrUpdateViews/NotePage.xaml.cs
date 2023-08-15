@@ -32,13 +32,13 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Do(nt => notifyDateTimePicker.Visibility = (nt == NotifyTypes.FooterNotify).Viz())
                     .Subscribe().DisposeWith(d);
 
-                //tv.ItemsSource = new OutgoCategoryRepository().All();
+                tv.ViewModel.ItemsSource = new OutgoCategoryRepository().All();
             });
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //tv.SelectedItem = tv.ItemsSource.FirstOrDefault(tvi => tvi.Id.ToString() == "5");
+            tv.ViewModel.SelectedItem = tv.ViewModel.ItemsSource.FirstOrDefault(tvi => tvi.OutgoCategoryId == 5);
         }
     }
 }

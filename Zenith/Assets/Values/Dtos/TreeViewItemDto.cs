@@ -19,6 +19,9 @@ namespace Zenith.Assets.Values.Dtos
         public bool IsExpanded { get; set; }
 
         [Reactive]
+        public TreeViewItemDto Parent { get; set; }
+
+        [Reactive]
         public IEnumerable<TreeViewItemDto> Children { get; set; } = Enumerable.Empty<TreeViewItemDto>();
     }
 }

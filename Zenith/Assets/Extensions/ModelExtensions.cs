@@ -53,10 +53,9 @@ namespace Zenith.Assets.Extensions
             return type.GetProperties().FirstOrDefault(p => p.GetCustomAttribute<KeyAttribute>() != null);
         }
 
-        public static object GetKeyPropertyValue<T>(this Type type, T model)
+        public static object GetKeyPropertyValue<T>(this T model)
         {
-            return type.GetProperties().FirstOrDefault(p => p.GetCustomAttribute<KeyAttribute>() != null)
-                .GetValue(model);
+            return typeof(T).GetKeyProperty().GetValue(model);
         }
     }
 }
