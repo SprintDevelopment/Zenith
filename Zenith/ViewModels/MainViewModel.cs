@@ -43,7 +43,7 @@ namespace Zenith.ViewModels
             {
                 return model;
             }, this.WhenAnyValue(vm => vm.IsLocked).Where(il => !il));
-            
+
             OpenLogFile = ReactiveCommand.Create<string>(_ =>
             {
                 Process.Start("notepad.exe", $"C:\\{_}");
@@ -69,6 +69,24 @@ namespace Zenith.ViewModels
                     })
                 });
 
+            });
+
+            Restore = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
+            {
+                var restoreResult = DatabaseUtil.Restore(@"D:\Backups\");
+                if (restoreResult is not null)
+                {
+                    _alerts.Add(new AlertViewModel
+                    {
+                        Guid = new Guid(),
+                        Title = restoreResult.ResultTitle,
+                        Description = restoreResult.ResultDescription,
+                        DialogType = restoreResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
+                        ActionContent = restoreResult.OperationResultType == OperationResultTypes.Succeeded ? string.Empty : "مشاهده فایل لاگ برنامه",
+                        ActionCommand = restoreResult.OperationResultType == OperationResultTypes.Succeeded ?
+                            null : ReactiveCommand.Create<Unit>(_ => { Process.Start("notepad.exe", @"C:\file.txt"); })
+                    });
+                }
             });
 
             _alerts.Connect()
@@ -114,5 +132,6 @@ namespace Zenith.ViewModels
         //
         public ReactiveCommand<string, Unit> OpenLogFile { get; set; }
         public ReactiveCommand<Unit, Unit> Backup { get; set; }
+        public ReactiveCommand<Unit, Unit> Restore { get; set; }
     }
 }

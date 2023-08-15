@@ -135,7 +135,7 @@
                             <controls:SubMenuItem Title="تنظیمات" />
                             <controls:SubMenuItem Title="نمایش فایل لاگ" Command="{Binding OpenLogFile}"/>
                             <controls:SubMenuItem Title="پشتیبان گیری از داده ها" Command="{Binding Backup}"/>
-                            <controls:SubMenuItem Title="بازیابی فایل پشتیبان"/>
+                            <controls:SubMenuItem Title="بازیابی فایل پشتیبان" Command="{Binding Restore}"/>
                             <controls:SubMenuItem Title="فعالسازی نرم افزار"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>

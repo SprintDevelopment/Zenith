@@ -13,9 +13,6 @@ namespace Zenith.Assets.Values.Dtos
         public object Id { get; set; }
 
         [Reactive]
-        public TreeViewItemDto Parent { get; set; }
-
-        [Reactive]
         public string Title { get; set; }
 
         [Reactive]

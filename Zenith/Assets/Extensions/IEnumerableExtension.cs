@@ -34,7 +34,7 @@ namespace Zenith.Assets.Extensions
                 if (thisItemGroup != null)
                     item.Children = thisItemGroup.Select(x =>
                     {
-                        var children = new TreeViewItemDto { Parent= item, Id = keyProperty.GetValue(x), Title = x.ToString() };
+                        var children = new TreeViewItemDto { Id = keyProperty.GetValue(x), Title = x.ToString() };
                         queue.Enqueue(children);
 
                         return children;

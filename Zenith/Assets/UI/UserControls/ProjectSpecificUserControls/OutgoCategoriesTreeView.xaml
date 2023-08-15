@@ -1,0 +1,12 @@
+﻿<baseclasses:JTreeView
+             xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
+             xmlns:model="clr-namespace:Zenith.Models"
+             x:TypeArguments="model:OutgoCategory"
+             x:Class="Zenith.Assets.UI.UserControls.OutgoCategoriesTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Margin="24,16,24,0" Title="دسته های هزینه"
+             d:DesignHeight="450" d:DesignWidth="800"/>
+
