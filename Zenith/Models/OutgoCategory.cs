@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Zenith.Assets.Attributes;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Zenith.Assets.Values.Constants;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Fody.Helpers;
@@ -21,9 +15,14 @@ namespace Zenith.Models
         [Reactive]
         public short OutgoCategoryId { get; set; }
 
+        [Reactive]
         public short? ParentOutgoCategoryId { get; set; }
 
-        [Required(ErrorMessage = "موضوع یادداشت نمی تواند خالی باشد")]
+        [ForeignKey(nameof(ParentOutgoCategoryId))]
+        [Reactive]
+        public OutgoCategory Parent { get; set; }
+
+        [Required(ErrorMessage = "عنوان نمی تواند خالی باشد")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Title { get; set; }
@@ -31,7 +30,7 @@ namespace Zenith.Models
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
         public OutgoCategory()
         {

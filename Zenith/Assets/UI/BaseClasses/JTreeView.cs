@@ -108,7 +108,6 @@ namespace Zenith.Assets.UI.BaseClasses
                     .Do(hi => itemsTreeView.ItemsSource = hi)
                     .Subscribe().DisposeWith(d);
 
-                //this.OneWayBind(ViewModel, vm => vm.ItemsSource, v => v.itemsTreeView.ItemsSource, i => i?.GetHierarchyCollection()).DisposeWith(d);
                 this.OneWayBind(ViewModel, vm => vm.SelectedItem, v => v.selectedItemTitleTextBox.Text, s => s?.ToString()).DisposeWith(d);
 
                 Observable.FromEventPattern(itemsTreeView, nameof(itemsTreeView.SelectedItemChanged))

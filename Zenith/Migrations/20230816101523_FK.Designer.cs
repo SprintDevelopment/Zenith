@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230816101523_FK")]
+    partial class FK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,38 +155,6 @@ namespace Zenith.Migrations
                     b.ToTable("Notes");
                 });
 
-            modelBuilder.Entity("Zenith.Models.Outgo", b =>
-                {
-                    b.Property<int>("OutgoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OutgoId"));
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("HasErrors")
-                        .HasColumnType("bit");
-
-                    b.Property<short>("OutgoCategoryId")
-                        .HasColumnType("smallint");
-
-                    b.Property<long>("Value")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("OutgoId");
-
-                    b.HasIndex("OutgoCategoryId");
-
-                    b.ToTable("Outgoes");
-                });
-
             modelBuilder.Entity("Zenith.Models.OutgoCategory", b =>
                 {
                     b.Property<short>("OutgoCategoryId")
@@ -270,38 +241,6 @@ namespace Zenith.Migrations
                     b.HasKey("PersonId");
 
                     b.ToTable("People");
-                });
-
-            modelBuilder.Entity("Zenith.Models.User", b =>
-                {
-                    b.Property<string>("Username")
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<byte[]>("AvatarImageBytes")
-                        .IsRequired()
-                        .HasColumnType("Image");
-
-                    b.Property<DateTime>("CreateDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("HasErrors")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Username");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Zenith.Models.Outgo", b =>
-                {
-                    b.HasOne("Zenith.Models.OutgoCategory", "OutgoCategory")
-                        .WithMany()
-                        .HasForeignKey("OutgoCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OutgoCategory");
                 });
 
             modelBuilder.Entity("Zenith.Models.OutgoCategory", b =>

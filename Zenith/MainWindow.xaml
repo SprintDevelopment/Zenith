@@ -84,8 +84,10 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="هزینه ها" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="OutgoList"/>
-                            <controls:SubMenuItem Title="OutgoCatList"/>
+                            <controls:SubMenuItem Title="لیست هزینه ها" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoListPage}"/>
+                            <controls:SubMenuItem Title="هزینه جدید"/>
+                            <controls:SubMenuItem Title="لیست دسته های هزینه" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
+                            <controls:SubMenuItem Title="دسته هزینه جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -120,6 +122,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/security.png" Title="کاربران و سطوح دسترسی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
+                            <controls:SubMenuItem Title="لیست کاربران" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:UserListPage}"/>
+                            <controls:SubMenuItem Title="کاربر جدید" />
                             <controls:SubMenuItem Title="UserList"/>
                             <controls:SubMenuItem Title="User"/>
                             <controls:SubMenuItem Title="UserPermission"/>

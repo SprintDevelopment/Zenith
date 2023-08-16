@@ -18,6 +18,7 @@
         <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
         <converters:CountToVisibilityConverter x:Key="countToVisibilityConverter"/>
+        <converters:ImageToBinaryConverter x:Key="imageToBianaryConverter"/>
         <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
         <converters:EnumConverter x:Key="enumConverter"/>
 
@@ -81,6 +82,54 @@
                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Right"/>
                                 <Setter Property="HorizontalAlignment" TargetName="titleTextBlock" Value="Right"/>
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Red"/>
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Margin" Value="24,16,24,0"/>
+            <Setter Property="MinHeight" Value="42"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}" FontSize="12" Foreground="{Binding Stroke, ElementName=border}" VerticalAlignment="Top"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Bottom" Margin="12,16,0,0"/>
+                            <Rectangle x:Name="border" Stroke="#FFBDBDBD" StrokeThickness="1" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Opacity=".2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="#FF6EBDFF"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="#FF4AADFF"/>
                             </Trigger>
                             <Trigger Property="Validation.HasError" Value="true">
                                 <Setter Property="Stroke" TargetName="border" Value="Red"/>

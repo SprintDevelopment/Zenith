@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230816133515_ChangeOutgoes")]
+    partial class ChangeOutgoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,27 +273,6 @@ namespace Zenith.Migrations
                     b.HasKey("PersonId");
 
                     b.ToTable("People");
-                });
-
-            modelBuilder.Entity("Zenith.Models.User", b =>
-                {
-                    b.Property<string>("Username")
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<byte[]>("AvatarImageBytes")
-                        .IsRequired()
-                        .HasColumnType("Image");
-
-                    b.Property<DateTime>("CreateDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("HasErrors")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Username");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Zenith.Models.Outgo", b =>

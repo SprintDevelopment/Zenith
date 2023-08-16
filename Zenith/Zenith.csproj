@@ -86,4 +86,31 @@
     <Resource Include="Resources\Images\Menu\trades.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\CreateOrUpdateViews\UserPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateOrUpdateViews\OutgoPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateOrUpdateViews\OutgoCategoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\UserListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\OutgoListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\OutgoCategoryListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ListViews\OutgoCategoryListPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
