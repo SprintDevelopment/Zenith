@@ -9,6 +9,7 @@ using System;
 using ReactiveUI;
 using System.Runtime.Serialization;
 using Zenith.Assets.Utils;
+using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
@@ -27,7 +28,7 @@ namespace Zenith.Models
 
         [Required]
         [MaxLength(LengthConstants.LARGE_STRING)]
-        public string HashedPassword => CryptoUtil.Encrypt(Password);
+        public string HashedPassword { get; private set; }
 
         [Reactive]
         public DateTime CreateDateTime { get; set; } = DateTime.Now;
@@ -40,6 +41,11 @@ namespace Zenith.Models
         {
             this.ValidationRule(vm => vm.Username, oc => oc is not null, "نام کاربری نمی تواند خالی باشد");
             this.ValidationRule(vm => vm.Password, pass => !string.IsNullOrWhiteSpace(pass), "میزان هزینه باید بیشتر از 0 باشد");
+
+            this.WhenAnyValue(m => m.Password)
+                .Where(p => !p.IsNullOrWhiteSpace())
+                .Do(p => HashedPassword = CryptoUtil.GenerateSaltedHashBytes(p))
+                .Subscribe();
         }
 
         public override string ToString()

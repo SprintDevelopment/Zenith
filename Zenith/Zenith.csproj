@@ -27,6 +27,7 @@
     <None Remove="Resources\Images\Common\partialSelection.png" />
     <None Remove="Resources\Images\Common\previous.png" />
     <None Remove="Resources\Images\Common\print.png" />
+    <None Remove="Resources\Images\Common\remove.png" />
     <None Remove="Resources\Images\Common\search.png" />
     <None Remove="Resources\Images\Menu\configs.png" />
     <None Remove="Resources\Images\Menu\definitions.png" />
@@ -74,6 +75,7 @@
     <Resource Include="Resources\Images\Common\partialSelection.png" />
     <Resource Include="Resources\Images\Common\previous.png" />
     <Resource Include="Resources\Images\Common\print.png" />
+    <Resource Include="Resources\Images\Common\remove.png" />
     <Resource Include="Resources\Images\Common\search.png" />
     <Resource Include="Resources\Images\Menu\configs.png" />
     <Resource Include="Resources\Images\Menu\definitions.png" />
@@ -87,6 +89,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CreateOrUpdateViews\BuyPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateOrUpdateViews\UserPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +99,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CreateOrUpdateViews\OutgoCategoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\BuyListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ListViews\UserListPage.xaml.cs">
@@ -111,6 +119,10 @@
     <Page Update="Views\ListViews\OutgoCategoryListPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

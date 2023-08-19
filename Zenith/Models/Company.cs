@@ -13,7 +13,7 @@ namespace Zenith.Models
     {
         [Key]
         [Reactive]
-        public int CompanyId { get; set; }
+        public short CompanyId { get; set; }
 
         [Required(ErrorMessage = "نام شرکت نمی تواند خالی باشد")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]

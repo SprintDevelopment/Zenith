@@ -1,10 +1,8 @@
-﻿Note - 1h
-Outgo Cat - 2h
-Outgo - 2h
-Users - 1h
-Permissions - 1h it is for the future.
+﻿Permissions - 1h it is for the future.
 Company, Personnel, Outgo, Note, Machine, Diesel
 Print
 
-Select suitable icons for MenuItems
-Create Outgoes, Poeple, 
+Buy (3h)
+Sale (3h)
+Order (3h)
+Dashboard (3h)

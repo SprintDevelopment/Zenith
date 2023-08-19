@@ -27,6 +27,7 @@ using System.Collections;
 using DynamicData.Binding;
 using Zenith.Assets.UI.UserControls;
 using DynamicData;
+using Zenith.Views;
 
 namespace Zenith
 {
@@ -45,103 +46,127 @@ namespace Zenith
             {
                 this.DataContext = ViewModel;
 
-                Observable.FromEventPattern(TitleBar, nameof(TitleBar.MenuClicked))
-                    .Do(_ => ViewModel.IsMenuVisible = !ViewModel.IsLocked && !ViewModel.IsMenuVisible)
-                    .Subscribe().DisposeWith(d);
-
-                ViewModel.WhenAnyValue(vm => vm.IsMenuVisible)
-                    .Do(isMenuVisible =>
+                ViewModel.WhenAnyValue(vm => vm.CreateUpdatePage)
+                    .SkipWhile(page => page == null)
+                    .Do(createUpdatePage =>
                     {
-                        if (isMenuVisible)
-                            ViewModel.IsSearchVisible = false;
-                        var storyboard = Resources[isMenuVisible ? "ShowMenuStoryboard" : "HideMenuStoryboard"] as Storyboard;
-                        storyboard.Begin();
+                        CreateUpdateFrame.RemoveBackEntry();
+                        if (createUpdatePage == null)
+                        {
+                            CreateUpdateFrame.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            createUpdatePage.FontFamily = this.FontFamily;
+                            createUpdatePage.FontSize = this.FontSize;
+                            CreateUpdateFrame.Navigate(createUpdatePage);
+                            CreateUpdateFrame.Visibility = Visibility.Visible;
+                        }
                     }).Subscribe().DisposeWith(d);
 
-                ViewModel.WhenAnyValue(vm => vm.IsSearchVisible).Subscribe(isSearchVisible =>
-                {
-                    if (isSearchVisible)
-                        ViewModel.IsMenuVisible = false;
-                    var storyboard = Resources[isSearchVisible ? "ShowSearchStoryboard" : "HideSearchStoryboard"] as Storyboard;
-                    storyboard.Begin();
-                });
+                CompositeDisposable disposable = null;
 
-                ViewModel.InitiateSearch.Subscribe(searchModel =>
-                {
-                    this.searchUserControl.Initialize(searchModel);
-                });
-
-                IDisposable disposable = null;
-                ViewModel.WhenAnyValue(vm => vm.DialogDto).Where(dto => dto != null).Subscribe(dialogDto =>
-                {
-                    disposable?.Dispose();
-                    disposable = Observable.FromEventPattern(dialogUserControl, nameof(dialogUserControl.Returned))
-                    .Select(ea => ((DialogEventArgs)ea.EventArgs).DialogResult).Subscribe(dialogResult =>
+                ViewModel.WhenAnyValue(vm => vm.LoggedInUser)
+                    .Do(lu => 
                     {
-                        ViewModel.DialogResult = dialogResult;
-                    });
+                        if(lu == null)
+                        {
+                            ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
+                            ViewModel.CreateUpdatePage = new LoginView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
+                            disposable?.Dispose();
+                        }
+                        else
+                        {
+                            disposable = new CompositeDisposable().DisposeWith(d);
 
-                    dialogUserControl.Initialize(dialogDto);
-                });
+                            Observable.FromEventPattern(TitleBar, nameof(TitleBar.MenuClicked))
+                                .Do(_ => ViewModel.IsMenuVisible = !ViewModel.IsLocked && !ViewModel.IsMenuVisible)
+                                .Subscribe().DisposeWith(disposable);
 
-                ViewModel.WhenAnyValue(vm => vm.ListPage).SkipWhile(page => page == null).Subscribe(listPage =>
-                {
-                    Frame.RemoveBackEntry();
-                    listPage.FontFamily = this.FontFamily;
-                    listPage.FontSize = this.FontSize;
-                    Frame.Navigate(listPage);
-                });
+                            ViewModel.WhenAnyValue(vm => vm.IsMenuVisible)
+                                .Do(isMenuVisible =>
+                                {
+                                    if (isMenuVisible)
+                                        ViewModel.IsSearchVisible = false;
+                                    var storyboard = Resources[isMenuVisible ? "ShowMenuStoryboard" : "HideMenuStoryboard"] as Storyboard;
+                                    storyboard.Begin();
+                                }).Subscribe().DisposeWith(disposable);
 
-                ViewModel.WhenAnyValue(vm => vm.CreateUpdatePage).SkipWhile(page => page == null).Subscribe(createUpdatePage =>
-                {
-                    CreateUpdateFrame.RemoveBackEntry();
-                    if (createUpdatePage == null)
-                    {
-                        CreateUpdateFrame.Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        createUpdatePage.FontFamily = this.FontFamily;
-                        createUpdatePage.FontSize = this.FontSize;
-                        CreateUpdateFrame.Navigate(createUpdatePage);
-                        CreateUpdateFrame.Visibility = Visibility.Visible;
-                    }
-                });
+                            ViewModel.WhenAnyValue(vm => vm.IsSearchVisible)
+                                .Do(isSearchVisible =>
+                                {
+                                    if (isSearchVisible)
+                                        ViewModel.IsMenuVisible = false;
+                                    var storyboard = Resources[isSearchVisible ? "ShowSearchStoryboard" : "HideSearchStoryboard"] as Storyboard;
+                                    storyboard.Begin();
+                                }).Subscribe().DisposeWith(disposable);
 
-                var shortcutedMenuItems = menuContainerStackPanel.Children.OfType<ZenithControls.MenuItem>()
-                    .Select(mi => mi.AdditionalContent as StackPanel)
-                    .SelectMany(sp => sp.Children.OfType<ZenithControls.SubMenuItem>())
-                    .Select(mi => new { mi.Shortcut, mi.Command, mi.CommandParameter })
-                    .Where(mi => !mi.Shortcut.IsNullOrWhiteSpace())
-                    .Select(mi => new 
-                    {
-                        modifiers = (mi.Shortcut.Contains("Ctrl") ? ModifierKeys.Control : ModifierKeys.None) | (mi.Shortcut.Contains("Shift") ? ModifierKeys.Shift : ModifierKeys.None),
-                        keyChar = char.ToUpper(mi.Shortcut.Last()),
-                        mi.Command, 
-                        mi.CommandParameter 
+                            ViewModel.InitiateSearch
+                                .Do(searchModel =>
+                                {
+                                    this.searchUserControl.Initialize(searchModel);
+                                }).Subscribe().DisposeWith(disposable);
+
+                            //IDisposable disposable = null;
+                            //ViewModel.WhenAnyValue(vm => vm.DialogDto).Where(dto => dto != null).Subscribe(dialogDto =>
+                            //{
+                            //    disposable?.Dispose();
+                            //    disposable = Observable.FromEventPattern(dialogUserControl, nameof(dialogUserControl.Returned))
+                            //    .Select(ea => ((DialogEventArgs)ea.EventArgs).DialogResult).Subscribe(dialogResult =>
+                            //    {
+                            //        ViewModel.DialogResult = dialogResult;
+                            //    });
+
+                            //    dialogUserControl.Initialize(dialogDto);
+                            //});
+
+                            ViewModel.WhenAnyValue(vm => vm.ListPage)
+                                .SkipWhile(page => page == null)
+                                .Do(listPage =>
+                                {
+                                    Frame.RemoveBackEntry();
+                                    listPage.FontFamily = this.FontFamily;
+                                    listPage.FontSize = this.FontSize;
+                                    Frame.Navigate(listPage);
+                                }).Subscribe().DisposeWith(disposable);
+
+                            var shortcutedMenuItems = menuContainerStackPanel.Children.OfType<ZenithControls.MenuItem>()
+                                .Select(mi => mi.AdditionalContent as StackPanel)
+                                .SelectMany(sp => sp.Children.OfType<ZenithControls.SubMenuItem>())
+                                .Select(mi => new { mi.Shortcut, mi.Command, mi.CommandParameter })
+                                .Where(mi => !mi.Shortcut.IsNullOrWhiteSpace())
+                                .Select(mi => new
+                                {
+                                    modifiers = (mi.Shortcut.Contains("Ctrl") ? ModifierKeys.Control : ModifierKeys.None) | (mi.Shortcut.Contains("Shift") ? ModifierKeys.Shift : ModifierKeys.None),
+                                    keyChar = char.ToUpper(mi.Shortcut.Last()),
+                                    mi.Command,
+                                    mi.CommandParameter
+                                })
+                                .AsEnumerable();
+
+                            Observable.FromEventPattern(this, nameof(Window.PreviewKeyDown))
+                                .Select(x => x.EventArgs as KeyEventArgs)
+                                .Select(x => new { eventArgs = x, shortcutedItem = shortcutedMenuItems.SingleOrDefault(smi => smi.modifiers == Keyboard.Modifiers && smi.keyChar == x.Key.ToChar()) })
+                                .Where(x => x.shortcutedItem is not null)
+                                .Do(x =>
+                                {
+                                    x.eventArgs.Handled = true;
+                                    x.shortcutedItem.Command.Execute(x.shortcutedItem.CommandParameter);
+                                }).Subscribe().DisposeWith(disposable);
+
+                            ViewModel.Alerts
+                                .ToObservableChangeSet()
+                                .ObserveOn(RxApp.MainThreadScheduler)
+                                .Transform(tvm => new Alert { ViewModel = tvm })
+                                .OnItemAdded(addedAlert => alertsStackPanel.Children.Add(addedAlert))
+                                .OnItemRemoved(removedAlert => alertsStackPanel.Children.Remove(removedAlert))
+                                .Subscribe().DisposeWith(disposable);
+
+                            ViewModel.CreateUpdatePage = null;
+                            ViewModel.IsMenuVisible = true;
+                        }
                     })
-                    .AsEnumerable();
-
-                Observable.FromEventPattern(this, nameof(Window.PreviewKeyDown))
-                    .Select(x => x.EventArgs as KeyEventArgs)
-                    .Select(x => new { eventArgs = x, shortcutedItem = shortcutedMenuItems.SingleOrDefault(smi => smi.modifiers == Keyboard.Modifiers && smi.keyChar == x.Key.ToChar()) })
-                    .Where(x => x.shortcutedItem is not null)
-                    .Do(x =>
-                    {
-                        x.eventArgs.Handled = true;
-                        x.shortcutedItem.Command.Execute(x.shortcutedItem.CommandParameter);
-                    }).Subscribe().DisposeWith(d);
-
-                ViewModel.Alerts
-                    .ToObservableChangeSet()
-                    .ObserveOn(RxApp.MainThreadScheduler)
-                    .Transform(tvm => new Alert { ViewModel = tvm })
-                    .OnItemAdded(addedAlert => alertsStackPanel.Children.Add(addedAlert))
-                    .OnItemRemoved(removedAlert => alertsStackPanel.Children.Remove(removedAlert))
                     .Subscribe().DisposeWith(d);
-
-                //Frame.Navigate(new NoteListPage() { FontFamily = this.FontFamily });
-                //CreateUpdateFrame.Navigate(new ContractPage() { FontFamily = this.FontFamily });
             });
         }
 

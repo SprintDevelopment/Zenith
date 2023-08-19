@@ -22,13 +22,78 @@ namespace Zenith.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Zenith.Models.Company", b =>
+            modelBuilder.Entity("Zenith.Models.Buy", b =>
                 {
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("BuyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyId"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<short>("CompanyId")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("HasErrors")
+                        .HasColumnType("bit");
+
+                    b.HasKey("BuyId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Buys");
+                });
+
+            modelBuilder.Entity("Zenith.Models.BuyItem", b =>
+                {
+                    b.Property<long>("BuyItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BuyItemId"));
+
+                    b.Property<int>("BuyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HasErrors")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("BuyItemId");
+
+                    b.HasIndex("BuyId");
+
+                    b.HasIndex("MaterialId");
+
+                    b.ToTable("BuyItem");
+                });
+
+            modelBuilder.Entity("Zenith.Models.Company", b =>
+                {
+                    b.Property<short>("CompanyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("CompanyId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -288,9 +353,42 @@ namespace Zenith.Migrations
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
+                    b.Property<string>("HashedPassword")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
                     b.HasKey("Username");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Zenith.Models.Buy", b =>
+                {
+                    b.HasOne("Zenith.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Zenith.Models.BuyItem", b =>
+                {
+                    b.HasOne("Zenith.Models.Buy", null)
+                        .WithMany("Items")
+                        .HasForeignKey("BuyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Zenith.Models.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Material");
                 });
 
             modelBuilder.Entity("Zenith.Models.Outgo", b =>
@@ -311,6 +409,11 @@ namespace Zenith.Migrations
                         .HasForeignKey("ParentOutgoCategoryId");
 
                     b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("Zenith.Models.Buy", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

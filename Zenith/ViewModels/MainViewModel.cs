@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
+using Zenith.Models;
 
 namespace Zenith.ViewModels
 {
@@ -99,6 +100,9 @@ namespace Zenith.ViewModels
                 .Do(tabToRemove => _alerts.Remove(tabToRemove))
                 .Subscribe();
         }
+
+        [Reactive]
+        public User LoggedInUser { get; set; }
 
         [Reactive]
         public bool IsMenuVisible { get; set; }

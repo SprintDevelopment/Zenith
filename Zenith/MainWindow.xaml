@@ -61,33 +61,11 @@
         <Frame Grid.Column="1" x:Name="CreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{DynamicResource CommonShadow}" Width="0">
             <StackPanel x:Name="menuContainerStackPanel" Background="White" VerticalAlignment="Top">
-                <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="دریافت و پرداخت" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="خرید و فروش" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Recieve" Command="{Binding OpenLogFile}" CommandParameter="GoalKeeper.txt"/>
+                            <controls:SubMenuItem Title="لیست خرید ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
                             <controls:SubMenuItem Title="Payment" Command="{Binding OpenLogFile}" CommandParameter="file.txt"/>
-                        </StackPanel>
-                    </controls:MenuItem.AdditionalContent>
-                </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="اشخاص" Margin="0,1">
-                    <controls:MenuItem.AdditionalContent>
-                        <StackPanel>
-                            <controls:SubMenuItem Title="لیست اشخاص" Shortcut="Ctrl+Shift+P" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:PersonListPage}"/>
-                            <controls:SubMenuItem Title="شخص جدید"/>
-                            <controls:SubMenuItem Title="PayableChequeList"/>
-                            <controls:SubMenuItem Title="Person"/>
-                            <controls:SubMenuItem Title="PersonList"/>
-                            <controls:SubMenuItem Title="PersonGroupList"/>
-                        </StackPanel>
-                    </controls:MenuItem.AdditionalContent>
-                </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="هزینه ها" Margin="0,1">
-                    <controls:MenuItem.AdditionalContent>
-                        <StackPanel>
-                            <controls:SubMenuItem Title="لیست هزینه ها" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoListPage}"/>
-                            <controls:SubMenuItem Title="هزینه جدید"/>
-                            <controls:SubMenuItem Title="لیست دسته های هزینه" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
-                            <controls:SubMenuItem Title="دسته هزینه جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -103,11 +81,24 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/deliveries.png" Title="پیامرسانی" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="هزینه ها" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="SMSList"/>
-                            <controls:SubMenuItem Title="SMS"/>
+                            <controls:SubMenuItem Title="لیست هزینه ها" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoListPage}"/>
+                            <controls:SubMenuItem Title="لیست دسته های هزینه" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
+                            <controls:SubMenuItem Title="دیزل" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="پرسنل و حقوق" Margin="0,1">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem Title="لیست اشخاص" Shortcut="Ctrl+Shift+P" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:PersonListPage}"/>
+                            <controls:SubMenuItem Title="شخص جدید"/>
+                            <controls:SubMenuItem Title="PayableChequeList"/>
+                            <controls:SubMenuItem Title="Person"/>
+                            <controls:SubMenuItem Title="PersonList"/>
+                            <controls:SubMenuItem Title="PersonGroupList"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

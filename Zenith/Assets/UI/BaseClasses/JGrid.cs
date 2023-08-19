@@ -40,7 +40,7 @@ namespace Zenith.Assets.UI.BaseClasses
 
         public JGrid()
         {
-            this.PreviewMouseLeftButtonDown += (s, e) => { if (e.ClickCount == 2) Command.Execute(DataContext); };
+            this.PreviewMouseLeftButtonDown += (s, e) => { if (e.ClickCount == 2) Command?.Execute(DataContext); };
         }
     }
 }
