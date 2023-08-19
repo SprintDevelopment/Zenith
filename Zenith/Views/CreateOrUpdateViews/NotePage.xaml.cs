@@ -31,7 +31,6 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Switch()
                     .Do(nt => notifyDateTimePicker.Visibility = (nt == NotifyTypes.FooterNotify).Viz())
                     .Subscribe().DisposeWith(d);
-
             });
         }
     }

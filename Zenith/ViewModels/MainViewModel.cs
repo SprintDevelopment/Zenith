@@ -8,10 +8,12 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Controls;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
+using Zenith.Repositories;
 
 namespace Zenith.ViewModels
 {
@@ -98,6 +100,26 @@ namespace Zenith.ViewModels
                 .MergeMany(t => t.CloseCommand)
                 .Select(guid => _alerts.Items.FirstOrDefault(t => t.Guid == guid))
                 .Do(tabToRemove => _alerts.Remove(tabToRemove))
+                .Subscribe();
+
+            var noteRepository = new NoteRepository();
+            Observable.Timer(TimeSpan.Zero, TimeSpan.FromMinutes(1))
+                .SelectMany(_ => noteRepository.Find(note => note.NotifyType == NotifyTypes.FooterNotify && note.NotifyDateTime.CompareTo(DateTime.Now) <= 0))
+                .Select(note => 
+                {
+                    note.NotifyType = NotifyTypes.NoNeedToNotify;
+                    noteRepository.Update(note, note.NoteId);
+                    noteRepository.SaveChanges();
+
+                    return new AlertViewModel
+                    {
+                        Guid = new Guid(),
+                        Title = note.Subject,
+                        Description = !note.Comment.IsNullOrWhiteSpace() ? note.Comment : $"موعد یادداشتی با عنوان {note.Subject} رسیده است.",
+                        DialogType = DialogTypes.Info,
+                        ActionContent = string.Empty,
+                    };
+                }).Do(alert => _alerts.Add(alert))
                 .Subscribe();
         }
 
