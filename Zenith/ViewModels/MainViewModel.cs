@@ -117,7 +117,8 @@ namespace Zenith.ViewModels
                         Title = note.Subject,
                         Description = !note.Comment.IsNullOrWhiteSpace() ? note.Comment : $"موعد یادداشتی با عنوان {note.Subject} رسیده است.",
                         DialogType = DialogTypes.Info,
-                        ActionContent = string.Empty,
+                        ActionContent = "متوجه شدم",
+                        ActionCommand = ReactiveCommand.Create<Unit>(_ => { })
                     };
                 }).Do(alert => _alerts.Add(alert))
                 .Subscribe();

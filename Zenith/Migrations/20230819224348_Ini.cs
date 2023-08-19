@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Zenith.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class Ini : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -127,7 +127,7 @@ namespace Zenith.Migrations
                     Username = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     HashedPassword = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     CreateDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AvatarImageBytes = table.Column<byte[]>(type: "Image", nullable: false),
+                    AvatarImageBytes = table.Column<byte[]>(type: "Image", nullable: true),
                     HasErrors = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -188,7 +188,7 @@ namespace Zenith.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuyId = table.Column<int>(type: "int", nullable: false),
                     MaterialId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
+                    UnitPrice = table.Column<long>(type: "bigint", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HasErrors = table.Column<bool>(type: "bit", nullable: false)

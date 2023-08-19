@@ -16,6 +16,7 @@ namespace Zenith.Data
         }
 
         public DbSet<Buy> Buys { get; set; }
+        public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Material> Materials { get; set; }

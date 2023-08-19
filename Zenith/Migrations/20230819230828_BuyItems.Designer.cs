@@ -12,8 +12,8 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230817153702_InitMigration")]
-    partial class InitMigration
+    [Migration("20230819230828_BuyItems")]
+    partial class BuyItems
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,7 +78,7 @@ namespace Zenith.Migrations
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Price")
+                    b.Property<long>("UnitPrice")
                         .HasColumnType("bigint");
 
                     b.HasKey("BuyItemId");
@@ -87,7 +87,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("BuyItem");
+                    b.ToTable("BuyItems");
                 });
 
             modelBuilder.Entity("Zenith.Models.Company", b =>
@@ -347,7 +347,6 @@ namespace Zenith.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.Property<byte[]>("AvatarImageBytes")
-                        .IsRequired()
                         .HasColumnType("Image");
 
                     b.Property<DateTime>("CreateDateTime")
@@ -379,7 +378,7 @@ namespace Zenith.Migrations
 
             modelBuilder.Entity("Zenith.Models.BuyItem", b =>
                 {
-                    b.HasOne("Zenith.Models.Buy", null)
+                    b.HasOne("Zenith.Models.Buy", "Buy")
                         .WithMany("Items")
                         .HasForeignKey("BuyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -390,6 +389,8 @@ namespace Zenith.Migrations
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Buy");
 
                     b.Navigation("Material");
                 });

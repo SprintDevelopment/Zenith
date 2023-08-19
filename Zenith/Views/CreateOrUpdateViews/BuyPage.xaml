@@ -55,7 +55,7 @@
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1" Grid.Row="1"/>
                     <Grid Margin="24,12">
                         <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="برای جستجو، نام یا کد را وارد کنید . . ." Foreground="#FFD1D1D1" />
-                        <TextBox Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" />
+                        <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
                         <ItemsControl.Template>
@@ -96,25 +96,23 @@
                 </Grid.RowDefinitions>
                 <Grid Background="White" Height="40" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Foreground="#FF3AB05A" Cursor="Hand"/>
-                    <TextBlock HorizontalAlignment="Left" Text="نام محصول" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Left" Text="قیمت واحد" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Left" Text="تعداد" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                    <TextBlock HorizontalAlignment="Left" Text="قیمت کل" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="5">
+                    <TextBlock HorizontalAlignment="Left" Text="نام محصول" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="قیمت واحد" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="تعداد" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Text="قیمت کل" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="4">
                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
-                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                 </Grid>
 
-                <ItemsControl x:Name="itemsListItemsControl" Grid.Row="1" Margin="0,1,0,0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
+                <ItemsControl ItemsSource="{Binding PageModel.Items}" Grid.Row="1" Margin="0,0,4,-2" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
                     <ItemsControl.Template>
                         <ControlTemplate TargetType="{x:Type ItemsControl}">
                             <ScrollViewer CanContentScroll="True">
@@ -131,22 +129,20 @@
                         <DataTemplate>
                             <baseclasses:JGrid Height="40">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center"/>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding UnitPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding Count, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                                <Button Style="{DynamicResource SimpleButtonStyle}" Grid.Column="5" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
+                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
+                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="2" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                                <Button Style="{DynamicResource SimpleButtonStyle}" Grid.Column="4" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding Material}">
                                     <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Button>
-                                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                                 <Rectangle HorizontalAlignment="Left" Width="2" Fill="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" StrokeThickness="0" />
                             </baseclasses:JGrid>
                         </DataTemplate>

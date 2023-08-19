@@ -12,8 +12,8 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230819074723_ChangeUser")]
-    partial class ChangeUser
+    [Migration("20230819224348_Ini")]
+    partial class Ini
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -378,7 +378,7 @@ namespace Zenith.Migrations
 
             modelBuilder.Entity("Zenith.Models.BuyItem", b =>
                 {
-                    b.HasOne("Zenith.Models.Buy", null)
+                    b.HasOne("Zenith.Models.Buy", "Buy")
                         .WithMany("Items")
                         .HasForeignKey("BuyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -389,6 +389,8 @@ namespace Zenith.Migrations
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Buy");
 
                     b.Navigation("Material");
                 });

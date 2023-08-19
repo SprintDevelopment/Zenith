@@ -51,6 +51,7 @@ namespace Zenith.Assets.UI.UserControls
 
                 this.BindCommand(ViewModel, vm => vm.ActionCommand, v => v.actionButton).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.closeButton).DisposeWith(d);
+                this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.actionButton).DisposeWith(d);
             });
         }
 

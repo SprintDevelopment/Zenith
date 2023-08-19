@@ -40,6 +40,7 @@ namespace Zenith
         public MainWindow()
         {
             InitializeComponent();
+            var blankPage = new BlankPage();
 
             ViewModel = App.MainViewModel;
 
@@ -54,6 +55,7 @@ namespace Zenith
                         CreateUpdateFrame.RemoveBackEntry();
                         if (createUpdatePage == null)
                         {
+                            CreateUpdateFrame.Navigate(blankPage);
                             CreateUpdateFrame.Visibility = Visibility.Collapsed;
                         }
                         else

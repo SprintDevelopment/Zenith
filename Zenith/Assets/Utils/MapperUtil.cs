@@ -12,6 +12,8 @@ namespace Zenith.Assets.Utils
     {
         public static Mapper Mapper = new Mapper(new MapperConfiguration(cfg =>
         {
+            cfg.CreateMap<Buy, Buy>();
+            cfg.CreateMap<BuyItem, BuyItem>();
             cfg.CreateMap<Company, Company>();
             cfg.CreateMap<Machine, Machine>();
             cfg.CreateMap<Material, Material>();

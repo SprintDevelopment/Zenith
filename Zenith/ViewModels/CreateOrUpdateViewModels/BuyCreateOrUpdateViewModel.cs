@@ -34,42 +34,36 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 .Bind(out MaterialsActiveList)
                 .Subscribe();
 
-            BuyItemsSourceList.Connect()
-                .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
-                .Bind(out BuyItemsActiveList)
-                .Subscribe();
-
-            AddToItemsCommand = ReactiveCommand.Create<Material>(item =>
+            AddToItemsCommand = ReactiveCommand.Create<Material>(material =>
             {
-                var buyItem = BuyItemsSourceList.Items.FirstOrDefault(b => b.Material == item);
+                var buyItem = PageModel.Items.FirstOrDefault(b => b.Material == material);
                 if (buyItem is null)
-                    BuyItemsSourceList.Add(new BuyItem { Material = item, UnitPrice = 200, Count = 1 });
+                    PageModel.Items.Add(new BuyItem { Material = material, MaterialId = material.MaterialId, UnitPrice = 200, Count = 1 });
                 else
                     buyItem.Count++;
             });
 
-            RemoveFromItemsCommand = ReactiveCommand.Create<BuyItem>(item =>
+            RemoveFromItemsCommand = ReactiveCommand.Create<Material>(material =>
             {
-                BuyItemsSourceList.Remove(item);
+                var buyItem = PageModel.Items.FirstOrDefault(b => b.Material == material);
+                if (buyItem is not null)
+                    PageModel.Items.Remove(buyItem);
             });
 
             RemoveAllItemsCommand = ReactiveCommand.Create<Unit>(_ =>
             {
-                BuyItemsSourceList.Clear();
+                PageModel.Items.Clear();
             });
         }
 
         public SourceList<Material> MaterialsSourceList { get; set; } = new SourceList<Material>();
         public ReadOnlyObservableCollection<Material> MaterialsActiveList;
 
-        public SourceList<BuyItem> BuyItemsSourceList { get; set; } = new SourceList<BuyItem>();
-        public ReadOnlyObservableCollection<BuyItem> BuyItemsActiveList;
-
         [Reactive]
         public string SearchedMaterialName { get; set; }
 
         public ReactiveCommand<Material, Unit> AddToItemsCommand { get; set; }
-        public ReactiveCommand<BuyItem, Unit> RemoveFromItemsCommand { get; set; }
+        public ReactiveCommand<Material, Unit> RemoveFromItemsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> RemoveAllItemsCommand { get; set; }
     }
 }

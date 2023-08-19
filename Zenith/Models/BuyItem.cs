@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Extensions;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reactive.Linq;
@@ -18,9 +19,13 @@ namespace Zenith.Models
         [Reactive]
         public int BuyId { get; set; }
 
+        [ForeignKey(nameof(BuyId))]
+        public Buy Buy { get; set; }
+
         [Reactive]
         public int MaterialId { get; set; }
 
+        [ForeignKey(nameof(MaterialId))]
         [Reactive]
         public Material Material { get; set; }
 
@@ -35,7 +40,7 @@ namespace Zenith.Models
         public long TotalPrice { get; set; }
 
         [Reactive]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
         public BuyItem()
         {
@@ -43,6 +48,8 @@ namespace Zenith.Models
                 .Select(x => x.Item1 * x.Item2)
                 .BindTo(this, m => m.TotalPrice);
 
+            this.ValidationRule(vm => vm.UnitPrice, up => up > 0, "قیمت واحد باید بزرگتر از صفر باشد");
+            this.ValidationRule(vm => vm.Count, c => c > 0, "تعداد خریداری شده باید بیشتر از صفر باشد");
         }
     }
 }

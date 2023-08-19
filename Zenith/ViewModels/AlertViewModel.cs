@@ -7,6 +7,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith.Assets.Values.Enums;
+using System.Reactive.Linq;
 
 namespace Zenith.ViewModels
 {

@@ -28,7 +28,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             {
                 companyComboBox.ItemsSource = new CompanyRepository().All().ToList();
                 materialListItemsControl.ItemsSource = CastedViewModel.MaterialsActiveList;
-                itemsListItemsControl.ItemsSource = CastedViewModel.BuyItemsActiveList;
+                //itemsListItemsControl.ItemsSource = CastedViewModel.BuyItemsActiveList;
 
                 CastedViewModel.WhenAnyValue(vm => vm.SearchedMaterialName)
                     .Select(s => s.IsNullOrWhiteSpace())
