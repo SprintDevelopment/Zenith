@@ -35,7 +35,7 @@ namespace Zenith.Models
 
         [Column(TypeName = "Image")]
         [Reactive]
-        public byte[] AvatarImageBytes { get; set; }
+        public byte[]? AvatarImageBytes { get; set; }
 
         public User()
         {

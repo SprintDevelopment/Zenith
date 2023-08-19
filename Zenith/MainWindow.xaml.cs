@@ -28,6 +28,7 @@ using DynamicData.Binding;
 using Zenith.Assets.UI.UserControls;
 using DynamicData;
 using Zenith.Views;
+using Zenith.Repositories;
 
 namespace Zenith
 {
@@ -107,18 +108,18 @@ namespace Zenith
                                     this.searchUserControl.Initialize(searchModel);
                                 }).Subscribe().DisposeWith(disposable);
 
-                            //IDisposable disposable = null;
-                            //ViewModel.WhenAnyValue(vm => vm.DialogDto).Where(dto => dto != null).Subscribe(dialogDto =>
-                            //{
-                            //    disposable?.Dispose();
-                            //    disposable = Observable.FromEventPattern(dialogUserControl, nameof(dialogUserControl.Returned))
-                            //    .Select(ea => ((DialogEventArgs)ea.EventArgs).DialogResult).Subscribe(dialogResult =>
-                            //    {
-                            //        ViewModel.DialogResult = dialogResult;
-                            //    });
+                            IDisposable dailogDisposable = null;
+                            ViewModel.WhenAnyValue(vm => vm.DialogDto).Where(dto => dto != null).Subscribe(dialogDto =>
+                            {
+                                dailogDisposable?.Dispose();
+                                dailogDisposable = Observable.FromEventPattern(dialogUserControl, nameof(dialogUserControl.Returned))
+                                .Select(ea => ((DialogEventArgs)ea.EventArgs).DialogResult).Subscribe(dialogResult =>
+                                {
+                                    ViewModel.DialogResult = dialogResult;
+                                });
 
-                            //    dialogUserControl.Initialize(dialogDto);
-                            //});
+                                dialogUserControl.Initialize(dialogDto);
+                            });
 
                             ViewModel.WhenAnyValue(vm => vm.ListPage)
                                 .SkipWhile(page => page == null)

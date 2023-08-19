@@ -65,7 +65,8 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست خرید ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
-                            <controls:SubMenuItem Title="Payment" Command="{Binding OpenLogFile}" CommandParameter="file.txt"/>
+                            <controls:SubMenuItem Title="لیست فروش ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
+                            <controls:SubMenuItem Title="لیست سفارش ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
