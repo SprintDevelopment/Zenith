@@ -1,8 +1,36 @@
-﻿Permissions - 1h it is for the future.
-Company, Personnel, Outgo, Note, Machine, Diesel
-Print
+﻿~fix the issues when saving Buy - 30m
+~load the Buys - 15m
+~add sale based on Buy - 20m
+add site - 30m
+add site to sale item - 20m
+add Trip - 30m
 
-Buy (3h)
-Sale (3h)
-Order (3h)
-Dashboard (3h)
+some improvements - 30m
+
+DEMO - 30m
+
+TOTAL - 4h 5m    
+
+
+for Device source 
+- create a new branch
+- review what should change 
+- 
+
+
+MTN 10m
+LNS 14m
+HME 5m
+SOS 1.6m => Keramat 1, Me 1.8 - (0.5 Alireza - 0.3 Keramat) = 1.6
+BBY 5m
+OUR 5m
+MRZ 10m
+------------
+TTL 50.6
+
+
+SRY 26
+BME 2
+ZTH 10
+MDI 13
+SQN .6

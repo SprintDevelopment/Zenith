@@ -24,6 +24,9 @@ namespace Zenith.Data
         public DbSet<Outgo> Outgoes { get; set; }
         public DbSet<OutgoCategory> OutgoCategories { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<SaleItem> SaleItems { get; set; }
+        public DbSet<Site> Sites { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

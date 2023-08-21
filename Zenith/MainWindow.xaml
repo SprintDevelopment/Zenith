@@ -65,7 +65,7 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست خرید ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
-                            <controls:SubMenuItem Title="لیست فروش ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
+                            <controls:SubMenuItem Title="لیست فروش ها" Shortcut="Ctrl+Shift+S" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SaleListPage}"/>
                             <controls:SubMenuItem Title="لیست سفارش ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
@@ -74,11 +74,9 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست شرکت ها" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
-                            <controls:SubMenuItem Title="شرکت جدید"/>
+                            <controls:SubMenuItem Title="لیست سایت های شرکت ها" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SiteListPage}"/>
                             <controls:SubMenuItem Title="لیست محصولات" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MaterialListPage}"/>
-                            <controls:SubMenuItem Title="محصول جدید"/>
                             <controls:SubMenuItem Title="لیست ماشین ها" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MachineListPage}"/>
-                            <controls:SubMenuItem Title="ماشین جدید"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

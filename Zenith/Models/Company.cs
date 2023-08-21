@@ -47,7 +47,7 @@ namespace Zenith.Models
 
         public Company()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "موضوع نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام نمی تواند خالی باشد");
             ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 

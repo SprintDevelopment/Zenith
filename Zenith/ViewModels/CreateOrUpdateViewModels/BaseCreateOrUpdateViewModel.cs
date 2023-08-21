@@ -20,7 +20,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
         public BaseCreateOrUpdateViewModel(Repository<T> repository, bool containsDeleted = false)
         {
             var modelAttributes = typeof(T).GetAttribute<ModelAttribute>();
-            var modelKeyProperty = typeof(T).GetKeyProperty();
+            var modelKeyProperty = PageModel.GetKeyProperty();
 
             Repository = repository;
 
@@ -46,8 +46,8 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 CreateOrUpdateCommand = ReactiveCommand.Create<Unit>(_ =>
                 {
                     var cuCommandResult = IsNew ? Repository.Add(pm) : Repository.Update(pm, modelKeyId);
-                    Repository.SaveChanges();
-                    ChangeSet.Add(pm);
+                    //Repository.SaveChanges();
+                    ChangeSet.Add(Repository.Single(pm.GetKeyPropertyValue()));
                 }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
 
                 createOrUpdateDisposable?.Dispose();

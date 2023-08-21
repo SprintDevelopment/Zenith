@@ -89,6 +89,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CreateOrUpdateViews\SitePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateOrUpdateViews\SalePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateOrUpdateViews\BuyPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -99,6 +105,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CreateOrUpdateViews\OutgoCategoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\SiteListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\SaleListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ListViews\BuyListPage.xaml.cs">

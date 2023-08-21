@@ -15,12 +15,12 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "خرید", MultipleName = "خرید ها")]
-    public class Buy : Model
+    [Model(SingleName = "فروش", MultipleName = "فروش ها")]
+    public class Sale : Model
     {
         [Key]
         [Reactive]
-        public int BuyId { get; set; }
+        public int SaleId { get; set; }
 
         [Reactive]
         public short CompanyId { get; set; }
@@ -38,26 +38,26 @@ namespace Zenith.Models
         public string Comment { get; set; } = string.Empty;
 
         [Reactive]
-        public virtual ObservableCollection<BuyItem> Items { get; set; } = new ObservableCollection<BuyItem>();
+        public virtual ObservableCollection<SaleItem> Items { get; set; } = new ObservableCollection<SaleItem>();
 
         [NotMapped]
         [Reactive]
         public long Price { get; set; }
 
-        public Buy()
+        public Sale()
         {
-            var itemsObservable = this.WhenAnyValue(b => b.Items)
+            var itemsObservable = this.WhenAnyValue(s => s.Items)
                 .SelectMany(items => items.ToObservableChangeSet());
 
             itemsObservable
-                .AutoRefresh(bi => bi.TotalPrice)
+                .AutoRefresh(si => si.TotalPrice)
                 .ToCollection()
-                .Select(items => items.Sum(bi => bi.TotalPrice))
+                .Select(items => items.Sum(si => si.TotalPrice))
                 .BindTo(this, m => m.Price);
 
 
-            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "شرکت فروشنده را انتخاب کنید");
-            this.ValidationRule(vm => vm.Items, itemsObservable.QueryWhenChanged().Select(children => children.Any()), "هیج محصولی برای خرید انتخاب نشده است");
+            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "شرکت خریدار را انتخاب کنید");
+            this.ValidationRule(vm => vm.Items, itemsObservable.QueryWhenChanged().Select(children => children.Any()), "هیج محصولی برای فروش انتخاب نشده است");
         }
 
         public override string ToString()

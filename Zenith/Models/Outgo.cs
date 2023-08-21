@@ -6,6 +6,8 @@ using Zenith.Assets.Values.Constants;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Fody.Helpers;
 using Zenith.Assets.Extensions;
+using ReactiveUI;
+using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
@@ -38,6 +40,11 @@ namespace Zenith.Models
         {
             this.ValidationRule(vm => vm.OutgoCategory, oc => oc is not null, "دسته هزینه باید انتخاب شده باشد");
             this.ValidationRule(vm => vm.Value, value => value > 0, "میزان هزینه باید بیشتر از 0 باشد");
+
+            this.WhenAnyValue(m => m.OutgoCategory)
+                .WhereNotNull()
+                .Do(oc => OutgoCategoryId = oc.OutgoCategoryId)
+                .Subscribe();
         }
 
         public override string ToString()

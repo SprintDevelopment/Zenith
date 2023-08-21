@@ -100,7 +100,7 @@ namespace Zenith.ViewModels.ListViewModels
                 {
                     var toRemoveItems = ActiveList.Where(x => x.IsSelected);
                     Repository.RemoveRange(toRemoveItems);
-                    Repository.SaveChanges();
+                    //Repository.SaveChanges();
 
                     SourceList.RemoveMany(toRemoveItems);
                 });

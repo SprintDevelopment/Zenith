@@ -11,5 +11,6 @@ namespace Zenith.Models
 {
     public class Model : BaseDto
     {
+        public Model Clone() => (Model)MemberwiseClone();
     }
 }

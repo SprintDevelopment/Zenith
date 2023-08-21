@@ -17,9 +17,9 @@ using System.Reactive;
 
 namespace Zenith.ViewModels.CreateOrUpdateViewModels
 {
-    public class BuyCreateOrUpdateViewModel : BaseCreateOrUpdateViewModel<Buy>
+    public class SaleCreateOrUpdateViewModel : BaseCreateOrUpdateViewModel<Sale>
     {
-        public BuyCreateOrUpdateViewModel(Repository<Buy> repository, bool containsDeleted = false) : base(repository, containsDeleted)
+        public SaleCreateOrUpdateViewModel(Repository<Sale> repository, bool containsDeleted = false) : base(repository, containsDeleted)
         {
             IObservable<Func<Material, bool>> dynamicFilter = this.WhenAnyValue(vm => vm.SearchedMaterialName)
                 .Throttle(TimeSpan.FromMilliseconds(250))
@@ -36,18 +36,18 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
             AddToItemsCommand = ReactiveCommand.Create<Material>(material =>
             {
-                var buyItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
-                if (buyItem is null)
-                    PageModel.Items.Add(new BuyItem { Material = material, MaterialId = material.MaterialId, UnitPrice = 200, Count = 1 });
+                var saleItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
+                if (saleItem is null)
+                    PageModel.Items.Add(new SaleItem { Material = material, MaterialId = material.MaterialId, UnitPrice = 200, Count = 1 });
                 else
-                    buyItem.Count++;
+                    saleItem.Count++;
             });
 
             RemoveFromItemsCommand = ReactiveCommand.Create<Material>(material =>
             {
-                var buyItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
-                if (buyItem is not null)
-                    PageModel.Items.Remove(buyItem);
+                var saleItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
+                if (saleItem is not null)
+                    PageModel.Items.Remove(saleItem);
             });
 
             RemoveAllItemsCommand = ReactiveCommand.Create<Unit>(_ =>

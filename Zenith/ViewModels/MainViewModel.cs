@@ -109,7 +109,7 @@ namespace Zenith.ViewModels
                 {
                     note.NotifyType = NotifyTypes.NoNeedToNotify;
                     noteRepository.Update(note, note.NoteId);
-                    noteRepository.SaveChanges();
+                    //noteRepository.SaveChanges();
 
                     return new AlertViewModel
                     {
