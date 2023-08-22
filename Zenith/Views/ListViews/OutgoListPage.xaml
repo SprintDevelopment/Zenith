@@ -51,7 +51,7 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
-                    <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="عنوان دسته هزینه" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
@@ -76,7 +76,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <baseclasses:JGrid Height="40" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="60"/>
@@ -86,12 +86,12 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
-                                <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding OutgoCategory.Title}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Value, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Comment}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
                             <Rectangle HorizontalAlignment="Left" Width="2" Fill="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" StrokeThickness="0" />
