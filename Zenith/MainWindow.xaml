@@ -94,10 +94,6 @@
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست اشخاص" Shortcut="Ctrl+Shift+P" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:PersonListPage}"/>
                             <controls:SubMenuItem Title="شخص جدید"/>
-                            <controls:SubMenuItem Title="PayableChequeList"/>
-                            <controls:SubMenuItem Title="Person"/>
-                            <controls:SubMenuItem Title="PersonList"/>
-                            <controls:SubMenuItem Title="PersonGroupList"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -114,11 +110,6 @@
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست کاربران" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:UserListPage}"/>
                             <controls:SubMenuItem Title="کاربر جدید" />
-                            <controls:SubMenuItem Title="UserList"/>
-                            <controls:SubMenuItem Title="User"/>
-                            <controls:SubMenuItem Title="UserPermission"/>
-                            <controls:SubMenuItem Title="ChangePassword"/>
-                            <controls:SubMenuItem Title="UserAccessLogList"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -137,8 +128,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/help.png" Title="راهنما و پشتیبانی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="TextHelp"/>
-                            <controls:SubMenuItem Title="AboutSoftware"/>
+                            <controls:SubMenuItem Title="راهنمای متنی"/>
+                            <controls:SubMenuItem Title="درباره ما"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

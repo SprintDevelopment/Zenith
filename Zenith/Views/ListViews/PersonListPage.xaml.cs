@@ -39,16 +39,6 @@ namespace Zenith.Views.ListViews
             this.WhenActivated(d => 
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
-
-                headerGrid.ColumnDefinitions.OfType<ColumnDefinition>().Skip(1)
-                    .Select((rd, i) =>
-                    {
-                        var colSeparatorRect = new Rectangle { Stroke = Brushes.WhiteSmoke, HorizontalAlignment = HorizontalAlignment.Right, StrokeThickness = 0.5 };
-                        colSeparatorRect.SetValue(Grid.RowSpanProperty, 2);
-                        colSeparatorRect.SetValue(Grid.ColumnProperty, i);
-                        headerGrid.Children.Add(colSeparatorRect);
-                        return i;
-                    }).ToList();
             });
         }
     }

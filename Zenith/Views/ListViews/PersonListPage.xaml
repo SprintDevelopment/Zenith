@@ -24,7 +24,7 @@
                 <TextBlock Margin="16,0,0,0" Text="{Binding ViewTitle}" FontSize="15"/>
                 <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
                 <Button Width="50" Style="{DynamicResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding CreateCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/add-new.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -35,12 +35,35 @@
                     <Image Source="/Zenith;component/Resources/Images/Common/delete.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
+            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeThickness="0.5"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="0,0,0,4" Background="#FFFDFDFD" VerticalAlignment="Top">
+        <Grid Grid.Row="1" Margin="0,1,0,4" Background="#FFFDFDFD">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
+            <Grid Background="White" Height="40" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
+                    <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
+                <TextBlock HorizontalAlignment="Left" Text="نام شخص" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="شماره موبایل" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="شماره تلفن" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="سمت کاری" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="آدرس" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
+            </Grid>
+
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -56,7 +79,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <baseclasses:JGrid Height="28" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="60"/>
@@ -67,7 +90,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
-                                <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding FullName}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
@@ -81,32 +104,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            
-            <Grid x:Name="headerGrid" Grid.RowSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Border BorderBrush="WhiteSmoke" VerticalAlignment="Stretch" Grid.ColumnSpan="7" BorderThickness="0,1" Background="#FFFAFAFA"/>
-                <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}" Margin="1">
-                    <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
-                <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" FontSize="15" Cursor="Hand"/>
-                <TextBlock HorizontalAlignment="Left" Text="نام شخص" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Left" Text="شماره موبایل" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" FontSize="15"/>
-                <TextBlock HorizontalAlignment="Left" Text="شماره تلفن" VerticalAlignment="Center" Grid.Column="4" FontSize="15" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Text="سمت کاری" VerticalAlignment="Center" Grid.Column="5" FontSize="15" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Text="آدرس" VerticalAlignment="Center" Grid.Column="6" FontSize="15" Margin="8,0,0,0"/>
-            </Grid>
         </Grid>
     </Grid>
 </local:BaseListPage>
