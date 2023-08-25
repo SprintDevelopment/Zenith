@@ -14,7 +14,7 @@ using Zenith.Models;
 
 namespace Zenith.Repositories
 {
-    public class Repository<T> where T : Model
+    public class Repository<T> where T : Model, new()
     {
         protected static ApplicationDbContext _context;
         public Repository()
@@ -24,6 +24,13 @@ namespace Zenith.Repositories
         }
 
         public virtual IEnumerable<T> All() => _context.Set<T>().AsEnumerable();
+        public virtual IEnumerable<T> AllForSearch()
+        {
+            var all = _context.Set<T>().AsEnumerable().ToList();
+            all.Insert(0, new T());
+
+            return all;
+        }
         public virtual IEnumerable<T> Find(Expression<Func<T, bool>> predicate) => _context.Set<T>().Where(predicate).AsEnumerable();
         public virtual T Single(dynamic id) => _context.Set<T>().Find(id);
 

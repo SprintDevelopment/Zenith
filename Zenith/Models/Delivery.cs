@@ -1,19 +1,15 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Zenith.Assets.Attributes;
-using Zenith.Assets.Values.Constants;
+﻿using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
-using ReactiveUI.Fody.Helpers;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Zenith.Assets.Attributes;
 using Zenith.Assets.Extensions;
-using ReactiveUI;
-using System.Reactive.Linq;
-using Zenith.Migrations;
-using System.Windows.Media.Media3D;
+using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "", MultipleName = "سایت ها")]
+    [Model(SingleName = "تحویل", MultipleName = "تحویل ها")]
     public class Delivery : Model
     {
         [Key]
@@ -26,6 +22,9 @@ namespace Zenith.Models
         [ForeignKey(nameof(SaleItemId))]
         [Reactive]
         public SaleItem SaleItem { get; set; }
+
+        [Reactive]
+        public int Count { get; set; }
 
         [Reactive]
         public int MachineId { get; set; }
@@ -45,6 +44,9 @@ namespace Zenith.Models
         [MaxLength(LengthConstants.SMALL_STRING)]
         [Reactive]
         public string BillNumber { get; set; } = string.Empty;
+
+        [Reactive]
+        public DateTime DateTime { get; set; } = DateTime.Now;
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

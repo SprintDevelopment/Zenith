@@ -33,7 +33,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0"/>
+            <TextBlock Text="{Binding RelatedMainPage.ViewModel.ViewTitle}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0"/>
             <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="18" Height="18" Grid.Column="1" Margin="8,0">
                 <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="8" Height="8" RenderOptions.BitmapScalingMode="HighQuality"/>
             </Button>

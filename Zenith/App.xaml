@@ -776,6 +776,13 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="{x:Type ItemsControl}">
+            <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+            <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
+            <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Standard"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        </Style>
+
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="FontFamily" Value="Vazir FD"/>
             <Setter Property="FontSize" Value="12" />

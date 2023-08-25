@@ -41,7 +41,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="شرکت فروشنده"/>
+                    <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="شرکت فروشنده"/>
                     <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="تاریخ و ساعت خرید"/>
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
                 </StackPanel>
@@ -57,7 +57,7 @@
                         <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="برای جستجو، نام یا کد را وارد کنید . . ." Foreground="#FFD1D1D1" />
                         <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-                    <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
+                    <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" >
                         <ItemsControl.Template>
                             <ControlTemplate TargetType="{x:Type ItemsControl}">
                                 <ScrollViewer CanContentScroll="True">
@@ -72,7 +72,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <baseclasses:JGrid Height="40" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.AddToItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                                <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}" Command="{Binding DataContext.AddToItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="*"/>
@@ -112,7 +112,7 @@
                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                 </Grid>
 
-                <ItemsControl ItemsSource="{Binding PageModel.Items}" Grid.Row="1" Margin="0,0,4,-2" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingStackPanel.VirtualizationMode="Standard" ScrollViewer.CanContentScroll="True">
+                <ItemsControl ItemsSource="{Binding PageModel.Items}" Grid.Row="1" Margin="0,0,4,-2" >
                     <ItemsControl.Template>
                         <ControlTemplate TargetType="{x:Type ItemsControl}">
                             <ScrollViewer CanContentScroll="True">
@@ -127,7 +127,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <baseclasses:JGrid Height="40">
+                            <baseclasses:JGrid Height="32">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="100"/>
@@ -143,7 +143,7 @@
                                     <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Button>
                                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
-                                <Rectangle HorizontalAlignment="Left" Width="2" Fill="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" StrokeThickness="0" />
+                                
                             </baseclasses:JGrid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

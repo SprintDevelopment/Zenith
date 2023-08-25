@@ -18,6 +18,7 @@ namespace Zenith.Data
         public DbSet<Buy> Buys { get; set; }
         public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Note> Notes { get; set; }
@@ -28,5 +29,17 @@ namespace Zenith.Data
         public DbSet<SaleItem> SaleItems { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Username = "admin",
+                    Password = "1234",
+                    CreateDateTime = DateTime.Today,
+                }
+            );
+        }
     }
 }

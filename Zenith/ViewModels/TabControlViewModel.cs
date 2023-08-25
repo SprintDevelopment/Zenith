@@ -23,19 +23,19 @@ namespace Zenith.ViewModels
                 .Subscribe();
 
             _tabs.Connect()
-                .MergeMany(t => t.WhenAnyValue(x => x.Guid, x => x.IsSelected))
-                .Select(change => new { guid = change.Item1, isSelected = change.Item2 })
-                .Where(x => x.isSelected)
-                .Select(selectedItem => _tabs.Items.FirstOrDefault(t => t.IsSelected && t.Guid != selectedItem.guid))
-                .WhereNotNull()
-                .Do(prevSelectedItem => prevSelectedItem.IsSelected = false)
+                .MergeMany(t => t.WhenAnyValue(x => x.IsSelected).Where(i => i).Select(_ => SelectedTabViewModel = t))
                 .Subscribe();
 
             _tabs.Connect()
-                .MergeMany(t => t.CloseCommand)
-                .Select(guid => _tabs.Items.FirstOrDefault(t => t.Guid == guid))
+                .MergeMany(t => t.CloseCommand.Select(_ => t))
+                .Do(_ => { var tabToSelect = _tabs.Items.OrderBy(tvm => tvm.SelectionOrder).Skip(1).FirstOrDefault(); if (tabToSelect is not null) tabToSelect.IsSelected = true; })
                 .Delay(TimeSpan.FromMilliseconds(100))
                 .Do(tabToRemove => _tabs.Remove(tabToRemove))
+                .Subscribe();
+
+            this.WhenAnyValue(vm => vm.SelectedTabViewModel)
+                .WhereNotNull()
+                .SelectMany(stvm => _tabs.Items.Select(tab => { tab.IsSelected = tab == stvm; tab.SelectionOrder = tab == stvm ? 0 : ++tab.SelectionOrder; return tab; }))
                 .Subscribe();
         }
 
@@ -43,6 +43,6 @@ namespace Zenith.ViewModels
         public ReadOnlyObservableCollection<TabViewModel> Tabs;
 
         [Reactive]
-        public TabViewModel SelectTabViewModel { get; set; }
+        public TabViewModel SelectedTabViewModel { get; set; }
     }
 }

@@ -22,10 +22,10 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new BuySearchModel();
 
-            IObservable<Func<Buy, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+            IObservable<Func<Buy, bool>> dynamicFilter = searchModel.WhenAnyValue(b => b.CompanyId)
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(SynchronizationContext.Current)
-                .Select(subject => new Func<Buy, bool>(oc => true));
+                .Select(companyId => new Func<Buy, bool>(b => companyId == 0 || b.CompanyId == companyId));
 
             ViewModel = new BaseListViewModel<Buy>(new BuyRepository(), searchModel, dynamicFilter)
             {

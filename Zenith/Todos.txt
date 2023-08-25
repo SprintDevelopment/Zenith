@@ -1,4 +1,6 @@
-﻿~fix the issues when saving Buy - 30m
+﻿https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli
+
+~fix the issues when saving Buy - 30m
 ~load the Buys - 15m
 ~add sale based on Buy - 20m
 add site - 30m

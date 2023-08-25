@@ -66,7 +66,7 @@
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست خرید ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
                             <controls:SubMenuItem Title="لیست فروش ها" Shortcut="Ctrl+Shift+S" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SaleListPage}"/>
-                            <controls:SubMenuItem Title="لیست سفارش ها" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
+                            <!--<controls:SubMenuItem Title="لیست تحویل ها" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:DeliveryListPage}"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -74,18 +74,18 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست شرکت ها" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
-                            <controls:SubMenuItem Title="لیست سایت های شرکت ها" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SiteListPage}"/>
+                            <controls:SubMenuItem Title="لیست سایت های شرکت ها" Shortcut="Ctrl+Shift+I" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SiteListPage}"/>
                             <controls:SubMenuItem Title="لیست محصولات" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MaterialListPage}"/>
-                            <controls:SubMenuItem Title="لیست ماشین ها" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MachineListPage}"/>
+                            <controls:SubMenuItem Title="لیست ماشین ها" Shortcut="Ctrl+Shift+T" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MachineListPage}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="هزینه ها" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="لیست هزینه ها" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoListPage}"/>
-                            <controls:SubMenuItem Title="لیست دسته های هزینه" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
-                            <controls:SubMenuItem Title="دیزل" Shortcut="Ctrl+Shift+L" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
+                            <controls:SubMenuItem Title="لیست هزینه ها" Shortcut="Ctrl+Shift+O" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoListPage}"/>
+                            <controls:SubMenuItem Title="لیست دسته های هزینه" Shortcut="Ctrl+Shift+G" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
+                            <controls:SubMenuItem Title="دیزل" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -108,7 +108,7 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/security.png" Title="کاربران و سطوح دسترسی" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="لیست کاربران" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:UserListPage}"/>
+                            <controls:SubMenuItem Title="لیست کاربران" Shortcut="Ctrl+Shift+U" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:UserListPage}"/>
                             <controls:SubMenuItem Title="کاربر جدید" />
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
@@ -116,12 +116,12 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/configs.png" Title="تنظیمات" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="یادداشت ها" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:NoteListPage}"/>
-                            <controls:SubMenuItem Title="تنظیمات" />
-                            <controls:SubMenuItem Title="نمایش فایل لاگ" Command="{Binding OpenLogFile}"/>
-                            <controls:SubMenuItem Title="پشتیبان گیری از داده ها" Command="{Binding Backup}"/>
-                            <controls:SubMenuItem Title="بازیابی فایل پشتیبان" Command="{Binding Restore}"/>
-                            <controls:SubMenuItem Title="فعالسازی نرم افزار"/>
+                            <controls:SubMenuItem Title="یادداشت ها" Shortcut="Ctrl+Shift+N" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:NoteListPage}"/>
+                            <controls:SubMenuItem Title="تنظیمات" Shortcut="Ctrl+Shift+F" />
+                            <controls:SubMenuItem Title="نمایش فایل لاگ" Shortcut="Ctrl+Shift+L" Command="{Binding OpenLogFile}"/>
+                            <controls:SubMenuItem Title="پشتیبان گیری از داده ها" Shortcut="Ctrl+Shift+B" Command="{Binding Backup}"/>
+                            <controls:SubMenuItem Title="بازیابی فایل پشتیبان" Shortcut="Ctrl+Shift+R" Command="{Binding Restore}"/>
+                            <!--<controls:SubMenuItem Title="فعالسازی نرم افزار" Shortcut="Ctrl+Shift+(A)ctivation"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

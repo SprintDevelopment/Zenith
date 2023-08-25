@@ -19,7 +19,8 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 {
     public class SaleCreateOrUpdateViewModel : BaseCreateOrUpdateViewModel<Sale>
     {
-        public SaleCreateOrUpdateViewModel(Repository<Sale> repository, bool containsDeleted = false) : base(repository, containsDeleted)
+        public SaleCreateOrUpdateViewModel(Repository<Sale> repository, bool containsDeleted = false)
+            : base(repository, containsDeleted)
         {
             IObservable<Func<Material, bool>> dynamicFilter = this.WhenAnyValue(vm => vm.SearchedMaterialName)
                 .Throttle(TimeSpan.FromMilliseconds(250))

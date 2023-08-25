@@ -1,10 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Zenith.Assets.Attributes;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.UI.Helpers;
 using Zenith.Assets.Values.Dtos;
+using Zenith.Assets.Values.Enums;
+using Zenith.Models;
 
 namespace Zenith.Assets.UI.UserControls
 {
@@ -30,235 +35,261 @@ namespace Zenith.Assets.UI.UserControls
 
                 if (searchAttribute != null)
                 {
-                    //switch (searchAttribute.SearchControlEnum)
-                    //{
-                    //    case SearchControlType.TextBox:
-                    //        {
-                    var newTextBox = UiGenerator.GetTextBox(searchAttribute.Title);
-                    var binding = new Binding(property.Name);
-                    binding.Source = model;
-                    binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                    newTextBox.SetBinding(TextBox.TextProperty, binding);
-                    SearchMemberStackPanel.Children.Add(newTextBox);
-                    //        }
-                    //        break;
+                    switch (searchAttribute.ControlType)
+                    {
+                        case SearchItemControlTypes.TextBox:
+                            {
+                                var newTextBox = UiGenerator.GetTextBox(searchAttribute.Title);
+                                var binding = new Binding(property.Name);
+                                binding.Source = model;
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                newTextBox.SetBinding(TextBox.TextProperty, binding);
+                                SearchMemberStackPanel.Children.Add(newTextBox);
+                            }
+                            break;
 
-                    //    case SearchControlType.ComboBox:
-                    //        {
-                    //            var newComboBox = UiUtil.GetComboBox(searchAttribute.Title);
-                    //            newComboBox.Name = $"_{propertyPassNumber}";
+                        case SearchItemControlTypes.ComboBox:
+                            {
+                                var newComboBox = UiGenerator.GetComboBox(searchAttribute.Title);
 
-                    //            if (!searchAttribute.EnumOrRepositoryName.Contains("Repository"))
-                    //            {
-                    //                newComboBox.DisplayMemberPath = "DisplayMember";
-                    //                newComboBox.SelectedValuePath = "IntegerValueMember";
+                                if (searchAttribute.ValueSourceType.IsEnum)
+                                {
+                                    newComboBox.DisplayMemberPath = "Description";
+                                    newComboBox.SelectedValuePath = "Value";
 
-                    //                var enumType = Type.GetType($"SOORIN.Asset.Enums.{searchAttribute.EnumOrRepositoryName}");
-                    //                newComboBox.ItemsSource = EnumUtil.EnumTypeToItemsSourceCollection(enumType, true);
-                    //            }
-                    //            else
-                    //            {
-                    //                var modelName = searchAttribute.EnumOrRepositoryName.Split(new string[] { "Repository" }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    //                var modelType = Type.GetType($"SOORIN.DataAccess.Model.{modelName}");
-                    //                ModelAttribute modelAttribute = modelType.GetCustomAttribute(typeof(ModelAttribute)) as ModelAttribute;
+                                    newComboBox.ItemsSource = searchAttribute.ValueSourceType.ToCollection(true);
+                                }
+                                else
+                                {
+                                    newComboBox.SelectedValuePath = property.Name;
 
-                    //                newComboBox.SelectedValuePath = modelAttribute.KeyPropertyName;
-                    //                newComboBox.DisplayMemberPath = modelAttribute.TitlePropertyName;
+                                    newComboBox.ItemsSource = ((dynamic)Activator.CreateInstance(searchAttribute.ValueSourceType)).AllForSearch();
+                                }
 
-                    //                var repositoryType = Type.GetType($"SOORIN.DataAccess.EF.{searchAttribute.EnumOrRepositoryName}");
-                    //                var getAllMethod = searchAttribute.HasDontCare ? repositoryType.GetMethod("GetAllWithDontCare") : repositoryType.GetMethod("GetAll");
+                                var binding = new Binding(property.Name);
+                                binding.Source = model;
+                                binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                                newComboBox.SetBinding(ComboBox.SelectedValueProperty, binding);
+                                SearchMemberStackPanel.Children.Add(newComboBox);
+                            }
+                            break;
 
-                    //                if (getAllMethod.GetParameters().Count() > 0)
-                    //                    newComboBox.ItemsSource = (IList)getAllMethod.Invoke(repositoryType, new object[] { false }); // containsDeleted
-                    //                else
-                    //                    newComboBox.ItemsSource = (IList)getAllMethod.Invoke(repositoryType, null);
-                    //            }
+                        //    case SearchControlType.ComboBox:
+                        //        {
+                        //            var newComboBox = UiUtil.GetComboBox(searchAttribute.Title);
+                        //            newComboBox.Name = $"_{propertyPassNumber}";
 
-                    //            newComboBox.SelectionChanged += (s, e) =>
-                    //            {
-                    //                toDisplayList.Clear();
-                    //                var thisPropertyPassNumber = int.Parse((s as ComboBox).Name.Substring(1));
-                    //                var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
+                        //            if (!searchAttribute.EnumOrRepositoryName.Contains("Repository"))
+                        //            {
+                        //                newComboBox.DisplayMemberPath = "DisplayMember";
+                        //                newComboBox.SelectedValuePath = "IntegerValueMember";
 
-                    //                for (int i = 0; i < allList.Count(); i++)
-                    //                {
-                    //                    if (Convert.ToInt64(newComboBox.SelectedValue) == Constants.DONT_CARE_VALUE || Convert.ToInt64(property.GetValue(allList[i])) == Convert.ToInt64(newComboBox.SelectedValue))
-                    //                        NotPassed[i] &= propertyPassNumberReverse;
-                    //                    else
-                    //                        NotPassed[i] |= thisPropertyPassNumber;
+                        //                var enumType = Type.GetType($"SOORIN.Asset.Enums.{searchAttribute.EnumOrRepositoryName}");
+                        //                newComboBox.ItemsSource = EnumUtil.EnumTypeToItemsSourceCollection(enumType, true);
+                        //            }
+                        //            else
+                        //            {
+                        //                var modelName = searchAttribute.EnumOrRepositoryName.Split(new string[] { "Repository" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                        //                var modelType = Type.GetType($"SOORIN.DataAccess.Model.{modelName}");
+                        //                ModelAttribute modelAttribute = modelType.GetCustomAttribute(typeof(ModelAttribute)) as ModelAttribute;
 
-                    //                    if (NotPassed[i] == 0 || allList[i].IsTotalRow)
-                    //                        toDisplayList.Add(allList[i]);
-                    //                }
-                    //                toDisplayList.SetModelOrderProperty();
-                    //            };
-                    //            SearchMemberStackPanel.Children.Add(newComboBox);
+                        //                newComboBox.SelectedValuePath = modelAttribute.KeyPropertyName;
+                        //                newComboBox.DisplayMemberPath = modelAttribute.TitlePropertyName;
 
-                    //            if (searchPrimaryModel != null)
-                    //            {
-                    //                newComboBox.SelectedValue = property.GetValue(searchPrimaryModel);
-                    //                newComboBox.RaiseEvent(
-                    //                    new SelectionChangedEventArgs(Selector.SelectionChangedEvent,
-                    //                    new List<ComboBoxItem> { newComboBox.Items[0] as ComboBoxItem },
-                    //                    new List<ComboBoxItem> { newComboBox.SelectedItem as ComboBoxItem }));
-                    //            }
-                    //        }
-                    //        break;
+                        //                var repositoryType = Type.GetType($"SOORIN.DataAccess.EF.{searchAttribute.EnumOrRepositoryName}");
+                        //                var getAllMethod = searchAttribute.HasDontCare ? repositoryType.GetMethod("GetAllWithDontCare") : repositoryType.GetMethod("GetAll");
 
-                    //    case SearchControlType.ComboBoxUC:
-                    //        {
-                    //            var newComboBoxUC = UiUtil.GetComboBoxUC(searchAttribute.Title);
-                    //            newComboBoxUC.Name = $"_{propertyPassNumber}";
+                        //                if (getAllMethod.GetParameters().Count() > 0)
+                        //                    newComboBox.ItemsSource = (IList)getAllMethod.Invoke(repositoryType, new object[] { false }); // containsDeleted
+                        //                else
+                        //                    newComboBox.ItemsSource = (IList)getAllMethod.Invoke(repositoryType, null);
+                        //            }
 
-                    //            var modelName = searchAttribute.EnumOrRepositoryName.Split(new string[] { "Repository" }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    //            var modelType = Type.GetType($"SOORIN.DataAccess.Model.{modelName}");
+                        //            newComboBox.SelectionChanged += (s, e) =>
+                        //            {
+                        //                toDisplayList.Clear();
+                        //                var thisPropertyPassNumber = int.Parse((s as ComboBox).Name.Substring(1));
+                        //                var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
 
-                    //            if (modelType == typeof(Person))
-                    //                newComboBoxUC.ItemsSource = GenericUtil.ToObservableCollectionOfModel(PersonRepository.GetAllWithDontCare());
-                    //            else if (modelType == typeof(Product))
-                    //                newComboBoxUC.ItemsSource = GenericUtil.ToObservableCollectionOfModel(ProductRepository.GetAllWithDontCare());
+                        //                for (int i = 0; i < allList.Count(); i++)
+                        //                {
+                        //                    if (Convert.ToInt64(newComboBox.SelectedValue) == Constants.DONT_CARE_VALUE || Convert.ToInt64(property.GetValue(allList[i])) == Convert.ToInt64(newComboBox.SelectedValue))
+                        //                        NotPassed[i] &= propertyPassNumberReverse;
+                        //                    else
+                        //                        NotPassed[i] |= thisPropertyPassNumber;
 
-                    //            newComboBoxUC.SelectionChanged += (s, e) =>
-                    //            {
-                    //                toDisplayList.Clear();
-                    //                var thisPropertyPassNumber = int.Parse((s as ComboBoxUC).Name.Substring(1));
-                    //                var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
+                        //                    if (NotPassed[i] == 0 || allList[i].IsTotalRow)
+                        //                        toDisplayList.Add(allList[i]);
+                        //                }
+                        //                toDisplayList.SetModelOrderProperty();
+                        //            };
+                        //            SearchMemberStackPanel.Children.Add(newComboBox);
 
-                    //                for (int i = 0; i < allList.Count(); i++)
-                    //                {
-                    //                    if (Convert.ToInt64(newComboBoxUC.SelectedValue) < 0 || Convert.ToInt64(property.GetValue(allList[i])) == Convert.ToInt64(newComboBoxUC.SelectedValue))
-                    //                        NotPassed[i] &= propertyPassNumberReverse;
-                    //                    else
-                    //                        NotPassed[i] |= thisPropertyPassNumber;
+                        //            if (searchPrimaryModel != null)
+                        //            {
+                        //                newComboBox.SelectedValue = property.GetValue(searchPrimaryModel);
+                        //                newComboBox.RaiseEvent(
+                        //                    new SelectionChangedEventArgs(Selector.SelectionChangedEvent,
+                        //                    new List<ComboBoxItem> { newComboBox.Items[0] as ComboBoxItem },
+                        //                    new List<ComboBoxItem> { newComboBox.SelectedItem as ComboBoxItem }));
+                        //            }
+                        //        }
+                        //        break;
 
-                    //                    if (NotPassed[i] == 0 || allList[i].IsTotalRow)
-                    //                        toDisplayList.Add(allList[i]);
-                    //                }
-                    //                toDisplayList.SetModelOrderProperty();
-                    //            };
-                    //            SearchMemberStackPanel.Children.Add(newComboBoxUC);
+                        //    case SearchControlType.ComboBoxUC:
+                        //        {
+                        //            var newComboBoxUC = UiUtil.GetComboBoxUC(searchAttribute.Title);
+                        //            newComboBoxUC.Name = $"_{propertyPassNumber}";
 
-                    //            if (searchPrimaryModel != null)
-                    //            {
-                    //                newComboBoxUC.SelectedValue = property.GetValue(searchPrimaryModel);
-                    //            }
-                    //        }
-                    //        break;
+                        //            var modelName = searchAttribute.EnumOrRepositoryName.Split(new string[] { "Repository" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                        //            var modelType = Type.GetType($"SOORIN.DataAccess.Model.{modelName}");
 
-                    //    case SearchControlType.DatePickerUC:
-                    //        {
-                    //            if (!searchAttribute.HasStartAndEndControlForDates)
-                    //            {
-                    //                var newDatePickerUC = GetDatePickerUC(searchAttribute);
-                    //                newDatePickerUC.Name = $"_{propertyPassNumber}";
+                        //            if (modelType == typeof(Person))
+                        //                newComboBoxUC.ItemsSource = GenericUtil.ToObservableCollectionOfModel(PersonRepository.GetAllWithDontCare());
+                        //            else if (modelType == typeof(Product))
+                        //                newComboBoxUC.ItemsSource = GenericUtil.ToObservableCollectionOfModel(ProductRepository.GetAllWithDontCare());
 
-                    //                newDatePickerUC.DateChanged += (s, e) =>
-                    //                {
-                    //                    toDisplayList.Clear();
-                    //                    var thisPropertyPassNumber = int.Parse((s as DatePickerUC).Name.Substring(1));
-                    //                    var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
+                        //            newComboBoxUC.SelectionChanged += (s, e) =>
+                        //            {
+                        //                toDisplayList.Clear();
+                        //                var thisPropertyPassNumber = int.Parse((s as ComboBoxUC).Name.Substring(1));
+                        //                var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
 
-                    //                    for (int i = 0; i < allList.Count(); i++)
-                    //                    {
-                    //                        var propertyValue = property.GetValue(allList[i]).ToString();
-                    //                        if (string.IsNullOrEmpty(newDatePickerUC.Date) || propertyValue.Contains(newDatePickerUC.Date))
-                    //                            NotPassed[i] &= propertyPassNumberReverse;
-                    //                        else
-                    //                            NotPassed[i] |= thisPropertyPassNumber;
+                        //                for (int i = 0; i < allList.Count(); i++)
+                        //                {
+                        //                    if (Convert.ToInt64(newComboBoxUC.SelectedValue) < 0 || Convert.ToInt64(property.GetValue(allList[i])) == Convert.ToInt64(newComboBoxUC.SelectedValue))
+                        //                        NotPassed[i] &= propertyPassNumberReverse;
+                        //                    else
+                        //                        NotPassed[i] |= thisPropertyPassNumber;
 
-                    //                        if (NotPassed[i] == 0 || allList[i].IsTotalRow)
-                    //                            toDisplayList.Add(allList[i]);
-                    //                    }
-                    //                    toDisplayList.SetModelOrderProperty();
-                    //                };
-                    //                SearchMemberStackPanel.Children.Add(newDatePickerUC);
+                        //                    if (NotPassed[i] == 0 || allList[i].IsTotalRow)
+                        //                        toDisplayList.Add(allList[i]);
+                        //                }
+                        //                toDisplayList.SetModelOrderProperty();
+                        //            };
+                        //            SearchMemberStackPanel.Children.Add(newComboBoxUC);
 
-                    //                if (searchPrimaryModel != null)
-                    //                    newDatePickerUC.Date = property.GetValue(searchPrimaryModel).ToString();
-                    //            }
-                    //            else
-                    //            {
-                    //                var newDatePickerUCForStart = GetDatePickerUC(searchAttribute, " (شروع)");
-                    //                newDatePickerUCForStart.Name = $"S_{propertyPassNumber}";
+                        //            if (searchPrimaryModel != null)
+                        //            {
+                        //                newComboBoxUC.SelectedValue = property.GetValue(searchPrimaryModel);
+                        //            }
+                        //        }
+                        //        break;
 
-                    //                var newDatePickerUCForEnd = GetDatePickerUC(searchAttribute, " (پایان)");
-                    //                newDatePickerUCForEnd.Name = $"E_{propertyPassNumber}";
+                        //    case SearchControlType.DatePickerUC:
+                        //        {
+                        //            if (!searchAttribute.HasStartAndEndControlForDates)
+                        //            {
+                        //                var newDatePickerUC = GetDatePickerUC(searchAttribute);
+                        //                newDatePickerUC.Name = $"_{propertyPassNumber}";
 
-                    //                newDatePickerUCForStart.DateChanged += (s, e) =>
-                    //                {
-                    //                    toDisplayList.Clear();
-                    //                    var thisPropertyPassNumber = int.Parse((s as DatePickerUC).Name.Substring(2));
-                    //                    var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
+                        //                newDatePickerUC.DateChanged += (s, e) =>
+                        //                {
+                        //                    toDisplayList.Clear();
+                        //                    var thisPropertyPassNumber = int.Parse((s as DatePickerUC).Name.Substring(1));
+                        //                    var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
 
-                    //                    var startDate = newDatePickerUCForStart.Date;
-                    //                    var endDate = newDatePickerUCForEnd.Date;
+                        //                    for (int i = 0; i < allList.Count(); i++)
+                        //                    {
+                        //                        var propertyValue = property.GetValue(allList[i]).ToString();
+                        //                        if (string.IsNullOrEmpty(newDatePickerUC.Date) || propertyValue.Contains(newDatePickerUC.Date))
+                        //                            NotPassed[i] &= propertyPassNumberReverse;
+                        //                        else
+                        //                            NotPassed[i] |= thisPropertyPassNumber;
 
-                    //                    if (string.IsNullOrWhiteSpace(startDate))
-                    //                        startDate = "0000/00/00";
+                        //                        if (NotPassed[i] == 0 || allList[i].IsTotalRow)
+                        //                            toDisplayList.Add(allList[i]);
+                        //                    }
+                        //                    toDisplayList.SetModelOrderProperty();
+                        //                };
+                        //                SearchMemberStackPanel.Children.Add(newDatePickerUC);
 
-                    //                    if (string.IsNullOrWhiteSpace(endDate))
-                    //                        endDate = "9999/99/99";
+                        //                if (searchPrimaryModel != null)
+                        //                    newDatePickerUC.Date = property.GetValue(searchPrimaryModel).ToString();
+                        //            }
+                        //            else
+                        //            {
+                        //                var newDatePickerUCForStart = GetDatePickerUC(searchAttribute, " (شروع)");
+                        //                newDatePickerUCForStart.Name = $"S_{propertyPassNumber}";
 
-                    //                    for (int i = 0; i < allList.Count(); i++)
-                    //                    {
-                    //                        var propertyValue = property.GetValue(allList[i]).ToString();
+                        //                var newDatePickerUCForEnd = GetDatePickerUC(searchAttribute, " (پایان)");
+                        //                newDatePickerUCForEnd.Name = $"E_{propertyPassNumber}";
 
-                    //                        if ((propertyValue.CompareTo(startDate) >= 0 && propertyValue.CompareTo(endDate) <= 0))
-                    //                            NotPassed[i] &= propertyPassNumberReverse;
-                    //                        else
-                    //                            NotPassed[i] |= thisPropertyPassNumber;
+                        //                newDatePickerUCForStart.DateChanged += (s, e) =>
+                        //                {
+                        //                    toDisplayList.Clear();
+                        //                    var thisPropertyPassNumber = int.Parse((s as DatePickerUC).Name.Substring(2));
+                        //                    var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
 
-                    //                        if (NotPassed[i] == 0 || allList[i].IsTotalRow)
-                    //                            toDisplayList.Add(allList[i]);
-                    //                    }
-                    //                    toDisplayList.SetModelOrderProperty();
-                    //                };
-                    //                newDatePickerUCForEnd.DateChanged += (s, e) =>
-                    //                {
-                    //                    toDisplayList.Clear();
-                    //                    var thisPropertyPassNumber = int.Parse((s as DatePickerUC).Name.Substring(2));
-                    //                    var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
+                        //                    var startDate = newDatePickerUCForStart.Date;
+                        //                    var endDate = newDatePickerUCForEnd.Date;
 
-                    //                    var startDate = newDatePickerUCForStart.Date;
-                    //                    var endDate = newDatePickerUCForEnd.Date;
+                        //                    if (string.IsNullOrWhiteSpace(startDate))
+                        //                        startDate = "0000/00/00";
 
-                    //                    if (string.IsNullOrWhiteSpace(startDate))
-                    //                        startDate = "0000/00/00";
+                        //                    if (string.IsNullOrWhiteSpace(endDate))
+                        //                        endDate = "9999/99/99";
 
-                    //                    if (string.IsNullOrWhiteSpace(endDate))
-                    //                        endDate = "9999/99/99";
+                        //                    for (int i = 0; i < allList.Count(); i++)
+                        //                    {
+                        //                        var propertyValue = property.GetValue(allList[i]).ToString();
 
-                    //                    for (int i = 0; i < allList.Count(); i++)
-                    //                    {
-                    //                        var propertyValue = property.GetValue(allList[i]).ToString();
+                        //                        if ((propertyValue.CompareTo(startDate) >= 0 && propertyValue.CompareTo(endDate) <= 0))
+                        //                            NotPassed[i] &= propertyPassNumberReverse;
+                        //                        else
+                        //                            NotPassed[i] |= thisPropertyPassNumber;
 
-                    //                        if ((propertyValue.CompareTo(startDate) >= 0 && propertyValue.CompareTo(endDate) <= 0))
-                    //                            NotPassed[i] &= propertyPassNumberReverse;
-                    //                        else
-                    //                            NotPassed[i] |= thisPropertyPassNumber;
+                        //                        if (NotPassed[i] == 0 || allList[i].IsTotalRow)
+                        //                            toDisplayList.Add(allList[i]);
+                        //                    }
+                        //                    toDisplayList.SetModelOrderProperty();
+                        //                };
+                        //                newDatePickerUCForEnd.DateChanged += (s, e) =>
+                        //                {
+                        //                    toDisplayList.Clear();
+                        //                    var thisPropertyPassNumber = int.Parse((s as DatePickerUC).Name.Substring(2));
+                        //                    var propertyPassNumberReverse = totalPassNumber - thisPropertyPassNumber;
 
-                    //                        if (NotPassed[i] == 0 || allList[i].IsTotalRow)
-                    //                            toDisplayList.Add(allList[i]);
-                    //                    }
-                    //                    toDisplayList.SetModelOrderProperty();
-                    //                };
+                        //                    var startDate = newDatePickerUCForStart.Date;
+                        //                    var endDate = newDatePickerUCForEnd.Date;
 
-                    //                SearchMemberStackPanel.Children.Add(newDatePickerUCForStart);
-                    //                SearchMemberStackPanel.Children.Add(newDatePickerUCForEnd);
+                        //                    if (string.IsNullOrWhiteSpace(startDate))
+                        //                        startDate = "0000/00/00";
 
-                    //                if (searchPrimaryModel != null)
-                    //                {
-                    //                    newDatePickerUCForStart.Date = property.GetValue(searchPrimaryModel).ToString();
-                    //                    newDatePickerUCForEnd.Date = property.GetValue(searchPrimaryModel).ToString();
-                    //                }
-                    //            }
-                    //        }
-                    //        break;
-                    //    case SearchControlType.CheckBox:
-                    //        break;
-                    //    default:
-                    //        break;
-                    //}
+                        //                    if (string.IsNullOrWhiteSpace(endDate))
+                        //                        endDate = "9999/99/99";
+
+                        //                    for (int i = 0; i < allList.Count(); i++)
+                        //                    {
+                        //                        var propertyValue = property.GetValue(allList[i]).ToString();
+
+                        //                        if ((propertyValue.CompareTo(startDate) >= 0 && propertyValue.CompareTo(endDate) <= 0))
+                        //                            NotPassed[i] &= propertyPassNumberReverse;
+                        //                        else
+                        //                            NotPassed[i] |= thisPropertyPassNumber;
+
+                        //                        if (NotPassed[i] == 0 || allList[i].IsTotalRow)
+                        //                            toDisplayList.Add(allList[i]);
+                        //                    }
+                        //                    toDisplayList.SetModelOrderProperty();
+                        //                };
+
+                        //                SearchMemberStackPanel.Children.Add(newDatePickerUCForStart);
+                        //                SearchMemberStackPanel.Children.Add(newDatePickerUCForEnd);
+
+                        //                if (searchPrimaryModel != null)
+                        //                {
+                        //                    newDatePickerUCForStart.Date = property.GetValue(searchPrimaryModel).ToString();
+                        //                    newDatePickerUCForEnd.Date = property.GetValue(searchPrimaryModel).ToString();
+                        //                }
+                        //            }
+                        //        }
+                        //        break;
+                        //    case SearchControlType.CheckBox:
+                        //        break;
+                        default:
+                            break;
+                    }
                 }
             }
 

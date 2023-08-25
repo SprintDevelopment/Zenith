@@ -48,6 +48,8 @@ namespace Zenith
             {
                 this.DataContext = ViewModel;
 
+                ViewModel.CreateDatabase.Execute().Subscribe().Dispose();
+
                 ViewModel.WhenAnyValue(vm => vm.CreateUpdatePage)
                     .SkipWhile(page => page == null)
                     .Do(createUpdatePage =>
@@ -145,7 +147,7 @@ namespace Zenith
                                     mi.Command,
                                     mi.CommandParameter
                                 })
-                                .AsEnumerable();
+                                .ToList();
 
                             Observable.FromEventPattern(this, nameof(Window.PreviewKeyDown))
                                 .Select(x => x.EventArgs as KeyEventArgs)

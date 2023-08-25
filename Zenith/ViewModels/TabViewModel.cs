@@ -2,6 +2,7 @@
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Windows.Controls;
 
 namespace Zenith.ViewModels
@@ -11,14 +12,8 @@ namespace Zenith.ViewModels
         public TabViewModel()
         {
             SelectCommand = ReactiveCommand.Create(() => { IsSelected = true; });
-            CloseCommand = ReactiveCommand.Create<Unit, Guid>(_ => Guid);
+            CloseCommand = ReactiveCommand.Create<Unit, TabViewModel>(_ => this);
         }
-
-        [Reactive]
-        public Guid Guid { get; set; }
-
-        [Reactive]
-        public string Title { get; set; }
 
         [Reactive]
         public bool IsSelected { get; set; }
@@ -26,7 +21,16 @@ namespace Zenith.ViewModels
         [Reactive]
         public bool AllowClose { get; set; }
 
+        [Reactive]
+        public int SelectionOrder { get; set; }
+
+        [Reactive]
+        public Page RelatedMainPage { get; set; }
+
+        [Reactive]
+        public Page RelatedCreateUpdatePage { get; set; }
+
         public ReactiveCommand<Unit, Unit> SelectCommand { get; set; }
-        public ReactiveCommand<Unit, Guid> CloseCommand { get; set; }
+        public ReactiveCommand<Unit, TabViewModel> CloseCommand { get; set; }
     }
 }

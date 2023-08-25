@@ -28,8 +28,8 @@
                 <baseclasses:JTextBox x:Name="usernameTextBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Title="نام کاربری" />
                 <PasswordBox x:Name="passPasswordBox" Tag="کلمه عبور" />
 
-                <Border x:Name="messageBorder" Background="Beige" BorderBrush="LightCoral" BorderThickness="1" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
-                    <TextBlock Text="نام کاربری و/یا کلمه عبور اشتباه است." Foreground="DarkRed"/>
+                <Border x:Name="messageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
+                    <TextBlock Text="نام کاربری و یا کلمه عبور اشتباه است." Foreground="Red"/>
                 </Border>
                 
                 <Button Content="ورود" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LoginCommand}"/>

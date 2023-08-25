@@ -44,7 +44,7 @@ namespace Zenith.Views
 
                 ViewModel.LoginCommand
                     .Do(_ => messageBorder.Visibility = Visibility.Visible)
-                    .Throttle(TimeSpan.FromSeconds(5)).ObserveOn(SynchronizationContext.Current)
+                    .Throttle(TimeSpan.FromSeconds(100)).ObserveOn(SynchronizationContext.Current)
                     .Do(_ => messageBorder.Visibility = Visibility.Collapsed)
                     .Subscribe().DisposeWith(d);
 

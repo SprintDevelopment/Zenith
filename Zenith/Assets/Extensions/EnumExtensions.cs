@@ -22,7 +22,7 @@ namespace Zenith.Assets.Extensions
         {
             var enumValues = Enum.GetValues(enumType);
 
-            return (from object enumValue in enumValues select new EnumDto(enumValue, ((Enum)enumValue).GetDescription())).ToObservableCollection();
+            return (from object enumValue in enumValues select new EnumDto(enumValue, ((Enum)enumValue).GetDescription())).OrderBy(item => item.Value).Where(item => hasDontCareItem || ((int)item.Value) >= 0).ToObservableCollection();
         }
 
         public static string GetDescription(this Enum enumValue)

@@ -27,7 +27,7 @@ namespace Zenith.Views.ListViews
                 .ObserveOn(SynchronizationContext.Current)
                 .Select(subject => new Func<Sale, bool>(oc => true));
 
-            ViewModel = new BaseListViewModel<Sale>(new SaleRepository(), searchModel, dynamicFilter)
+            ViewModel = new SaleListViewModel(new SaleRepository(), searchModel, dynamicFilter)
             {
                 CreateUpdatePage = new SalePage()
             };

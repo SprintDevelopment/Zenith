@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reactive.Linq;
@@ -41,6 +42,13 @@ namespace Zenith.Models
 
         [Reactive]
         public string Comment { get; set; } = string.Empty;
+
+        [Reactive]
+        public virtual ObservableCollection<Delivery> Deliveries { get; set; } = new ObservableCollection<Delivery>();
+
+        [NotMapped]
+        [Reactive]
+        public bool IsDeliveriesVisible { get; set; }
 
         public SaleItem()
         {

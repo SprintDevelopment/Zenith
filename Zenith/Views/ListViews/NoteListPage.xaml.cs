@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
@@ -22,10 +23,13 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new NoteSearchModel();
 
-            IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Subject)
+            IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(n => n.Subject, n => n.NotifyType)
+                .Select(x => new { subject = x.Item1, notifyType = x.Item2})
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(SynchronizationContext.Current)
-                .Select(subject => new Func<Note, bool>(p => subject.IsNullOrWhiteSpace() || p.Subject.Contains(subject)));
+                .Select(x => new Func<Note, bool>(p => 
+                    (x.subject.IsNullOrWhiteSpace() || p.Subject.Contains(x.subject)) &&
+                    (x.notifyType == NotifyTypes.DontCare || p.NotifyType == x.notifyType)));
 
             ViewModel = new BaseListViewModel<Note>(new NoteRepository(), searchModel, dynamicFilter)
             {

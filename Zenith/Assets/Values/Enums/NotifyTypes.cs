@@ -9,8 +9,10 @@ namespace Zenith.Assets.Values.Enums
 {
     public enum NotifyTypes
     {
+        [Display(Name = "")]
+        DontCare = -1,
         [Display(Name = "نیازی به یادآوری نیست")]
-        NoNeedToNotify = 0,
+        NoNeedToNotify,
         [Display(Name = "یادآوری در پایین پنجره")]
         FooterNotify
     }

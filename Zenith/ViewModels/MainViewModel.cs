@@ -1,4 +1,5 @@
 ﻿using DynamicData;
+using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -12,8 +13,10 @@ using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
+using Zenith.Data;
 using Zenith.Models;
 using Zenith.Repositories;
+using Zenith.Views.ListViews;
 
 namespace Zenith.ViewModels
 {
@@ -29,7 +32,23 @@ namespace Zenith.ViewModels
 
             Navigate = ReactiveCommand.Create<Type>(type =>
             {
-                ListPage = (Page)Activator.CreateInstance(type);
+                var tabForPage = TabControlViewModel._tabs.Items.FirstOrDefault(tab => tab.RelatedMainPage.GetType() == type);
+                if (tabForPage is not null)
+                    tabForPage.IsSelected = true;
+                else
+                    TabControlViewModel._tabs.Add(new TabViewModel { RelatedMainPage = (Page)Activator.CreateInstance(type), IsSelected = true });
+            });
+
+
+            TabControlViewModel.WhenAnyValue(vm => vm.SelectedTabViewModel)
+                .Where(stvm => stvm?.RelatedMainPage is not null)
+                .Do(stvm => ListPage = stvm.RelatedMainPage)
+                .Subscribe();
+
+
+            ShowDeliveriesCommand = ReactiveCommand.Create<Sale>(sale =>
+            {
+                ListPage = new DeliveryListPage(sale);
             });
 
             ShowCreateUpdatePage = ReactiveCommand.Create<Page>(page =>
@@ -92,6 +111,8 @@ namespace Zenith.ViewModels
                 }
             });
 
+            CreateDatabase = ReactiveCommand.CreateRunInBackground<Unit>(_ => new DbContextFactory().CreateDbContext(null).Database.Migrate());
+
             _alerts.Connect()
                 .Bind(out Alerts)
                 .Subscribe();
@@ -150,8 +171,9 @@ namespace Zenith.ViewModels
 
         public SourceList<AlertViewModel> _alerts { get; private set; } = new SourceList<AlertViewModel>();
         public ReadOnlyObservableCollection<AlertViewModel> Alerts;
-
+        public TabControlViewModel TabControlViewModel { get; set; } = new TabControlViewModel();
         public ReactiveCommand<Type, Unit> Navigate { get; set; }
+        public ReactiveCommand<Sale, Unit> ShowDeliveriesCommand { get; set; }
         public ReactiveCommand<Page, Unit> ShowCreateUpdatePage { get; set; }
         public ReactiveCommand<DialogDto, Unit> ShowDialog { get; set; }
         public ReactiveCommand<Unit, Unit> CreateUpdatePageReturned { get; set; }
@@ -160,5 +182,6 @@ namespace Zenith.ViewModels
         public ReactiveCommand<string, Unit> OpenLogFile { get; set; }
         public ReactiveCommand<Unit, Unit> Backup { get; set; }
         public ReactiveCommand<Unit, Unit> Restore { get; set; }
+        public ReactiveCommand<Unit, Unit> CreateDatabase { get; set; }
     }
 }
