@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Zenith.Assets.Attributes;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Constants;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
@@ -15,10 +16,13 @@ namespace Zenith.Models
         [Reactive]
         public short CompanyId { get; set; }
 
-        [Required(ErrorMessage = "نام شرکت نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام شرکت را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
+
+        [Reactive]
+        public CompanyTypes CompanyType { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.CALL_NUMBERS)]
@@ -47,7 +51,7 @@ namespace Zenith.Models
 
         public Company()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام را وارد کنید");
             ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 

@@ -30,6 +30,7 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="نام شرکت" />
+                <ComboBox x:Name="companyTypeComboBox" SelectedValue="{Binding PageModel.CompanyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="نوع شرکت"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

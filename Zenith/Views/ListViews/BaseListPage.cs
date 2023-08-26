@@ -27,6 +27,8 @@ namespace Zenith.Views.ListViews
 
             this.WhenActivated(d =>
             {
+                ViewModel.InitiateSearchCommand.Execute().Subscribe().Dispose();
+
                 this.DataContext = ViewModel;
             });
             //WindowPreviewKeyDownEventHandler = (s, e) => { ListBasePage_PreviewKeyDown(s, e); };

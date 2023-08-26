@@ -22,7 +22,7 @@ namespace Zenith.Models
         [Reactive]
         public OutgoCategory Parent { get; set; }
 
-        [Required(ErrorMessage = "عنوان نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "عنوان را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Title { get; set; }
@@ -34,7 +34,7 @@ namespace Zenith.Models
 
         public OutgoCategory()
         {
-            this.ValidationRule(vm => vm.Title, title => !title.IsNullOrWhiteSpace(), "عنوان نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Title, title => !title.IsNullOrWhiteSpace(), "عنوان را وارد کنید");
         }
 
         public override string ToString()

@@ -18,7 +18,7 @@ namespace Zenith.Models
         [Reactive]
         public int SiteId { get; set; }
 
-        [Required(ErrorMessage = "نام شرکت نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام شرکت را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
@@ -42,9 +42,9 @@ namespace Zenith.Models
 
         public Site()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام را وارد کنید");
             this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "شرکت مربوطه باید انتخاب شده باشد");
-            this.ValidationRule(vm => vm.Address, address => !address.IsNullOrWhiteSpace(), "آدرس نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Address, address => !address.IsNullOrWhiteSpace(), "آدرس را وارد کنید");
         }
 
         public override string ToString()

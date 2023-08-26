@@ -10,7 +10,7 @@
     <helpers:ActivatableUserControl.Resources>
         <Storyboard x:Key="ShowStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="headerBorder">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="200">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="150">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>

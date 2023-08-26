@@ -22,10 +22,11 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             ViewModel = new BaseCreateOrUpdateViewModel<Note>(new NoteRepository());
 
+            // Should be out of this.WhenActivated !!
+            notifyTypeComboBox.ItemsSource = typeof(NotifyTypes).ToCollection();
+
             this.WhenActivated(d =>
             {
-                notifyTypeComboBox.ItemsSource = typeof(NotifyTypes).ToCollection();
-
                 ViewModel.WhenAnyValue(vm => vm.PageModel)
                     .Select(pm => pm.WhenAnyValue(pm => pm.NotifyType))
                     .Switch()

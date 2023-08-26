@@ -17,7 +17,7 @@ namespace Zenith.Models
     public class User : Model
     {
         [Key]
-        [Required(ErrorMessage = "نام کاربری نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Username { get; set; }
@@ -39,7 +39,7 @@ namespace Zenith.Models
 
         public User()
         {
-            this.ValidationRule(vm => vm.Username, oc => oc is not null, "نام کاربری نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Username, oc => oc is not null, "نام کاربری را وارد کنید");
             this.ValidationRule(vm => vm.Password, pass => !string.IsNullOrWhiteSpace(pass), "میزان هزینه باید بیشتر از 0 باشد");
 
             this.WhenAnyValue(m => m.Password)

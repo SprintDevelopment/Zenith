@@ -107,6 +107,7 @@ namespace Zenith
                                 }).Subscribe().DisposeWith(disposable);
 
                             ViewModel.InitiateSearch
+                                .WhereNotNull()
                                 .Do(searchModel =>
                                 {
                                     this.searchUserControl.Initialize(searchModel);

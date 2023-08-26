@@ -55,7 +55,7 @@ namespace Zenith.Models
 
         public Delivery()
         {
-            this.ValidationRule(vm => vm.BillNumber, bn => !bn.IsNullOrWhiteSpace(), "شماره بارنامه نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.BillNumber, bn => !bn.IsNullOrWhiteSpace(), "شماره بارنامه را وارد کنید");
             this.ValidationRule(vm => vm.SaleItemId, sii => sii > 0, "آیتم فروش باید انتخاب شده باشد");
             this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "ماشین باید انتخاب شده باشد");
             this.ValidationRule(vm => vm.DriverId, di => di > 0, "راننده باید انتخاب شده باشد");

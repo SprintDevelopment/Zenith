@@ -18,9 +18,11 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             ViewModel = new BaseCreateOrUpdateViewModel<Person>(new PersonRepository());
 
+            // Should be out of this.WhenActivated !!
+            jobComboBox.ItemsSource = typeof(Jobs).ToCollection();
+
             this.WhenActivated(d =>
             {
-                jobComboBox.ItemsSource = typeof(Jobs).ToCollection();
             });
         }
     }

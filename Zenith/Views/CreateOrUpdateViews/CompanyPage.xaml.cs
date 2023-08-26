@@ -1,4 +1,7 @@
-﻿using Zenith.Models;
+﻿using ReactiveUI;
+using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
+using Zenith.Models;
 using Zenith.Repositories;
 using Zenith.ViewModels.CreateOrUpdateViewModels;
 
@@ -14,6 +17,13 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BaseCreateOrUpdateViewModel<Company>(new CompanyRepository());
+
+            // Should be out of this.WhenActivated !!
+            companyTypeComboBox.ItemsSource = typeof(CompanyTypes).ToCollection();
+
+            this.WhenActivated(d =>
+            {
+            });
         }
     }
 }

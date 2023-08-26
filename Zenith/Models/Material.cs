@@ -21,7 +21,7 @@ namespace Zenith.Models
         [Reactive]
         public int MaterialId { get; set; }
 
-        [Required(ErrorMessage = "نام متریال نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام متریال را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
@@ -33,7 +33,7 @@ namespace Zenith.Models
 
         public Material()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام متریال نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام متریال را وارد کنید");
             ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 

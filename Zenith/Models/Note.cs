@@ -18,7 +18,7 @@ namespace Zenith.Models
         [Reactive]
         public int NoteId { get; set; }
 
-        [Required(ErrorMessage = "موضوع یادداشت نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "موضوع یادداشت را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Subject { get; set; }
@@ -30,14 +30,14 @@ namespace Zenith.Models
 
         [Required]
         [Reactive]
-        public NotifyTypes NotifyType { get; set; } = NotifyTypes.NoNeedToNotify;
+        public NotifyTypes NotifyType { get; set; }
 
         [Reactive]
         public DateTime NotifyDateTime { get; set; } = DateTime.Now;
 
         public Note()
         {
-            this.ValidationRule(vm => vm.Subject, subject => !subject.IsNullOrWhiteSpace(), "موضوع نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.Subject, subject => !subject.IsNullOrWhiteSpace(), "موضوع را وارد کنید");
         }
 
         public override string ToString()

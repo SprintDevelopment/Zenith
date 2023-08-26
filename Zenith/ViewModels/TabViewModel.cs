@@ -19,7 +19,7 @@ namespace Zenith.ViewModels
         public bool IsSelected { get; set; }
 
         [Reactive]
-        public bool AllowClose { get; set; }
+        public bool AllowClose { get; set; } = true;
 
         [Reactive]
         public int SelectionOrder { get; set; }

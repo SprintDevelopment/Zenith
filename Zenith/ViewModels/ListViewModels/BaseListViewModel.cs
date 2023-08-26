@@ -53,12 +53,6 @@ namespace Zenith.ViewModels.ListViewModels
                 .Do(_ => calculate())
                 .Subscribe();
 
-            if (searchModel != null)
-            {
-                searchModel.Title = $"جستجو در لیست {modelAttributes.MultipleName}";
-                App.MainViewModel.InitiateSearch.Execute(searchModel).Subscribe();
-            }
-
             SelectAllCommand = ReactiveCommand.Create<Unit>(_ =>
             {
                 SelectionMode = SelectionMode != SelectionModes.AllItemsSelected ? SelectionModes.AllItemsSelected : SelectionModes.NoItemSelected;
@@ -148,6 +142,9 @@ namespace Zenith.ViewModels.ListViewModels
                 App.MainViewModel.IsSearchVisible = !App.MainViewModel.IsSearchVisible;
             });
 
+            searchModel.Title = $"جستجو در لیست {modelAttributes.MultipleName}";
+            InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearch.Execute(searchModel));
+
             DisposeCommand = ReactiveCommand.Create<Unit>(_ =>
             {
                 SelectAllCommand?.Dispose();
@@ -168,6 +165,7 @@ namespace Zenith.ViewModels.ListViewModels
         public ReactiveCommand<Unit, Unit> CreateCommand { get; set; }
         public ReactiveCommand<T, Unit> UpdateCommand { get; set; }
         public ReactiveCommand<T, bool> RemoveCommand { get; set; }
+        public ReactiveCommand<Unit, SearchBaseDto> InitiateSearchCommand { get; set; }
         public ReactiveCommand<Unit, Unit> SearchCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DisposeCommand { get; set; }
 

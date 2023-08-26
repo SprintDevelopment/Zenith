@@ -35,7 +35,14 @@ namespace Zenith.ViewModels
 
             this.WhenAnyValue(vm => vm.SelectedTabViewModel)
                 .WhereNotNull()
-                .SelectMany(stvm => _tabs.Items.Select(tab => { tab.IsSelected = tab == stvm; tab.SelectionOrder = tab == stvm ? 0 : ++tab.SelectionOrder; return tab; }))
+                .Do(stvm => stvm.SelectionOrder = 0)
+                .SelectMany(stvm => _tabs.Items.Where(tab => tab != stvm).Select(tab => { tab.IsSelected = false; tab.AllowClose = true; tab.SelectionOrder++; return tab; }))
+                .Subscribe();
+
+            _tabs.CountChanged
+                .Where(i => i == 1)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Do(_ => _tabs.Items.Single().AllowClose = false)
                 .Subscribe();
         }
 

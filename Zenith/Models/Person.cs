@@ -19,12 +19,12 @@ namespace Zenith.Models
         [Reactive]
         public Jobs Job { get; set; }
 
-        [Required(ErrorMessage = "نام نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "نام خانوادگی نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام خانوادگی را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string LastName { get; set; }
@@ -75,8 +75,8 @@ namespace Zenith.Models
 
         public Person()
         {
-            this.ValidationRule(vm => vm.FirstName, fName => !fName.IsNullOrWhiteSpace(), "نام نمی تواند خالی باشد");
-            this.ValidationRule(vm => vm.LastName, lName => !lName.IsNullOrWhiteSpace(), "نام خانوادگی نمی تواند خالی باشد");
+            this.ValidationRule(vm => vm.FirstName, fName => !fName.IsNullOrWhiteSpace(), "نام را وارد کنید");
+            this.ValidationRule(vm => vm.LastName, lName => !lName.IsNullOrWhiteSpace(), "نام خانوادگی را وارد کنید");
         }
 
         public override string ToString()

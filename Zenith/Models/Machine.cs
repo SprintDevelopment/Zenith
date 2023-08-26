@@ -14,10 +14,14 @@ namespace Zenith.Models
         [Reactive]
         public int MachineId { get; set; }
 
-        [Required(ErrorMessage = "نام ماشین نمی تواند خالی باشد")]
+        [Required(ErrorMessage = "نام ماشین را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
+
+        [Range(1, int.MaxValue)]
+        [Reactive]
+        public int Capacity { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
@@ -26,8 +30,8 @@ namespace Zenith.Models
 
         public Machine()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام ماشین نمی تواند خالی باشد");
-            ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام ماشین را وارد کنید");
+            this.ValidationRule(vm => vm.Capacity, volume => volume > 0, "ظرفیت ماشین باید عددی بزرگتر از صفر باشد");
         }
 
         public override string ToString()
