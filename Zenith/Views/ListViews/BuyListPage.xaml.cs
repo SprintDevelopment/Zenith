@@ -24,7 +24,7 @@ namespace Zenith.Views.ListViews
 
             IObservable<Func<Buy, bool>> dynamicFilter = searchModel.WhenAnyValue(b => b.CompanyId)
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(companyId => new Func<Buy, bool>(b => companyId == 0 || b.CompanyId == companyId));
 
             ViewModel = new BaseListViewModel<Buy>(new BuyRepository(), searchModel, dynamicFilter)

@@ -24,7 +24,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
         {
             IObservable<Func<Material, bool>> dynamicFilter = this.WhenAnyValue(vm => vm.SearchedMaterialName)
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(materialName => new Func<Material, bool>(m => materialName.IsNullOrWhiteSpace() || m.Name.Contains(materialName)));
 
             MaterialsSourceList.AddRange(new MaterialRepository().All());

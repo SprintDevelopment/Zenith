@@ -95,6 +95,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CreateOrUpdateViews\MixturePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateOrUpdateViews\SitePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -111,6 +114,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CreateOrUpdateViews\OutgoCategoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\MixtureListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ListViews\DeliveryListPage.xaml.cs">

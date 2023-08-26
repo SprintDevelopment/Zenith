@@ -22,10 +22,10 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new SiteSearchModel();
 
-            IObservable<Func<Site, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+            IObservable<Func<Site, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.CompanyId)
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
-                .Select(subject => new Func<Site, bool>(oc => true));
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Select(companyId => new Func<Site, bool>(s => companyId == 0 || s.CompanyId == companyId));
 
             ViewModel = new BaseListViewModel<Site>(new SiteRepository(), searchModel, dynamicFilter)
             {

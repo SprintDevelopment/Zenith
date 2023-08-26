@@ -28,7 +28,7 @@ namespace Zenith.Views.ListViews
 
             IObservable<Func<Person, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name)
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(subject => new Func<Person, bool>(p => subject.IsNullOrWhiteSpace() || p.FullName.Contains(subject)));
 
             ViewModel = new BaseListViewModel<Person>(new PersonRepository(), searchModel, dynamicFilter)

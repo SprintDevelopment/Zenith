@@ -24,7 +24,7 @@ namespace Zenith.Views.ListViews
 
             IObservable<Func<Sale, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(subject => new Func<Sale, bool>(oc => true));
 
             ViewModel = new SaleListViewModel(new SaleRepository(), searchModel, dynamicFilter)

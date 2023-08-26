@@ -63,7 +63,7 @@ namespace Zenith.Assets.UI.BaseClasses
                 borderRectangle.SetValue(Grid.RowSpanProperty, 2);
                 newContent.Children.Add(borderRectangle);
 
-                this.WhenAnyValue(w => w.WindowState).ObserveOn(SynchronizationContext.Current).Subscribe(ws =>
+                this.WhenAnyValue(w => w.WindowState).ObserveOn(RxApp.MainThreadScheduler).Subscribe(ws =>
                 {
                     if (ws == WindowState.Maximized)
                     {

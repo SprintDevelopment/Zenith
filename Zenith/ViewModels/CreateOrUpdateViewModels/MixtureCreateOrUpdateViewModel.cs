@@ -17,9 +17,9 @@ using System.Reactive;
 
 namespace Zenith.ViewModels.CreateOrUpdateViewModels
 {
-    public class BuyCreateOrUpdateViewModel : BaseCreateOrUpdateViewModel<Buy>
+    public class MixtureCreateOrUpdateViewModel : BaseCreateOrUpdateViewModel<Mixture>
     {
-        public BuyCreateOrUpdateViewModel(Repository<Buy> repository, bool containsDeleted = false)
+        public MixtureCreateOrUpdateViewModel(Repository<Mixture> repository, bool containsDeleted = false)
             : base(repository, containsDeleted)
         {
             IObservable<Func<Material, bool>> dynamicFilter = this.WhenAnyValue(vm => vm.SearchedMaterialName)
@@ -37,18 +37,16 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
             AddToItemsCommand = ReactiveCommand.Create<Material>(material =>
             {
-                var buyItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
-                if (buyItem is null)
-                    PageModel.Items.Add(new BuyItem { Material = material, MaterialId = material.MaterialId, UnitPrice = 200, Count = 1 });
-                else
-                    buyItem.Count++;
+                var mixtureItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
+                if (mixtureItem is null)
+                    PageModel.Items.Add(new MixtureItem { Material = material, MaterialId = material.MaterialId, Percent = 0 });
             });
 
             RemoveFromItemsCommand = ReactiveCommand.Create<Material>(material =>
             {
-                var buyItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
-                if (buyItem is not null)
-                    PageModel.Items.Remove(buyItem);
+                var mixtureItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
+                if (mixtureItem is not null)
+                    PageModel.Items.Remove(mixtureItem);
             });
 
             RemoveAllItemsCommand = ReactiveCommand.Create<Unit>(_ =>

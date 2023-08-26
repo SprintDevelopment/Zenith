@@ -26,7 +26,7 @@ namespace Zenith.Views.ListViews
             IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(n => n.Subject, n => n.NotifyType)
                 .Select(x => new { subject = x.Item1, notifyType = x.Item2})
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(SynchronizationContext.Current)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(x => new Func<Note, bool>(p => 
                     (x.subject.IsNullOrWhiteSpace() || p.Subject.Contains(x.subject)) &&
                     (x.notifyType == NotifyTypes.DontCare || p.NotifyType == x.notifyType)));

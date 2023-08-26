@@ -13,23 +13,23 @@ using Zenith.Views.CreateOrUpdateViews;
 namespace Zenith.Views.ListViews
 {
     /// <summary>
-    /// Interaction logic for UserListPage.xaml
+    /// Interaction logic for MixtureListPage.xaml
     /// </summary>
-    public partial class UserListPage : BaseListPage<User>
+    public partial class MixtureListPage : BaseListPage<Mixture>
     {
-        public UserListPage()
+        public MixtureListPage()
         {
             InitializeComponent();
-            var searchModel = new UserSearchModel();
+            var searchModel = new MixtureSearchModel();
 
-            IObservable<Func<User, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+            IObservable<Func<Mixture, bool>> dynamicFilter = searchModel.WhenAnyValue(m => m.Title)
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(subject => new Func<User, bool>(oc => true));
+                .Select(title => new Func<Mixture, bool>(b => true));
 
-            ViewModel = new BaseListViewModel<User>(new UserRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Mixture>(new MixtureRepository(), searchModel, dynamicFilter)
             {
-                CreateUpdatePage = new UserPage()
+                CreateUpdatePage = new MixturePage()
             };
 
             this.WhenActivated(d => { listItemsControl.ItemsSource = ViewModel.ActiveList; });
