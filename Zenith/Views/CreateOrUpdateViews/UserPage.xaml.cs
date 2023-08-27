@@ -23,10 +23,13 @@ namespace Zenith.Views.CreateOrUpdateViews
         {
             InitializeComponent();
 
-            ViewModel = new BaseCreateOrUpdateViewModel<User>(new UserRepository());
+            ViewModel = new UserCreateOrUpdateViewModel(new UserRepository());
 
             this.WhenActivated(d =>
             {
+                var newPermissions = typeof(PermissionTypes).ToCollection().Where(p => !ViewModel.PageModel.Permissions.Any(up => up.PermissionType == (PermissionTypes)p.Value)).ToList();
+                newPermissions.ForEach(p => ViewModel.PageModel.Permissions.Add(new UserPermission { PermissionType = (PermissionTypes)p.Value }));
+
                 Observable
                     .Merge(
                         Observable.FromEventPattern(passPasswordBox, nameof(PasswordBox.PasswordChanged)),
@@ -34,21 +37,6 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Where(_ => passPasswordBox.Password == repeatPassPasswordBox.Password)
                     .Do(_ => ViewModel.PageModel.Password = passPasswordBox.Password)
                     .Subscribe().DisposeWith(d);
-
-                Observable.FromEventPattern(addImageButton, nameof(Button.Click))
-                    .Do(_ =>
-                    {
-                        var openFileDialog = new OpenFileDialog()
-                        {
-                            Filter = "Image Files(*.jpg, *.jpeg, *.bmp, *.png) | *.jpg; *.jpeg; *.bmp; *.png"
-                        };
-
-                        var result = openFileDialog.ShowDialog();
-                        if (result.HasValue && result.Value)
-                        {
-                            ViewModel.PageModel.AvatarImageBytes = File.ReadAllBytes(openFileDialog.FileName);
-                        }
-                    }).Subscribe().DisposeWith(d);
             });
         }
     }

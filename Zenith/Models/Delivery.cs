@@ -21,7 +21,7 @@ namespace Zenith.Models
 
         [ForeignKey(nameof(SaleItemId))]
         [Reactive]
-        public SaleItem SaleItem { get; set; }
+        public virtual SaleItem SaleItem { get; set; }
 
         [Reactive]
         public int Count { get; set; }
@@ -31,14 +31,14 @@ namespace Zenith.Models
 
         [ForeignKey(nameof(MachineId))]
         [Reactive]
-        public Machine Machine { get; set; }
+        public virtual Machine Machine { get; set; }
 
         [Reactive]
         public int DriverId { get; set; }
 
         [ForeignKey(nameof(DriverId))]
         [Reactive]
-        public Person Driver { get; set; }
+        public virtual Person Driver { get; set; }
 
         [Required]
         [MaxLength(LengthConstants.SMALL_STRING)]

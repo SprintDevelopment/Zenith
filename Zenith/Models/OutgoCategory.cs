@@ -20,7 +20,7 @@ namespace Zenith.Models
 
         [ForeignKey(nameof(ParentOutgoCategoryId))]
         [Reactive]
-        public OutgoCategory Parent { get; set; }
+        public virtual OutgoCategory Parent { get; set; }
 
         [Required(ErrorMessage = "عنوان را وارد کنید")]
         [MaxLength(LengthConstants.MEDIUM_STRING)]

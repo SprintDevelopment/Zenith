@@ -23,7 +23,7 @@ namespace Zenith.Models
 
         [ForeignKey(nameof(OutgoCategoryId))]
         [Reactive]
-        public OutgoCategory OutgoCategory { get; set; }
+        public virtual OutgoCategory OutgoCategory { get; set; }
 
         [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;

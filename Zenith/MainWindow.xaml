@@ -110,7 +110,7 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="لیست کاربران" Shortcut="Ctrl+Shift+U" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:UserListPage}"/>
-                            <controls:SubMenuItem Title="کاربر جدید" />
+                            <controls:SubMenuItem Title="تغییر کلمه عبور"  Shortcut="Ctrl+Shift+W"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

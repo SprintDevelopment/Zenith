@@ -28,7 +28,7 @@ namespace Zenith.Models
 
         [ForeignKey(nameof(CompanyId))]
         [Reactive]
-        public Company Company { get; set; }
+        public virtual Company Company { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

@@ -10,6 +10,7 @@ using ReactiveUI;
 using System.Runtime.Serialization;
 using Zenith.Assets.Utils;
 using System.Reactive.Linq;
+using System.Collections.ObjectModel;
 
 namespace Zenith.Models
 {
@@ -28,19 +29,18 @@ namespace Zenith.Models
 
         [Required]
         [MaxLength(LengthConstants.LARGE_STRING)]
-        public string HashedPassword { get; private set; }
+        public string HashedPassword { get; private set; } = "TEST";
 
         [Reactive]
         public DateTime CreateDateTime { get; set; } = DateTime.Now;
 
-        [Column(TypeName = "Image")]
         [Reactive]
-        public byte[]? AvatarImageBytes { get; set; }
+        public virtual ObservableCollection<UserPermission> Permissions { get; set; } = new ObservableCollection<UserPermission>();
 
         public User()
         {
             this.ValidationRule(vm => vm.Username, oc => oc is not null, "نام کاربری را وارد کنید");
-            this.ValidationRule(vm => vm.Password, pass => !string.IsNullOrWhiteSpace(pass), "میزان هزینه باید بیشتر از 0 باشد");
+            this.ValidationRule(vm => vm.Password, pass => !string.IsNullOrWhiteSpace(pass), "کلمه عبور را وارد کنید");
 
             this.WhenAnyValue(m => m.Password)
                 .Where(p => !p.IsNullOrWhiteSpace())

@@ -20,14 +20,14 @@ namespace Zenith.Models
         public int MixtureId { get; set; }
 
         [ForeignKey(nameof(MixtureId))]
-        public Mixture Mixture { get; set; }
+        public virtual Mixture Mixture { get; set; }
 
         [Reactive]
         public int MaterialId { get; set; }
 
         [ForeignKey(nameof(MaterialId))]
         [Reactive]
-        public Material Material { get; set; }
+        public virtual Material Material { get; set; }
 
         [Range(1, 99)]
         [Reactive]

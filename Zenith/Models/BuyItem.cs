@@ -20,14 +20,14 @@ namespace Zenith.Models
         public int BuyId { get; set; }
 
         [ForeignKey(nameof(BuyId))]
-        public Buy Buy { get; set; }
+        public virtual Buy Buy { get; set; }
 
         [Reactive]
         public int MaterialId { get; set; }
 
         [ForeignKey(nameof(MaterialId))]
         [Reactive]
-        public Material Material { get; set; }
+        public virtual Material Material { get; set; }
 
         [Reactive]
         public long UnitPrice { get; set; }

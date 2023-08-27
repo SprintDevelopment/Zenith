@@ -27,7 +27,7 @@ namespace Zenith.Models
 
         [ForeignKey(nameof(CompanyId))]
         [Reactive]
-        public Company Company { get; set; }
+        public virtual Company Company { get; set; }
 
         [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;
