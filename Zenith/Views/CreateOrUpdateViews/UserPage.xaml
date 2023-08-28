@@ -70,7 +70,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <baseclasses:JGrid Height="32">
+                                <Grid Height="50">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="80"/>
@@ -79,48 +79,12 @@
                                         <ColumnDefinition Width="80"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock HorizontalAlignment="Left" Text="{Binding PermissionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:PermissionTypes}}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                    <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.ToggleOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" Grid.Column="1">
-                                        <Button.CommandParameter>
-                                            <dtos:PermissionAccessLevelDto AccessLevel="CanRead" PermissionType="{Binding PermissionType}"/>
-                                        </Button.CommandParameter>
-                                        <Grid>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/noSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.5"/>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding HasReadAccess, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        </Grid>
-                                    </Button>
-                                    <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.ToggleOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" Grid.Column="2">
-                                        <Button.CommandParameter>
-                                            <dtos:PermissionAccessLevelDto AccessLevel="CanCreate" PermissionType="{Binding PermissionType}"/>
-                                        </Button.CommandParameter>
-                                        <Grid>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/noSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.5"/>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding HasCreateAccess, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        </Grid>
-                                    </Button>
-                                    <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.ToggleOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" Grid.Column="3">
-                                        <Button.CommandParameter>
-                                            <dtos:PermissionAccessLevelDto AccessLevel="CanUpdate" PermissionType="{Binding PermissionType}"/>
-                                        </Button.CommandParameter>
-                                        <Grid>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/noSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.5"/>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding HasUpdateAccess, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        </Grid>
-                                    </Button>
-                                    <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding DataContext.ToggleOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" Grid.Column="4">
-                                        <Button.CommandParameter>
-                                            <dtos:PermissionAccessLevelDto AccessLevel="CanDelete" PermissionType="{Binding PermissionType}"/>
-                                        </Button.CommandParameter>
-                                        <Grid>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/noSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.5"/>
-                                            <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding HasDeleteAccess, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        </Grid>
-                                    </Button>
-                                    <!--<CheckBox IsChecked="{Binding HasReadAccess}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Style="{DynamicResource SliderCheckBox}" />
-                                    <CheckBox IsChecked="{Binding HasCreateAccess}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Style="{DynamicResource SliderCheckBox}" />
-                                    <CheckBox IsChecked="{Binding HasUpdateAccess}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Style="{DynamicResource SliderCheckBox}" />
-                                    <CheckBox IsChecked="{Binding HasDeleteAccess}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4" Style="{DynamicResource SliderCheckBox}" />-->
+                                    <CheckBox IsChecked="{Binding HasReadAccess}" Grid.Column="1" />
+                                    <CheckBox IsChecked="{Binding HasCreateAccess}" Grid.Column="2" />
+                                    <CheckBox IsChecked="{Binding HasUpdateAccess}" Grid.Column="3" />
+                                    <CheckBox IsChecked="{Binding HasDeleteAccess}" Grid.Column="4" />
                                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
-                                </baseclasses:JGrid>
+                                </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

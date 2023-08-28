@@ -20,13 +20,13 @@ for Device source
 - 
 
 
-MTN 10m
-LNS 14m
-HME 5m
+MTN 10m 7
+LNS 14m 14
+HME 5m	3
 SOS 1.6m => Keramat 1, Me 1.8 - (0.5 Alireza - 0.3 Keramat) = 1.6
-BBY 5m
-OUR 5m
-MRZ 10m
+BBY 5m	2
+OUR 5m	2
+MRZ 10m	5
 ------------
 TTL 50.6
 

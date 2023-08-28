@@ -1,5 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using DynamicData;
+using Microsoft.Win32;
 using ReactiveUI;
+using ReactiveUI.Validation.Extensions;
 using System;
 using System.IO;
 using System.Linq;
@@ -23,10 +25,13 @@ namespace Zenith.Views.CreateOrUpdateViews
         {
             InitializeComponent();
 
-            ViewModel = new UserCreateOrUpdateViewModel(new UserRepository());
+            ViewModel = new BaseCreateOrUpdateViewModel<User>(new UserRepository());
 
             this.WhenActivated(d =>
             {
+                if (!ViewModel.PageModel.Username.IsNullOrWhiteSpace())
+                    ViewModel.PageModel.ClearValidationRules(u => u.Password);
+
                 var newPermissions = typeof(PermissionTypes).ToCollection().Where(p => !ViewModel.PageModel.Permissions.Any(up => up.PermissionType == (PermissionTypes)p.Value)).ToList();
                 newPermissions.ForEach(p => ViewModel.PageModel.Permissions.Add(new UserPermission { PermissionType = (PermissionTypes)p.Value }));
 
