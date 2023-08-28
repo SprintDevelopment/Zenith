@@ -89,7 +89,7 @@
 
                 <Button Content="تایید" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFDFDFD">
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFAFAFA">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition />
@@ -100,6 +100,7 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="نام محصول" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <TextBlock HorizontalAlignment="Center" Text="قیمت واحد" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
@@ -151,7 +152,7 @@
                                 </baseclasses:JGrid>
                                 
                                 <Grid Grid.Row="1" Visibility="{Binding IsDeliveriesVisible, Converter={StaticResource boolToVisibilityConverter}}" Margin="0,0,0,16">
-                                    <ItemsControl ItemsSource="{Binding Deliveries}" Grid.Row="1" Margin="8,1">
+                                    <ItemsControl ItemsSource="{Binding Deliveries}" Grid.Row="1" Margin="4,0,0,1">
                                         <ItemsControl.Template>
                                             <ControlTemplate TargetType="{x:Type ItemsControl}">
                                                 <ScrollViewer CanContentScroll="True">
@@ -183,7 +184,7 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                    <Rectangle Stroke="Red" Grid.Row="1" HorizontalAlignment="Left"/>
+                                    <Rectangle Stroke="LightPink" Grid.Row="1" HorizontalAlignment="Left" StrokeThickness="2"/>
                                 </Grid>
                             </Grid>
                         </DataTemplate>
