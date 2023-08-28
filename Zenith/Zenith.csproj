@@ -22,7 +22,6 @@
     <None Remove="Resources\Images\Common\menu.png" />
     <None Remove="Resources\Images\Common\mini-close.png" />
     <None Remove="Resources\Images\Common\minimize.png" />
-    <None Remove="Resources\Images\Common\new-send.png" />
     <None Remove="Resources\Images\Common\next.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
     <None Remove="Resources\Images\Common\partialSelection.png" />
@@ -31,7 +30,7 @@
     <None Remove="Resources\Images\Common\remove.png" />
     <None Remove="Resources\Images\Common\search.png" />
     <None Remove="Resources\Images\Common\send.png" />
-    <None Remove="Resources\Images\Common\sub-list.png" />
+    <None Remove="Resources\Images\Common\show-list.png" />
     <None Remove="Resources\Images\Menu\configs.png" />
     <None Remove="Resources\Images\Menu\definitions.png" />
     <None Remove="Resources\Images\Menu\deliveries.png" />
@@ -73,7 +72,6 @@
     <Resource Include="Resources\Images\Common\menu.png" />
     <Resource Include="Resources\Images\Common\mini-close.png" />
     <Resource Include="Resources\Images\Common\minimize.png" />
-    <Resource Include="Resources\Images\Common\new-send.png" />
     <Resource Include="Resources\Images\Common\next.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />
     <Resource Include="Resources\Images\Common\partialSelection.png" />
@@ -82,7 +80,7 @@
     <Resource Include="Resources\Images\Common\remove.png" />
     <Resource Include="Resources\Images\Common\search.png" />
     <Resource Include="Resources\Images\Common\send.png" />
-    <Resource Include="Resources\Images\Common\sub-list.png" />
+    <Resource Include="Resources\Images\Common\show-list.png" />
     <Resource Include="Resources\Images\Menu\configs.png" />
     <Resource Include="Resources\Images\Menu\definitions.png" />
     <Resource Include="Resources\Images\Menu\deliveries.png" />

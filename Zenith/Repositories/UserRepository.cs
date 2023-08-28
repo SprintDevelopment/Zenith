@@ -32,7 +32,7 @@ namespace Zenith.Repositories
 
             user.Permissions.ToList().ForEach(p =>
             {
-                if (p.Username.IsNullOrWhiteSpace())
+                if (p.UserPermissionId == 0)
                 {
                     p.Username = user.Username;
                     UserPermissionRepository.Add(p);

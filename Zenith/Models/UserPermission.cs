@@ -54,13 +54,20 @@ namespace Zenith.Models
 
         public UserPermission()
         {
+            var locked = false;
+
             this.WhenAnyValue(m => m.AccessLevel)
                 .Do(al =>
                 {
-                    HasReadAccess = AccessLevel.HasFlag(AccessLevels.CanRead);
-                    HasCreateAccess = AccessLevel.HasFlag(AccessLevels.CanCreate);
-                    HasUpdateAccess = AccessLevel.HasFlag(AccessLevels.CanUpdate);
-                    HasDeleteAccess = AccessLevel.HasFlag(AccessLevels.CanDelete);
+                    if (!locked)
+                    {
+                        locked = true;
+                        HasReadAccess = AccessLevel.HasFlag(AccessLevels.CanRead);
+                        HasCreateAccess = AccessLevel.HasFlag(AccessLevels.CanCreate);
+                        HasUpdateAccess = AccessLevel.HasFlag(AccessLevels.CanUpdate);
+                        HasDeleteAccess = AccessLevel.HasFlag(AccessLevels.CanDelete);
+                        locked = false;
+                    }
                 }).Subscribe();
 
             this.WhenAnyValue(m => m.HasReadAccess, m => m.HasCreateAccess, m => m.HasUpdateAccess, m => m.HasDeleteAccess)
@@ -70,7 +77,15 @@ namespace Zenith.Models
                     x.Item2 ? 2 : 0,
                     x.Item3 ? 4 : 0,
                     x.Item4 ? 8 : 0
-                }).Do(values => AccessLevel = (AccessLevels)values.Sum())
+                }).Do(values =>
+                {
+                    if (!locked)
+                    {
+                        locked = true;
+                        AccessLevel = (AccessLevels)values.Sum();
+                        locked = false;
+                    }
+                })
                 .Subscribe();
         }
     }

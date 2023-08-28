@@ -698,8 +698,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
                         <baseclasses:JGrid>
-                            <Image Source="/Zenith;component/Resources/Images/Common/noSelection.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.8"/>
-                            <Image x:Name="allSelectionImage" Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>
+                            <Image Source="/Zenith;component/Resources/Images/Common/noSelection.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.8"/>
+                            <Image x:Name="allSelectionImage" Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>
                             <ContentPresenter x:Name="ContentPresenter" />
                         </baseclasses:JGrid>
                         <ControlTemplate.Triggers>

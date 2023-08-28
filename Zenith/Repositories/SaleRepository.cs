@@ -25,6 +25,8 @@ namespace Zenith.Repositories
             return _context.Set<Sale>()
                 .Include(s => s.Company)
                 .Include(s => s.Items).ThenInclude(si => si.Material)
+                .Include(d => d.Items).ThenInclude(si => si.Deliveries).ThenInclude(d => d.Machine)
+                .Include(d => d.Items).ThenInclude(si => si.Deliveries).ThenInclude(d => d.Driver)
                 .SingleOrDefault(s => s.SaleId == intId);
         }
 

@@ -44,11 +44,14 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                     saleItem.Count++;
             });
 
-            RemoveFromItemsCommand = ReactiveCommand.Create<Material>(material =>
+            RemoveFromItemsCommand = ReactiveCommand.Create<SaleItem>(saleItem =>
             {
-                var saleItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
-                if (saleItem is not null)
-                    PageModel.Items.Remove(saleItem);
+                PageModel.Items.Remove(saleItem);
+            });
+
+            ShowHideDeliveriesCommand = ReactiveCommand.Create<SaleItem>(saleItem =>
+            {
+                saleItem.IsDeliveriesVisible = !saleItem.IsDeliveriesVisible;
             });
 
             RemoveAllItemsCommand = ReactiveCommand.Create<Unit>(_ =>
@@ -64,7 +67,8 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
         public string SearchedMaterialName { get; set; }
 
         public ReactiveCommand<Material, Unit> AddToItemsCommand { get; set; }
-        public ReactiveCommand<Material, Unit> RemoveFromItemsCommand { get; set; }
+        public ReactiveCommand<SaleItem, Unit> RemoveFromItemsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> RemoveAllItemsCommand { get; set; }
+        public ReactiveCommand<SaleItem, Unit> ShowHideDeliveriesCommand { get; set; }
     }
 }

@@ -10,9 +10,9 @@
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
       xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls">
     <Grid FlowDirection="RightToLeft">
-        <Grid Width="1000" Height="650" VerticalAlignment="Center">
+        <Grid Width="1050" Height="750" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -100,16 +100,12 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="نام محصول" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <TextBlock HorizontalAlignment="Center" Text="قیمت واحد" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <TextBlock HorizontalAlignment="Center" Text="تعداد" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                     <TextBlock HorizontalAlignment="Center" Text="قیمت کل" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="4">
-                        <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    </Button>
-                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="4" StrokeThickness="0.5"/>
                 </Grid>
 
                 <ItemsControl ItemsSource="{Binding PageModel.Items}" Grid.Row="1" Margin="0,0,4,-2" >
@@ -127,24 +123,69 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <baseclasses:JGrid Height="32">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="40"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
-                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="2" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                <Button Style="{DynamicResource SimpleButtonStyle}" Grid.Column="4" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding Material}">
-                                    <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                </Button>
-                                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="32" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <baseclasses:JGrid Height="32">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="2" Margin="8,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                                    <Button Style="{DynamicResource SimpleButtonStyle}" ToolTip="حذف این آیتم" Grid.Column="4" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                        <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Button>
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="لیست تحویل ها" Grid.Column="5" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                        <Image Source="/Zenith;component/Resources/Images/Common/show-list.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Button>
+                                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                                </baseclasses:JGrid>
                                 
-                            </baseclasses:JGrid>
+                                <Grid Grid.Row="1" Visibility="{Binding IsDeliveriesVisible, Converter={StaticResource boolToVisibilityConverter}}" Margin="0,0,0,16">
+                                    <ItemsControl ItemsSource="{Binding Deliveries}" Grid.Row="1" Margin="8,1">
+                                        <ItemsControl.Template>
+                                            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                                <ScrollViewer CanContentScroll="True">
+                                                    <ItemsPresenter/>
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </ItemsControl.Template>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <baseclasses:JGrid Height="32" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0" FontSize="13">
+                                                        <Run Text="{Binding Count}" Foreground="DarkRed" FontWeight="Bold"/>
+                                                        <Run Text=" : تحویل توسط " Foreground="#FF505050"/>
+                                                        <Run Text="{Binding Driver.FullName, Mode=OneWay}"/>
+                                                        <Run Text="با ماشین " Foreground="#FF505050"/>
+                                                        <Run Text="{Binding Machine.Name}"/>
+                                                        <Run Text="با شماره بارنامه " Foreground="#FF505050"/>
+                                                        <Run Text="{Binding BillNumber}"/>
+                                                        <Run Text="در تاریخ " Foreground="#FF505050"/>
+                                                        <Run Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}"/>
+                                                    </TextBlock>
+                                                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" StrokeThickness="0.5"/>
+                                                </baseclasses:JGrid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <Rectangle Stroke="Red" Grid.Row="1" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
