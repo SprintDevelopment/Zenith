@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls">
-    <Grid FlowDirection="RightToLeft">
+    <Grid>
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

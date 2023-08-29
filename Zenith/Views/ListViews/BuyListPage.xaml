@@ -10,7 +10,7 @@
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
       mc:Ignorable="d" FontSize="14" d:DesignHeight="450" d:DesignWidth="800"
       Title="PersonListPage">
-    <Grid FlowDirection="RightToLeft" Background="White">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>

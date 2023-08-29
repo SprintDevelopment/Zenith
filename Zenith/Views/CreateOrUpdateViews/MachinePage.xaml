@@ -9,7 +9,7 @@
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
       Title="MachinePage">
-    <Grid FlowDirection="RightToLeft">
+    <Grid>
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

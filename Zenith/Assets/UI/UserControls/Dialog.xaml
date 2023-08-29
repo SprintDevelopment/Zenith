@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
              Visibility="Collapsed">
-    <Grid Background="#60000000" FlowDirection="RightToLeft">
+    <Grid Background="#60000000">
         <Grid Width="500" Height="250">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

@@ -10,7 +10,7 @@
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
       xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls" xmlns:dtos="clr-namespace:Zenith.Assets.Values.Dtos">
-    <Grid FlowDirection="RightToLeft">
+    <Grid>
         <Grid Width="550" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
