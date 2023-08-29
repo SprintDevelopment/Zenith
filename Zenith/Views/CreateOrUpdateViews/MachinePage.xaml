@@ -31,6 +31,7 @@
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="نام ماشین" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="حجم ماشین (به واحد متر)" />
+                <baseclasses:JTextBox Text="{Binding PageModel.DefaultDeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="هزینه تحویل پیشفرض" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

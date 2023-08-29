@@ -34,22 +34,29 @@
                     <Grid>
                         <TextBlock TextWrapping="Wrap">
                             <Run Text="تحویل " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontStyle="Italic" FontWeight="Bold"/>
+                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontSize="16"/>
                             <Run Text="به شرکت " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontStyle="Italic" FontWeight="Bold"/>
-                            <Run Text="در سایت " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.Site.Name}" FontStyle="Italic" FontWeight="Bold"/>
-                            <Run Text="به آدرس " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.Site.Address}" FontStyle="Italic" FontWeight="Bold"/>
-                            <Run Text="با مشخصات تحویل زیر :" Foreground="#FF505050"/>
+                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontSize="16"/>
                         </TextBlock>
                     </Grid>
                 </Border>
+                <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="SiteId" Tag="سایت محل تحویل"/>
 
-                <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="ماشین"/>
+                <Grid>
+                    <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="ماشین"/>
+                    <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.InfoIsRelatedToMachine}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,64,0">
+                        <Grid>
+                            <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}}"/>
+                            <Image Source="/Zenith;component/Resources/Images/Common/unlock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                        </Grid>
+                    </ToggleButton>
+                </Grid>
+
+                <baseclasses:JTextBox Text="{Binding PageModel.Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="مقدار تحویل داده شده" />
+                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="هزینه تحویل" />
                 <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="راننده"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="شماره تحویل" />
                 <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="تاریخ و ساعت تحویل"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.BillNumber, UpdateSourceTrigger=PropertyChanged}" Title="شماره بارنامه" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

@@ -19,6 +19,7 @@
     <None Remove="Resources\Images\Common\edit.png" />
     <None Remove="Resources\Images\Common\expand.png" />
     <None Remove="Resources\Images\Common\filter.png" />
+    <None Remove="Resources\Images\Common\lock.png" />
     <None Remove="Resources\Images\Common\menu.png" />
     <None Remove="Resources\Images\Common\mini-close.png" />
     <None Remove="Resources\Images\Common\minimize.png" />
@@ -31,6 +32,7 @@
     <None Remove="Resources\Images\Common\search.png" />
     <None Remove="Resources\Images\Common\send.png" />
     <None Remove="Resources\Images\Common\show-list.png" />
+    <None Remove="Resources\Images\Common\unlock.png" />
     <None Remove="Resources\Images\Menu\configs.png" />
     <None Remove="Resources\Images\Menu\definitions.png" />
     <None Remove="Resources\Images\Menu\deliveries.png" />
@@ -69,6 +71,7 @@
     <Resource Include="Resources\Images\Common\edit.png" />
     <Resource Include="Resources\Images\Common\expand.png" />
     <Resource Include="Resources\Images\Common\filter.png" />
+    <Resource Include="Resources\Images\Common\lock.png" />
     <Resource Include="Resources\Images\Common\menu.png" />
     <Resource Include="Resources\Images\Common\mini-close.png" />
     <Resource Include="Resources\Images\Common\minimize.png" />
@@ -81,6 +84,7 @@
     <Resource Include="Resources\Images\Common\search.png" />
     <Resource Include="Resources\Images\Common\send.png" />
     <Resource Include="Resources\Images\Common\show-list.png" />
+    <Resource Include="Resources\Images\Common\unlock.png" />
     <Resource Include="Resources\Images\Menu\configs.png" />
     <Resource Include="Resources\Images\Menu\definitions.png" />
     <Resource Include="Resources\Images\Menu\deliveries.png" />

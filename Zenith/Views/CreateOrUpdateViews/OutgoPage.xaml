@@ -30,7 +30,7 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <projUsercontrols:OutgoCategoriesTreeView x:Name="outgoCategoryTreeView" Title="دسته هزینه"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged}" Title="میزان هزینه"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="میزان هزینه"/>
                 <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="تاریخ و ساعت هزینه"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
 

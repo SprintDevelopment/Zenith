@@ -69,6 +69,25 @@ namespace Zenith
                         }
                     }).Subscribe().DisposeWith(d);
 
+                ViewModel.WhenAnyValue(vm => vm.SecondCreateUpdatePage)
+                    .SkipWhile(page => page == null)
+                    .Do(secondCreateUpdatePage =>
+                    {
+                        SecondCreateUpdateFrame.RemoveBackEntry();
+                        if (secondCreateUpdatePage == null)
+                        {
+                            SecondCreateUpdateFrame.Navigate(blankPage);
+                            SecondCreateUpdateFrame.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            secondCreateUpdatePage.FontFamily = this.FontFamily;
+                            secondCreateUpdatePage.FontSize = this.FontSize;
+                            SecondCreateUpdateFrame.Navigate(secondCreateUpdatePage);
+                            SecondCreateUpdateFrame.Visibility = Visibility.Visible;
+                        }
+                    }).Subscribe().DisposeWith(d);
+
                 CompositeDisposable disposable = null;
 
                 ViewModel.WhenAnyValue(vm => vm.LoggedInUser)

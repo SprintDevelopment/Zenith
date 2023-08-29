@@ -18,9 +18,6 @@ namespace Zenith.ViewModels.ListViewModels
         public SaleListViewModel(Repository<Sale> repository, SearchBaseDto searchModel, IObservable<Func<Sale, bool>> criteria)
             : base(repository, searchModel, criteria)
         {
-            ShowDeliveriesCommand = ReactiveCommand.CreateFromObservable<Sale, Unit>(sale => App.MainViewModel.ShowDeliveriesCommand.Execute(sale));
         }
-
-        public ReactiveCommand<Sale, Unit> ShowDeliveriesCommand { get; set; }
     }
 }

@@ -33,6 +33,10 @@ namespace Zenith.Models
         [Reactive]
         public virtual Machine Machine { get; set; }
 
+        [NotMapped]
+        [Reactive]
+        public bool InfoIsRelatedToMachine { get; set; } = true;
+
         [Reactive]
         public int DriverId { get; set; }
 
@@ -43,7 +47,10 @@ namespace Zenith.Models
         [Required]
         [MaxLength(LengthConstants.SMALL_STRING)]
         [Reactive]
-        public string BillNumber { get; set; } = string.Empty;
+        public string DeliveryNumber { get; set; } = string.Empty;
+
+        [Reactive]
+        public long DeliveryFee { get; set; }
 
         [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;
@@ -55,15 +62,17 @@ namespace Zenith.Models
 
         public Delivery()
         {
-            this.ValidationRule(vm => vm.BillNumber, bn => !bn.IsNullOrWhiteSpace(), "شماره بارنامه را وارد کنید");
+            this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "شماره بارنامه را وارد کنید");
             this.ValidationRule(vm => vm.SaleItemId, sii => sii > 0, "آیتم فروش باید انتخاب شده باشد");
             this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "ماشین باید انتخاب شده باشد");
             this.ValidationRule(vm => vm.DriverId, di => di > 0, "راننده باید انتخاب شده باشد");
+            this.ValidationRule(vm => vm.Count, c => c > 0, "مقدار تحویل داده شده باید بیشتر از صفر باشد");
+            this.ValidationRule(vm => vm.DeliveryFee, df => df > 0, "هزینه تحویل باید بیشتر از صفر باشد");
         }
 
         public override string ToString()
         {
-            return BillNumber;
+            return DeliveryNumber;
         }
     }
 }

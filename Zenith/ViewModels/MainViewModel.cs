@@ -61,6 +61,16 @@ namespace Zenith.ViewModels
                 CreateUpdatePage = null;
             });
 
+            ShowSecondCreateUpdatePage = ReactiveCommand.Create<Page>(page =>
+            {
+                SecondCreateUpdatePage = page;
+            });
+
+            SecondCreateUpdatePageReturned = ReactiveCommand.Create<Unit>(_ =>
+            {
+                SecondCreateUpdatePage = null;
+            });
+
             InitiateSearch = ReactiveCommand.Create<SearchBaseDto, SearchBaseDto>(model =>
             {
                 return model;
@@ -164,6 +174,9 @@ namespace Zenith.ViewModels
         public Page CreateUpdatePage { get; set; }
 
         [Reactive]
+        public Page SecondCreateUpdatePage { get; set; }
+
+        [Reactive]
         public DialogDto DialogDto { get; set; }
 
         [Reactive]
@@ -175,8 +188,10 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Type, Unit> Navigate { get; set; }
         public ReactiveCommand<Sale, Unit> ShowDeliveriesCommand { get; set; }
         public ReactiveCommand<Page, Unit> ShowCreateUpdatePage { get; set; }
+        public ReactiveCommand<Page, Unit> ShowSecondCreateUpdatePage { get; set; }
         public ReactiveCommand<DialogDto, Unit> ShowDialog { get; set; }
         public ReactiveCommand<Unit, Unit> CreateUpdatePageReturned { get; set; }
+        public ReactiveCommand<Unit, Unit> SecondCreateUpdatePageReturned { get; set; }
         public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearch { get; set; }
         //
         public ReactiveCommand<string, Unit> OpenLogFile { get; set; }

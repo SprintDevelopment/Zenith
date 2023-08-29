@@ -23,6 +23,10 @@ namespace Zenith.Models
         [Reactive]
         public int Capacity { get; set; }
 
+        [Range(1, int.MaxValue)]
+        [Reactive]
+        public long DefaultDeliveryFee { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
@@ -32,6 +36,7 @@ namespace Zenith.Models
         {
             this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام ماشین را وارد کنید");
             this.ValidationRule(vm => vm.Capacity, volume => volume > 0, "ظرفیت ماشین باید عددی بزرگتر از صفر باشد");
+            this.ValidationRule(vm => vm.DefaultDeliveryFee, ddf => ddf > 0, "هزینه پیشفرض تحویل برای این ماشین باید عددی بزرگتر از صفر باشد");
         }
 
         public override string ToString()
