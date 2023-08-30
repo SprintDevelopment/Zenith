@@ -8,7 +8,7 @@ using Zenith.Assets.Extensions;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "دسته هزینه", MultipleName = "دسته های هزینه")]
+    [Model(SingleName = "Outgo category", MultipleName = "Outgo categories")]
     public class OutgoCategory : Model
     {
         [Key]
@@ -22,7 +22,7 @@ namespace Zenith.Models
         [Reactive]
         public virtual OutgoCategory Parent { get; set; }
 
-        [Required(ErrorMessage = "عنوان را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Title { get; set; }
@@ -34,7 +34,7 @@ namespace Zenith.Models
 
         public OutgoCategory()
         {
-            this.ValidationRule(vm => vm.Title, title => !title.IsNullOrWhiteSpace(), "عنوان را وارد کنید");
+            this.ValidationRule(vm => vm.Title, title => !title.IsNullOrWhiteSpace(), "Enter title");
         }
 
         public override string ToString()

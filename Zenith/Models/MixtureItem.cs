@@ -9,7 +9,7 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "آیتم سازنده ترکیب", MultipleName = "آیتم های سازنده ترکیب ها")]
+    [Model(SingleName = "Mixture item", MultipleName = "Mixture items")]
     public class MixtureItem : Model
     {
         [Key]
@@ -38,7 +38,7 @@ namespace Zenith.Models
 
         public MixtureItem()
         {
-            this.ValidationRule(vm => vm.Percent, p => p > 0 && p <= 100, "درصد ترکیب شده باید عددی بین 1 تا 99 باشد");
+            this.ValidationRule(vm => vm.Percent, p => p > 0 && p <= 100, "Percent must be between 1 and 99");
         }
     }
 }

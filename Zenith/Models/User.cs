@@ -14,11 +14,11 @@ using System.Collections.ObjectModel;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "کاربر", MultipleName = "کاربران")]
+    [Model(SingleName = "User", MultipleName = "Users")]
     public class User : Model
     {
         [Key]
-        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Username { get; set; }
@@ -39,8 +39,8 @@ namespace Zenith.Models
 
         public User()
         {
-            this.ValidationRule(vm => vm.Username, oc => oc is not null, "نام کاربری را وارد کنید");
-            this.ValidationRule(vm => vm.Password, pass => !string.IsNullOrWhiteSpace(pass), "کلمه عبور را وارد کنید");
+            this.ValidationRule(vm => vm.Username, oc => oc is not null, "Enter username");
+            this.ValidationRule(vm => vm.Password, pass => !string.IsNullOrWhiteSpace(pass), "Enter password");
 
             this.WhenAnyValue(m => m.Password)
                 .Where(p => !p.IsNullOrWhiteSpace())

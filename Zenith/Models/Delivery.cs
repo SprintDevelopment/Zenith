@@ -9,7 +9,7 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "تحویل", MultipleName = "تحویل ها")]
+    [Model(SingleName = "Delivery", MultipleName = "Deliveries")]
     public class Delivery : Model
     {
         [Key]
@@ -62,12 +62,12 @@ namespace Zenith.Models
 
         public Delivery()
         {
-            this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "شماره بارنامه را وارد کنید");
-            this.ValidationRule(vm => vm.SaleItemId, sii => sii > 0, "آیتم فروش باید انتخاب شده باشد");
-            this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "ماشین باید انتخاب شده باشد");
-            this.ValidationRule(vm => vm.DriverId, di => di > 0, "راننده باید انتخاب شده باشد");
-            this.ValidationRule(vm => vm.Count, c => c > 0, "مقدار تحویل داده شده باید بیشتر از صفر باشد");
-            this.ValidationRule(vm => vm.DeliveryFee, df => df > 0, "هزینه تحویل باید بیشتر از صفر باشد");
+            this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "Enter delivery number");
+            this.ValidationRule(vm => vm.SaleItemId, sii => sii > 0, "Select sale item");
+            this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "Select machine");
+            this.ValidationRule(vm => vm.DriverId, di => di > 0, "Select driver");
+            this.ValidationRule(vm => vm.Count, c => c > 0, "Delivered count must be greater than 0");
+            this.ValidationRule(vm => vm.DeliveryFee, df => df > 0, "Delivery fee must be greater than 0");
         }
 
         public override string ToString()

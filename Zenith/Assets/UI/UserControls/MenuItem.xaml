@@ -54,7 +54,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Icon, ElementName=owner}"/>
                 <TextBlock Text="{Binding Title, ElementName=owner}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Image Grid.Column="1" Name="IndicatorImage" HorizontalAlignment="Right" Margin="0,0,16,0" VerticalAlignment="Center" Source="/Zenith;component/Resources/Images/Common/previous.png" Width="12" Height="12" RenderTransformOrigin="0.5,0.5">
+                <Image Grid.Column="1" Name="IndicatorImage" HorizontalAlignment="Right" Margin="0,0,16,0" VerticalAlignment="Center" Source="/Zenith;component/Resources/Images/Common/next.png" Width="12" Height="12" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -64,11 +64,12 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeDashArray="2 2"/>
             </Grid>
         </Button>
+        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         <StackPanel Name="SubMenuStackPanel" Height="0" Grid.Row="1" Background="White">
             <ContentPresenter Content="{Binding AdditionalContent, ElementName=owner}" />
+            <Rectangle Fill="WhiteSmoke" VerticalAlignment="Bottom" Height="1"/>
         </StackPanel>
     </Grid>
 </UserControl>

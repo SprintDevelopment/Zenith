@@ -9,7 +9,7 @@ using Zenith.Assets.Attributes;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "آیتم خرید", MultipleName = "آیتم های خرید")]
+    [Model(SingleName = "Buy item", MultipleName = "Buy items")]
     public class BuyItem : Model
     {
         [Key]
@@ -48,8 +48,8 @@ namespace Zenith.Models
                 .Select(x => x.Item1 * x.Item2)
                 .BindTo(this, m => m.TotalPrice);
 
-            this.ValidationRule(vm => vm.UnitPrice, up => up > 0, "قیمت واحد باید بزرگتر از صفر باشد");
-            this.ValidationRule(vm => vm.Count, c => c > 0, "تعداد خریداری شده باید بیشتر از صفر باشد");
+            this.ValidationRule(vm => vm.UnitPrice, up => up > 0, "Unit price must be greater than 0");
+            this.ValidationRule(vm => vm.Count, c => c > 0, "Count must be greater than 0");
         }
     }
 }

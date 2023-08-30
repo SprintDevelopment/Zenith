@@ -11,14 +11,14 @@ using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "سایت", MultipleName = "سایت ها")]
+    [Model(SingleName = "Company site", MultipleName = "Company sites")]
     public class Site : Model
     {
         [Key]
         [Reactive]
         public int SiteId { get; set; }
 
-        [Required(ErrorMessage = "نام شرکت را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
@@ -42,9 +42,9 @@ namespace Zenith.Models
 
         public Site()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام را وارد کنید");
-            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "شرکت مربوطه باید انتخاب شده باشد");
-            this.ValidationRule(vm => vm.Address, address => !address.IsNullOrWhiteSpace(), "آدرس را وارد کنید");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter company name");
+            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select related company");
+            this.ValidationRule(vm => vm.Address, address => !address.IsNullOrWhiteSpace(), "Enter address");
         }
 
         public override string ToString()

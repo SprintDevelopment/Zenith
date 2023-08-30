@@ -35,10 +35,11 @@ namespace Zenith.Views.CreateOrUpdateViews
                     ((Control)FindName("FirstEntryControl"))?.Focus();
                 });
 
-                var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
+                var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)), Name = "modalBackRect" };
                 modalBackRect.InputBindings.Add(new MouseBinding(ViewModel.ReturnCommand, new MouseGesture(MouseAction.LeftClick)));
 
-                ((Grid)Content).Children.Insert(0, modalBackRect);
+                if(!((Grid)Content).Children.OfType<Rectangle>().Any(r => r.Name == "modalBackRect"))
+                    ((Grid)Content).Children.Insert(0, modalBackRect);
             });
 
             //WindowPreviewKeyDownEventHandler = (s, e) => { CreateUpdateBasePage_PreviewKeyDown(s, e); };

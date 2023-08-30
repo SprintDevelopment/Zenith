@@ -11,14 +11,14 @@ using System;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "یادداشت", MultipleName = "یادداشت ها")]
+    [Model(SingleName = "Note", MultipleName = "Notes")]
     public class Note : Model
     {
         [Key]
         [Reactive]
         public int NoteId { get; set; }
 
-        [Required(ErrorMessage = "موضوع یادداشت را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Subject { get; set; }
@@ -37,7 +37,7 @@ namespace Zenith.Models
 
         public Note()
         {
-            this.ValidationRule(vm => vm.Subject, subject => !subject.IsNullOrWhiteSpace(), "موضوع را وارد کنید");
+            this.ValidationRule(vm => vm.Subject, subject => !subject.IsNullOrWhiteSpace(), "Enter the subject");
         }
 
         public override string ToString()

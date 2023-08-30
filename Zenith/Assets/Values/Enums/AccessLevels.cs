@@ -6,15 +6,15 @@ namespace Zenith.Assets.Values.Enums
     [Flags]
     public enum AccessLevels
     {
-        [Display(Name = "عدم دسترسی")]
+        [Display(Name = "No access")]
         NoAccess = 0,
-        [Display(Name = "دسترسی مشاهده")]
+        [Display(Name = "View list")]
         CanRead = 1,
-        [Display(Name = "دسترسی ایجاد")]
+        [Display(Name = "Create")]
         CanCreate = 2,
-        [Display(Name = "دسترسی ویرایش")]
+        [Display(Name = "Edit")]
         CanUpdate = 4,
-        [Display(Name = "دسترسی حذف")]
+        [Display(Name = "Delete")]
         CanDelete = 8
     }
 }

@@ -36,8 +36,8 @@ namespace Zenith.Assets.UI.BaseClasses
             base.Initialized += (sender, eventArgs) =>
             {
                 WindowState = WindowState.Maximized;
-                FontFamily = new FontFamily("Vazir FD");
-                FontSize = 14;
+                FontFamily = new FontFamily("Roboto");
+                FontSize = 15;
 
                 TitleBar = new TitleBar();
                 TitleBar.Closed += (s, e) => this.Close();

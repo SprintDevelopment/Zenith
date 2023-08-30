@@ -11,9 +11,9 @@ namespace Zenith.Assets.Values.Enums
     {
         [Display(Name = "")]
         DontCare = -1,
-        [Display(Name = "نیازی به یادآوری نیست")]
+        [Display(Name = "No need to remind")]
         NoNeedToNotify,
-        [Display(Name = "یادآوری در پایین پنجره")]
+        [Display(Name = "Show at bottom")]
         FooterNotify
     }
 }

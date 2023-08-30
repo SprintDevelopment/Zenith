@@ -7,14 +7,14 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "ماشین", MultipleName = "ماشین ها")]
+    [Model(SingleName = "Machine", MultipleName = "Machines")]
     public class Machine : Model
     {
         [Key]
         [Reactive]
         public int MachineId { get; set; }
 
-        [Required(ErrorMessage = "نام ماشین را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
@@ -34,9 +34,9 @@ namespace Zenith.Models
 
         public Machine()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام ماشین را وارد کنید");
-            this.ValidationRule(vm => vm.Capacity, volume => volume > 0, "ظرفیت ماشین باید عددی بزرگتر از صفر باشد");
-            this.ValidationRule(vm => vm.DefaultDeliveryFee, ddf => ddf > 0, "هزینه پیشفرض تحویل برای این ماشین باید عددی بزرگتر از صفر باشد");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name");
+            this.ValidationRule(vm => vm.Capacity, volume => volume > 0, "Capacity must be greater than 0");
+            this.ValidationRule(vm => vm.DefaultDeliveryFee, ddf => ddf > 0, "Default delivery fee must be greater than 0");
         }
 
         public override string ToString()

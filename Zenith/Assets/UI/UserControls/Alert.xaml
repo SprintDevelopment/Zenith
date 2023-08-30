@@ -16,14 +16,13 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="closeButton" Style="{StaticResource TitleBarButtonStyle}" VerticalAlignment="Center" Width="24" Height="24" Margin="10">
+                <TextBlock x:Name="titleTextBlock" Text="{Binding Title}" Foreground="DarkRed" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{StaticResource TitleBarButtonStyle}" Grid.Column="1" VerticalAlignment="Center" Width="24" Height="24" Margin="10">
                     <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
-
-                <TextBlock x:Name="titleTextBlock" Text="{Binding Title}" Foreground="DarkRed" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
             </Grid>
             <Rectangle Grid.Row="1" VerticalAlignment="Top" Height="1" Stroke="LightGray" Opacity="0.5" Margin="1,0"/>
             <TextBlock Grid.Row="1" x:Name="descriptionTextBlock" Foreground="DarkRed" Text="{Binding Description}" Margin="16" LineHeight="30" TextWrapping="Wrap"/>

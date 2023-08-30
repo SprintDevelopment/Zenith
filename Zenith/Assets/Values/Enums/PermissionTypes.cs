@@ -11,9 +11,9 @@ namespace Zenith.Assets.Values.Enums
     {
         [Display(Name = "")]
         DontCare = -1,
-        [Display(Name = "خرید")]
+        [Display(Name = "Buy")]
         Buy,
-        [Display(Name = "فروش")]
+        [Display(Name = "Sale")]
         Sale,
     }
 }

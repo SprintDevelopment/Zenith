@@ -24,7 +24,7 @@ namespace Zenith.ViewModels.ListViewModels
         public BaseListViewModel(Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria)
         {
             var modelAttributes = typeof(T).GetAttribute<ModelAttribute>();
-            ViewTitle = $"لیست {modelAttributes.MultipleName}";
+            ViewTitle = modelAttributes.MultipleName;
             Repository = repository;
 
             SourceList.AddRange(Repository.All());
@@ -36,12 +36,12 @@ namespace Zenith.ViewModels.ListViewModels
                 ItemsStatistics = $"({itemsCount:n0} {modelAttributes.SingleName}";
                 if (itemsCount == selectedItemsCount || selectedItemsCount == 0)
                 {
-                    ItemsStatistics += selectedItemsCount > 0 ? $" ، همه موارد انتخاب شده)" : ")";
+                    ItemsStatistics += selectedItemsCount > 0 ? $" , all itmes selected)" : ")";
                     SelectionMode = selectedItemsCount == 0 ? SelectionModes.NoItemSelected : SelectionModes.AllItemsSelected;
                 }
                 else
                 {
-                    ItemsStatistics += $" ، {selectedItemsCount:n0} مورد انتخاب شده)";
+                    ItemsStatistics += $" , {selectedItemsCount:n0} item(s) selected)";
                     SelectionMode = SelectionModes.SomeItemsSelected;
                 }
             };
@@ -79,12 +79,12 @@ namespace Zenith.ViewModels.ListViewModels
                 var dialogDto = new DialogDto()
                 {
                     DialogType = DialogTypes.Danger,
-                    Title = selectedItemsCount == 1 ? $"حذف یک {modelAttributes.SingleName}" : $"حذف چند {modelAttributes.SingleName}",
-                    Text = selectedItemsCount == 1 ? $"آیا می خواهید {ActiveList.FirstOrDefault(x => x.IsSelected)} حذف شود ؟" : $"آیا می خواهید تعداد {selectedItemsCount:n0} {modelAttributes.SingleName} حذف شود ؟",
+                    Title = selectedItemsCount == 1 ? $"Deleting one {modelAttributes.SingleName}" : $"Deleting multiple {modelAttributes.SingleName}",
+                    Text = selectedItemsCount == 1 ? $"Are you sure to delete {ActiveList.FirstOrDefault(x => x.IsSelected)} ?" : $"Are you sure to delete {selectedItemsCount:n0} {modelAttributes.SingleName} items ?",
                     Choices = new List<DialogChoiceDto>()
                     {
-                        new DialogChoiceDto { DialogResult = DialogResults.Yes, Text = "بله، حذف شود" },
-                        new DialogChoiceDto { DialogResult = DialogResults.No, Text = "خیر، حذف نشود" },
+                        new DialogChoiceDto { DialogResult = DialogResults.Yes, Text = "Yes, delete" },
+                        new DialogChoiceDto { DialogResult = DialogResults.No, Text = "No, cancel" },
                     }
                 };
 
@@ -142,7 +142,7 @@ namespace Zenith.ViewModels.ListViewModels
                 App.MainViewModel.IsSearchVisible = !App.MainViewModel.IsSearchVisible;
             });
 
-            searchModel.Title = $"جستجو در لیست {modelAttributes.MultipleName}";
+            searchModel.Title = $"Search in {modelAttributes.MultipleName}";
             InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearch.Execute(searchModel));
 
             DisposeCommand = ReactiveCommand.Create<Unit>(_ =>

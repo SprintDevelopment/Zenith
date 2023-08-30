@@ -11,11 +11,11 @@ namespace Zenith.Assets.Values.Enums
     {
         [Display(Name = "")]
         DontCare = -1,
-        [Display(Name = "مشخص نشده")]
+        [Display(Name = "Not specified")]
         None,
-        [Display(Name = "راننده")]
+        [Display(Name = "Driver")]
         Driver,
-        [Display(Name = "حسابدار")]
+        [Display(Name = "Accountant")]
         Accountant
     }
 }

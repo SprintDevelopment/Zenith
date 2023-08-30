@@ -37,11 +37,11 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                     IsNew = string.IsNullOrWhiteSpace(modelKeyId);
                 else
                     IsNew = modelKeyId == 0;
-                ViewTitle = $"تعریف {modelAttributes.SingleName}";
-                ViewTitle = IsNew ? $"تعریف {modelAttributes.SingleName} جدید" : $"ویرایش {modelAttributes.SingleName}";
+
+                ViewTitle = IsNew ? $"Create new {modelAttributes.SingleName}" : $"Edit {modelAttributes.SingleName}";
 
                 if (IsNew)
-                    StayOpenTitle = $"صفحه برای وارد کردن {modelAttributes.SingleName} جدید باز بماند ؟";
+                    StayOpenTitle = $"Stay open for new {modelAttributes.SingleName} ?";
 
                 CreateOrUpdateCommand = ReactiveCommand.Create<Unit>(_ =>
                 {

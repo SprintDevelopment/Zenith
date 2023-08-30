@@ -9,7 +9,7 @@ using Zenith.Assets.Extensions;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "پرسنل", MultipleName = "پرسنل")]
+    [Model(SingleName = "Personnel", MultipleName = "Personnel")]
     public class Person : Model
     {
         [Key]
@@ -19,12 +19,12 @@ namespace Zenith.Models
         [Reactive]
         public Jobs Job { get; set; }
 
-        [Required(ErrorMessage = "نام را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "نام خانوادگی را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string LastName { get; set; }
@@ -75,8 +75,8 @@ namespace Zenith.Models
 
         public Person()
         {
-            this.ValidationRule(vm => vm.FirstName, fName => !fName.IsNullOrWhiteSpace(), "نام را وارد کنید");
-            this.ValidationRule(vm => vm.LastName, lName => !lName.IsNullOrWhiteSpace(), "نام خانوادگی را وارد کنید");
+            this.ValidationRule(vm => vm.FirstName, fName => !fName.IsNullOrWhiteSpace(), "Enter first name");
+            this.ValidationRule(vm => vm.LastName, lName => !lName.IsNullOrWhiteSpace(), "Enter last name");
         }
 
         public override string ToString()

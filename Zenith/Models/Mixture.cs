@@ -13,19 +13,19 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "ترکیب", MultipleName = "ترکیب ها")]
+    [Model(SingleName = "Mixture", MultipleName = "Mixtures")]
     public class Mixture : Model
     {
         [Key]
         [Reactive]
         public int MixtureId { get; set; }
 
-        [Required(ErrorMessage = "نام ترکیب را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "نام نمایشی را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string DisplayName { get; set; }
@@ -44,9 +44,9 @@ namespace Zenith.Models
                 .ToCollection();
                 
 
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام ترکیب را وارد کنید");
-            this.ValidationRule(vm => vm.DisplayName, displayName => !displayName.IsNullOrWhiteSpace(), "نام نمایشی ترکیب را وارد کنید");
-            this.ValidationRule(vm => vm.Items, itemsObservable.Select(children => children.Count > 1 && children.Sum(i => i.Percent) == 100), "حداقل دو محصول جهت ترکیب انتخاب کنید؛ مجموع درصد ترکیبات باید 100 شود");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name of mixture");
+            this.ValidationRule(vm => vm.DisplayName, displayName => !displayName.IsNullOrWhiteSpace(), "Enter name for display in factor");
+            this.ValidationRule(vm => vm.Items, itemsObservable.Select(children => children.Count > 1 && children.Sum(i => i.Percent) == 100), "Add at least 2 materials; Sum of composition percent must be equal to 100");
         }
 
         public override string ToString()

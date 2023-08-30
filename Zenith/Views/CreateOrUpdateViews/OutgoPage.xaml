@@ -18,25 +18,25 @@
             <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
             <Grid Height="50">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="1" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
-                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <projUsercontrols:OutgoCategoriesTreeView x:Name="outgoCategoryTreeView" Title="دسته هزینه"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="میزان هزینه"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="تاریخ و ساعت هزینه"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
+                <projUsercontrols:OutgoCategoriesTreeView x:Name="outgoCategoryTreeView" Title="Category"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="Value"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Date and time"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="تایید" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="Confirm" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

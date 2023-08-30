@@ -11,7 +11,7 @@ using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "هزینه", MultipleName = "هزینه ها")]
+    [Model(SingleName = "Outgo", MultipleName = "Outgoes")]
     public class Outgo : Model
     {
         [Key]
@@ -38,8 +38,8 @@ namespace Zenith.Models
 
         public Outgo()
         {
-            this.ValidationRule(vm => vm.OutgoCategory, oc => oc is not null, "دسته هزینه باید انتخاب شده باشد");
-            this.ValidationRule(vm => vm.Value, value => value > 0, "میزان هزینه باید بیشتر از 0 باشد");
+            this.ValidationRule(vm => vm.OutgoCategory, oc => oc is not null, "Select outgo category");
+            this.ValidationRule(vm => vm.Value, value => value > 0, "Outgo value must be greater than 0");
 
             this.WhenAnyValue(m => m.OutgoCategory)
                 .WhereNotNull()

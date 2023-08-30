@@ -11,11 +11,11 @@ namespace Zenith.Assets.Values.Enums
     {
         [Display(Name = "")]
         DontCare = -1,
-        [Display(Name = "خریدار")]
+        [Display(Name = "Buyer")]
         Buyer,
-        [Display(Name = "فروشنده")]
+        [Display(Name = "Seller")]
         Seller,
-        [Display(Name = "هم خریدار و هم فروشنده")]
+        [Display(Name = "Both buyer and seller")]
         Both
     }
 }

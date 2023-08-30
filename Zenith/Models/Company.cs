@@ -9,14 +9,14 @@ using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "شرکت", MultipleName = "شرکت ها")]
+    [Model(SingleName = "Company", MultipleName = "Companies")]
     public class Company : Model
     {
         [Key]
         [Reactive]
         public short CompanyId { get; set; }
 
-        [Required(ErrorMessage = "نام شرکت را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
@@ -51,7 +51,7 @@ namespace Zenith.Models
 
         public Company()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام را وارد کنید");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name");
             ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 

@@ -41,9 +41,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="نام ترکیب" />
-                    <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="نام نمایشی ترکیب (استفاده در فاکتور فروش)" />
-                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="Mixture name" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="Display name (to use in factor)" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">
                     <Grid.RowDefinitions>
@@ -54,7 +54,7 @@
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1"/>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1" Grid.Row="1"/>
                     <Grid Margin="24,12">
-                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="برای جستجو، نام یا کد را وارد کنید . . ." Foreground="#FFD1D1D1" />
+                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="Enter the name of material to search ..." Foreground="#FFD1D1D1" />
                         <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" >
@@ -87,7 +87,7 @@
 
                 </Grid>
 
-                <Button Content="تایید" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFDFDFD">
                 <Grid.RowDefinitions>

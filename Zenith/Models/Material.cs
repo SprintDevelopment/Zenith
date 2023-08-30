@@ -14,14 +14,14 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "متریال", MultipleName = "متریال ها")]
+    [Model(SingleName = "Material", MultipleName = "Materials")]
     public class Material : Model
     {
         [Key]
         [Reactive]
         public int MaterialId { get; set; }
 
-        [Required(ErrorMessage = "نام متریال را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Name { get; set; }
@@ -33,7 +33,7 @@ namespace Zenith.Models
 
         public Material()
         {
-            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "نام متریال را وارد کنید");
+            this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name");
             ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 

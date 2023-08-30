@@ -66,7 +66,7 @@ namespace Zenith.Assets.UI.UserControls
             var lastEasingDoubleKeyFrame = showStoryboardDoubleAnimationUsingKeyFrames.KeyFrames[1] as EasingDoubleKeyFrame;
 
 
-            lastEasingDoubleKeyFrame.Value = SubMenuItemCount * 50 + 5;
+            lastEasingDoubleKeyFrame.Value = SubMenuItemCount * 46 + 5;
 
             hideStoryboard = this.FindResource("HideSubMenuStoryboard") as Storyboard;
 

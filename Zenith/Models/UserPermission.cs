@@ -14,14 +14,14 @@ using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "دسترسی کاربر", MultipleName = "دسترسی های کاربر")]
+    [Model(SingleName = "User permission", MultipleName = "User permissions")]
     public class UserPermission : Model
     {
         [Key]
         [Reactive]
         public int UserPermissionId { get; set; }
 
-        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
+        [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Username { get; set; }

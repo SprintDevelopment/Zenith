@@ -18,13 +18,13 @@
             <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
             <Grid Height="50">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="1" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
-                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
@@ -33,17 +33,18 @@
                 <Border x:Name="messageBorder" Background="#FFECECFF" BorderBrush="Blue" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16">
                     <Grid>
                         <TextBlock TextWrapping="Wrap">
-                            <Run Text="تحویل " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontSize="16"/>
-                            <Run Text="به شرکت " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontSize="16"/>
+                            <Run Text="Delivery of " Foreground="#FF505050"/>
+                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontSize="18"/>
+                            <Run Text="to " Foreground="#FF505050"/>
+                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontSize="18"/>
+                            <Run Text="company " Foreground="#FF505050"/>
                         </TextBlock>
                     </Grid>
                 </Border>
-                <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="SiteId" Tag="سایت محل تحویل"/>
+                <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="SiteId" Tag="Site for delivery"/>
 
                 <Grid>
-                    <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="ماشین"/>
+                    <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="Machine"/>
                     <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.InfoIsRelatedToMachine}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,64,0">
                         <Grid>
                             <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}}"/>
@@ -52,16 +53,16 @@
                     </ToggleButton>
                 </Grid>
 
-                <baseclasses:JTextBox Text="{Binding PageModel.Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="مقدار تحویل داده شده" />
-                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="هزینه تحویل" />
-                <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="راننده"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="شماره تحویل" />
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="تاریخ و ساعت تحویل"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="Count" />
+                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="Delivery fee" />
+                <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="Driver"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="Delivery number" />
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Delivery date and time"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="تایید" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Button Content="Confirm" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>

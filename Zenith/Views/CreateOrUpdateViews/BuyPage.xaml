@@ -42,8 +42,8 @@
                 </Grid.RowDefinitions>
                 <StackPanel>
                     <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="شرکت فروشنده"/>
-                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="تاریخ و ساعت خرید"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="توضیحات مرتبط" />
+                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Buy date and time"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">
                     <Grid.RowDefinitions>
@@ -54,7 +54,7 @@
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1"/>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1" Grid.Row="1"/>
                     <Grid Margin="24,12">
-                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="برای جستجو، نام یا کد را وارد کنید . . ." Foreground="#FFD1D1D1" />
+                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="Enter the name of material to search ..." Foreground="#FFD1D1D1" />
                         <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" >
@@ -87,7 +87,7 @@
 
                 </Grid>
 
-                <Button Content="تایید" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFDFDFD">
                 <Grid.RowDefinitions>
@@ -102,10 +102,10 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Left" Text="نام محصول" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="قیمت واحد" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="تعداد" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                    <TextBlock HorizontalAlignment="Center" Text="قیمت کل" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Left" Text="Material name" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="Unit price" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="Count" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Text="Total price" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="4">
                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
