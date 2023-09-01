@@ -48,7 +48,7 @@ namespace Zenith
             {
                 this.DataContext = ViewModel;
 
-                ViewModel.CreateDatabase.Execute().Subscribe().Dispose();
+                ViewModel.CreateDatabaseCommand.Execute().Subscribe().Dispose();
 
                 ViewModel.WhenAnyValue(vm => vm.CreateUpdatePage)
                     .SkipWhile(page => page == null)
@@ -91,9 +91,9 @@ namespace Zenith
                 CompositeDisposable disposable = null;
 
                 ViewModel.WhenAnyValue(vm => vm.LoggedInUser)
-                    .Do(lu => 
+                    .Do(lu =>
                     {
-                        if(lu == null)
+                        if (lu == null)
                         {
                             ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
                             ViewModel.CreateUpdatePage = new LoginView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
@@ -125,7 +125,7 @@ namespace Zenith
                                     storyboard.Begin();
                                 }).Subscribe().DisposeWith(disposable);
 
-                            ViewModel.InitiateSearch
+                            ViewModel.InitiateSearchCommand
                                 .WhereNotNull()
                                 .Do(searchModel =>
                                 {
@@ -176,7 +176,8 @@ namespace Zenith
                                 .Do(x =>
                                 {
                                     x.eventArgs.Handled = true;
-                                    x.shortcutedItem.Command.Execute(x.shortcutedItem.CommandParameter);
+                                    if (x.shortcutedItem.Command.CanExecute(x.shortcutedItem.CommandParameter))
+                                        x.shortcutedItem.Command.Execute(x.shortcutedItem.CommandParameter);
                                 }).Subscribe().DisposeWith(disposable);
 
                             ViewModel.Alerts

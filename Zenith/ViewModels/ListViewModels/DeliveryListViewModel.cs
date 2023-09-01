@@ -21,7 +21,7 @@ namespace Zenith.ViewModels.ListViewModels
     public class DeliveryListViewModel : BaseListViewModel<Delivery>
     {
         public DeliveryListViewModel(DeliveryRepository repository, SearchBaseDto searchModel, IObservable<Func<Delivery, bool>> criteria, Sale relatedSale)
-            : base(repository, searchModel, criteria)
+            : base(repository, searchModel, criteria, PermissionTypes.Sales)
         {
             var modelAttributes = typeof(Delivery).GetAttribute<ModelAttribute>();
             ViewTitle = $"لیست {modelAttributes.MultipleName} به {relatedSale.Company.Name} بابت سفارش شماره {relatedSale.SaleId}";

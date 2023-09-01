@@ -24,6 +24,13 @@ namespace Zenith.Models
         public virtual SaleItem SaleItem { get; set; }
 
         [Reactive]
+        public int SiteId { get; set; }
+
+        [ForeignKey(nameof(SiteId))]
+        [Reactive]
+        public virtual Site Site { get; set; }
+
+        [Reactive]
         public int Count { get; set; }
 
         [Reactive]

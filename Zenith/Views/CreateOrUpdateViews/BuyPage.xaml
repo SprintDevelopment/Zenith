@@ -22,15 +22,14 @@
             <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="White" Effect="{StaticResource CommonShadow}"/>
             <Grid Height="50" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0"/>
+                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Grid.Column="1" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
-                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Margin="16,0"/>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
-                <Rectangle Fill="LightGray" HorizontalAlignment="Left" Grid.Column="1" Width="1" Margin="0,12"/>
             </Grid>
             <Rectangle Fill="#FFF8F8F8" HorizontalAlignment="Right" Grid.Row="1" Width="1"/>
 
@@ -41,8 +40,8 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="شرکت فروشنده"/>
-                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Buy date and time"/>
+                    <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="Seller company"/>
+                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Buy DateTime"/>
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">

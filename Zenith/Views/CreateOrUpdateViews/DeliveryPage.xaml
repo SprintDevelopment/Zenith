@@ -34,9 +34,9 @@
                     <Grid>
                         <TextBlock TextWrapping="Wrap">
                             <Run Text="Delivery of " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontSize="18"/>
+                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontSize="16"/>
                             <Run Text="to " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontSize="18"/>
+                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontSize="16"/>
                             <Run Text="company " Foreground="#FF505050"/>
                         </TextBlock>
                     </Grid>
@@ -57,7 +57,7 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="Delivery fee" />
                 <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="Driver"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="Delivery number" />
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Delivery date and time"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Delivery DateTime"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

@@ -8,7 +8,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Zenith.Views.ListViews" 
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
-      mc:Ignorable="d" FontSize="16" d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d" FontSize="14" d:DesignHeight="450" d:DesignWidth="800"
       Title="PersonListPage">
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -20,8 +20,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <TextBlock Margin="16,0,0,0" Text="{Binding ViewTitle}" FontSize="17"/>
-                <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="17" Foreground="#FF328332"/>
+                <TextBlock Margin="16,0,0,0" Text="{Binding ViewTitle}" FontSize="15"/>
+                <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
                 <Button Width="50" Style="{DynamicResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding CreateCommand}">
@@ -55,7 +55,7 @@
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="Subject" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Left" Text="Reminder type" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="Reminder date and time" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="Reminder DateTime" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
             </Grid>
 

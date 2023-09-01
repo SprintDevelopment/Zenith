@@ -21,7 +21,7 @@ namespace Zenith.ViewModels.ListViewModels
 {
     public class BaseListViewModel<T> : BaseViewModel<T> where T : Model, new()
     {
-        public BaseListViewModel(Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria)
+        public BaseListViewModel(Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria, PermissionTypes permissionType)
         {
             var modelAttributes = typeof(T).GetAttribute<ModelAttribute>();
             ViewTitle = modelAttributes.MultipleName;
@@ -89,7 +89,7 @@ namespace Zenith.ViewModels.ListViewModels
                 };
 
                 removeDisposable?.Dispose();
-                App.MainViewModel.ShowDialog.Execute(dialogDto).Subscribe();
+                App.MainViewModel.ShowDialogCommand.Execute(dialogDto).Subscribe();
                 removeDisposable = App.MainViewModel.WhenAnyValue(vm => vm.DialogResult).Where(dr => dr == DialogResults.Yes).Subscribe(dialogResult =>
                 {
                     var toRemoveItems = ActiveList.Where(x => x.IsSelected);
@@ -99,7 +99,11 @@ namespace Zenith.ViewModels.ListViewModels
                     SourceList.RemoveMany(toRemoveItems);
                 });
                 return false;
-            }, this.WhenAnyValue(vm => vm.SelectionMode).Select(selectionMode => selectionMode != SelectionModes.NoItemSelected));
+            }, this.WhenAnyValue(vm => vm.SelectionMode)
+                .Select(selectionMode => selectionMode != SelectionModes.NoItemSelected)
+                .CombineLatest(App.MainViewModel.WhenAnyValue(mvm => mvm.LoggedInUser)
+                .Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == permissionType && p.HasDeleteAccess)))
+                .Select(combined => combined.First && combined.Second));
 
             IDisposable createUpdateDisposable = null;
             CreateCommand = ReactiveCommand.Create<Unit>(_ =>
@@ -112,12 +116,13 @@ namespace Zenith.ViewModels.ListViewModels
                     {
                         SourceList.AddRange(changeSet);
                     }
-                    App.MainViewModel.CreateUpdatePageReturned.Execute().Subscribe();
+                    App.MainViewModel.CreateUpdatePageReturnedCommand.Execute().Subscribe();
                 });
 
                 CreateUpdatePage.ViewModel.PrepareCommand.Execute().Subscribe();
-                App.MainViewModel.ShowCreateUpdatePage.Execute(CreateUpdatePage).Subscribe();
-            });
+                App.MainViewModel.ShowCreateUpdatePageCommand.Execute(CreateUpdatePage).Subscribe();
+            }, App.MainViewModel.WhenAnyValue(mvm => mvm.LoggedInUser)
+                .Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == permissionType && p.HasCreateAccess)));
 
             UpdateCommand = ReactiveCommand.Create<T>(itemToUpdate =>
             {
@@ -130,12 +135,13 @@ namespace Zenith.ViewModels.ListViewModels
                         MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), itemToUpdate);
                     }
 
-                    App.MainViewModel.CreateUpdatePageReturned.Execute().Subscribe();
+                    App.MainViewModel.CreateUpdatePageReturnedCommand.Execute().Subscribe();
                 });
 
                 CreateUpdatePage.ViewModel.PrepareCommand.Execute(itemToUpdate.GetKeyPropertyValue()).Subscribe();
-                App.MainViewModel.ShowCreateUpdatePage.Execute(CreateUpdatePage).Subscribe();
-            });
+                App.MainViewModel.ShowCreateUpdatePageCommand.Execute(CreateUpdatePage).Subscribe();
+            }, App.MainViewModel.WhenAnyValue(mvm => mvm.LoggedInUser)
+                .Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == permissionType && p.HasUpdateAccess)));
 
             SearchCommand = ReactiveCommand.Create<Unit>(_ =>
             {
@@ -143,7 +149,7 @@ namespace Zenith.ViewModels.ListViewModels
             });
 
             searchModel.Title = $"Search in {modelAttributes.MultipleName}";
-            InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearch.Execute(searchModel));
+            InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearchCommand.Execute(searchModel));
 
             DisposeCommand = ReactiveCommand.Create<Unit>(_ =>
             {

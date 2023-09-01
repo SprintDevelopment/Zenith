@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
@@ -27,7 +28,7 @@ namespace Zenith.Views.ListViews
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(subject => new Func<OutgoCategory, bool>(oc => true));
 
-            ViewModel = new BaseListViewModel<OutgoCategory>(new OutgoCategoryRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<OutgoCategory>(new OutgoCategoryRepository(), searchModel, dynamicFilter, PermissionTypes.OutgoCategories)
             {
                 CreateUpdatePage = new OutgoCategoryPage()
             };

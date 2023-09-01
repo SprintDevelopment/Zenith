@@ -8,7 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Reflection.PortableExecutable;
 using System.Windows.Controls;
+using System.Windows.Media.Media3D;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Dtos;
@@ -24,13 +26,13 @@ namespace Zenith.ViewModels
     {
         public MainViewModel()
         {
-            ShowDialog = ReactiveCommand.Create<DialogDto>(dialogDto =>
+            ShowDialogCommand = ReactiveCommand.Create<DialogDto>(dialogDto =>
             {
                 DialogResult = DialogResults.None;
                 DialogDto = dialogDto;
             });
 
-            Navigate = ReactiveCommand.Create<Type>(type =>
+            NavigateCommand = ReactiveCommand.Create<Type>(type =>
             {
                 var tabForPage = TabControlViewModel._tabs.Items.FirstOrDefault(tab => tab.RelatedMainPage.GetType() == type);
                 if (tabForPage is not null)
@@ -39,49 +41,55 @@ namespace Zenith.ViewModels
                     TabControlViewModel._tabs.Add(new TabViewModel { RelatedMainPage = (Page)Activator.CreateInstance(type), IsSelected = true });
             });
 
+            NavigateToBuysCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(BuyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Buys && p.HasReadAccess)));
+            NavigateToSalesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SaleListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Sales && p.HasReadAccess)));
+            NavigateToCompaniesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CompanyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Companies && p.HasReadAccess)));
+            NavigateToSitesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SiteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Sites && p.HasReadAccess)));
+            NavigateToMaterialsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MaterialListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Materials && p.HasReadAccess)));
+            NavigateToMixturesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MixtureListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Mixtures && p.HasReadAccess)));
+            NavigateToMachinesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Machines && p.HasReadAccess)));
+            NavigateToOutgoesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Outgoes && p.HasReadAccess)));
+            NavigateToOutgoCategoriesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoCategoryListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.OutgoCategories && p.HasReadAccess)));
+            NavigateToPersonnelCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(PersonListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Personnel && p.HasReadAccess)));
+            NavigateToUsersCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(UserListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
+            NavigateToNotesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(NoteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Notes && p.HasReadAccess)));
 
             TabControlViewModel.WhenAnyValue(vm => vm.SelectedTabViewModel)
-                .Where(stvm => stvm?.RelatedMainPage is not null)
-                .Do(stvm => ListPage = stvm.RelatedMainPage)
-                .Subscribe();
+                    .Where(stvm => stvm?.RelatedMainPage is not null)
+                    .Do(stvm => ListPage = stvm.RelatedMainPage)
+                    .Subscribe();
 
-
-            ShowDeliveriesCommand = ReactiveCommand.Create<Sale>(sale =>
-            {
-                ListPage = new DeliveryListPage(sale);
-            });
-
-            ShowCreateUpdatePage = ReactiveCommand.Create<Page>(page =>
+            ShowCreateUpdatePageCommand = ReactiveCommand.Create<Page>(page =>
             {
                 CreateUpdatePage = page;
             });
 
-            CreateUpdatePageReturned = ReactiveCommand.Create<Unit>(_ =>
+            CreateUpdatePageReturnedCommand = ReactiveCommand.Create<Unit>(_ =>
             {
                 CreateUpdatePage = null;
             });
 
-            ShowSecondCreateUpdatePage = ReactiveCommand.Create<Page>(page =>
+            ShowSecondCreateUpdatePageCommand = ReactiveCommand.Create<Page>(page =>
             {
                 SecondCreateUpdatePage = page;
             });
 
-            SecondCreateUpdatePageReturned = ReactiveCommand.Create<Unit>(_ =>
+            SecondCreateUpdatePageReturnedCommand = ReactiveCommand.Create<Unit>(_ =>
             {
                 SecondCreateUpdatePage = null;
             });
 
-            InitiateSearch = ReactiveCommand.Create<SearchBaseDto, SearchBaseDto>(model =>
+            InitiateSearchCommand = ReactiveCommand.Create<SearchBaseDto, SearchBaseDto>(model =>
             {
                 return model;
             }, this.WhenAnyValue(vm => vm.IsLocked).Where(il => !il));
 
-            OpenLogFile = ReactiveCommand.Create<string>(_ =>
+            OpenLogFileCommand = ReactiveCommand.Create<string>(_ =>
             {
                 Process.Start("notepad.exe", $"C:\\{_}");
             });
 
-            Backup = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
+            BackupCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
                 var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
                 _alerts.Add(new AlertViewModel
@@ -103,7 +111,7 @@ namespace Zenith.ViewModels
 
             });
 
-            Restore = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
+            RestoreCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
                 var restoreResult = DatabaseUtil.Restore(@"D:\Backups\");
                 if (restoreResult is not null)
@@ -121,7 +129,7 @@ namespace Zenith.ViewModels
                 }
             });
 
-            CreateDatabase = ReactiveCommand.CreateRunInBackground<Unit>(_ => new DbContextFactory().CreateDbContext(null).Database.Migrate());
+            CreateDatabaseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ => new DbContextFactory().CreateDbContext(null).Database.Migrate());
 
             _alerts.Connect()
                 .Bind(out Alerts)
@@ -136,7 +144,7 @@ namespace Zenith.ViewModels
             var noteRepository = new NoteRepository();
             Observable.Timer(TimeSpan.Zero, TimeSpan.FromMinutes(1))
                 .SelectMany(_ => noteRepository.Find(note => note.NotifyType == NotifyTypes.FooterNotify && note.NotifyDateTime.CompareTo(DateTime.Now) <= 0))
-                .Select(note => 
+                .Select(note =>
                 {
                     note.NotifyType = NotifyTypes.NoNeedToNotify;
                     noteRepository.Update(note, note.NoteId);
@@ -185,18 +193,31 @@ namespace Zenith.ViewModels
         public SourceList<AlertViewModel> _alerts { get; private set; } = new SourceList<AlertViewModel>();
         public ReadOnlyObservableCollection<AlertViewModel> Alerts;
         public TabControlViewModel TabControlViewModel { get; set; } = new TabControlViewModel();
-        public ReactiveCommand<Type, Unit> Navigate { get; set; }
-        public ReactiveCommand<Sale, Unit> ShowDeliveriesCommand { get; set; }
-        public ReactiveCommand<Page, Unit> ShowCreateUpdatePage { get; set; }
-        public ReactiveCommand<Page, Unit> ShowSecondCreateUpdatePage { get; set; }
-        public ReactiveCommand<DialogDto, Unit> ShowDialog { get; set; }
-        public ReactiveCommand<Unit, Unit> CreateUpdatePageReturned { get; set; }
-        public ReactiveCommand<Unit, Unit> SecondCreateUpdatePageReturned { get; set; }
-        public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearch { get; set; }
+        public ReactiveCommand<Type, Unit> NavigateCommand { get; set; }
         //
-        public ReactiveCommand<string, Unit> OpenLogFile { get; set; }
-        public ReactiveCommand<Unit, Unit> Backup { get; set; }
-        public ReactiveCommand<Unit, Unit> Restore { get; set; }
-        public ReactiveCommand<Unit, Unit> CreateDatabase { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToBuysCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToSalesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToCompaniesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToSitesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToMaterialsCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToMixturesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToMachinesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToOutgoesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToOutgoCategoriesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToPersonnelCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToUsersCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToNotesCommand { get; set; }
+        //
+        public ReactiveCommand<Page, Unit> ShowCreateUpdatePageCommand { get; set; }
+        public ReactiveCommand<Page, Unit> ShowSecondCreateUpdatePageCommand { get; set; }
+        public ReactiveCommand<DialogDto, Unit> ShowDialogCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> CreateUpdatePageReturnedCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> SecondCreateUpdatePageReturnedCommand { get; set; }
+        public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearchCommand { get; set; }
+        //
+        public ReactiveCommand<string, Unit> OpenLogFileCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> BackupCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> RestoreCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> CreateDatabaseCommand { get; set; }
     }
 }

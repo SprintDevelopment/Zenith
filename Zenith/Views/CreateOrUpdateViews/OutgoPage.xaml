@@ -31,7 +31,7 @@
             <StackPanel Grid.Row="1">
                 <projUsercontrols:OutgoCategoriesTreeView x:Name="outgoCategoryTreeView" Title="Category"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="Value"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Date and time"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="DateTime"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

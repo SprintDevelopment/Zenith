@@ -44,6 +44,10 @@ namespace Zenith.Models
         [Reactive]
         public long Price { get; set; }
 
+        [NotMapped]
+        [Reactive]
+        public long DeliveryFee { get; set; }
+
         public Sale()
         {
             var itemsObservable = this.WhenAnyValue(s => s.Items)
@@ -55,6 +59,11 @@ namespace Zenith.Models
                 .Select(items => items.Sum(si => si.TotalPrice))
                 .BindTo(this, m => m.Price);
 
+            itemsObservable
+                .AutoRefreshOnObservable(si => si.Deliveries.ToObservableChangeSet())
+                .ToCollection()
+                .Select(items => items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee)))
+                .BindTo(this, m => m.DeliveryFee);
 
             this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select the buyer company");
             this.ValidationRule(vm => vm.Items, itemsObservable.QueryWhenChanged().Select(children => children.Any()), "No material selected");

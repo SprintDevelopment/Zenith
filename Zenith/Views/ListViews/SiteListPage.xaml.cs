@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
@@ -27,7 +28,7 @@ namespace Zenith.Views.ListViews
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(companyId => new Func<Site, bool>(s => companyId == 0 || s.CompanyId == companyId));
 
-            ViewModel = new BaseListViewModel<Site>(new SiteRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Site>(new SiteRepository(), searchModel, dynamicFilter, PermissionTypes.Sites)
             {
                 CreateUpdatePage = new SitePage()
             };

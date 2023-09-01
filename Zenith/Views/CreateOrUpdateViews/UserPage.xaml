@@ -31,9 +31,9 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Username, UpdateSourceTrigger=PropertyChanged}" Title="Username" IsEnabled="{Binding IsNew}"/>
-                <PasswordBox x:Name="passPasswordBox" Tag="Password" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
-                <PasswordBox x:Name="repeatPassPasswordBox" Tag="Confirm password" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Create date and time" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <PasswordBox x:Name="passPasswordBox" Tag="Password" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <PasswordBox x:Name="repeatPassPasswordBox" Tag="Confirm password" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Create DateTime" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
                 <Grid Grid.Column="1" Margin="24,16,24,0" Background="#FFFDFDFD">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -47,7 +47,7 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock HorizontalAlignment="Left" Text="Permission" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="Permission" VerticalAlignment="Center" Grid.Column="0" Margin="16,0,0,0" Foreground="#FF3AB05A"/>
                         <TextBlock HorizontalAlignment="Center" Text="View list" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A"/>
                         <TextBlock HorizontalAlignment="Center" Text="Create" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A"/>
                         <TextBlock HorizontalAlignment="Center" Text="Edit" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A"/>
@@ -78,7 +78,7 @@
                                         <ColumnDefinition Width="80"/>
                                         <ColumnDefinition Width="80"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock HorizontalAlignment="Left" Text="{Binding PermissionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:PermissionTypes}}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding PermissionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:PermissionTypes}}" VerticalAlignment="Center" Grid.Column="0" Margin="16,0,0,0"/>
                                     <CheckBox IsChecked="{Binding HasReadAccess}" Grid.Column="1" />
                                     <CheckBox IsChecked="{Binding HasCreateAccess}" Grid.Column="2" />
                                     <CheckBox IsChecked="{Binding HasUpdateAccess}" Grid.Column="3" />

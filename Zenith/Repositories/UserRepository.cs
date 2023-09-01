@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Zenith.Assets.Extensions;
 using Zenith.Models;
 
@@ -9,6 +11,13 @@ namespace Zenith.Repositories
     public class UserRepository : Repository<User>
     {
         UserPermissionRepository UserPermissionRepository = new UserPermissionRepository();
+
+        public override IEnumerable<User> Find(Expression<Func<User, bool>> predicate)
+        {
+            return _context.Set<User>()
+                .Include(u => u.Permissions)
+                .Where(predicate).AsEnumerable();
+        }
 
         public override User Single(dynamic id)
         {

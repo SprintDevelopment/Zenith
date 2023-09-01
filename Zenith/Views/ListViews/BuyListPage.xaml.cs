@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
@@ -27,7 +28,7 @@ namespace Zenith.Views.ListViews
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(companyId => new Func<Buy, bool>(b => companyId == 0 || b.CompanyId == companyId));
 
-            ViewModel = new BaseListViewModel<Buy>(new BuyRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Buy>(new BuyRepository(), searchModel, dynamicFilter, PermissionTypes.Buys)
             {
                 CreateUpdatePage = new BuyPage()
             };

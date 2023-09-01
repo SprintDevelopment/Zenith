@@ -74,7 +74,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                     {
                         saleItem.Deliveries.AddRange(changeSet);
                     }
-                    App.MainViewModel.SecondCreateUpdatePageReturned.Execute().Subscribe();
+                    App.MainViewModel.SecondCreateUpdatePageReturnedCommand.Execute().Subscribe();
                 });
 
                 deliveryCreateOrUpdatePage.ViewModel.PrepareCommand.Execute().Subscribe();
@@ -83,7 +83,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItem = saleItem;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItemId = saleItem.SaleItemId;
 
-                App.MainViewModel.ShowSecondCreateUpdatePage.Execute(deliveryCreateOrUpdatePage).Subscribe();
+                App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });
 
             UpdateDeliveryCommand = ReactiveCommand.Create<Delivery>(deliveryToUpdate =>
@@ -97,11 +97,11 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                         MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), deliveryToUpdate);
                     }
 
-                    App.MainViewModel.SecondCreateUpdatePageReturned.Execute().Subscribe();
+                    App.MainViewModel.SecondCreateUpdatePageReturnedCommand.Execute().Subscribe();
                 });
 
                 deliveryCreateOrUpdatePage.ViewModel.PrepareCommand.Execute(deliveryToUpdate.GetKeyPropertyValue()).Subscribe();
-                App.MainViewModel.ShowSecondCreateUpdatePage.Execute(deliveryCreateOrUpdatePage).Subscribe();
+                App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });
 
             //AddNewDeliveryCommand = ReactiveCommand.CreateFromObservable<SaleItem, Unit>(saleItem => 

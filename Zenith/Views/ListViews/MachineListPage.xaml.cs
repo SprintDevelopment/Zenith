@@ -13,6 +13,7 @@ using Zenith.Views.CreateOrUpdateViews;
 using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Views.ListViews
 {
@@ -30,7 +31,7 @@ namespace Zenith.Views.ListViews
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
                 .Select(s => new { Title = s }).Select(s => new Func<Machine, bool>(p => true));
 
-            ViewModel = new BaseListViewModel<Machine>(new MachineRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Machine>(new MachineRepository(), searchModel, dynamicFilter, PermissionTypes.Machines)
             {
                 CreateUpdatePage = new MachinePage()
             };

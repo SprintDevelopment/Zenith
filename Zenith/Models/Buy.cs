@@ -15,7 +15,7 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "خرید", MultipleName = "خرید ها")]
+    [Model(SingleName = "Buy", MultipleName = "Buys")]
     public class Buy : Model
     {
         [Key]
@@ -56,8 +56,8 @@ namespace Zenith.Models
                 .BindTo(this, m => m.Price);
 
 
-            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "شرکت فروشنده را انتخاب کنید");
-            this.ValidationRule(vm => vm.Items, itemsObservable.QueryWhenChanged().Select(children => children.Any()), "هیج محصولی برای خرید انتخاب نشده است");
+            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select buyer company");
+            this.ValidationRule(vm => vm.Items, itemsObservable.QueryWhenChanged().Select(children => children.Any()), "No material selected");
         }
 
         public override string ToString()

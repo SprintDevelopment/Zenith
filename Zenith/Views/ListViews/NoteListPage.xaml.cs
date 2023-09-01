@@ -31,7 +31,7 @@ namespace Zenith.Views.ListViews
                     (x.subject.IsNullOrWhiteSpace() || p.Subject.Contains(x.subject)) &&
                     (x.notifyType == NotifyTypes.DontCare || p.NotifyType == x.notifyType)));
 
-            ViewModel = new BaseListViewModel<Note>(new NoteRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Note>(new NoteRepository(), searchModel, dynamicFilter, PermissionTypes.Notes)
             {
                 CreateUpdatePage = new NotePage()
             };

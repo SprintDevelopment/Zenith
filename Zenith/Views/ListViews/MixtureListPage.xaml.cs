@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
@@ -27,7 +28,7 @@ namespace Zenith.Views.ListViews
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(title => new Func<Mixture, bool>(b => true));
 
-            ViewModel = new BaseListViewModel<Mixture>(new MixtureRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Mixture>(new MixtureRepository(), searchModel, dynamicFilter, PermissionTypes.Mixtures)
             {
                 CreateUpdatePage = new MixturePage()
             };

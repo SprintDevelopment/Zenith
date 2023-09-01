@@ -26,7 +26,7 @@ namespace Zenith.ViewModels
             {
                 mainViewModel.LoggedInUser = userRepository.Find(u => u.Username == Username && u.HashedPassword == CryptoUtil.GenerateSaltedHashBytes(Password)).FirstOrDefault();
                 if (mainViewModel.LoggedInUser != null)
-                    mainViewModel.CreateUpdatePageReturned.Execute().Subscribe();
+                    mainViewModel.CreateUpdatePageReturnedCommand.Execute().Subscribe();
             }, this.WhenAnyValue(vm => vm.Username, vm => vm.Password)
                 .Select(cr => !(cr.Item1.IsNullOrWhiteSpace() || cr.Item2.IsNullOrWhiteSpace())));
 

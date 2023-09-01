@@ -16,7 +16,7 @@
     <Window.Resources>
         <Storyboard x:Key="ShowMenuStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="MenuContainerScrollViewer">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="320">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="300">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <QuinticEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -34,7 +34,7 @@
         </Storyboard>
         <Storyboard x:Key="ShowSearchStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="searchUserControl">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="320">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="300">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <QuinticEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -65,8 +65,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="Buy and sale" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Buys" Shortcut="Ctrl+Shift+B" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:BuyListPage}"/>
-                            <controls:SubMenuItem Title="Sale" Shortcut="Ctrl+Shift+S" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SaleListPage}"/>
+                            <controls:SubMenuItem Title="Buys" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToBuysCommand}"/>
+                            <controls:SubMenuItem Title="Sale" Shortcut="Ctrl+Shift+S" Command="{Binding NavigateToSalesCommand}"/>
                             <!--<controls:SubMenuItem Title="لیست تحویل ها" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:DeliveryListPage}"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
@@ -74,27 +74,27 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/definitions.png" Title="Definitions" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Companies" Shortcut="Ctrl+Shift+C" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:CompanyListPage}"/>
-                            <controls:SubMenuItem Title="Company Sites" Shortcut="Ctrl+Shift+I" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:SiteListPage}"/>
-                            <controls:SubMenuItem Title="Materials" Shortcut="Ctrl+Shift+M" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MaterialListPage}"/>
-                            <controls:SubMenuItem Title="Mixtures" Shortcut="Ctrl+Shift+X" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MixtureListPage}"/>
-                            <controls:SubMenuItem Title="Machines" Shortcut="Ctrl+Shift+T" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:MachineListPage}"/>
+                            <controls:SubMenuItem Title="Companies" Shortcut="Ctrl+Shift+C" Command="{Binding NavigateToCompaniesCommand}"/>
+                            <controls:SubMenuItem Title="Company Sites" Shortcut="Ctrl+Shift+I" Command="{Binding NavigateToSitesCommand}"/>
+                            <controls:SubMenuItem Title="Materials" Shortcut="Ctrl+Shift+M" Command="{Binding NavigateToMaterialsCommand}"/>
+                            <controls:SubMenuItem Title="Mixtures" Shortcut="Ctrl+Shift+X" Command="{Binding NavigateToMixturesCommand}"/>
+                            <controls:SubMenuItem Title="Machines" Shortcut="Ctrl+Shift+T" Command="{Binding NavigateToMachinesCommand}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="Outgoes" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Outgoes" Shortcut="Ctrl+Shift+O" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoListPage}"/>
-                            <controls:SubMenuItem Title="Outgo Categories" Shortcut="Ctrl+Shift+G" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
-                            <controls:SubMenuItem Title="Diesel" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:OutgoCategoryListPage}"/>
+                            <controls:SubMenuItem Title="Outgoes" Shortcut="Ctrl+Shift+O" Command="{Binding NavigateToOutgoesCommand}" />
+                            <controls:SubMenuItem Title="Outgo Categories" Shortcut="Ctrl+Shift+G" Command="{Binding NavigateToOutgoCategoriesCommand}" />
+                            <controls:SubMenuItem Title="Diesel" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="Personnel and salary" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Personnel" Shortcut="Ctrl+Shift+P" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:PersonListPage}"/>
+                            <controls:SubMenuItem Title="Personnel" Shortcut="Ctrl+Shift+P" Command="{Binding NavigateToPersonnelCommand}" />
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
@@ -109,7 +109,7 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/security.png" Title="Users and permissions" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Users" Shortcut="Ctrl+Shift+U" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:UserListPage}"/>
+                            <controls:SubMenuItem Title="Users" Shortcut="Ctrl+Shift+U" Command="{Binding NavigateToUsersCommand}" />
                             <controls:SubMenuItem Title="Change Password"  Shortcut="Ctrl+Shift+W"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
@@ -117,11 +117,11 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/configs.png" Title="System" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Notes" Shortcut="Ctrl+Shift+N" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:NoteListPage}"/>
+                            <controls:SubMenuItem Title="Notes" Shortcut="Ctrl+Shift+N" Command="{Binding NavigateToNotesCommand}" />
                             <controls:SubMenuItem Title="Configuration" Shortcut="Ctrl+Shift+F" />
-                            <controls:SubMenuItem Title="Open log file" Shortcut="Ctrl+Shift+L" Command="{Binding OpenLogFile}"/>
-                            <controls:SubMenuItem Title="Backup" Shortcut="Ctrl+Shift+B" Command="{Binding Backup}"/>
-                            <controls:SubMenuItem Title="Restore" Shortcut="Ctrl+Shift+R" Command="{Binding Restore}"/>
+                            <controls:SubMenuItem Title="Open log file" Shortcut="Ctrl+Shift+L" Command="{Binding OpenLogFileCommand}"/>
+                            <controls:SubMenuItem Title="Backup" Shortcut="Ctrl+Shift+B" Command="{Binding BackupCommand}"/>
+                            <controls:SubMenuItem Title="Restore" Shortcut="Ctrl+Shift+R" Command="{Binding RestoreCommand}"/>
                             <!--<controls:SubMenuItem Title="فعالسازی نرم افزار" Shortcut="Ctrl+Shift+(A)ctivation"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>

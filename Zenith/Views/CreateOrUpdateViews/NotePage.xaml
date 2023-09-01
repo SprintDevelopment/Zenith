@@ -31,7 +31,7 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.Subject, UpdateSourceTrigger=PropertyChanged}" Title="Subject"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
                 <ComboBox x:Name="notifyTypeComboBox" SelectedValue="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="Reminder type"/>
-                <usercontrols:DatePicker x:Name="notifyDateTimePicker" Title="Reminder date and time"/>
+                <usercontrols:DatePicker x:Name="notifyDateTimePicker" Title="Reminder DateTime"/>
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{DynamicResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 

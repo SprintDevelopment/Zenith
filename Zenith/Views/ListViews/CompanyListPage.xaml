@@ -21,8 +21,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <TextBlock Margin="16,0,0,0" Text="{Binding ViewTitle}" FontSize="17"/>
-                <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="17" Foreground="#FF328332"/>
+                <TextBlock Margin="16,0,0,0" Text="{Binding ViewTitle}" FontSize="15"/>
+                <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
                 <Button Width="50" Style="{DynamicResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding CreateCommand}">

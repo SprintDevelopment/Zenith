@@ -13,6 +13,7 @@ using Zenith.Views.CreateOrUpdateViews;
 using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Views.ListViews
 {
@@ -31,7 +32,7 @@ namespace Zenith.Views.ListViews
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(subject => new Func<Person, bool>(p => subject.IsNullOrWhiteSpace() || p.FullName.Contains(subject)));
 
-            ViewModel = new BaseListViewModel<Person>(new PersonRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<Person>(new PersonRepository(), searchModel, dynamicFilter, PermissionTypes.Personnel)
             {
                 CreateUpdatePage = new PersonPage()
             };
