@@ -1,8 +1,47 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=netstandard">
+    <FlowDirection x:Key="AppFlowDirection">RightToLeft</FlowDirection>
+    <FontFamily x:Key="AppFont">Vazir FD, JetBrains Mono</FontFamily>
+
+    <system:Int32 x:Key="PageHeader.CloseButton.Grid.Column">0</system:Int32>
+    <GridLength x:Key="PageHeader.FirstGrid.Length">50</GridLength>
+    <GridLength x:Key="PageHeader.SecondGrid.Length">*</GridLength>
+
+    <system:String x:Key="MainWindow.BuySaleMenuItem">خرید و فروش</system:String>
+    <system:String x:Key="MainWindow.BuysSubMenuItem">خریدها</system:String>
+    <system:String x:Key="MainWindow.SalesSubMenuItem">فروش ها</system:String>
+    <system:String x:Key="MainWindow.DefinitionsMenuItem">تعاریف</system:String>
+    <system:String x:Key="MainWindow.CompaniesSubMenuItem">شرکت ها</system:String>
+    <system:String x:Key="MainWindow.CompanySitesSubMenuItem">سایت های شرکت ها</system:String>
+    <system:String x:Key="MainWindow.MaterialsSubMenuItem">محصولات</system:String>
+    <system:String x:Key="MainWindow.MixturesSubMenuItem">ترکیبات</system:String>
+    <system:String x:Key="MainWindow.MachinesSubMenuItem">ماشین ها</system:String>
+    <system:String x:Key="MainWindow.OutgoesSubMenuItem">هزینه ها</system:String>
+    <system:String x:Key="MainWindow.OutgoesMenuItem">هزینه ها</system:String>
+    <system:String x:Key="MainWindow.OutgoCategoriesSubMenuItem">دسته های هزینه</system:String>
+    <system:String x:Key="MainWindow.DieselSubMenuItem">دیزل</system:String>
+    <system:String x:Key="MainWindow.PersonnelSubMenuItem">پرسنل و حقوق</system:String>
+    <system:String x:Key="MainWindow.PersonnelMenuItem">پرسنل</system:String>
+    <system:String x:Key="MainWindow.ReportsMenuItem">گزارشات</system:String>
+    <system:String x:Key="MainWindow.DashboardSubMenuItem">داشبورد</system:String>
+    <system:String x:Key="MainWindow.ReportsSubMenuItem">گزارشات</system:String>
+    <system:String x:Key="MainWindow.UsersPermissionsMenuItem">کاربران و دسترسی ها</system:String>
+    <system:String x:Key="MainWindow.UsersSubMenuItem">کاربران</system:String>
+    <system:String x:Key="MainWindow.ChangePasswordSubMenuItem">تغییر کلمه عبور</system:String>
+    <system:String x:Key="MainWindow.SystemMenuItem">سیستم</system:String>
+    <system:String x:Key="MainWindow.NotesSubMenuItem">یادداشت ها</system:String>
+    <system:String x:Key="MainWindow.ConfigurationSubMenuItem">تنظیمات</system:String>
+    <system:String x:Key="MainWindow.OpenLogFileSubMenuItem">مشاهده فایل لاگ</system:String>
+    <system:String x:Key="MainWindow.BackupSubMenuItem">پشتیبان گیری از داده ها</system:String>
+    <system:String x:Key="MainWindow.RestoreSubMenuItem">بازیابی داده ها</system:String>
+    <system:String x:Key="MainWindow.HelpMenuItem">راهنما</system:String>
+    <system:String x:Key="MainWindow.TextHelpSubMenuItem">راهنمای متنی</system:String>
+    <system:String x:Key="MainWindow.AboutSubMenuItem">درباره ما</system:String>
+
     <system:String x:Key="LoginView.Title">ورود</system:String>
     <system:String x:Key="LoginView.UsernameTextBoxTitle">نام کاربری</system:String>
     <system:String x:Key="LoginView.PasswordPasswordBoxTitle">کلمه عبور</system:String>
+    <system:String x:Key="LoginView.LanguageComboBoxTitle">زبان برنامه</system:String>
     <system:String x:Key="LoginView.IcorrectUserPassText">نام کاربری یا کلمه عبور اشتباه است</system:String>
     <system:String x:Key="LoginView.LoginButtonContent">ورود</system:String>
 </ResourceDictionary>

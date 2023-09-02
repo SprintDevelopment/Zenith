@@ -51,7 +51,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Grid>
+    <Grid FlowDirection="{DynamicResource AppFlowDirection}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -62,75 +62,75 @@
         <Frame Grid.Column="1" x:Name="SecondCreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{StaticResource CommonShadow}" Width="0">
             <StackPanel x:Name="menuContainerStackPanel" Background="White" VerticalAlignment="Top">
-                <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="Buy and sale" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="{DynamicResource MainWindow.BuySaleMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Buys" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToBuysCommand}"/>
-                            <controls:SubMenuItem Title="Sale" Shortcut="Ctrl+Shift+S" Command="{Binding NavigateToSalesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.BuysSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToBuysCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.SalesSubMenuItem}" Shortcut="Ctrl+Shift+S" Command="{Binding NavigateToSalesCommand}"/>
                             <!--<controls:SubMenuItem Title="لیست تحویل ها" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:DeliveryListPage}"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/definitions.png" Title="Definitions" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/definitions.png" Title="{DynamicResource MainWindow.DefinitionsMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Companies" Shortcut="Ctrl+Shift+C" Command="{Binding NavigateToCompaniesCommand}"/>
-                            <controls:SubMenuItem Title="Company Sites" Shortcut="Ctrl+Shift+I" Command="{Binding NavigateToSitesCommand}"/>
-                            <controls:SubMenuItem Title="Materials" Shortcut="Ctrl+Shift+M" Command="{Binding NavigateToMaterialsCommand}"/>
-                            <controls:SubMenuItem Title="Mixtures" Shortcut="Ctrl+Shift+X" Command="{Binding NavigateToMixturesCommand}"/>
-                            <controls:SubMenuItem Title="Machines" Shortcut="Ctrl+Shift+T" Command="{Binding NavigateToMachinesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.CompaniesSubMenuItem}" Shortcut="Ctrl+Shift+C" Command="{Binding NavigateToCompaniesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.CompanySitesSubMenuItem}" Shortcut="Ctrl+Shift+I" Command="{Binding NavigateToSitesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.MaterialsSubMenuItem}" Shortcut="Ctrl+Shift+M" Command="{Binding NavigateToMaterialsCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.MixturesSubMenuItem}" Shortcut="Ctrl+Shift+X" Command="{Binding NavigateToMixturesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.MachinesSubMenuItem}" Shortcut="Ctrl+Shift+T" Command="{Binding NavigateToMachinesCommand}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="Outgoes" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="{DynamicResource MainWindow.OutgoesMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Outgoes" Shortcut="Ctrl+Shift+O" Command="{Binding NavigateToOutgoesCommand}" />
-                            <controls:SubMenuItem Title="Outgo Categories" Shortcut="Ctrl+Shift+G" Command="{Binding NavigateToOutgoCategoriesCommand}" />
-                            <controls:SubMenuItem Title="Diesel" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.OutgoesSubMenuItem}" Shortcut="Ctrl+Shift+O" Command="{Binding NavigateToOutgoesCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.OutgoCategoriesSubMenuItem}" Shortcut="Ctrl+Shift+G" Command="{Binding NavigateToOutgoCategoriesCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.DieselSubMenuItem}" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="Personnel and salary" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="{DynamicResource MainWindow.PersonnelSubMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Personnel" Shortcut="Ctrl+Shift+P" Command="{Binding NavigateToPersonnelCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.PersonnelMenuItem}" Shortcut="Ctrl+Shift+P" Command="{Binding NavigateToPersonnelCommand}" />
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/reports.png" Title="Reports" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/reports.png" Title="{DynamicResource MainWindow.ReportsMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Dashboard"/>
-                            <controls:SubMenuItem Title="Reports"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.DashboardSubMenuItem}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.ReportsSubMenuItem}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/security.png" Title="Users and permissions" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/security.png" Title="{DynamicResource MainWindow.UsersPermissionsMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Users" Shortcut="Ctrl+Shift+U" Command="{Binding NavigateToUsersCommand}" />
-                            <controls:SubMenuItem Title="Change Password"  Shortcut="Ctrl+Shift+W"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.UsersSubMenuItem}" Shortcut="Ctrl+Shift+U" Command="{Binding NavigateToUsersCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.ChangePasswordSubMenuItem}"  Shortcut="Ctrl+Shift+W"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/configs.png" Title="System" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/configs.png" Title="{DynamicResource MainWindow.SystemMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Notes" Shortcut="Ctrl+Shift+N" Command="{Binding NavigateToNotesCommand}" />
-                            <controls:SubMenuItem Title="Configuration" Shortcut="Ctrl+Shift+F" />
-                            <controls:SubMenuItem Title="Open log file" Shortcut="Ctrl+Shift+L" Command="{Binding OpenLogFileCommand}"/>
-                            <controls:SubMenuItem Title="Backup" Shortcut="Ctrl+Shift+B" Command="{Binding BackupCommand}"/>
-                            <controls:SubMenuItem Title="Restore" Shortcut="Ctrl+Shift+R" Command="{Binding RestoreCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.NotesSubMenuItem}" Shortcut="Ctrl+Shift+N" Command="{Binding NavigateToNotesCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.ConfigurationSubMenuItem}" Shortcut="Ctrl+Shift+F" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.OpenLogFileSubMenuItem}" Shortcut="Ctrl+Shift+L" Command="{Binding OpenLogFileCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.BackupSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding BackupCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.RestoreSubMenuItem}" Shortcut="Ctrl+Shift+R" Command="{Binding RestoreCommand}"/>
                             <!--<controls:SubMenuItem Title="فعالسازی نرم افزار" Shortcut="Ctrl+Shift+(A)ctivation"/>-->
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/help.png" Title="Help and support" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/help.png" Title="{DynamicResource MainWindow.HelpMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="Text help"/>
-                            <controls:SubMenuItem Title="About"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.TextHelpSubMenuItem}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.AboutSubMenuItem}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

@@ -16,7 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.UI.Helpers;
+using Zenith.Assets.Values.Dtos;
+using Zenith.Assets.Values.Enums;
 using Zenith.ViewModels;
 
 namespace Zenith.Views
@@ -31,6 +34,7 @@ namespace Zenith.Views
             InitializeComponent();
 
             ViewModel = new LoginViewModel();
+            languageComboBox.ItemsSource = typeof(AppLanguages).ToCollection();
 
             this.WhenActivated(d =>
             {
@@ -44,9 +48,18 @@ namespace Zenith.Views
 
                 ViewModel.LoginCommand
                     .Do(_ => messageBorder.Visibility = Visibility.Visible)
-                    .Throttle(TimeSpan.FromSeconds(100)).ObserveOn(RxApp.MainThreadScheduler)
+                    .Throttle(TimeSpan.FromSeconds(5)).ObserveOn(RxApp.MainThreadScheduler)
                     .Do(_ => messageBorder.Visibility = Visibility.Collapsed)
                     .Subscribe().DisposeWith(d);
+
+                Observable.FromEventPattern(languageComboBox, nameof(ComboBox.SelectionChanged))
+                    .Select(_ => (AppLanguages)((EnumDto)languageComboBox.SelectedItem).Value)
+                    .Do(selectedLanguage =>
+                    {
+                        App.Current.Resources.MergedDictionaries.Clear();
+                        App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"{selectedLanguage}ResourceDictionary.xaml", UriKind.Relative) });
+
+                    }).Subscribe().DisposeWith(d);
 
                 var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
                 ((Grid)Content).Children.Insert(0, modalBackRect);
@@ -60,11 +73,5 @@ namespace Zenith.Views
         }
 
         public LoginViewModel ViewModel { get; set; }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    App.Current.Resources.MergedDictionaries.Clear();
-        //    App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("PersianResourceDictionary.xaml", UriKind.Relative) });
-        //}
     }
 }

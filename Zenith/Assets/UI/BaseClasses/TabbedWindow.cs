@@ -36,7 +36,7 @@ namespace Zenith.Assets.UI.BaseClasses
             base.Initialized += (sender, eventArgs) =>
             {
                 WindowState = WindowState.Maximized;
-                FontFamily = new FontFamily("JetBrains Mono");
+                this.SetResourceReference(FontFamilyProperty, "AppFont");
                 FontSize = 13;
 
                 TitleBar = new TitleBar();

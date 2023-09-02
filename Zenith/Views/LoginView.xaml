@@ -5,7 +5,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
       Title="LoginPage">
-    <Grid>
+    <Grid FlowDirection="{DynamicResource AppFlowDirection}">
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -14,11 +14,11 @@
             <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
             <Grid Height="50">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="HeaderTextBlock" Text="{DynamicResource LoginView.Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding CloseCommand}" Grid.Column="1" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding CloseCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
@@ -27,6 +27,7 @@
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox x:Name="usernameTextBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LoginView.UsernameTextBoxTitle}" />
                 <PasswordBox x:Name="passPasswordBox" Tag="{DynamicResource LoginView.PasswordPasswordBoxTitle}" PasswordChar="*"/>
+                <ComboBox x:Name="languageComboBox" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource LoginView.LanguageComboBoxTitle}"/> 
 
                 <Border x:Name="messageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
                     <TextBlock Text="{DynamicResource LoginView.IcorrectUserPassText}" Foreground="Red"/>
