@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=netstandard">
+    <system:String x:Key="LoginView.Title">ورود</system:String>
+    <system:String x:Key="LoginView.UsernameTextBoxTitle">نام کاربری</system:String>
+    <system:String x:Key="LoginView.PasswordPasswordBoxTitle">کلمه عبور</system:String>
+    <system:String x:Key="LoginView.IcorrectUserPassText">نام کاربری یا کلمه عبور اشتباه است</system:String>
+    <system:String x:Key="LoginView.LoginButtonContent">ورود</system:String>
+</ResourceDictionary>

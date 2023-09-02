@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              Name="owner" Height="46" FontSize="13">
     <Grid>
-        <Button Style="{DynamicResource SimpleButtonStyle}" Command="{Binding Command, ElementName=owner}" CommandParameter="{Binding CommandParameter, ElementName=owner}">
+        <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding Command, ElementName=owner}" CommandParameter="{Binding CommandParameter, ElementName=owner}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>

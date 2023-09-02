@@ -40,6 +40,9 @@ namespace Zenith
         public MainWindow()
         {
             InitializeComponent();
+
+            App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("EnglishResourceDictionary.xaml", UriKind.Relative) });
+
             var blankPage = new BlankPage();
 
             ViewModel = App.MainViewModel;

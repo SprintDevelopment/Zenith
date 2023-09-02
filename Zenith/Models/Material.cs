@@ -26,6 +26,15 @@ namespace Zenith.Models
         [Reactive]
         public string Name { get; set; }
 
+        [Reactive]
+        public long BuyPrice { get; set; }
+
+        [Reactive]
+        public long SalePrice { get; set; }
+
+        [Reactive]
+        public int AvailableAmount { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]

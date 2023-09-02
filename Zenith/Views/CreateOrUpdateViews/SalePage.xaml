@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0"/>
-                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Grid.Column="1" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Grid.Column="1" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
@@ -86,7 +86,7 @@
 
                 </Grid>
 
-                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFAFAFA">
                 <Grid.RowDefinitions>
@@ -142,7 +142,7 @@
                                     <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
                                     <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="2" Margin="8,0,0,0"/>
                                     <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                    <Button Style="{DynamicResource SimpleButtonStyle}" ToolTip="Remove this item" Grid.Column="4" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Remove this item" Grid.Column="4" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
                                     <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Add new delivery" Grid.Column="5" Command="{Binding DataContext.AddNewDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">

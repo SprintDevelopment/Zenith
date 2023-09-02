@@ -12,8 +12,8 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230901172201_AddSiteToDeliveries")]
-    partial class AddSiteToDeliveries
+    [Migration("20230902140251_SomeAddition")]
+    partial class SomeAddition
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,11 @@ namespace Zenith.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<string>("TaxRegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
                     b.Property<string>("Tel")
                         .IsRequired()
                         .HasMaxLength(13)
@@ -178,9 +183,6 @@ namespace Zenith.Migrations
                     b.Property<long>("SaleItemId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int");
-
                     b.HasKey("DeliveryId");
 
                     b.HasIndex("DriverId");
@@ -188,8 +190,6 @@ namespace Zenith.Migrations
                     b.HasIndex("MachineId");
 
                     b.HasIndex("SaleItemId");
-
-                    b.HasIndex("SiteId");
 
                     b.ToTable("Deliveries");
                 });
@@ -234,6 +234,12 @@ namespace Zenith.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
 
+                    b.Property<int>("AvailableAmount")
+                        .HasColumnType("int");
+
+                    b.Property<long>("BuyPrice")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(2048)
@@ -246,6 +252,9 @@ namespace Zenith.Migrations
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
+
+                    b.Property<long>("SalePrice")
+                        .HasColumnType("bigint");
 
                     b.HasKey("MaterialId");
 
@@ -593,7 +602,7 @@ namespace Zenith.Migrations
                         new
                         {
                             Username = "admin",
-                            CreateDateTime = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateDateTime = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             HasErrors = false,
                             HashedPassword = "b9bcda38c0de9edcda3b12bc5d91de5959e2de031a1fcc13a3860d9c39eeb3b2"
                         });
@@ -678,19 +687,11 @@ namespace Zenith.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Zenith.Models.Site", "Site")
-                        .WithMany()
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Driver");
 
                     b.Navigation("Machine");
 
                     b.Navigation("SaleItem");
-
-                    b.Navigation("Site");
                 });
 
             modelBuilder.Entity("Zenith.Models.MixtureItem", b =>

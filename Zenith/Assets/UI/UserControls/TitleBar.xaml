@@ -20,16 +20,16 @@
             <Image Source="/Zenith;component/Resources/Images/Common/add-tab.png" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" />
         </Button>-->
 
-        <Button Name="searchButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="2">
+        <Button Name="searchButton" Style="{StaticResource TitleBarButtonStyle}" Grid.Column="2">
             <Image Source="/Zenith;component/Resources/Images/Common/search.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
-        <Button Name="menuButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="3">
+        <Button Name="menuButton" Style="{StaticResource TitleBarButtonStyle}" Grid.Column="3">
             <Image Source="/Zenith;component/Resources/Images/Common/menu.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
-        <Button Name="minimizeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="4">
+        <Button Name="minimizeButton" Style="{StaticResource TitleBarButtonStyle}" Grid.Column="4">
             <Image Source="/Zenith;component/Resources/Images/Common/minimize.png" Width="12" Height="12" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
-        <Button Name="closeButton" Style="{DynamicResource TitleBarButtonStyle}" Grid.Column="5">
+        <Button Name="closeButton" Style="{StaticResource TitleBarButtonStyle}" Grid.Column="5">
             <Image Source="/Zenith;component/Resources/Images/Common/close.png" Width="10" Height="10" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
     </Grid>

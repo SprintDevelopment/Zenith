@@ -46,7 +46,7 @@
             <RowDefinition Height="52"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Style="{DynamicResource SimpleButtonStyle}" Click="ExpandCollapse_Click">
+        <Button Style="{StaticResource SimpleButtonStyle}" Click="ExpandCollapse_Click">
             <Grid Height="52">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>

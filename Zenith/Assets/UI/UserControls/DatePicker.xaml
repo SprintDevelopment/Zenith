@@ -14,11 +14,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <baseclasses:JTextBox x:Name="dateTextBox" Title="{Binding Title, ElementName=owner}" MinWidth="300" Margin="0"/>
-        <Button x:Name="showHidePopupButton" Width="42" HorizontalAlignment="Right" Margin="0,1" Style="{DynamicResource SimpleCenteredButtonStyle}" BorderThickness="0">
+        <Button x:Name="showHidePopupButton" Width="42" HorizontalAlignment="Right" Margin="0,1" Style="{StaticResource SimpleCenteredButtonStyle}" BorderThickness="0">
             <Image Source="/Zenith;component/Resources/Images/Common/down.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="14" Height="14"/>
         </Button>
 
-        <Popup x:Name="dateSelectionPopup" Grid.Row="1" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="False">
+        <Popup x:Name="dateSelectionPopup" Grid.Row="1" PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="False">
             <Grid FlowDirection="LeftToRight" Height="320" Width="{Binding ActualWidth, ElementName=dateTextBox}" Background="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -32,13 +32,13 @@
                         <ColumnDefinition Width="42"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Name="preButton" Grid.Column="0" Style="{DynamicResource SimpleCenteredButtonStyle}">
+                    <Button Name="preButton" Grid.Column="0" Style="{StaticResource SimpleCenteredButtonStyle}">
                         <Image Source="/Zenith;component/Resources/Images/Common/previous.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
                     </Button>
-                    <Button Name="nextButton" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}">
+                    <Button Name="nextButton" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}">
                         <Image Source="/Zenith;component/Resources/Images/Common/next.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
                     </Button>
-                    <Button x:Name="yearMonthModeButton" Grid.Column="2" Foreground="#FF00AD97" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
+                    <Button x:Name="yearMonthModeButton" Grid.Column="2" Foreground="#FF00AD97" Style="{StaticResource SimpleCenteredButtonStyle}"/>
                     <Rectangle Grid.ColumnSpan="3" VerticalAlignment="Bottom" Height="1" Fill="#FFF8F8F8" />
                 </Grid>
                 <Grid x:Name="monthsGrid" Grid.Row="1" Margin="1,0">
@@ -54,18 +54,18 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <Button Content="January" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="February" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="March" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="April" Grid.Row="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="May" Grid.Column="1" Grid.Row="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="June" Grid.Column="2" Grid.Row="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="July" Grid.Row="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="August" Grid.Column="1" Grid.Row="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="September" Grid.Column="2" Grid.Row="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="October" Grid.Row="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="November" Grid.Column="1" Grid.Row="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Content="December" Grid.Column="2" Grid.Row="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="January" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="February" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="March" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="April" Grid.Row="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="May" Grid.Column="1" Grid.Row="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="June" Grid.Column="2" Grid.Row="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="July" Grid.Row="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="August" Grid.Column="1" Grid.Row="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="September" Grid.Column="2" Grid.Row="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="October" Grid.Row="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="November" Grid.Column="1" Grid.Row="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Content="December" Grid.Column="2" Grid.Row="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
                 </Grid>
 
                 <Grid Name="daysGrid" Grid.Row="1" Margin="1">
@@ -87,48 +87,48 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="1" Grid.Column="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Grid.Column="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Grid.Column="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Grid.Column="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="2" Grid.Column="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Grid.Column="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Grid.Column="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Grid.Column="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="3" Grid.Column="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Grid.Column="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Grid.Column="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Grid.Column="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="4" Grid.Column="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Grid.Column="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Grid.Column="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Grid.Column="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="5" Grid.Column="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Grid.Column="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Grid.Column="2" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Grid.Column="3" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Grid.Column="4" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Grid.Column="5" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
-                    <Button Grid.Row="6" Grid.Column="6" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Grid.Column="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Grid.Column="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="1" Grid.Column="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Grid.Column="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Grid.Column="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="2" Grid.Column="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Grid.Column="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Grid.Column="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="3" Grid.Column="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Grid.Column="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Grid.Column="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Grid.Column="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="4" Grid.Column="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Grid.Column="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Grid.Column="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Grid.Column="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="5" Grid.Column="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Grid.Column="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Grid.Column="2" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Grid.Column="3" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Grid.Column="4" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Grid.Column="5" Style="{StaticResource SimpleCenteredButtonStyle}"/>
+                    <Button Grid.Row="6" Grid.Column="6" Style="{StaticResource SimpleCenteredButtonStyle}"/>
 
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Grid.Column="0" Text="Su"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Grid.Column="1" Text="Mo"/>
@@ -140,7 +140,7 @@
 
                     <Rectangle Name="dayIndentifierRect" Stroke="#FF3CA3F4" Grid.Row="1"/>
                 </Grid>
-                <Button x:Name="todayButton" Grid.Row="2" Margin="1" Style="{DynamicResource SimpleCenteredButtonStyle}"/>
+                <Button x:Name="todayButton" Grid.Row="2" Margin="1" Style="{StaticResource SimpleCenteredButtonStyle}"/>
             </Grid>
         </Popup>
     </Grid>

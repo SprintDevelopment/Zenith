@@ -60,5 +60,11 @@ namespace Zenith.Views
         }
 
         public LoginViewModel ViewModel { get; set; }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    App.Current.Resources.MergedDictionaries.Clear();
+        //    App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("PersianResourceDictionary.xaml", UriKind.Relative) });
+        //}
     }
 }

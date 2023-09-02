@@ -41,11 +41,11 @@ namespace Zenith.Assets.UI.BaseClasses
         public JTreeView()
         {
             //<baseclasses:JTextBox x:Name="SelectedItemTitleTextBox" Title="{Binding Title, ElementName=owner}" MinWidth="300" Margin="0"/>
-            //<Button x:Name="showHidePopupButton" Width="42" HorizontalAlignment="Right" Margin="0,1" Style="{DynamicResource SimpleCenteredButtonStyle}" BorderThickness="0">
+            //<Button x:Name="showHidePopupButton" Width="42" HorizontalAlignment="Right" Margin="0,1" Style="{StaticResource SimpleCenteredButtonStyle}" BorderThickness="0">
             //    <Image Source = "/Zenith;component/Resources/Images/Common/down.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="14" Height="14"/>
             //</Button>
 
-            //<Popup x:Name="treeViewPopup" Grid.Row="1" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="False">
+            //<Popup x:Name="treeViewPopup" Grid.Row="1" PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="False">
             //    <Grid Height = "320" Width="{Binding ActualWidth, ElementName=SelectedItemTitleTextBox}" Background="White">
             //        <Rectangle Stroke = "#FF3CA3F4" />
             //        < TreeView x:Name="itemsTreeView" ItemsSource="{Binding HierarchicalItemsSource, ElementName=owner}" 

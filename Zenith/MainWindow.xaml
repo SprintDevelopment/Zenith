@@ -60,7 +60,7 @@
         <Frame Grid.Column="1" x:Name="Frame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <Frame Grid.Column="1" x:Name="CreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
         <Frame Grid.Column="1" x:Name="SecondCreateUpdateFrame" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden"/>
-        <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{DynamicResource CommonShadow}" Width="0">
+        <ScrollViewer Name="MenuContainerScrollViewer" Grid.Row="1" HorizontalAlignment="Left" Background="White" Effect="{StaticResource CommonShadow}" Width="0">
             <StackPanel x:Name="menuContainerStackPanel" Background="White" VerticalAlignment="Top">
                 <controls:MenuItem Icon="Resources/Images/Menu/trades.png" Title="Buy and sale" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
@@ -102,7 +102,7 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="Dashboard"/>
-                            <controls:SubMenuItem Title="ReportList"/>
+                            <controls:SubMenuItem Title="Reports"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
                 <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Margin="16,0"/>
@@ -87,7 +87,7 @@
 
                 </Grid>
 
-                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFDFDFD">
                 <Grid.RowDefinitions>
@@ -131,7 +131,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
                                 <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Percent, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="8,0,0,0"/>
-                                <Button Style="{DynamicResource SimpleButtonStyle}" Grid.Column="2" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding Material}">
+                                <Button Style="{StaticResource SimpleButtonStyle}" Grid.Column="2" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding Material}">
                                     <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Button>
                                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>

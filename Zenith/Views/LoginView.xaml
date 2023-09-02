@@ -17,22 +17,22 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="HeaderTextBlock" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                <Button x:Name="closeButton" Style="{DynamicResource CircularButtonStyle}" Command="{Binding CloseCommand}" Grid.Column="1" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <TextBlock x:Name="HeaderTextBlock" Text="{DynamicResource LoginView.Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding CloseCommand}" Grid.Column="1" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox x:Name="usernameTextBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Title="Username" />
-                <PasswordBox x:Name="passPasswordBox" Tag="Password" PasswordChar="*"/>
+                <baseclasses:JTextBox x:Name="usernameTextBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LoginView.UsernameTextBoxTitle}" />
+                <PasswordBox x:Name="passPasswordBox" Tag="{DynamicResource LoginView.PasswordPasswordBoxTitle}" PasswordChar="*"/>
 
                 <Border x:Name="messageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
-                    <TextBlock Text="Incorrect username and/or password" Foreground="Red"/>
+                    <TextBlock Text="{DynamicResource LoginView.IcorrectUserPassText}" Foreground="Red"/>
                 </Border>
-                
-                <Button Content="Login" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{DynamicResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LoginCommand}"/>
+
+                <Button Content="{DynamicResource LoginView.LoginButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LoginCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>
