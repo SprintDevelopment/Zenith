@@ -18,11 +18,11 @@
             <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
             <Grid Height="50">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="1" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
@@ -34,24 +34,24 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <baseclasses:JTextBox Text="{Binding PageModel.FirstName, UpdateSourceTrigger=PropertyChanged}" Title="First name" Margin="24,16,8,0"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.LastName, UpdateSourceTrigger=PropertyChanged}" Title="Last name" Margin="8,16,24,0" Grid.Column="1"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.FirstName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.FirstNameTextBoxTitle}" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.LastName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.LastNameTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Mobile, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="Mobile" Margin="24,16,8,0"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="Tel" Margin="8,16,24,0" Grid.Column="1"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Mobile, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.TelTextBoxTitle}" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.FaxTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
                 </Grid>
-                <ComboBox x:Name="jobComboBox" SelectedValue="{Binding PageModel.Job, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="سمت کاری"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="Address" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
+                <ComboBox x:Name="jobComboBox" SelectedValue="{Binding PageModel.Job, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource PersonPage.RoleComboBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.AddressTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="Confirm" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Button Content="{DynamicResource PersonPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>

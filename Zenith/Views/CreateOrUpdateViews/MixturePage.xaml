@@ -22,15 +22,14 @@
             <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="White" Effect="{StaticResource CommonShadow}"/>
             <Grid Height="50" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
-                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Margin="16,0"/>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
-                <Rectangle Fill="LightGray" HorizontalAlignment="Left" Grid.Column="1" Width="1" Margin="0,12"/>
             </Grid>
             <Rectangle Fill="#FFF8F8F8" HorizontalAlignment="Right" Grid.Row="1" Width="1"/>
 
@@ -41,9 +40,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="Mixture name" />
-                    <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="Display name (to use in factor)" />
-                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.MixtureNameTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.DisplayNameTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.CommentTextBoxTitle}" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">
                     <Grid.RowDefinitions>
@@ -54,7 +53,7 @@
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1"/>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1" Grid.Row="1"/>
                     <Grid Margin="24,12">
-                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="Enter the name of material to search ..." Foreground="#FFD1D1D1" />
+                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="{DynamicResource MixturePage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
                         <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" >
@@ -87,7 +86,7 @@
 
                 </Grid>
 
-                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="{DynamicResource MixturePage.ConfirmButtonContent}" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFDFDFD">
                 <Grid.RowDefinitions>
@@ -100,8 +99,8 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Left" Text="نام محصول جهت ترکیب" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="درصد استفاده شده" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MixturePage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MixturePage.MixturePercentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="2">
                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>

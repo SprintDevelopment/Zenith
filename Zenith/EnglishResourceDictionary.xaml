@@ -39,6 +39,98 @@
     <system:String x:Key="MainWindow.TextHelpSubMenuItem">Text help</system:String>
     <system:String x:Key="MainWindow.AboutSubMenuItem">About us</system:String>
     
+    <!-- DELIVERY PAGE -->
+    <system:String x:Key="DeliveryPage.SiteComboBoxTitle">Site for delivery</system:String>
+    <system:String x:Key="DeliveryPage.MachineComboBoxTitle">Machine</system:String>
+    <system:String x:Key="DeliveryPage.CountTextBoxTitle">Count</system:String>
+    <system:String x:Key="DeliveryPage.DeliveryFeeTextBoxTitle">Delivery fee</system:String>
+    <system:String x:Key="DeliveryPage.DriverComboBoxTitle">Driver</system:String>
+    <system:String x:Key="DeliveryPage.DeliveryNumberTextBoxTitle">Delivery number</system:String>
+    <system:String x:Key="DeliveryPage.DeliveryDateTimeTitle">Delivery date time</system:String>
+    <system:String x:Key="DeliveryPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="DeliveryPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- MACHINE PAGE -->
+    <system:String x:Key="MachinePage.MachineNameTextBoxTitle">Machine name</system:String>
+    <system:String x:Key="MachinePage.CapacityTextBlockText">Capacity (in meters)</system:String>
+    <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBlockText">Default delivery fee</system:String>
+    <system:String x:Key="MachinePage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="MachinePage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- MATERIAL PAGE -->
+    <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">Material name</system:String>
+    <system:String x:Key="MaterialPage.AvailableAmountTextBoxTitle">Available amount</system:String>
+    <system:String x:Key="MaterialPage.BuyPriceTextBlockText">Buy price</system:String>
+    <system:String x:Key="MaterialPage.SalePriceTextBlockText">Sale price</system:String>
+    <system:String x:Key="MaterialPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="MaterialPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- MIXTURE PAGE -->
+    <system:String x:Key="MixturePage.MixtureNameTextBoxTitle">Mixture name</system:String>
+    <system:String x:Key="MixturePage.DisplayNameTextBoxTitle">Display name (to use in factor)</system:String>
+    <system:String x:Key="MixturePage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="MixturePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="MixturePage.MaterialNameColumnTextBlockText">Mixed material name</system:String>
+    <system:String x:Key="MixturePage.MixturePercentColumnTextBlockText">Mixed percent</system:String>
+    <system:String x:Key="MixturePage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- NOTE PAGE -->
+    <system:String x:Key="NotePage.SubjectTextBoxTitle">Subject</system:String>
+    <system:String x:Key="NotePage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="NotePage.ReminderTypeComboBoxTitle">Reminder type</system:String>
+    <system:String x:Key="NotePage.ReminderDateTimeTitle">Reminder date time</system:String>
+    <system:String x:Key="NotePage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- OUTGO PAGE -->
+    <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
+    <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
+    <system:String x:Key="OutgoPage.DateTimeTitle">Outgo date time</system:String>
+    <system:String x:Key="OutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="OutgoPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- OUTGO CATEGORY PAGE -->
+    <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">Category title</system:String>
+    <system:String x:Key="OutgoCategoryPage.ParentOutgoCategoryComboBoxTitle">Parent category</system:String>
+    <system:String x:Key="OutgoCategoryPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="OutgoCategoryPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- PERSON PAGE -->
+    <system:String x:Key="PersonPage.FirstNameTextBoxTitle">First name</system:String>
+    <system:String x:Key="PersonPage.LastNameTextBoxTitle">Last name</system:String>
+    <system:String x:Key="PersonPage.TelTextBoxTitle">Tel</system:String>
+    <system:String x:Key="PersonPage.FaxTextBoxTitle">Fax</system:String>
+    <system:String x:Key="PersonPage.RoleComboBoxTitle">Role</system:String>
+    <system:String x:Key="PersonPage.AddressTextBoxTitle">Address</system:String>
+    <system:String x:Key="PersonPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="PersonPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- SALE PAGE -->
+    <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>
+    <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
+    <system:String x:Key="SalePage.CommentTextBoxTitle">Optional comment</system:String>
+    <system:String x:Key="SalePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="SalePage.ConfirmButtonContent">Confirm</system:String>
+    <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">Material name</system:String>
+    <system:String x:Key="SalePage.UnitPriceColumnTextBlockText">Unit price</system:String>
+    <system:String x:Key="SalePage.CountColumnTextBlockText">Count</system:String>
+    <system:String x:Key="SalePage.TotalPriceColumnTextBlockText">Total price</system:String>
+    <system:String x:Key="SalePage.DeliveriesHeaderTextBlockText">Deliveries</system:String>
+    <system:String x:Key="SalePage.SiteNameColumnTextBlockText">Site name</system:String>
+    <system:String x:Key="SalePage.MachineNameColumnTextBlockText">Machine</system:String>
+    <system:String x:Key="SalePage.DriverFullNameColumnTextBlockText">Driver</system:String>
+    <system:String x:Key="SalePage.DeliveryNumberColumnTextBlockText">Delivery number</system:String>
+    <system:String x:Key="SalePage.DeliveryPriceColumnTextBlockText">Delivery price</system:String>
+    <system:String x:Key="SalePage.DeliveredCountColumnTextBlockText">Count</system:String>
+    <system:String x:Key="SalePage.DeliveryDateTimeColumnTextBlockText">Date time</system:String>
+    
+    <!-- SITE PAGE -->
+    <system:String x:Key="SitePage.RelatedCompanyComboBoxTitle">Related company</system:String>
+    <system:String x:Key="SitePage.NameTextBoxTitle">Site name</system:String>
+    <system:String x:Key="SitePage.AddressTextBoxTitle">Address</system:String>
+    <system:String x:Key="SitePage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="SitePage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- LOGIN VIEW -->
     <system:String x:Key="LoginView.Title">Login</system:String>
     <system:String x:Key="LoginView.UsernameTextBoxTitle">Username</system:String>
     <system:String x:Key="LoginView.PasswordPasswordBoxTitle">Password</system:String>
