@@ -7,7 +7,6 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Machine", MultipleName = "Machines")]
     public class Machine : Model
     {
         [Key]

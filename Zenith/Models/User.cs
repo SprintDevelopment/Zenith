@@ -14,7 +14,6 @@ using System.Collections.ObjectModel;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "User", MultipleName = "Users")]
     public class User : Model
     {
         [Key]

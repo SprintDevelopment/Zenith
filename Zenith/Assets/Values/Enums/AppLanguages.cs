@@ -9,9 +9,7 @@ namespace Zenith.Assets.Values.Enums
 {
     public enum AppLanguages
     {
-        [Display(Name = "English")]
         English,
-        [Display(Name = "فارسی")]
         Persian
     }
 }

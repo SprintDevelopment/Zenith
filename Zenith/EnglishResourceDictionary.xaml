@@ -7,7 +7,80 @@
     <system:Int32 x:Key="PageHeader.CloseButton.Grid.Column">1</system:Int32>
     <GridLength x:Key="PageHeader.FirstGrid.Length">*</GridLength>
     <GridLength x:Key="PageHeader.SecondGrid.Length">50</GridLength>
-    
+
+    <!-- APP LANGUAGES TYPES -->
+    <system:String x:Key="AppLanguages.English">English</system:String>
+    <system:String x:Key="AppLanguages.Persian">فارسی</system:String>
+
+    <!-- COMPANY TYPES -->
+    <system:String x:Key="CompanyTypes.DontCare">_</system:String>
+    <system:String x:Key="CompanyTypes.Buyer">Buyer</system:String>
+    <system:String x:Key="CompanyTypes.Seller">Seller</system:String>
+    <system:String x:Key="CompanyTypes.Both">Both buyer and seller</system:String>
+
+    <!-- JOBS -->
+    <system:String x:Key="Jobs.DontCare">_</system:String>
+    <system:String x:Key="Jobs.None">Not specified</system:String>
+    <system:String x:Key="Jobs.Driver">Driver</system:String>
+    <system:String x:Key="Jobs.Accountant">Accountant</system:String>
+
+    <!-- NOTIFY TYPES -->
+    <system:String x:Key="NotifyTypes.DontCare">_</system:String>
+    <system:String x:Key="NotifyTypes.NoNeedToNotify">No need to remind</system:String>
+    <system:String x:Key="NotifyTypes.FooterNotify">Show at bottom</system:String>
+
+    <!-- PERMISSION TYPES -->
+    <system:String x:Key="PermissionTypes.DontCare">_</system:String>
+    <system:String x:Key="PermissionTypes.Buys">Buys</system:String>
+    <system:String x:Key="PermissionTypes.Sales">Sales</system:String>
+    <system:String x:Key="PermissionTypes.Companies">Companies</system:String>
+    <system:String x:Key="PermissionTypes.Sites">Company sites</system:String>
+    <system:String x:Key="PermissionTypes.Materials">Materials</system:String>
+    <system:String x:Key="PermissionTypes.Mixtures">Mixtures</system:String>
+    <system:String x:Key="PermissionTypes.Machines">Machines</system:String>
+    <system:String x:Key="PermissionTypes.Outgoes">Outgoes</system:String>
+    <system:String x:Key="PermissionTypes.OutgoCategories">Outgo Categories</system:String>
+    <system:String x:Key="PermissionTypes.Personnel">Personnel</system:String>
+    <system:String x:Key="PermissionTypes.Users">Users</system:String>
+    <system:String x:Key="PermissionTypes.Notes">Notes</system:String>
+
+    <!-- SINGLE & MULTIPLE RESOURCE NAMES -->
+    <system:String x:Key="SingleResources.Buy">Buy</system:String>
+    <system:String x:Key="MultipleResources.Buy">Buys</system:String>
+    <system:String x:Key="SingleResources.BuyItem">Buy item</system:String>
+    <system:String x:Key="MultipleResources.BuyItem">Buy items</system:String>
+    <system:String x:Key="SingleResources.Company">Company</system:String>
+    <system:String x:Key="MultipleResources.Company">Companies</system:String>
+    <system:String x:Key="SingleResources.Delivey">Delivery</system:String>
+    <system:String x:Key="MultipleResources.Delivey">Deliveries</system:String>
+    <system:String x:Key="SingleResources.Machine">Machine</system:String>
+    <system:String x:Key="MultipleResources.Machine">Machines</system:String>
+    <system:String x:Key="SingleResources.Material">Material</system:String>
+    <system:String x:Key="MultipleResources.Material">Materials</system:String>
+    <system:String x:Key="SingleResources.Mixture">Mixture</system:String>
+    <system:String x:Key="MultipleResources.Mixture">Mixtures</system:String>
+    <system:String x:Key="SingleResources.MixtureItem">Mixture item</system:String>
+    <system:String x:Key="MultipleResources.MixtureItem">Mixture items</system:String>
+    <system:String x:Key="SingleResources.Note">Note</system:String>
+    <system:String x:Key="MultipleResources.Note">Notes</system:String>
+    <system:String x:Key="SingleResources.Outgo">Outgo</system:String>
+    <system:String x:Key="MultipleResources.Outgo">Outgoes</system:String>
+    <system:String x:Key="SingleResources.OutgoCategory">Outgo category</system:String>
+    <system:String x:Key="MultipleResources.OutgoCategory">Outgo categories</system:String>
+    <system:String x:Key="SingleResources.Person">Personnel</system:String>
+    <system:String x:Key="MultipleResources.Person">Personnel</system:String>
+    <system:String x:Key="SingleResources.Sale">Sale</system:String>
+    <system:String x:Key="MultipleResources.Sale">Sales</system:String>
+    <system:String x:Key="SingleResources.SaleItem">Sale item</system:String>
+    <system:String x:Key="MultipleResources.SaleItem">Sale items</system:String>
+    <system:String x:Key="SingleResources.Site">Site</system:String>
+    <system:String x:Key="MultipleResources.Site">Sites</system:String>
+    <system:String x:Key="SingleResources.User">User</system:String>
+    <system:String x:Key="MultipleResources.User">Users</system:String>
+    <system:String x:Key="SingleResources.UserPermission">User permission</system:String>
+    <system:String x:Key="MultipleResources.UserPermission">User permissions</system:String>
+
+    <!-- MENU -->
     <system:String x:Key="MainWindow.BuySaleMenuItem">Buy and sale</system:String>
     <system:String x:Key="MainWindow.BuysSubMenuItem">Buys</system:String>
     <system:String x:Key="MainWindow.SalesSubMenuItem">Sales</system:String>
@@ -38,7 +111,43 @@
     <system:String x:Key="MainWindow.HelpMenuItem">Help and support</system:String>
     <system:String x:Key="MainWindow.TextHelpSubMenuItem">Text help</system:String>
     <system:String x:Key="MainWindow.AboutSubMenuItem">About us</system:String>
-    
+
+    <!-- BUY PAGE -->
+    <system:String x:Key="BuyPage.SellerCompanyComboBoxTitle">Seller company</system:String>
+    <system:String x:Key="BuyPage.BuyDateTimeTitle">Buy date time</system:String>
+    <system:String x:Key="BuyPage.CommentTextBoxTitle">Optional comment</system:String>
+    <system:String x:Key="BuyPage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="BuyPage.ConfirmButtonContent">Confirm</system:String>
+    <system:String x:Key="BuyPage.MaterialNameColumnTextBlockText">Material name</system:String>
+    <system:String x:Key="BuyPage.UnitPriceColumnTextBlockText">Unit price</system:String>
+    <system:String x:Key="BuyPage.CountColumnTextBlockText">Count</system:String>
+    <system:String x:Key="BuyPage.TotalPriceColumnTextBlockText">Total price</system:String>
+
+    <!-- BUY LIST PAGE -->
+    <system:String x:Key="BuyListPage.SellerCompanyColumnTextBlockText">Seller company</system:String>
+    <system:String x:Key="BuyListPage.MaterialsPriceColumnTextBlockText">Factor price</system:String>
+    <system:String x:Key="BuyListPage.StateColumnTextBlockText">State</system:String>
+    <system:String x:Key="BuyListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
+
+    <!-- COMPANY PAGE -->
+    <system:String x:Key="CompanyPage.NameTextBoxTitle">Company name</system:String>
+    <system:String x:Key="CompanyPage.TRNTextBoxTitle">Tax registration number (TRN)</system:String>
+    <system:String x:Key="CompanyPage.TypeComboBoxTitle">Type</system:String>
+    <system:String x:Key="CompanyPage.TelTextBoxTitle">Tel</system:String>
+    <system:String x:Key="CompanyPage.FaxTextBoxTitle">Fax</system:String>
+    <system:String x:Key="CompanyPage.EmailTextBoxTitle">Email</system:String>
+    <system:String x:Key="CompanyPage.AddressTextBoxTitle">Address</system:String>
+    <system:String x:Key="CompanyPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="CompanyPage.ConfirmButtonContent">Confirm</system:String>
+
+    <!-- COMPANY LIST PAGE -->
+    <system:String x:Key="CompanyListPage.NameColumnTextBlockText">Company name</system:String>
+    <system:String x:Key="CompanyListPage.TRNColumnTextBlockText">TRN</system:String>
+    <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">Type</system:String>
+    <system:String x:Key="CompanyListPage.TelColumnTextBlockText">Tel</system:String>
+    <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">Fax</system:String>
+    <system:String x:Key="CompanyListPage.AddressColumnTextBlockText">Address</system:String>
+
     <!-- DELIVERY PAGE -->
     <system:String x:Key="DeliveryPage.SiteComboBoxTitle">Site for delivery</system:String>
     <system:String x:Key="DeliveryPage.MachineComboBoxTitle">Machine</system:String>
@@ -52,18 +161,29 @@
     
     <!-- MACHINE PAGE -->
     <system:String x:Key="MachinePage.MachineNameTextBoxTitle">Machine name</system:String>
-    <system:String x:Key="MachinePage.CapacityTextBlockText">Capacity (in meters)</system:String>
-    <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBlockText">Default delivery fee</system:String>
+    <system:String x:Key="MachinePage.CapacityTextBoxTitle">Capacity (in meters)</system:String>
+    <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBoxTitle">Default delivery fee</system:String>
     <system:String x:Key="MachinePage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MachinePage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- MACHINE LIST PAGE -->
+    <system:String x:Key="MachineListPage.MachineNameColumnTextBlockText">Machine name</system:String>
+    <system:String x:Key="MachineListPage.CapacityColumnTextBlockText">Capacity (in meters)</system:String>
+    <system:String x:Key="MachineListPage.DefaultDeliveryFeeColumnTextBlockText">Default delivery fee</system:String>
     
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">Material name</system:String>
     <system:String x:Key="MaterialPage.AvailableAmountTextBoxTitle">Available amount</system:String>
-    <system:String x:Key="MaterialPage.BuyPriceTextBlockText">Buy price</system:String>
-    <system:String x:Key="MaterialPage.SalePriceTextBlockText">Sale price</system:String>
+    <system:String x:Key="MaterialPage.BuyPriceTextBoxTitle">Buy price</system:String>
+    <system:String x:Key="MaterialPage.SalePriceTextBoxTitle">Sale price</system:String>
     <system:String x:Key="MaterialPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MaterialPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- MATERIAL LIST PAGE -->
+    <system:String x:Key="MaterialListPage.MaterialNameColumnTextBlockText">Material name</system:String>
+    <system:String x:Key="MaterialListPage.AvailableAmountColumnTextBlockText">Available amount</system:String>
+    <system:String x:Key="MaterialListPage.BuyPriceColumnTextBlockText">Buy price</system:String>
+    <system:String x:Key="MaterialListPage.SalePriceColumnTextBlockText">Sale price</system:String>
     
     <!-- MIXTURE PAGE -->
     <system:String x:Key="MixturePage.MixtureNameTextBoxTitle">Mixture name</system:String>
@@ -74,19 +194,35 @@
     <system:String x:Key="MixturePage.MixturePercentColumnTextBlockText">Mixed percent</system:String>
     <system:String x:Key="MixturePage.ConfirmButtonContent">Confirm</system:String>
     
+    <!-- MIXTURE LIST PAGE -->
+    <system:String x:Key="MixtureListPage.MixtureNameColumnTextBlockText">Mixture name</system:String>
+    <system:String x:Key="MixtureListPage.DisplayNameColumnTextBlockText">Display name</system:String>
+    <system:String x:Key="MixtureListPage.CommentColumnTextBlockText">Comment</system:String>
+    
     <!-- NOTE PAGE -->
     <system:String x:Key="NotePage.SubjectTextBoxTitle">Subject</system:String>
     <system:String x:Key="NotePage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="NotePage.ReminderTypeComboBoxTitle">Reminder type</system:String>
     <system:String x:Key="NotePage.ReminderDateTimeTitle">Reminder date time</system:String>
     <system:String x:Key="NotePage.ConfirmButtonContent">Confirm</system:String>
-    
+
+    <!-- NOTE LIST PAGE -->
+    <system:String x:Key="NoteListPage.SubjectColumnTextBlockText">Subject</system:String>
+    <system:String x:Key="NoteListPage.ReminderTypeColumnTextBlockText">Remider type</system:String>
+    <system:String x:Key="NoteListPage.ReminderDateTimeColumnTextBlockText">Reminder date time</system:String>
+
     <!-- OUTGO PAGE -->
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
     <system:String x:Key="OutgoPage.DateTimeTitle">Outgo date time</system:String>
     <system:String x:Key="OutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoPage.ConfirmButtonContent">Confirm</system:String>
+
+    <!-- OUTGO LIST PAGE -->
+    <system:String x:Key="OutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
+    <system:String x:Key="OutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
+    <system:String x:Key="OutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
+    <system:String x:Key="OutgoListPage.CommentColumnTextBlockText">Comment</system:String>
     
     <!-- OUTGO CATEGORY PAGE -->
     <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">Category title</system:String>
@@ -94,15 +230,27 @@
     <system:String x:Key="OutgoCategoryPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoCategoryPage.ConfirmButtonContent">Confirm</system:String>
     
+    <!-- OUTGO CATEGORY LIST PAGE -->
+    <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
+    <system:String x:Key="OutgoCategoryListPage.ParentOutgoCategoryColumnTextBlockText">Parent category</system:String>
+    <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
+    
     <!-- PERSON PAGE -->
     <system:String x:Key="PersonPage.FirstNameTextBoxTitle">First name</system:String>
     <system:String x:Key="PersonPage.LastNameTextBoxTitle">Last name</system:String>
+    <system:String x:Key="PersonPage.MobileTextBoxTitle">Mobile</system:String>
     <system:String x:Key="PersonPage.TelTextBoxTitle">Tel</system:String>
-    <system:String x:Key="PersonPage.FaxTextBoxTitle">Fax</system:String>
     <system:String x:Key="PersonPage.RoleComboBoxTitle">Role</system:String>
     <system:String x:Key="PersonPage.AddressTextBoxTitle">Address</system:String>
     <system:String x:Key="PersonPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="PersonPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- PERSON LIST PAGE -->
+    <system:String x:Key="PersonListPage.FullNameColumnTextBlockText">Full name</system:String>
+    <system:String x:Key="PersonListPage.MobileColumnTextBlockText">Mobile</system:String>
+    <system:String x:Key="PersonListPage.TelColumnTextBlockText">Tel</system:String>
+    <system:String x:Key="PersonListPage.RoleColumnTextBlockText">Role</system:String>
+    <system:String x:Key="PersonListPage.AddressColumnTextBlockText">Address</system:String>
     
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>
@@ -123,6 +271,13 @@
     <system:String x:Key="SalePage.DeliveredCountColumnTextBlockText">Count</system:String>
     <system:String x:Key="SalePage.DeliveryDateTimeColumnTextBlockText">Date time</system:String>
     
+    <!-- SALE LIST PAGE -->
+    <system:String x:Key="SaleListPage.BuyerCompanyColumnTextBlockText">Buyer company</system:String>
+    <system:String x:Key="SaleListPage.MaterialsPriceColumnTextBlockText">Materials' price</system:String>
+    <system:String x:Key="SaleListPage.DeliveriesPriceColumnTextBlockText">Deliveries' price</system:String>
+    <system:String x:Key="SaleListPage.StateColumnTextBlockText">State</system:String>
+    <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
+    
     <!-- SITE PAGE -->
     <system:String x:Key="SitePage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="SitePage.NameTextBoxTitle">Site name</system:String>
@@ -130,6 +285,27 @@
     <system:String x:Key="SitePage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="SitePage.ConfirmButtonContent">Confirm</system:String>
     
+    <!-- SITE LIST PAGE -->
+    <system:String x:Key="SiteListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
+    <system:String x:Key="SiteListPage.NameColumnTextBlockText">Site name</system:String>
+    <system:String x:Key="SiteListPage.AddressColumnTextBlockText">Address</system:String>
+
+    <!-- USER PAGE -->
+    <system:String x:Key="UserPage.UsernameTextBoxTitle">Username</system:String>
+    <system:String x:Key="UserPage.PasswordPasswordBoxTitle">Password</system:String>
+    <system:String x:Key="UserPage.ConfirmPasswordBoxTitle">Confirm password</system:String>
+    <system:String x:Key="UserPage.CreateDateTimeTitle">Create date time</system:String>
+    <system:String x:Key="UserPage.ConfirmButtonContent">Confirm</system:String>
+    <system:String x:Key="UserPage.PermissionColumnTextBlockText">Permission</system:String>
+    <system:String x:Key="UserPage.ViewListColumnTextBlockText">View list</system:String>
+    <system:String x:Key="UserPage.CreateColumnTextBlockText">Create</system:String>
+    <system:String x:Key="UserPage.EditColumnTextBlockText">Edit</system:String>
+    <system:String x:Key="UserPage.DeleteColumnTextBlockText">Delete</system:String>
+
+    <!-- USER LIST PAGE -->
+    <system:String x:Key="UserListPage.UsernameColumnTextBlockText">Username</system:String>
+    <system:String x:Key="UserListPage.CreateDateTimeColumnTextBlockText">Create date time</system:String>
+
     <!-- LOGIN VIEW -->
     <system:String x:Key="LoginView.Title">Login</system:String>
     <system:String x:Key="LoginView.UsernameTextBoxTitle">Username</system:String>

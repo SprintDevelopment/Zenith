@@ -10,7 +10,6 @@ using Zenith.Assets.Attributes;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Sale item", MultipleName = "Sale items")]
     public class SaleItem : Model
     {
         [Key]

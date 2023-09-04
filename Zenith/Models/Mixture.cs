@@ -13,7 +13,6 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Mixture", MultipleName = "Mixtures")]
     public class Mixture : Model
     {
         [Key]

@@ -11,7 +11,6 @@ using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Company site", MultipleName = "Company sites")]
     public class Site : Model
     {
         [Key]

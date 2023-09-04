@@ -23,9 +23,13 @@ namespace Zenith.ViewModels.ListViewModels
     {
         public BaseListViewModel(Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria, PermissionTypes permissionType)
         {
-            var modelAttributes = typeof(T).GetAttribute<ModelAttribute>();
-            ViewTitle = modelAttributes.MultipleName;
+            ViewTitle = (string)App.Current.Resources[$"MultipleResources.{typeof(T).Name}"];
             Repository = repository;
+            var allItemsSelectedString = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ?
+                " , all items selected" : " ، تمامی موارد انتخاب شده";
+
+            var nItemsSelectedStringFormat = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ?
+                " , {0:n0} item(s) selected)" : " ، {0:n0} مورد انتخاب شده";
 
             SourceList.AddRange(Repository.All());
             void calculate()
@@ -33,15 +37,15 @@ namespace Zenith.ViewModels.ListViewModels
                 var itemsCount = ActiveList.Count();
                 var selectedItemsCount = ActiveList.Count(item => item.IsSelected);
 
-                ItemsStatistics = $"({itemsCount:n0} {modelAttributes.SingleName}";
+                ItemsStatistics = $"({itemsCount:n0} {(string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"]}";
                 if (itemsCount == selectedItemsCount || selectedItemsCount == 0)
                 {
-                    ItemsStatistics += selectedItemsCount > 0 ? $" , all itmes selected)" : ")";
+                    ItemsStatistics += selectedItemsCount > 0 ? allItemsSelectedString : ")";
                     SelectionMode = selectedItemsCount == 0 ? SelectionModes.NoItemSelected : SelectionModes.AllItemsSelected;
                 }
                 else
                 {
-                    ItemsStatistics += $" , {selectedItemsCount:n0} item(s) selected)";
+                    ItemsStatistics += string.Format(nItemsSelectedStringFormat,selectedItemsCount);
                     SelectionMode = SelectionModes.SomeItemsSelected;
                 }
             };
@@ -79,8 +83,8 @@ namespace Zenith.ViewModels.ListViewModels
                 var dialogDto = new DialogDto()
                 {
                     DialogType = DialogTypes.Danger,
-                    Title = selectedItemsCount == 1 ? $"Deleting one {modelAttributes.SingleName}" : $"Deleting multiple {modelAttributes.SingleName}",
-                    Text = selectedItemsCount == 1 ? $"Are you sure to delete {ActiveList.FirstOrDefault(x => x.IsSelected)} ?" : $"Are you sure to delete {selectedItemsCount:n0} {modelAttributes.SingleName} items ?",
+                    //Title = selectedItemsCount == 1 ? $"Deleting one {modelAttributes.SingleResourceName}" : $"Deleting multiple {modelAttributes.SingleResourceName}",
+                    //Text = selectedItemsCount == 1 ? $"Are you sure to delete {ActiveList.FirstOrDefault(x => x.IsSelected)} ?" : $"Are you sure to delete {selectedItemsCount:n0} {modelAttributes.SingleResourceName} items ?",
                     Choices = new List<DialogChoiceDto>()
                     {
                         new DialogChoiceDto { DialogResult = DialogResults.Yes, Text = "Yes, delete" },
@@ -148,7 +152,7 @@ namespace Zenith.ViewModels.ListViewModels
                 App.MainViewModel.IsSearchVisible = !App.MainViewModel.IsSearchVisible;
             });
 
-            searchModel.Title = $"Search in {modelAttributes.MultipleName}";
+            //searchModel.Title = $"Search in {modelAttributes.MultipleResourceName}";
             InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearchCommand.Execute(searchModel));
 
             DisposeCommand = ReactiveCommand.Create<Unit>(_ =>

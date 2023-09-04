@@ -9,7 +9,6 @@ using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Company", MultipleName = "Companies")]
     public class Company : Model
     {
         [Key]

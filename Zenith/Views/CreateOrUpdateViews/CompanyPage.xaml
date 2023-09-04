@@ -29,24 +29,24 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="Company name" />
-                <baseclasses:JTextBox Text="{Binding PageModel.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" Title="TRN" />
-                <ComboBox x:Name="companyTypeComboBox" SelectedValue="{Binding PageModel.CompanyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="Type"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.NameTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.TRNTextBoxTitle}" />
+                <ComboBox x:Name="companyTypeComboBox" SelectedValue="{Binding PageModel.CompanyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource CompanyPage.TypeComboBoxTitle}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="Tel" Margin="24,16,8,0"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Fax, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="Fax" Margin="8,16,24,0" Grid.Column="1"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource CompanyPage.TelTextBoxTitle}" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Fax, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource CompanyPage.FaxTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
                 </Grid>
-                <baseclasses:JTextBox Text="{Binding PageModel.Email, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="Email" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="Address" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Email, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource CompanyPage.EmailTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.AddressTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="Confirm" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Button Content="{DynamicResource CompanyPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>

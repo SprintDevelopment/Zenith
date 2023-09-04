@@ -11,7 +11,6 @@ using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Outgo", MultipleName = "Outgoes")]
     public class Outgo : Model
     {
         [Key]

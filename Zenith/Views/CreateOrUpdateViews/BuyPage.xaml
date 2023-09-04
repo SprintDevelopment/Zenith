@@ -40,9 +40,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="Seller company"/>
-                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Buy DateTime"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="Optional comments" />
+                    <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource BuyPage.SellerCompanyComboBoxTitle}"/>
+                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource BuyPage.BuyDateTimeTitle}"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource BuyPage.CommentTextBoxTitle}" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">
                     <Grid.RowDefinitions>
@@ -53,7 +53,7 @@
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1"/>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1" Grid.Row="1"/>
                     <Grid Margin="24,12">
-                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="Enter the name of material to search ..." Foreground="#FFD1D1D1" />
+                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="{DynamicResource BuyPage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
                         <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" >
@@ -86,7 +86,7 @@
 
                 </Grid>
 
-                <Button Content="Confirm" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="{DynamicResource BuyPage.ConfirmButtonContent}" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFDFDFD">
                 <Grid.RowDefinitions>
@@ -101,10 +101,10 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Left" Text="Material name" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="Unit price" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="Count" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                    <TextBlock HorizontalAlignment="Center" Text="Total price" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource BuyPage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.UnitPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.TotalPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="4">
                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>

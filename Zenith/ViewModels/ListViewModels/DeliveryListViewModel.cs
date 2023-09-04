@@ -23,8 +23,8 @@ namespace Zenith.ViewModels.ListViewModels
         public DeliveryListViewModel(DeliveryRepository repository, SearchBaseDto searchModel, IObservable<Func<Delivery, bool>> criteria, Sale relatedSale)
             : base(repository, searchModel, criteria, PermissionTypes.Sales)
         {
-            var modelAttributes = typeof(Delivery).GetAttribute<ModelAttribute>();
-            ViewTitle = $"لیست {modelAttributes.MultipleName} به {relatedSale.Company.Name} بابت سفارش شماره {relatedSale.SaleId}";
+            //var modelAttributes = typeof(Delivery).GetAttribute<ModelAttribute>();
+            //ViewTitle = $"لیست {modelAttributes.MultipleResourceName} به {relatedSale.Company.Name} بابت سفارش شماره {relatedSale.SaleId}";
 
             SourceList.Clear();
             SourceList.AddRange(Repository.Find(d => relatedSale.Items.Contains(d.SaleItem)));

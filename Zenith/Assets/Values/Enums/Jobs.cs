@@ -9,13 +9,9 @@ namespace Zenith.Assets.Values.Enums
 {
     public enum Jobs
     {
-        [Display(Name = "")]
         DontCare = -1,
-        [Display(Name = "Not specified")]
         None,
-        [Display(Name = "Driver")]
         Driver,
-        [Display(Name = "Accountant")]
         Accountant
     }
 }

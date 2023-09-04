@@ -9,13 +9,9 @@ namespace Zenith.Assets.Values.Enums
 {
     public enum CompanyTypes
     {
-        [Display(Name = "")]
         DontCare = -1,
-        [Display(Name = "Buyer")]
         Buyer,
-        [Display(Name = "Seller")]
         Seller,
-        [Display(Name = "Both buyer and seller")]
         Both
     }
 }

@@ -9,7 +9,6 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Mixture item", MultipleName = "Mixture items")]
     public class MixtureItem : Model
     {
         [Key]

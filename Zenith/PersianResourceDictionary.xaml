@@ -1,12 +1,86 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=netstandard">
+    
     <FlowDirection x:Key="AppFlowDirection">RightToLeft</FlowDirection>
     <FontFamily x:Key="AppFont">Vazir FD, JetBrains Mono</FontFamily>
 
     <system:Int32 x:Key="PageHeader.CloseButton.Grid.Column">0</system:Int32>
     <GridLength x:Key="PageHeader.FirstGrid.Length">50</GridLength>
     <GridLength x:Key="PageHeader.SecondGrid.Length">*</GridLength>
+    
+    <!-- APP LANGUAGES TYPES -->
+    <system:String x:Key="AppLanguages.English">English</system:String>
+    <system:String x:Key="AppLanguages.Persian">فارسی</system:String>
+    
+    <!-- COMPANY TYPES -->
+    <system:String x:Key="CompanyTypes.DontCare">_</system:String>
+    <system:String x:Key="CompanyTypes.Buyer">خریدار</system:String>
+    <system:String x:Key="CompanyTypes.Seller">فروشنده</system:String>
+    <system:String x:Key="CompanyTypes.Both">هم خریدار و هم فروشنده</system:String>
 
+    <!-- JOBS -->
+    <system:String x:Key="Jobs.DontCare">_</system:String>
+    <system:String x:Key="Jobs.None">مشخص نشده</system:String>
+    <system:String x:Key="Jobs.Driver">راننده</system:String>
+    <system:String x:Key="Jobs.Accountant">حسابدار</system:String>
+
+    <!-- NOTIFY TYPES -->
+    <system:String x:Key="NotifyTypes.DontCare">_</system:String>
+    <system:String x:Key="NotifyTypes.NoNeedToNotify">نیازی به یادآوری نیست</system:String>
+    <system:String x:Key="NotifyTypes.FooterNotify">یادآوری در پایین صفحه</system:String>
+
+    <!-- PERMISSION TYPES -->
+    <system:String x:Key="PermissionTypes.DontCare">_</system:String>
+    <system:String x:Key="PermissionTypes.Buys">خریدها</system:String>
+    <system:String x:Key="PermissionTypes.Sales">فروش ها</system:String>
+    <system:String x:Key="PermissionTypes.Companies">شرکت ها</system:String>
+    <system:String x:Key="PermissionTypes.Sites">سایت ها</system:String>
+    <system:String x:Key="PermissionTypes.Materials">محصولات</system:String>
+    <system:String x:Key="PermissionTypes.Mixtures">ترکیبات</system:String>
+    <system:String x:Key="PermissionTypes.Machines">ماشین ها</system:String>
+    <system:String x:Key="PermissionTypes.Outgoes">هزینه ها</system:String>
+    <system:String x:Key="PermissionTypes.OutgoCategories">دسته های هزینه</system:String>
+    <system:String x:Key="PermissionTypes.Personnel">پرسنل</system:String>
+    <system:String x:Key="PermissionTypes.Users">کاربران</system:String>
+    <system:String x:Key="PermissionTypes.Notes">یادداشت ها</system:String>
+    
+    <!-- SINGLE & MULTIPLE RESOURCE NAMES -->
+    <system:String x:Key="SingleResources.Buy">خرید</system:String>
+    <system:String x:Key="MultipleResources.Buy">خرید ها</system:String>
+    <system:String x:Key="SingleResources.BuyItem">آیتم خرید</system:String>
+    <system:String x:Key="MultipleResources.BuyItem">آیتم های خرید</system:String>
+    <system:String x:Key="SingleResources.Company">شرکت</system:String>
+    <system:String x:Key="MultipleResources.Company">شرکت ها</system:String>
+    <system:String x:Key="SingleResources.Delivey">تحویل</system:String>
+    <system:String x:Key="MultipleResources.Delivey">تحویل ها</system:String>
+    <system:String x:Key="SingleResources.Machine">ماشین</system:String>
+    <system:String x:Key="MultipleResources.Machine">ماشین ها</system:String>
+    <system:String x:Key="SingleResources.Material">محصول</system:String>
+    <system:String x:Key="MultipleResources.Material">محصولات</system:String>
+    <system:String x:Key="SingleResources.Mixture">ترکیب</system:String>
+    <system:String x:Key="MultipleResources.Mixture">ترکیبات</system:String>
+    <system:String x:Key="SingleResources.MixtureItem">آیتم ترکیب</system:String>
+    <system:String x:Key="MultipleResources.MixtureItem">آیتم های ترکیب</system:String>
+    <system:String x:Key="SingleResources.Note">یادداشت</system:String>
+    <system:String x:Key="MultipleResources.Note">یادداشت ها</system:String>
+    <system:String x:Key="SingleResources.Outgo">هزینه</system:String>
+    <system:String x:Key="MultipleResources.Outgo">هزینه ها</system:String>
+    <system:String x:Key="SingleResources.OutgoCategory">دسته هزینه</system:String>
+    <system:String x:Key="MultipleResources.OutgoCategory">دسته های هزینه</system:String>
+    <system:String x:Key="SingleResources.Person">پرسنل</system:String>
+    <system:String x:Key="MultipleResources.Person">پرسنل</system:String>
+    <system:String x:Key="SingleResources.Sale">فروش</system:String>
+    <system:String x:Key="MultipleResources.Sale">فروش ها</system:String>
+    <system:String x:Key="SingleResources.SaleItem">آیتم فروش</system:String>
+    <system:String x:Key="MultipleResources.SaleItem">آیتم های فروش</system:String>
+    <system:String x:Key="SingleResources.Site">سایت</system:String>
+    <system:String x:Key="MultipleResources.Site">سایت ها</system:String>
+    <system:String x:Key="SingleResources.User">کاربر</system:String>
+    <system:String x:Key="MultipleResources.User">کاربران</system:String>
+    <system:String x:Key="SingleResources.UserPermission">دسترسی</system:String>
+    <system:String x:Key="MultipleResources.UserPermission">دسترسی ها</system:String>
+    
+    <!-- MENU -->
     <system:String x:Key="MainWindow.BuySaleMenuItem">خرید و فروش</system:String>
     <system:String x:Key="MainWindow.BuysSubMenuItem">خریدها</system:String>
     <system:String x:Key="MainWindow.SalesSubMenuItem">فروش ها</system:String>
@@ -38,6 +112,42 @@
     <system:String x:Key="MainWindow.TextHelpSubMenuItem">راهنمای متنی</system:String>
     <system:String x:Key="MainWindow.AboutSubMenuItem">درباره ما</system:String>
 
+    <!-- BUY PAGE -->
+    <system:String x:Key="BuyPage.SellerCompanyComboBoxTitle">شرکت فروشنده</system:String>
+    <system:String x:Key="BuyPage.BuyDateTimeTitle">تاریخ و ساعت خرید</system:String>
+    <system:String x:Key="BuyPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
+    <system:String x:Key="BuyPage.SearchHintTextBlockText">برای جستجو، نام محصول را وارد کنید ...</system:String>
+    <system:String x:Key="BuyPage.ConfirmButtonContent">تایید</system:String>
+    <system:String x:Key="BuyPage.MaterialNameColumnTextBlockText">نام محصول</system:String>
+    <system:String x:Key="BuyPage.UnitPriceColumnTextBlockText">قیمت واحد</system:String>
+    <system:String x:Key="BuyPage.CountColumnTextBlockText">تعداد</system:String>
+    <system:String x:Key="BuyPage.TotalPriceColumnTextBlockText">قیمت کل</system:String>
+
+    <!-- BUY LIST PAGE -->
+    <system:String x:Key="BuyListPage.SellerCompanyColumnTextBlockText">شرکت فروشنده</system:String>
+    <system:String x:Key="BuyListPage.MaterialsPriceColumnTextBlockText">مبلغ فاکتور</system:String>
+    <system:String x:Key="BuyListPage.StateColumnTextBlockText">وضعیت</system:String>
+    <system:String x:Key="BuyListPage.SaleDateTimeColumnTextBlockText">تاریخ و ساعت</system:String>
+
+    <!-- COMPANY PAGE -->
+    <system:String x:Key="CompanyPage.NameTextBoxTitle">نام شرکت</system:String>
+    <system:String x:Key="CompanyPage.TRNTextBoxTitle">شماره مالیاتی (TRN)</system:String>
+    <system:String x:Key="CompanyPage.TypeComboBoxTitle">نوع</system:String>
+    <system:String x:Key="CompanyPage.TelTextBoxTitle">تلفن</system:String>
+    <system:String x:Key="CompanyPage.FaxTextBoxTitle">فکس</system:String>
+    <system:String x:Key="CompanyPage.EmailTextBoxTitle">ایمیل</system:String>
+    <system:String x:Key="CompanyPage.AddressTextBoxTitle">آدرس</system:String>
+    <system:String x:Key="CompanyPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
+    <system:String x:Key="CompanyPage.ConfirmButtonContent">تایید</system:String>
+
+    <!-- COMPANY LIST PAGE -->
+    <system:String x:Key="CompanyListPage.NameColumnTextBlockText">نام شرکت</system:String>
+    <system:String x:Key="CompanyListPage.TRNColumnTextBlockText">شماره مالیاتی (TRN)</system:String>
+    <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">نوع</system:String>
+    <system:String x:Key="CompanyListPage.TelColumnTextBlockText">تلفن</system:String>
+    <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">فکس</system:String>
+    <system:String x:Key="CompanyListPage.AddressColumnTextBlockText">آدرس</system:String>
+
     <!-- DELIVERY PAGE -->
     <system:String x:Key="DeliveryPage.SiteComboBoxTitle">سایت محل تحویل</system:String>
     <system:String x:Key="DeliveryPage.MachineComboBoxTitle">ماشین</system:String>
@@ -51,18 +161,29 @@
 
     <!-- MACHINE PAGE -->
     <system:String x:Key="MachinePage.MachineNameTextBoxTitle">نام ماشین</system:String>
-    <system:String x:Key="MachinePage.CapacityTextBlockText">ظرفیت (به واحد متر)</system:String>
-    <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBlockText">هزینه تحویل پیشفرض</system:String>
+    <system:String x:Key="MachinePage.CapacityTextBoxTitle">ظرفیت (به واحد متر)</system:String>
+    <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBoxTitle">هزینه تحویل پیشفرض</system:String>
     <system:String x:Key="MachinePage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="MachinePage.ConfirmButtonContent">تایید</system:String>
+
+    <!-- MACHINE LIST PAGE -->
+    <system:String x:Key="MachineListPage.MachineNameColumnTextBlockText">نام ماشین</system:String>
+    <system:String x:Key="MachineListPage.CapacityColumnTextBlockText">ظرفیت (به واحد متر)</system:String>
+    <system:String x:Key="MachineListPage.DefaultDeliveryFeeColumnTextBlockText">هزینه تحویل پیشفرض</system:String>
 
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">نام محصول</system:String>
     <system:String x:Key="MaterialPage.AvailableAmountTextBoxTitle">مقدار موجودی</system:String>
-    <system:String x:Key="MaterialPage.BuyPriceTextBlockText">قیمت خرید</system:String>
-    <system:String x:Key="MaterialPage.SalePriceTextBlockText">قیمت فروش</system:String>
+    <system:String x:Key="MaterialPage.BuyPriceTextBoxTitle">قیمت خرید</system:String>
+    <system:String x:Key="MaterialPage.SalePriceTextBoxTitle">قیمت فروش</system:String>
     <system:String x:Key="MaterialPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="MaterialPage.ConfirmButtonContent">تایید</system:String>
+
+    <!-- MATERIAL LIST PAGE -->
+    <system:String x:Key="MaterialListPage.MaterialNameColumnTextBlockText">نام محصول</system:String>
+    <system:String x:Key="MaterialListPage.AvailableAmountColumnTextBlockText">مقدار موجودی</system:String>
+    <system:String x:Key="MaterialListPage.BuyPriceColumnTextBlockText">قیمت خرید</system:String>
+    <system:String x:Key="MaterialListPage.SalePriceColumnTextBlockText">قیمت فروش</system:String>
 
     <!-- MIXTURE PAGE -->
     <system:String x:Key="MixturePage.MixtureNameTextBoxTitle">نام ترکیب</system:String>
@@ -73,12 +194,22 @@
     <system:String x:Key="MixturePage.MixturePercentColumnTextBlockText">درصد ترکیب</system:String>
     <system:String x:Key="MixturePage.ConfirmButtonContent">تایید</system:String>
 
+    <!-- MIXTURE LIST PAGE -->
+    <system:String x:Key="MixtureListPage.MixtureNameColumnTextBlockText">نام ترکیب</system:String>
+    <system:String x:Key="MixtureListPage.DisplayNameColumnTextBlockText">نام نمایشی</system:String>
+    <system:String x:Key="MixtureListPage.CommentColumnTextBlockText">توضیحات</system:String>
+
     <!-- NOTE PAGE -->
     <system:String x:Key="NotePage.SubjectTextBoxTitle">عنوان یادداشت</system:String>
     <system:String x:Key="NotePage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="NotePage.ReminderTypeComboBoxTitle">نوع یادآوری</system:String>
     <system:String x:Key="NotePage.ReminderDateTimeTitle">تاریخ و ساعت یادآوری</system:String>
     <system:String x:Key="NotePage.ConfirmButtonContent">تایید</system:String>
+
+    <!-- NOTE LIST PAGE -->
+    <system:String x:Key="NoteListPage.SubjectColumnTextBlockText">عنوان یادداشت</system:String>
+    <system:String x:Key="NoteListPage.ReminderTypeColumnTextBlockText">نوع یادآوری</system:String>
+    <system:String x:Key="NoteListPage.ReminderDateTimeColumnTextBlockText">تاریخ و ساعت یادآوری</system:String>
 
     <!-- OUTGO PAGE -->
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">دسته هزینه</system:String>
@@ -87,21 +218,39 @@
     <system:String x:Key="OutgoPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="OutgoPage.ConfirmButtonContent">تایید</system:String>
 
+    <!-- OUTGO LIST PAGE -->
+    <system:String x:Key="OutgoListPage.OutgoCategoryColumnTextBlockText">دسته هزینه</system:String>
+    <system:String x:Key="OutgoListPage.ValueColumnTextBlockText">میزان هزینه</system:String>
+    <system:String x:Key="OutgoListPage.DateTimeColumnTextBlockText">تاریخ و ساعت هزینه</system:String>
+    <system:String x:Key="OutgoListPage.CommentColumnTextBlockText">توضیحات اختیاری</system:String>
+
     <!-- OUTGO CATEGORY PAGE -->
     <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">عنوان دسته</system:String>
     <system:String x:Key="OutgoCategoryPage.ParentOutgoCategoryComboBoxTitle">دسته پدر</system:String>
     <system:String x:Key="OutgoCategoryPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="OutgoCategoryPage.ConfirmButtonContent">تایید</system:String>
 
+    <!-- OUTGO CATEGORY LIST PAGE -->
+    <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">عنوان دسته</system:String>
+    <system:String x:Key="OutgoCategoryListPage.ParentOutgoCategoryColumnTextBlockText">دسته پدر</system:String>
+    <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">توضیحات</system:String>
+
     <!-- PERSON PAGE -->
     <system:String x:Key="PersonPage.FirstNameTextBoxTitle">نام</system:String>
     <system:String x:Key="PersonPage.LastNameTextBoxTitle">نام خانوادگی</system:String>
+    <system:String x:Key="PersonPage.MobileTextBoxTitle">موبایل</system:String>
     <system:String x:Key="PersonPage.TelTextBoxTitle">تلفن</system:String>
-    <system:String x:Key="PersonPage.FaxTextBoxTitle">فکس</system:String>
     <system:String x:Key="PersonPage.RoleComboBoxTitle">سمت کاری</system:String>
     <system:String x:Key="PersonPage.AddressTextBoxTitle">آدرس</system:String>
     <system:String x:Key="PersonPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="PersonPage.ConfirmButtonContent">تایید</system:String>
+
+    <!-- PERSON LIST PAGE -->
+    <system:String x:Key="PersonListPage.FullNameTextBoxTitle">نام</system:String>
+    <system:String x:Key="PersonListPage.MobileTextBoxTitle">موبایل</system:String>
+    <system:String x:Key="PersonListPage.TelTextBoxTitle">تلفن</system:String>
+    <system:String x:Key="PersonListPage.RoleComboBoxTitle">سمت کاری</system:String>
+    <system:String x:Key="PersonListPage.AddressTextBoxTitle">آدرس</system:String>
 
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">شرکت خریدار</system:String>
@@ -122,12 +271,40 @@
     <system:String x:Key="SalePage.DeliveredCountColumnTextBlockText">تعداد</system:String>
     <system:String x:Key="SalePage.DeliveryDateTimeColumnTextBlockText">تاریخ و ساعت</system:String>
 
+    <!-- SALE LIST PAGE -->
+    <system:String x:Key="SaleListPage.BuyerCompanyColumnTextBlockText">شرکت خریدار</system:String>
+    <system:String x:Key="SaleListPage.MaterialsPriceColumnTextBlockText">قیمت محصولات</system:String>
+    <system:String x:Key="SaleListPage.DeliveriesPriceColumnTextBlockText">قیمت تحویل ها</system:String>
+    <system:String x:Key="SaleListPage.StateColumnTextBlockText">وضعیت</system:String>
+    <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">تاریخ و ساعت</system:String>
+
     <!-- SITE PAGE -->
     <system:String x:Key="SitePage.RelatedCompanyComboBoxTitle">شرکت مرتبط</system:String>
     <system:String x:Key="SitePage.NameTextBoxTitle">نام سایت</system:String>
     <system:String x:Key="SitePage.AddressTextBoxTitle">آدرس</system:String>
     <system:String x:Key="SitePage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="SitePage.ConfirmButtonContent">تایید</system:String>
+
+    <!-- SITE LIST PAGE -->
+    <system:String x:Key="SiteListPage.RelatedCompanyColumnTextBlockText">شرکت مرتبط</system:String>
+    <system:String x:Key="SiteListPage.NameColumnTextBlockText">نام سایت</system:String>
+    <system:String x:Key="SiteListPage.AddressColumnTextBlockText">آدرس</system:String>
+
+    <!-- USER PAGE -->
+    <system:String x:Key="UserPage.UsernameTextBoxTitle">نام کاربری</system:String>
+    <system:String x:Key="UserPage.PasswordPasswordBoxTitle">کلمه عبور</system:String>
+    <system:String x:Key="UserPage.ConfirmPasswordBoxTitle">تکرار کلمه عبور</system:String>
+    <system:String x:Key="UserPage.CreateDateTimeTitle">تاریخ و ساعت ایجاد</system:String>
+    <system:String x:Key="UserPage.ConfirmButtonContent">تایید</system:String>
+    <system:String x:Key="UserPage.PermissionColumnTextBlockText">عنوان دسترسی</system:String>
+    <system:String x:Key="UserPage.ViewListColumnTextBlockText">مشاهده لیست</system:String>
+    <system:String x:Key="UserPage.CreateColumnTextBlockText">ایجاد</system:String>
+    <system:String x:Key="UserPage.EditColumnTextBlockText">ویرایش</system:String>
+    <system:String x:Key="UserPage.DeleteColumnTextBlockText">حذف</system:String>
+
+    <!-- USER LIST PAGE -->
+    <system:String x:Key="UserListPage.UsernameColumnTextBlockText">نام کاربری</system:String>
+    <system:String x:Key="UserListPage.CreateDateTimeColumnTextBlockText">تاریخ و ساعت ایجاد</system:String>
 
     <!-- LOGIN VIEW -->
     <system:String x:Key="LoginView.Title">ورود</system:String>

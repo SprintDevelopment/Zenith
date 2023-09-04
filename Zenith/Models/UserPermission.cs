@@ -14,7 +14,6 @@ using System.Reactive.Linq;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "User permission", MultipleName = "User permissions")]
     public class UserPermission : Model
     {
         [Key]

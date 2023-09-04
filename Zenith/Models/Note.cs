@@ -11,7 +11,6 @@ using System;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Note", MultipleName = "Notes")]
     public class Note : Model
     {
         [Key]

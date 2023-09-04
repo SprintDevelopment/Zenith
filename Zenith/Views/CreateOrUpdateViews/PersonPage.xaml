@@ -42,8 +42,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Mobile, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.TelTextBoxTitle}" Margin="24,16,8,0"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.FaxTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Mobile, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.MobileTextBoxTitle}" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.TelTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
                 </Grid>
                 <ComboBox x:Name="jobComboBox" SelectedValue="{Binding PageModel.Job, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource PersonPage.RoleComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.AddressTextBoxTitle}" />

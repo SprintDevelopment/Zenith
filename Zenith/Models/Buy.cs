@@ -15,7 +15,6 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Buy", MultipleName = "Buys")]
     public class Buy : Model
     {
         [Key]

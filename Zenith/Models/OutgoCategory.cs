@@ -8,7 +8,6 @@ using Zenith.Assets.Extensions;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Outgo category", MultipleName = "Outgo categories")]
     public class OutgoCategory : Model
     {
         [Key]

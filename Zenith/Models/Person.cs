@@ -9,7 +9,6 @@ using Zenith.Assets.Extensions;
 
 namespace Zenith.Models
 {
-    [Model(SingleName = "Personnel", MultipleName = "Personnel")]
     public class Person : Model
     {
         [Key]

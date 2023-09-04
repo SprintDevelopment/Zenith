@@ -167,6 +167,9 @@ namespace Zenith.ViewModels
         public User LoggedInUser { get; set; }
 
         [Reactive]
+        public AppLanguages Language { get; set; }
+
+        [Reactive]
         public bool IsMenuVisible { get; set; }
 
         [Reactive]

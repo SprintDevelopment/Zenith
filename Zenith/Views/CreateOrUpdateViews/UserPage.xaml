@@ -30,10 +30,10 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.Username, UpdateSourceTrigger=PropertyChanged}" Title="Username" IsEnabled="{Binding IsNew}"/>
-                <PasswordBox x:Name="passPasswordBox" Tag="Password" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
-                <PasswordBox x:Name="repeatPassPasswordBox" Tag="Confirm password" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="Create DateTime" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Username, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource UserPage.UsernameTextBoxTitle}" IsEnabled="{Binding IsNew}"/>
+                <PasswordBox x:Name="passPasswordBox" Tag="{DynamicResource UserPage.PasswordPasswordBoxTitle}" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <PasswordBox x:Name="repeatPassPasswordBox" Tag="{DynamicResource UserPage.ConfirmPasswordBoxTitle}" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource UserPage.CreateDateTimeTitle}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
                 <Grid Grid.Column="1" Margin="24,16,24,0" Background="#FFFDFDFD">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -47,11 +47,11 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock HorizontalAlignment="Left" Text="Permission" VerticalAlignment="Center" Grid.Column="0" Margin="16,0,0,0" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Center" Text="View list" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Create" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Edit" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Delete" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource UserPage.PermissionColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="16,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource UserPage.ViewListColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource UserPage.CreateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource UserPage.EditColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource UserPage.DeleteColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A"/>
                         <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                     </Grid>
 
@@ -91,7 +91,7 @@
                     <Rectangle Stroke="WhiteSmoke" Grid.RowSpan="2" StrokeThickness="1"/>
                 </Grid>
 
-                <Button Content="Confirm" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="{DynamicResource UserPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

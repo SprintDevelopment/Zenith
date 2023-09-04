@@ -19,7 +19,6 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
     {
         public BaseCreateOrUpdateViewModel(Repository<T> repository, bool containsDeleted = false)
         {
-            var modelAttributes = typeof(T).GetAttribute<ModelAttribute>();
             var modelKeyProperty = PageModel.GetKeyProperty();
 
             Repository = repository;
@@ -38,10 +37,16 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 else
                     IsNew = modelKeyId == 0;
 
-                ViewTitle = IsNew ? $"Create new {modelAttributes.SingleName}" : $"Edit {modelAttributes.SingleName}";
+                var viewTitleStringFormat = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ?
+                    (IsNew ? $"Create new {0}" : $"Edit {0}") :
+                    (IsNew ? "ایجاد {0} جدید" : "ویرایش {0}");
+
+                ViewTitle = string.Format(viewTitleStringFormat, (string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"]);
 
                 if (IsNew)
-                    StayOpenTitle = $"Stay open for new {modelAttributes.SingleName} ?";
+                    StayOpenTitle = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ? 
+                        string.Format("Stay open for new {0} ?" ,(string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"]):
+                        string.Format("صفحه برای وارد کردن {0} بعدی باز بماند ؟", (string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"]);
 
                 CreateOrUpdateCommand = ReactiveCommand.Create<Unit>(_ =>
                 {
