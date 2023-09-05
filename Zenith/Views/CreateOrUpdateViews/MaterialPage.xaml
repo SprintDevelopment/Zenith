@@ -34,6 +34,58 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.BuyPriceTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.SalePriceTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.CommentTextBoxTitle}" />
+                <CheckBox IsChecked="{Binding StayOpen}" Content="{DynamicResource MaterialPage.IsMixedMaterialCheckBoxContent}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                
+                <Grid Margin="24,16,24,0" Background="#FFFDFDFD">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Background="White" Height="40" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MixturePage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MixturePage.MixturePercentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
+                    </Grid>
+
+                    <ItemsControl ItemsSource="{Binding PageModel.Permissions}" Grid.Row="1" Height="200" Margin="0,1,0,0" >
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                <ScrollViewer CanContentScroll="True">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <baseclasses:JGrid Height="32">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Style="{StaticResource SimpleButtonStyle}" Grid.Column="2" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding Material}">
+                                        <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Button>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Percent, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="8,0,0,0"/>
+                                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
+
+                                </baseclasses:JGrid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Rectangle Stroke="WhiteSmoke" Grid.RowSpan="2" StrokeThickness="1"/>
+                </Grid>
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 

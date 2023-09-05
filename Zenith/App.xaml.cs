@@ -14,6 +14,6 @@ namespace Zenith
     /// </summary>
     public partial class App : Application
     {
-        public static MainViewModel MainViewModel = new MainViewModel();
+        public static MainViewModel MainViewModel { get; set; } = new MainViewModel();
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reflection.PortableExecutable;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 using Zenith.Assets.Extensions;
@@ -161,13 +162,20 @@ namespace Zenith.ViewModels
                     };
                 }).Do(alert => _alerts.Add(alert))
                 .Subscribe();
+
+            this.WhenAnyValue(vm => vm.Language)
+                .Do(language =>
+                {
+                    App.Current.Resources.MergedDictionaries.Clear();
+                    App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"{language}ResourceDictionary.xaml", UriKind.Relative) });
+                }).Subscribe();
         }
 
         [Reactive]
         public User LoggedInUser { get; set; }
 
         [Reactive]
-        public AppLanguages Language { get; set; }
+        public AppLanguages Language { get; set; } = AppLanguages.English;
 
         [Reactive]
         public bool IsMenuVisible { get; set; }

@@ -52,15 +52,6 @@ namespace Zenith.Views
                     .Do(_ => messageBorder.Visibility = Visibility.Collapsed)
                     .Subscribe().DisposeWith(d);
 
-                Observable.FromEventPattern(languageComboBox, nameof(ComboBox.SelectionChanged))
-                    .Select(_ => (AppLanguages)((EnumDto)languageComboBox.SelectedItem).Value)
-                    .Do(selectedLanguage =>
-                    {
-                        App.Current.Resources.MergedDictionaries.Clear();
-                        App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri($"{selectedLanguage}ResourceDictionary.xaml", UriKind.Relative) });
-
-                    }).Subscribe().DisposeWith(d);
-
                 var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
                 ((Grid)Content).Children.Insert(0, modalBackRect);
             });

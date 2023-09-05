@@ -1,38 +1,30 @@
-﻿https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli
+﻿Complete Zenith in 42 hours.
 
-~fix the issues when saving Buy - 30m
-~load the Buys - 15m
-~add sale based on Buy - 20m
-add site - 30m
-add site to sale item - 20m
-add Trip - 30m
+Available Time
+Tuesday - 10h
 
-some improvements - 30m
+Wednesday - 12h
+Thursday - 10h
+Friday - 10h
 
-DEMO - 30m
+Cheques - 4h
+Mixed Materials - 2h
+Personnel Salary - 3h
+Language Issues - 2h
 
-TOTAL - 4h 5m    
-
-
-for Device source 
-- create a new branch
-- review what should change 
-- 
-
-
-MTN 10m 7
-LNS 14m 14
-HME 5m	3
-SOS 1.6m => Keramat 1, Me 1.8 - (0.5 Alireza - 0.3 Keramat) = 1.6
-BBY 5m	2
-OUR 5m	2
-MRZ 10m	5
-------------
-TTL 50.6
+Print Factor - 2h
+Materials Conversion Between Capacity And Density - 2h
+Configurations - 3h
+Outgoes - 3h
+Diesel - 2h
+Backup - 30m
+Restore - 30m
+Machine Reports - 3h
+Driver Reports - 3h
+Payments From Companies - 4h
+Payments To Companies - 4h
+Integrities - 4h
 
 
-SRY 26
-BME 2
-ZTH 10
-MDI 13
-SQN .6
+
+Total - 42h

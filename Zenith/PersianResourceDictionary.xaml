@@ -177,6 +177,7 @@
     <system:String x:Key="MaterialPage.BuyPriceTextBoxTitle">قیمت خرید</system:String>
     <system:String x:Key="MaterialPage.SalePriceTextBoxTitle">قیمت فروش</system:String>
     <system:String x:Key="MaterialPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
+    <system:String x:Key="MaterialPage.IsMixedMaterialCheckBoxContent">این محصول یک محصول ترکیبی است ؟</system:String>
     <system:String x:Key="MaterialPage.ConfirmButtonContent">تایید</system:String>
 
     <!-- MATERIAL LIST PAGE -->

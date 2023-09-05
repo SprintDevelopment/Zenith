@@ -23,13 +23,19 @@ namespace Zenith.ViewModels.ListViewModels
     {
         public BaseListViewModel(Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria, PermissionTypes permissionType)
         {
-            ViewTitle = (string)App.Current.Resources[$"MultipleResources.{typeof(T).Name}"];
-            Repository = repository;
-            var allItemsSelectedString = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ?
-                " , all items selected" : " ، تمامی موارد انتخاب شده";
+            var singleMultipleTitles = new
+            {
+                single = (string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"],
+                multiple = (string)App.Current.Resources[$"MultipleResources.{typeof(T).Name}"]
+            };
 
-            var nItemsSelectedStringFormat = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ?
-                " , {0:n0} item(s) selected)" : " ، {0:n0} مورد انتخاب شده";
+            ViewTitle = singleMultipleTitles.multiple;
+            Repository = repository;
+            var allItemsSelectedString = App.MainViewModel.Language == AppLanguages.English ?
+                " , all items selected)" : " ، تمامی موارد انتخاب شده)";
+
+            var nItemsSelectedStringFormat = App.MainViewModel.Language == AppLanguages.English ?
+                " , {0:n0} item(s) selected)" : " ، {0:n0} مورد انتخاب شده)";
 
             SourceList.AddRange(Repository.All());
             void calculate()
@@ -37,7 +43,7 @@ namespace Zenith.ViewModels.ListViewModels
                 var itemsCount = ActiveList.Count();
                 var selectedItemsCount = ActiveList.Count(item => item.IsSelected);
 
-                ItemsStatistics = $"({itemsCount:n0} {(string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"]}";
+                ItemsStatistics = $"({itemsCount:n0}{singleMultipleTitles.single}";
                 if (itemsCount == selectedItemsCount || selectedItemsCount == 0)
                 {
                     ItemsStatistics += selectedItemsCount > 0 ? allItemsSelectedString : ")";
@@ -80,15 +86,25 @@ namespace Zenith.ViewModels.ListViewModels
             RemoveCommand = ReactiveCommand.Create<T, bool>(_ =>
             {
                 var selectedItemsCount = ActiveList.Count(x => x.IsSelected);
+                var titleTextAndChoices = new 
+                {
+                    titleSingle = App.MainViewModel.Language == AppLanguages.English ? $"Deleting one {singleMultipleTitles.single}" : $"حذف یک {singleMultipleTitles.single}",
+                    titleMultiple = App.MainViewModel.Language == AppLanguages.English ? $"Deleting multiple {singleMultipleTitles.multiple}" : $"حذف چند {singleMultipleTitles.single}",
+                    textSingle = App.MainViewModel.Language == AppLanguages.English ? $"Are you sure to delete {ActiveList.FirstOrDefault(x => x.IsSelected)} ?" : $"آیا از حذف {ActiveList.FirstOrDefault(x => x.IsSelected)} اطمینان دارید ؟",
+                    textMultiple = App.MainViewModel.Language == AppLanguages.English ? $"Are you sure to delete {selectedItemsCount:n0} {singleMultipleTitles.multiple} ?" : $"آیا از حذف {selectedItemsCount:n0} {singleMultipleTitles.single} اطمینان دارید ؟",
+                    contentYes = App.MainViewModel.Language == AppLanguages.English ? "Yes, delete" : "بله، حذف شود",
+                    contentNo = App.MainViewModel.Language == AppLanguages.English ? "No, cancel" : "خیر، حذف نشود"
+                };
+
                 var dialogDto = new DialogDto()
                 {
                     DialogType = DialogTypes.Danger,
-                    //Title = selectedItemsCount == 1 ? $"Deleting one {modelAttributes.SingleResourceName}" : $"Deleting multiple {modelAttributes.SingleResourceName}",
-                    //Text = selectedItemsCount == 1 ? $"Are you sure to delete {ActiveList.FirstOrDefault(x => x.IsSelected)} ?" : $"Are you sure to delete {selectedItemsCount:n0} {modelAttributes.SingleResourceName} items ?",
+                    Title = selectedItemsCount == 1 ? titleTextAndChoices.titleSingle : titleTextAndChoices.titleMultiple,
+                    Text = selectedItemsCount == 1 ? titleTextAndChoices.textSingle : titleTextAndChoices.textMultiple,
                     Choices = new List<DialogChoiceDto>()
                     {
-                        new DialogChoiceDto { DialogResult = DialogResults.Yes, Text = "Yes, delete" },
-                        new DialogChoiceDto { DialogResult = DialogResults.No, Text = "No, cancel" },
+                        new DialogChoiceDto { DialogResult = DialogResults.Yes, Text = titleTextAndChoices.contentYes },
+                        new DialogChoiceDto { DialogResult = DialogResults.No, Text = titleTextAndChoices.contentNo },
                     }
                 };
 

@@ -177,6 +177,7 @@
     <system:String x:Key="MaterialPage.BuyPriceTextBoxTitle">Buy price</system:String>
     <system:String x:Key="MaterialPage.SalePriceTextBoxTitle">Sale price</system:String>
     <system:String x:Key="MaterialPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="MaterialPage.IsMixedMaterialCheckBoxContent">Is this a mixed material ?</system:String>
     <system:String x:Key="MaterialPage.ConfirmButtonContent">Confirm</system:String>
     
     <!-- MATERIAL LIST PAGE -->

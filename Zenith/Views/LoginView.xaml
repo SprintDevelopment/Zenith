@@ -27,7 +27,7 @@
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox x:Name="usernameTextBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LoginView.UsernameTextBoxTitle}" />
                 <PasswordBox x:Name="passPasswordBox" Tag="{DynamicResource LoginView.PasswordPasswordBoxTitle}" PasswordChar="*"/>
-                <ComboBox x:Name="languageComboBox" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource LoginView.LanguageComboBoxTitle}"/> 
+                <ComboBox x:Name="languageComboBox" SelectedValue="{Binding MainViewModel.Language, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource LoginView.LanguageComboBoxTitle}"/> 
 
                 <Border x:Name="messageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
                     <TextBlock Text="{DynamicResource LoginView.IcorrectUserPassText}" Foreground="Red"/>
