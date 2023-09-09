@@ -23,7 +23,7 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new NoteSearchModel();
 
-            IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(n => n.Subject, n => n.NotifyType)
+            IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(n => n.Subject, n => n.NotifyType, n => n.OnlyForRefreshAfterUpdate)
                 .Select(x => new { subject = x.Item1, notifyType = x.Item2})
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)

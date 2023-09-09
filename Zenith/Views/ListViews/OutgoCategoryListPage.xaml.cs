@@ -23,7 +23,7 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new OutgoCategorySearchModel();
 
-            IObservable<Func<OutgoCategory, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+            IObservable<Func<OutgoCategory, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(subject => new Func<OutgoCategory, bool>(oc => true));

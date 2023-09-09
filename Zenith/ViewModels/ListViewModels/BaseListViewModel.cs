@@ -153,6 +153,7 @@ namespace Zenith.ViewModels.ListViewModels
                     if (!changeSet.IsNullOrEmpty())
                     {
                         MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), itemToUpdate);
+                        searchModel.OnlyForRefreshAfterUpdate++;
                     }
 
                     App.MainViewModel.CreateUpdatePageReturnedCommand.Execute().Subscribe();

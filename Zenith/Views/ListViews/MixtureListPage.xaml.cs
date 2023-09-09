@@ -23,7 +23,7 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new MixtureSearchModel();
 
-            IObservable<Func<Mixture, bool>> dynamicFilter = searchModel.WhenAnyValue(m => m.Title)
+            IObservable<Func<Mixture, bool>> dynamicFilter = searchModel.WhenAnyValue(m => m.Title, n => n.OnlyForRefreshAfterUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(title => new Func<Mixture, bool>(b => true));

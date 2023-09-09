@@ -24,7 +24,7 @@ namespace Zenith.Views.ListViews
 
             var searchModel = new DeliverySearchModel();
 
-            IObservable<Func<Delivery, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+            IObservable<Func<Delivery, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(subject => new Func<Delivery, bool>(oc => true));

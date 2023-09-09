@@ -27,7 +27,8 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new MachineSearchModel();
 
-            IObservable<Func<Machine, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title)
+            IObservable<Func<Machine, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
+                .Select(x => x.Item1)
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
                 .Select(s => new { Title = s }).Select(s => new Func<Machine, bool>(p => true));
 

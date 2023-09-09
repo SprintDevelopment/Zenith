@@ -27,10 +27,11 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new CompanySearchModel();
 
-            IObservable<Func<Company, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name)
+            IObservable<Func<Company, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name, n => n.OnlyForRefreshAfterUpdate)
+                .Select(x => x.Item1)
                 .Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(subject => new Func<Company, bool>(p => subject.IsNullOrWhiteSpace() || p.Name.Contains(subject)));
+                .Select(name => new Func<Company, bool>(p => name.IsNullOrWhiteSpace() || p.Name.Contains(name)));
 
             ViewModel = new BaseListViewModel<Company>(new CompanyRepository(), searchModel, dynamicFilter, PermissionTypes.Companies)
             {
