@@ -31,6 +31,7 @@
             <StackPanel Grid.Row="1">
                 <projUsercontrols:OutgoCategoriesTreeView x:Name="outgoCategoryTreeView" Title="{DynamicResource OutgoPage.OutgoCategoryComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource OutgoPage.ValueTextBoxTitle}"/>
+                <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource OutgoPage.RelatedCompanyComboBoxTitle}"/>
                 <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource OutgoPage.DateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.CommentTextBoxTitle}" />
 

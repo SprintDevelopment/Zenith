@@ -12,6 +12,7 @@ namespace Zenith.Repositories
         {
             return _context.Set<Outgo>()
                 .Include(o => o.OutgoCategory)
+                .Include(o => o.Company)
                 .AsEnumerable();
         }
 
@@ -20,6 +21,7 @@ namespace Zenith.Repositories
             int intId = (int)id;
             return _context.Set<Outgo>()
                 .Include(o => o.OutgoCategory)
+                .Include(o => o.Company)
                 .SingleOrDefault(o => o.OutgoId == intId);
         }
     }

@@ -5,6 +5,7 @@ using Zenith.Assets.Values.Constants;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Fody.Helpers;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
@@ -25,6 +26,9 @@ namespace Zenith.Models
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
         public string Title { get; set; }
+
+        [Reactive]
+        public CostCenters CostCenter { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

@@ -25,6 +25,13 @@ namespace Zenith.Models
         public virtual OutgoCategory OutgoCategory { get; set; }
 
         [Reactive]
+        public short? CompanyId { get; set; }
+
+        [ForeignKey(nameof(CompanyId))]
+        [Reactive]
+        public virtual Company Company { get; set; }
+
+        [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;
 
         [Reactive]

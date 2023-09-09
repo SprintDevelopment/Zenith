@@ -172,7 +172,7 @@
     <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">Type</system:String>
     <system:String x:Key="CompanyListPage.TelColumnTextBlockText">Tel</system:String>
     <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">Fax</system:String>
-    <system:String x:Key="CompanyListPage.AddressColumnTextBlockText">Address</system:String>
+    <system:String x:Key="CompanyListPage.CreditValueColumnTextBlockText">Credit</system:String>
 
     <!-- DELIVERY PAGE -->
     <system:String x:Key="DeliveryPage.SiteComboBoxTitle">Site for delivery</system:String>
@@ -243,6 +243,7 @@
     <system:String x:Key="NoteListPage.ReminderDateTimeColumnTextBlockText">Reminder date time</system:String>
 
     <!-- OUTGO PAGE -->
+    <system:String x:Key="OutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
     <system:String x:Key="OutgoPage.DateTimeTitle">Outgo date time</system:String>
@@ -252,18 +253,21 @@
     <!-- OUTGO LIST PAGE -->
     <system:String x:Key="OutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
     <system:String x:Key="OutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
+    <system:String x:Key="OutgoListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
     <system:String x:Key="OutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
     <system:String x:Key="OutgoListPage.CommentColumnTextBlockText">Comment</system:String>
     
     <!-- OUTGO CATEGORY PAGE -->
     <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">Category title</system:String>
     <system:String x:Key="OutgoCategoryPage.ParentOutgoCategoryComboBoxTitle">Parent category</system:String>
+    <system:String x:Key="OutgoCategoryPage.CostCenterComboBoxTitle">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoCategoryPage.ConfirmButtonContent">Confirm</system:String>
     
     <!-- OUTGO CATEGORY LIST PAGE -->
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
     <system:String x:Key="OutgoCategoryListPage.ParentOutgoCategoryColumnTextBlockText">Parent category</system:String>
+    <system:String x:Key="OutgoCategoryListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
     
     <!-- PERSON PAGE -->

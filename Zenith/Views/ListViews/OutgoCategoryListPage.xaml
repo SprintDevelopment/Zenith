@@ -47,6 +47,7 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
@@ -55,8 +56,9 @@
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.TitleColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.ParentOutgoCategoryColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CommentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CostCenterColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CommentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
             </Grid>
 
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" >
@@ -80,6 +82,7 @@
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
@@ -87,8 +90,10 @@
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Title}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Comment}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Parent.Title}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding CostCenter, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:CostCenters}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Comment}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
                             
                         </baseclasses:JGrid>
                     </DataTemplate>

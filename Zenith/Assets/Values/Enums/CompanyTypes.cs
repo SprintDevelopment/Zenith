@@ -12,6 +12,7 @@ namespace Zenith.Assets.Values.Enums
         DontCare = -1,
         Buyer,
         Seller,
-        Both
+        Both,
+        Other
     }
 }

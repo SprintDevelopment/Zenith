@@ -21,6 +21,8 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BaseCreateOrUpdateViewModel<OutgoCategory>(new OutgoCategoryRepository());
+            
+            costCenterComboBox.ItemsSource = typeof(CostCenters).ToCollection();
 
             this.WhenActivated(d =>
             {

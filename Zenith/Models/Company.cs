@@ -48,6 +48,9 @@ namespace Zenith.Models
         [Reactive]
         public string Address { get; set; } = string.Empty;
 
+        [Reactive]
+        public long CreditValue { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
