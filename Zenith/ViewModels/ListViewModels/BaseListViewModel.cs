@@ -43,7 +43,7 @@ namespace Zenith.ViewModels.ListViewModels
                 var itemsCount = ActiveList.Count();
                 var selectedItemsCount = ActiveList.Count(item => item.IsSelected);
 
-                ItemsStatistics = $"({itemsCount:n0}{singleMultipleTitles.single}";
+                ItemsStatistics = $"({itemsCount:n0} {singleMultipleTitles.single}";
                 if (itemsCount == selectedItemsCount || selectedItemsCount == 0)
                 {
                     ItemsStatistics += selectedItemsCount > 0 ? allItemsSelectedString : ")";

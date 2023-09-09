@@ -42,6 +42,8 @@
                 <StackPanel>
                     <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.MixtureNameTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.DisplayNameTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MixturePage.BuyPriceTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MixturePage.SalePriceTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.CommentTextBoxTitle}" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">

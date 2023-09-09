@@ -1,30 +1,27 @@
-﻿Complete Zenith in 42 hours.
+﻿################################################ 1st priorities -> 13.5h (Excellent if finished at Friday 24)
+Cheques - 1.5h												
+Mixed Materials - 1h										
+Personnel Salary - 1.5h
+Materials Conversion Between Capacity And Density - 1h
+Outgoes - 2h
+Diesel - 1h
+Payments From Companies - 2.5h
+Payments To Companies - 1h
+Calculation - 2h
 
-Available Time
-Tuesday - 10h
-
-Wednesday - 12h
-Thursday - 10h
-Friday - 10h
-
-Cheques - 4h
-Mixed Materials - 2h
-Personnel Salary - 3h
-Language Issues - 2h
-
+################################################ 2nd priorities -> 13h (Excellent if finished at Monday 24)
+Language Issues - 1h
+Configurations - 2.5h
+Backup - 20m
+Restore - 10m
+Machine Reports - 2h
+Driver Reports - 2h
 Print Factor - 2h
-Materials Conversion Between Capacity And Density - 2h
-Configurations - 3h
-Outgoes - 3h
-Diesel - 2h
-Backup - 30m
-Restore - 30m
-Machine Reports - 3h
-Driver Reports - 3h
-Payments From Companies - 4h
-Payments To Companies - 4h
-Integrities - 4h
+Integrities - 3h
 
 
 
-Total - 42h
+Total - 30h
+
+Keep going ...
+Do your best and trust the process ...

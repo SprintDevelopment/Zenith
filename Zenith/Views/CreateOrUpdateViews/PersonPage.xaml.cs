@@ -1,4 +1,10 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using DynamicData.Binding;
+using ReactiveUI;
+using System;
+using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
@@ -16,13 +22,33 @@ namespace Zenith.Views.CreateOrUpdateViews
         {
             InitializeComponent();
 
-            ViewModel = new BaseCreateOrUpdateViewModel<Person>(new PersonRepository());
+            ViewModel = new PersonCreateOrUpdateViewModel(new PersonRepository());
+            var CastedViewModel = (PersonCreateOrUpdateViewModel)ViewModel;
 
             // Should be out of this.WhenActivated !!
             jobComboBox.ItemsSource = typeof(Jobs).ToCollection();
+            costCenterComboBox.ItemsSource = typeof(CostCenters).ToCollection();
 
             this.WhenActivated(d =>
             {
+                ViewModel.WhenAnyValue(vm => vm.PageModel.PersonnelAbsences)
+                    .SelectMany(pas => pas.ToObservableChangeSet().QueryWhenChanged())
+                    .Do(pas => { timeSheetControl.ViewModel.HighligtDates = pas.Select(pa => pa.DateTime).ToObservableCollection(); })
+                    .Subscribe().DisposeWith(d);
+
+                //Observable.FromEventPattern(timeSheetControl, nameof(timeSheetControl.DayClicked))
+                //    .Select(x => (DateTime)x.EventArgs)
+                //    .Do(dt =>
+                //    {
+                timeSheetControl.DayClicked += (s, e) =>
+                {
+                    var prePersonnelAbsence = ViewModel.PageModel.PersonnelAbsences.FirstOrDefault(item => item.DateTime == e);
+                    if (prePersonnelAbsence is null)
+                        CastedViewModel.AddNewPersonnelAbsenceCommand.Execute(e).Subscribe();
+                    else
+                        CastedViewModel.UpdatePersonnelAbsenceCommand.Execute(prePersonnelAbsence).Subscribe();
+                };
+                    //}).Subscribe().DisposeWith(d);
             });
         }
     }

@@ -44,6 +44,7 @@ namespace Zenith.ViewModels
 
             NavigateToBuysCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(BuyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Buys && p.HasReadAccess)));
             NavigateToSalesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SaleListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Sales && p.HasReadAccess)));
+            NavigateToChequesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(ChequeListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Cheques && p.HasReadAccess)));
             NavigateToCompaniesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CompanyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Companies && p.HasReadAccess)));
             NavigateToSitesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SiteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Sites && p.HasReadAccess)));
             NavigateToMaterialsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MaterialListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Materials && p.HasReadAccess)));
@@ -89,6 +90,8 @@ namespace Zenith.ViewModels
             {
                 Process.Start("notepad.exe", $"C:\\{_}");
             });
+
+            //ChangeLanguageCommand = ReactiveCommand.Create<Unit>(_ => Language = Language == AppLanguages.English ? AppLanguages.Persian : AppLanguages.English);
 
             BackupCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
@@ -208,6 +211,7 @@ namespace Zenith.ViewModels
         //
         public ReactiveCommand<Unit, Unit> NavigateToBuysCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSalesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToChequesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToCompaniesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSitesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToMaterialsCommand { get; set; }
@@ -227,6 +231,7 @@ namespace Zenith.ViewModels
         public ReactiveCommand<SearchBaseDto, SearchBaseDto> InitiateSearchCommand { get; set; }
         //
         public ReactiveCommand<string, Unit> OpenLogFileCommand { get; set; }
+        //public ReactiveCommand<Unit, Unit> ChangeLanguageCommand { get; set; }
         public ReactiveCommand<Unit, Unit> BackupCommand { get; set; }
         public ReactiveCommand<Unit, Unit> RestoreCommand { get; set; }
         public ReactiveCommand<Unit, Unit> CreateDatabaseCommand { get; set; }

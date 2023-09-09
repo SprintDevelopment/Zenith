@@ -12,6 +12,7 @@ namespace Zenith.Assets.Values.Enums
         DontCare = -1,
         Buys,
         Sales,
+        Cheques,
         Companies,
         Sites,
         Materials,

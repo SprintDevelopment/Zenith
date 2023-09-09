@@ -23,6 +23,10 @@ namespace Zenith.Assets.Utils
             cfg.CreateMap<Sale, Sale>();
             cfg.CreateMap<SaleItem, SaleItem>();
             cfg.CreateMap<Site, Site>();
+
+            cfg.CreateMap<Mixture, Material>()
+                .ForMember(material => material.Name, opt => opt.MapFrom(mixture => mixture.DisplayName))
+                .ForMember(material => material.IsMixed, opt => opt.MapFrom(mixture => true));
         }));
     }
 }

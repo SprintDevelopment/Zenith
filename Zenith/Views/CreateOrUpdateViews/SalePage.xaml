@@ -75,9 +75,11 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="60"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" />
-                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                                    <Image Source="/Zenith;component/Resources/Images/Common/mixed.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="16" Height="16" Grid.Column="2" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsMixed, Converter={StaticResource boolToVisibilityConverter}}"/>
                                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="4" StrokeThickness="0.5"/>
                                 </baseclasses:JGrid>
                             </DataTemplate>
@@ -102,7 +104,7 @@
                         <ColumnDefinition Width="120"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SalePage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.UnitPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.SalePriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                     <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.TotalPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>

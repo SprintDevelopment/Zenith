@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230907142227_PersonnelAbsence")]
+    partial class PersonnelAbsence
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,9 +289,6 @@ namespace Zenith.Migrations
 
                     b.Property<bool>("IsMixed")
                         .HasColumnType("bit");
-
-                    b.Property<int>("MetersPerTon")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -683,7 +683,7 @@ namespace Zenith.Migrations
                         new
                         {
                             Username = "admin",
-                            CreateDateTime = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateDateTime = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             HasErrors = false,
                             HashedPassword = "b9bcda38c0de9edcda3b12bc5d91de5959e2de031a1fcc13a3860d9c39eeb3b2"
                         });

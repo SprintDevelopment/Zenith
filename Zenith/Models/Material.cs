@@ -34,6 +34,12 @@ namespace Zenith.Models
         [Reactive]
         public int AvailableAmount { get; set; }
 
+        [Reactive]
+        public int MetersPerTon { get; set; }
+
+        [Reactive]
+        public bool IsMixed { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
@@ -42,6 +48,7 @@ namespace Zenith.Models
         public Material()
         {
             this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name");
+            this.ValidationRule(vm => vm.MetersPerTon, mpt => mpt > 0, "Enter meters per ton");
             ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 

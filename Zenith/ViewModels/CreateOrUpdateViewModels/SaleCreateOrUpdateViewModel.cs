@@ -29,7 +29,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(materialName => new Func<Material, bool>(m => materialName.IsNullOrWhiteSpace() || m.Name.Contains(materialName)));
 
-            MaterialsSourceList.AddRange(new MaterialRepository().All());
+            MaterialsSourceList.AddRange(new MaterialRepository().AllIncludeMixed());
 
             MaterialsSourceList.Connect()
                 .Filter(dynamicFilter, ListFilterPolicy.ClearAndReplace)
@@ -41,7 +41,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
             {
                 var saleItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
                 if (saleItem is null)
-                    PageModel.Items.Add(new SaleItem { Material = material, MaterialId = material.MaterialId, UnitPrice = 200, Count = 1 });
+                    PageModel.Items.Add(new SaleItem { Material = material, MaterialId = material.MaterialId, UnitPrice = material.SalePrice, Count = 1 });
                 else
                     saleItem.Count++;
             });

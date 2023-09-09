@@ -1,5 +1,5 @@
-﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.MaterialPage"
-      x:TypeArguments="model:Material" 
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.ChequePage"
+      x:TypeArguments="model:Cheque" 
       xmlns:model="clr-namespace:Zenith.Models"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
-      Title="MaterialPage">
+      xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls">
     <Grid>
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
@@ -29,16 +29,26 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.MaterialNameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.MetersPerTon, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.MetersPerTonTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.AvailableAmount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.AvailableAmountTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.BuyPriceTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.SalePriceTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.CommentTextBoxTitle}" />
+                <Border x:Name="messageBorder" Background="#FFECECFF" BorderBrush="Blue" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16">
+                    <Grid>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="Delivery of " Foreground="#FF505050"/>
+                            <Run Text="{Binding PageModel.SaleItem.Material.Name}" FontSize="16"/>
+                            <Run Text="to " Foreground="#FF505050"/>
+                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}" FontSize="16"/>
+                            <Run Text="company " Foreground="#FF505050"/>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+
+                <baseclasses:JTextBox Text="{Binding PageModel.ChequeNumber, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource ChequePage.ChequeNumberTextBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource ChequePage.ChequeValueTextBoxTitle}"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource ChequePage.ChequeDateTimeTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.IssueDateTimeTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="{DynamicResource MaterialPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Button Content="{DynamicResource ChequePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

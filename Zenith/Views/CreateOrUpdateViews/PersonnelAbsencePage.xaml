@@ -1,5 +1,5 @@
-﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.MaterialPage"
-      x:TypeArguments="model:Material" 
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.PersonnelAbsencePage"
+      x:TypeArguments="model:PersonnelAbsence" 
       xmlns:model="clr-namespace:Zenith.Models"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,8 +7,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
-      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
-      Title="MaterialPage">
+      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls">
     <Grid>
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
@@ -29,16 +28,21 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.MaterialNameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.MetersPerTon, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.MetersPerTonTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.AvailableAmount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.AvailableAmountTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.BuyPriceTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.SalePriceTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.CommentTextBoxTitle}" />
+                <ComboBox x:Name="personComboBox" SelectedValue="{Binding PageModel.PersonId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource PersonAbsencePage.PersonnelComboBoxTitle}" IsEnabled="False"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource PersonAbsencePage.DateDateTimeTitle}" IsEnabled="False"/>
+                <baseclasses:JTextBox x:Name="optionalCommentTextBox" Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonAbsencePage.CommentTextBoxTitle}" />
 
-                <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <Button Content="{DynamicResource PersonAbsencePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"  Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="{DynamicResource MaterialPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Grid Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="{DynamicResource PersonAbsencePage.EditButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,8,16" Style="{StaticResource ConfirmButtonStyle}" Command="{Binding CreateOrUpdateCommand}" />
+                    <Button Content="{DynamicResource PersonAbsencePage.DeleteButtonContent}" Height="38" VerticalAlignment="Top" Margin="8,24,24,16" Grid.Column="1" Style="{StaticResource ConfirmButtonStyle}" Command="{Binding DeletePersonnelAbsenceCommand}" />
+                </Grid>
+
             </StackPanel>
         </Grid>
     </Grid>

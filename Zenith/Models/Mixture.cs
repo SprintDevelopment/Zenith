@@ -30,6 +30,15 @@ namespace Zenith.Models
         public string DisplayName { get; set; }
 
         [Reactive]
+        public long BuyPrice { get; set; }
+
+        [Reactive]
+        public long SalePrice { get; set; }
+
+        [Reactive]
+        public int RelatedMaterialId { get; set; }
+
+        [Reactive]
         public virtual ObservableCollection<MixtureItem> Items { get; set; } = new ObservableCollection<MixtureItem>();
 
         [Reactive]

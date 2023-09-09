@@ -4,12 +4,14 @@ using System.Linq;
 using Zenith.Assets.Utils;
 using System.Collections.Generic;
 using Zenith.Assets.Extensions;
+using DynamicData;
 
 namespace Zenith.Repositories
 {
     public class MixtureRepository : Repository<Mixture>
     {
         MixtureItemRepository MixtureItemRepository = new MixtureItemRepository();
+        MaterialRepository MaterialRepository = new MaterialRepository();
 
         public override IEnumerable<Mixture> All()
         {
@@ -28,6 +30,10 @@ namespace Zenith.Repositories
 
         public override Mixture Add(Mixture mixture) 
         {
+            var newMaterial = MapperUtil.Mapper.Map<Material>(mixture);
+            MaterialRepository.Add(newMaterial);
+            mixture.RelatedMaterialId = newMaterial.MaterialId;
+
             base.Add(mixture);
             MixtureItemRepository.AddRange(mixture.Items.Select(bi => { bi.MixtureId = mixture.MixtureId; return bi; }));
 
@@ -37,6 +43,10 @@ namespace Zenith.Repositories
         public override Mixture Update(Mixture mixture, dynamic mixtureId) 
         {
             base.Update(mixture, mixture.MixtureId);
+
+            var relatedMaterial = MaterialRepository.Single(mixture.RelatedMaterialId);
+            MapperUtil.Mapper.Map(mixture, relatedMaterial);
+            MaterialRepository.Update(relatedMaterial, relatedMaterial.MaterialId);
 
             var oldItems = MixtureItemRepository.Find(bi => bi.MixtureId == mixture.MixtureId).ToList();
             MixtureItemRepository.RemoveRange(oldItems.Where(bi => !mixture.Items.Any(rbi => rbi.MixtureItemId == bi.MixtureItemId)));
@@ -54,5 +64,6 @@ namespace Zenith.Repositories
 
             return mixture;
         }
+        //here before create new add, related material should be deleted
     }
 }

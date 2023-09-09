@@ -102,7 +102,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource BuyPage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.UnitPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.BuyPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                     <TextBlock HorizontalAlignment="Center" Text="{DynamicResource BuyPage.TotalPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                     <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding RemoveAllItemsCommand}" Grid.Column="4">

@@ -105,6 +105,7 @@
     <system:String x:Key="MainWindow.SystemMenuItem">سیستم</system:String>
     <system:String x:Key="MainWindow.NotesSubMenuItem">یادداشت ها</system:String>
     <system:String x:Key="MainWindow.ConfigurationSubMenuItem">تنظیمات</system:String>
+    <!--<system:String x:Key="MainWindow.ChangeLanguageSubMenuItem">تغییر زبان به انگلیسی</system:String>-->
     <system:String x:Key="MainWindow.OpenLogFileSubMenuItem">مشاهده فایل لاگ</system:String>
     <system:String x:Key="MainWindow.BackupSubMenuItem">پشتیبان گیری از داده ها</system:String>
     <system:String x:Key="MainWindow.RestoreSubMenuItem">بازیابی داده ها</system:String>

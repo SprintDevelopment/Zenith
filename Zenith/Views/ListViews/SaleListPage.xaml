@@ -46,8 +46,8 @@
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
@@ -56,8 +56,8 @@
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SaleListPage.BuyerCompanyColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SaleListPage.MaterialsPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SaleListPage.DeliveriesPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SaleListPage.MaterialsPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SaleListPage.DeliveriesPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SaleListPage.StateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SaleListPage.SaleDateTimeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
@@ -83,8 +83,8 @@
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
                             </Grid.ColumnDefinitions>
@@ -93,8 +93,8 @@
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Price, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding DeliveryFee, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Price, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding DeliveryFee, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="State" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>

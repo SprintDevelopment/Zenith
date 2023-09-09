@@ -10,24 +10,29 @@
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
       Title="CompanyPage">
     <Grid>
-        <Grid Width="450" Height="auto" VerticalAlignment="Center">
+        <Grid Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
-            <Grid Height="50">
+            <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="White" Effect="{StaticResource CommonShadow}"/>
+            <Grid Height="50" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
                     <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" Command="{Binding ReturnCommand}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
                     <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                 </Button>
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
-                <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
+            <Rectangle Fill="#FFF8F8F8" HorizontalAlignment="Right" Grid.Row="1" Width="1"/>
+
             <StackPanel Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -42,9 +47,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Mobile, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.MobileTextBoxTitle}" Margin="24,16,8,0"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" LeftToRightText="True" Title="{DynamicResource PersonPage.TelTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Mobile, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.MobileTextBoxTitle}" Margin="24,16,8,0"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Tel, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.TelTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
                 </Grid>
+                <baseclasses:JTextBox Text="{Binding PageModel.Salary, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource PersonPage.SalaryTextBoxTitle}" />
+                <ComboBox x:Name="costCenterComboBox" SelectedValue="{Binding PageModel.CostCenter, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource PersonPage.CostCenterComboBoxTitle}"/>
                 <ComboBox x:Name="jobComboBox" SelectedValue="{Binding PageModel.Job, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource PersonPage.RoleComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Address, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.AddressTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonPage.CommentTextBoxTitle}" />
@@ -53,6 +60,7 @@
 
                 <Button Content="{DynamicResource PersonPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
             </StackPanel>
+            <usercontrols:TimeSheetControl x:Name="timeSheetControl" Width="500" Grid.Row="1" Grid.Column="1" Margin="0,0,0,4" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
         </Grid>
     </Grid>
 </local:BaseCreateOrUpdatePage>

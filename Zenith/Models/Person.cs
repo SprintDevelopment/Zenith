@@ -6,6 +6,7 @@ using Zenith.Assets.Values.Enums;
 using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
 using Zenith.Assets.Extensions;
+using System.Collections.ObjectModel;
 
 namespace Zenith.Models
 {
@@ -54,15 +55,19 @@ namespace Zenith.Models
             }
         }
 
-        [Required(AllowEmptyStrings = true)]
-        [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
-        public string NationalCode { get; set; } = string.Empty;
+        public long Salary { get; set; }
+
+        [Reactive]
+        public CostCenters CostCenter { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.LARGE_STRING)]
         [Reactive]
         public string Address { get; set; } = string.Empty;
+
+        [Reactive]
+        public virtual ObservableCollection<PersonnelAbsence> PersonnelAbsences { get; set; } = new ObservableCollection<PersonnelAbsence>();
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

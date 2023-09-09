@@ -38,7 +38,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                     IsNew = modelKeyId == 0;
 
                 var viewTitleStringFormat = App.MainViewModel.Language == Assets.Values.Enums.AppLanguages.English ?
-                    (IsNew ? $"Create new {0}" : $"Edit {0}") :
+                    (IsNew ? "Create new {0}" : "Edit {0}") :
                     (IsNew ? "ایجاد {0} جدید" : "ویرایش {0}");
 
                 ViewTitle = string.Format(viewTitleStringFormat, (string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"]);
