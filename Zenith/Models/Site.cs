@@ -8,6 +8,7 @@ using ReactiveUI.Fody.Helpers;
 using Zenith.Assets.Extensions;
 using ReactiveUI;
 using System.Reactive.Linq;
+using System.Collections.ObjectModel;
 
 namespace Zenith.Models
 {
@@ -38,6 +39,9 @@ namespace Zenith.Models
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
         public string Comment { get; set; } = string.Empty;
+
+        [Reactive]
+        public virtual ObservableCollection<Delivery> Deliveries { get; set; } = new ObservableCollection<Delivery>();
 
         public Site()
         {

@@ -44,6 +44,12 @@ namespace Zenith.Data
                     CreateDateTime = DateTime.Today,
                 }
             );
+
+            modelBuilder.Entity<Delivery>()
+                .HasOne(d => d.Site)
+                .WithMany(s => s.Deliveries)
+                .HasForeignKey(d => d.SiteId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

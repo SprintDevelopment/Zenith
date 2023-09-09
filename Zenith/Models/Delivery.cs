@@ -22,12 +22,12 @@ namespace Zenith.Models
         [Reactive]
         public virtual SaleItem SaleItem { get; set; }
 
-        //[Reactive]
-        //public int SiteId { get; set; }
+        [Reactive]
+        public int SiteId { get; set; }
 
-        //[ForeignKey(nameof(SiteId))]
-        //[Reactive]
-        //public virtual Site Site { get; set; }
+        [ForeignKey(nameof(SiteId))]
+        [Reactive]
+        public virtual Site Site { get; set; }
 
         [Reactive]
         public int Count { get; set; }
@@ -70,6 +70,7 @@ namespace Zenith.Models
         {
             this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "Enter delivery number");
             this.ValidationRule(vm => vm.SaleItemId, sii => sii > 0, "Select sale item");
+            this.ValidationRule(vm => vm.SiteId, si => si > 0, "Select site");
             this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "Select machine");
             this.ValidationRule(vm => vm.DriverId, di => di > 0, "Select driver");
             this.ValidationRule(vm => vm.Count, c => c > 0, "Delivered count must be greater than 0");
