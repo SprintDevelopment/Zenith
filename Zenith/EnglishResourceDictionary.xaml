@@ -24,6 +24,12 @@
     <system:String x:Key="CostCenters.Transportation">Transportation</system:String>
     <system:String x:Key="CostCenters.Both">Both workshop and transportation</system:String>
 
+    <!-- COST CENTERS -->
+    <system:String x:Key="CountUnits.Ton">Per ton</system:String>
+    <system:String x:Key="CountUnits.Meter">Per meter</system:String>
+    <system:String x:Key="CountUnits.Ton.OnlyUnit">Ton</system:String>
+    <system:String x:Key="CountUnits.Meter.OnlyUnit">Meter</system:String>
+
     <!-- JOBS -->
     <system:String x:Key="Jobs.DontCare">_</system:String>
     <system:String x:Key="Jobs.None">Not specified</system:String>

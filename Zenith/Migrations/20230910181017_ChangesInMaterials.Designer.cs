@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230910181017_ChangesInMaterials")]
+    partial class ChangesInMaterials
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace Zenith.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BuyItemId"));
-
-                    b.Property<int>("BuyCountUnit")
-                        .HasColumnType("int");
 
                     b.Property<int>("BuyId")
                         .HasColumnType("int");
@@ -639,9 +639,6 @@ namespace Zenith.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SaleCountUnit")
                         .HasColumnType("int");
 
                     b.Property<int>("SaleId")

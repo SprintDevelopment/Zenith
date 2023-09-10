@@ -33,7 +33,7 @@ namespace Zenith.Models
         public long BuyPrice { get; set; }
 
         [NotMapped]
-        public string BuyPriceWithUnit => $"{BuyPrice} ({CommonBuyUnit})";
+        public string BuyPriceWithUnit => $"{BuyPrice} ({App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
 
         [Reactive]
         public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;
@@ -42,7 +42,7 @@ namespace Zenith.Models
         public long SalePrice { get; set; }
 
         [NotMapped]
-        public string SalePriceWithUnit => $"{SalePrice} ({CommonSaleUnit})";
+        public string SalePriceWithUnit => $"{SalePrice} ({App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
 
         [Reactive]
         public int AvailableAmount { get; set; }

@@ -41,7 +41,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
             {
                 var saleItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
                 if (saleItem is null)
-                    PageModel.Items.Add(new SaleItem { Material = material, MaterialId = material.MaterialId, UnitPrice = material.SalePrice, Count = 1 });
+                    PageModel.Items.Add(new SaleItem { Material = material, MaterialId = material.MaterialId, UnitPrice = material.SalePrice, SaleCountUnit = material.CommonSaleUnit, Count = 1 });
                 else
                     saleItem.Count++;
             });

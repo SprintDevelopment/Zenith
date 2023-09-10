@@ -99,15 +99,16 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="96"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="120"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SalePage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.SalePriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.TotalPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.SalePriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SalePage.TotalPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
                 </Grid>
 
                 <ItemsControl ItemsSource="{Binding PageModel.Items}" Grid.Row="1" Margin="0,0,4,-2" >
@@ -134,6 +135,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="96"/>
                                         <ColumnDefinition Width="100"/>
                                         <ColumnDefinition Width="100"/>
                                         <ColumnDefinition Width="40"/>
@@ -141,19 +143,20 @@
                                         <ColumnDefinition Width="40"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
-                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="2" Margin="8,0,0,0"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Remove this item" Grid.Column="4" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
+                                    <usercontrols:UnitSelectorControl DataContext="{Binding UnitSelectorViewModel}" Grid.Column="2"/>
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="3" Margin="8,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Remove this item" Grid.Column="5" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
-                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Add new delivery" Grid.Column="5" Command="{Binding DataContext.AddNewDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Add new delivery" Grid.Column="6" Command="{Binding DataContext.AddNewDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/send.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
-                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Show/hide deliveries" Grid.Column="6" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Show/hide deliveries" Grid.Column="7" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/show-list.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
-                                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
+                                    <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
                                 </baseclasses:JGrid>
                                 
                                 <Grid Grid.Row="1" Visibility="{Binding IsDeliveriesVisible, Converter={StaticResource boolToVisibilityConverter}}" Margin="0,0,0,8">

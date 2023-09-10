@@ -39,7 +39,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
             {
                 var buyItem = PageModel.Items.FirstOrDefault(b => b.Material.MaterialId == material.MaterialId);
                 if (buyItem is null)
-                    PageModel.Items.Add(new BuyItem { Material = material, MaterialId = material.MaterialId, UnitPrice = material.BuyPrice, Count = 1 });
+                    PageModel.Items.Add(new BuyItem { Material = material, MaterialId = material.MaterialId, UnitPrice = material.BuyPrice, BuyCountUnit = material.CommonBuyUnit, Count = 1 });
                 else
                     buyItem.Count++;
             });

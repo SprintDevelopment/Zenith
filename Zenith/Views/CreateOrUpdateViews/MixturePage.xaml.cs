@@ -22,6 +22,9 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new MixtureCreateOrUpdateViewModel(new MixtureRepository());
+            
+            saleUnitComboBox.ItemsSource = typeof(CountUnits).ToCollection();
+            
             var CastedViewModel = (MixtureCreateOrUpdateViewModel)ViewModel;
 
             this.WhenActivated(d =>

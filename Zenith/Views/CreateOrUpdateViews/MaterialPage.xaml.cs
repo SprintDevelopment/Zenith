@@ -1,4 +1,6 @@
-﻿using Zenith.Models;
+﻿using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
+using Zenith.Models;
 using Zenith.Repositories;
 using Zenith.ViewModels.CreateOrUpdateViewModels;
 
@@ -14,6 +16,10 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BaseCreateOrUpdateViewModel<Material>(new MaterialRepository());
+
+            buyUnitComboBox.ItemsSource = typeof(CountUnits).ToCollection();
+            saleUnitComboBox.ItemsSource = typeof(CountUnits).ToCollection();
+
         }
     }
 }

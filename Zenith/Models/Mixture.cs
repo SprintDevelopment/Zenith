@@ -38,7 +38,7 @@ namespace Zenith.Models
         public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;
 
         [NotMapped]
-        public string SalePriceWithUnit => $"{SalePrice} ({CommonSaleUnit})";
+        public string SalePriceWithUnit => $"{SalePrice} ({(string)App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
 
         [Reactive]
         public int RelatedMaterialId { get; set; }
