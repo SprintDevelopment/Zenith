@@ -42,7 +42,7 @@
                 <StackPanel>
                     <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.MixtureNameTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.DisplayNameTextBoxTitle}" />
-                    <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MixturePage.BuyPriceTextBoxTitle}" />
+                    <ComboBox x:Name="saleUnitComboBox" SelectedValue="{Binding PageModel.CommonSaleUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MixturePage.CommonSaleUnitComboBoxTitle}"/>
                     <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MixturePage.SalePriceTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.CommentTextBoxTitle}" />
                 </StackPanel>

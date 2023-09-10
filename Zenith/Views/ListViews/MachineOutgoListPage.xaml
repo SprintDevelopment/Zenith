@@ -1,15 +1,15 @@
-﻿<local:BaseListPage x:Class="Zenith.Views.ListViews.MaterialListPage"
-      x:TypeArguments="model:Material"
+﻿<local:BaseListPage x:Class="Zenith.Views.ListViews.MachineOutgoListPage"
+      x:TypeArguments="model:MachineOutgo"
       xmlns:model="clr-namespace:Zenith.Models"
+      xmlns:enums="clr-namespace:Zenith.Assets.Values.Enums"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Zenith.Views.ListViews"
+      xmlns:local="clr-namespace:Zenith.Views.ListViews" 
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MaterialListPage">
+      mc:Ignorable="d" FontSize="14" d:DesignHeight="450" d:DesignWidth="800"
+      Title="PersonListPage">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -47,22 +47,22 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MaterialListPage.MaterialNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MaterialListPage.MetersPerTonColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MaterialListPage.AvailableAmountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MaterialListPage.BuyPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MaterialListPage.SalePriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineOutgoListPage.OutgoCategoryColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineOutgoListPage.ValueColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineOutgoListPage.RelatedCompanyColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineOutgoListPage.RelatedMachineColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineOutgoListPage.DateTimeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
             </Grid>
-            
+
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" >
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -84,21 +84,21 @@
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="150"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding MetersPerTon, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding AvailableAmount, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding BuyPriceWithUnit}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding SalePriceWithUnit}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding OutgoCategory.Title}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Value, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Machine.Name}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
-                            <!---->
+                            
                         </baseclasses:JGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -1,5 +1,5 @@
-﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.MaterialPage"
-      x:TypeArguments="model:Material" 
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.MachineOutgoPage"
+      x:TypeArguments="model:MachineOutgo" 
       xmlns:model="clr-namespace:Zenith.Models"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
       xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
-      Title="MaterialPage">
+      xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls">
     <Grid>
         <Grid Width="450" Height="auto" VerticalAlignment="Center">
             <Grid.RowDefinitions>
@@ -29,18 +29,16 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.MaterialNameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.MetersPerTon, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.MetersPerTonTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.AvailableAmount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.AvailableAmountTextBoxTitle}" />
-                <ComboBox x:Name="buyUnitComboBox" SelectedValue="{Binding PageModel.CommonBuyUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MaterialPage.CommonBuyUnitComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.BuyPriceTextBoxTitle}" />
-                <ComboBox x:Name="saleUnitComboBox" SelectedValue="{Binding PageModel.CommonSaleUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MaterialPage.CommonSaleUnitComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.SalePriceTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.CommentTextBoxTitle}" />
+                <projUsercontrols:OutgoCategoriesTreeView x:Name="outgoCategoryTreeView" Title="{DynamicResource MachineOutgoPage.OutgoCategoryComboBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MachineOutgoPage.ValueTextBoxTitle}"/>
+                <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource MachineOutgoPage.RelatedMachineComboBoxTitle}"/>
+                <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource MachineOutgoPage.RelatedCompanyComboBoxTitle}"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource MachineOutgoPage.DateTimeTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineOutgoPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="{DynamicResource MaterialPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                <Button Content="{DynamicResource MachineOutgoPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

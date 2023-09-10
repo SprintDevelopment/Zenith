@@ -44,7 +44,7 @@ namespace Zenith.Models
 
         public Outgo()
         {
-            this.ValidationRule(vm => vm.OutgoCategory, oc => oc is not null, "Select outgo category");
+            this.ValidationRule(vm => vm.OutgoCategoryId, oci => oci > 0, "Select outgo category");
             this.ValidationRule(vm => vm.Value, value => value > 0, "Outgo value must be greater than 0");
 
             this.WhenAnyValue(m => m.OutgoCategory)

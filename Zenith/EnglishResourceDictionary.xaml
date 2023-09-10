@@ -45,6 +45,7 @@
     <system:String x:Key="PermissionTypes.Materials">Materials</system:String>
     <system:String x:Key="PermissionTypes.Mixtures">Mixtures</system:String>
     <system:String x:Key="PermissionTypes.Machines">Machines</system:String>
+    <system:String x:Key="PermissionTypes.MachineOutgoes">Machine outgoes</system:String>
     <system:String x:Key="PermissionTypes.Outgoes">Outgoes</system:String>
     <system:String x:Key="PermissionTypes.OutgoCategories">Outgo Categories</system:String>
     <system:String x:Key="PermissionTypes.Personnel">Personnel</system:String>
@@ -64,6 +65,8 @@
     <system:String x:Key="MultipleResources.Delivey">Deliveries</system:String>
     <system:String x:Key="SingleResources.Machine">Machine</system:String>
     <system:String x:Key="MultipleResources.Machine">Machines</system:String>
+    <system:String x:Key="SingleResources.MachineOutgo">Machine outgo</system:String>
+    <system:String x:Key="MultipleResources.MachineOutgo">Machine outgoes</system:String>
     <system:String x:Key="SingleResources.Material">Material</system:String>
     <system:String x:Key="MultipleResources.Material">Materials</system:String>
     <system:String x:Key="SingleResources.Mixture">Mixture</system:String>
@@ -102,8 +105,8 @@
     <system:String x:Key="MainWindow.MachinesSubMenuItem">Machines</system:String>
     <system:String x:Key="MainWindow.OutgoesMenuItem">Outgoes</system:String>
     <system:String x:Key="MainWindow.OutgoesSubMenuItem">Outgoes</system:String>
+    <system:String x:Key="MainWindow.MachineOutgoesSubMenuItem">Machine outgoes</system:String>
     <system:String x:Key="MainWindow.OutgoCategoriesSubMenuItem">Outgo categories</system:String>
-    <system:String x:Key="MainWindow.DieselSubMenuItem">Diesel</system:String>
     <system:String x:Key="MainWindow.PersonnelSubMenuItem">Personnel and salary</system:String>
     <system:String x:Key="MainWindow.PersonnelMenuItem">Personnel</system:String>
     <system:String x:Key="MainWindow.ReportsMenuItem">Reports</system:String>
@@ -196,12 +199,30 @@
     <system:String x:Key="MachineListPage.MachineNameColumnTextBlockText">Machine name</system:String>
     <system:String x:Key="MachineListPage.CapacityColumnTextBlockText">Capacity (in meters)</system:String>
     <system:String x:Key="MachineListPage.DefaultDeliveryFeeColumnTextBlockText">Default delivery fee</system:String>
-    
+
+    <!-- MACHINE OUTGO PAGE -->
+    <system:String x:Key="MachineOutgoPage.RelatedMachineComboBoxTitle">Related machine</system:String>
+    <system:String x:Key="MachineOutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
+    <system:String x:Key="MachineOutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
+    <system:String x:Key="MachineOutgoPage.ValueTextBoxTitle">Outgo value</system:String>
+    <system:String x:Key="MachineOutgoPage.DateTimeTitle">Outgo date time</system:String>
+    <system:String x:Key="MachineOutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="MachineOutgoPage.ConfirmButtonContent">Confirm</system:String>
+
+    <!-- MACHINE OUTGO LIST PAGE -->
+    <system:String x:Key="MachineOutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
+    <system:String x:Key="MachineOutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
+    <system:String x:Key="MachineOutgoListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
+    <system:String x:Key="MachineOutgoListPage.RelatedMachineColumnTextBlockText">Related company</system:String>
+    <system:String x:Key="MachineOutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
+
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">Material name</system:String>
     <system:String x:Key="MaterialPage.MetersPerTonTextBoxTitle">Meters per ton</system:String>
     <system:String x:Key="MaterialPage.AvailableAmountTextBoxTitle">Available amount</system:String>
+    <system:String x:Key="MaterialPage.CommonBuyUnitComboBoxTitle">Common buy unit</system:String>
     <system:String x:Key="MaterialPage.BuyPriceTextBoxTitle">Buy price</system:String>
+    <system:String x:Key="MaterialPage.CommonSaleUnitComboBoxTitle">Common sale unit</system:String>
     <system:String x:Key="MaterialPage.SalePriceTextBoxTitle">Sale price</system:String>
     <system:String x:Key="MaterialPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MaterialPage.IsMixedMaterialCheckBoxContent">Is this a mixed material ?</system:String>
@@ -217,7 +238,7 @@
     <!-- MIXTURE PAGE -->
     <system:String x:Key="MixturePage.MixtureNameTextBoxTitle">Mixture name</system:String>
     <system:String x:Key="MixturePage.DisplayNameTextBoxTitle">Display name (to use in factor)</system:String>
-    <system:String x:Key="MixturePage.BuyPriceTextBoxTitle">Buy price</system:String>
+    <system:String x:Key="MixturePage.CommonSaleUnitComboBoxTitle">Common sale unit</system:String>
     <system:String x:Key="MixturePage.SalePriceTextBoxTitle">Sale price</system:String>
     <system:String x:Key="MixturePage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MixturePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
@@ -228,6 +249,7 @@
     <!-- MIXTURE LIST PAGE -->
     <system:String x:Key="MixtureListPage.MixtureNameColumnTextBlockText">Mixture name</system:String>
     <system:String x:Key="MixtureListPage.DisplayNameColumnTextBlockText">Display name</system:String>
+    <system:String x:Key="MixtureListPage.SalePriceColumnTextBlockText">Sale price</system:String>
     <system:String x:Key="MixtureListPage.CommentColumnTextBlockText">Comment</system:String>
     
     <!-- NOTE PAGE -->

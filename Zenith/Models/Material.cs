@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Zenith.Assets.Attributes;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Constants;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
@@ -26,10 +27,22 @@ namespace Zenith.Models
         public string Name { get; set; }
 
         [Reactive]
+        public CountUnits CommonBuyUnit { get; set; } = CountUnits.Ton;
+
+        [Reactive]
         public long BuyPrice { get; set; }
+
+        [NotMapped]
+        public string BuyPriceWithUnit => $"{BuyPrice} ({CommonBuyUnit})";
+
+        [Reactive]
+        public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;
 
         [Reactive]
         public long SalePrice { get; set; }
+
+        [NotMapped]
+        public string SalePriceWithUnit => $"{SalePrice} ({CommonSaleUnit})";
 
         [Reactive]
         public int AvailableAmount { get; set; }

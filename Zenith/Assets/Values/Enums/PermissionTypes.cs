@@ -18,6 +18,7 @@ namespace Zenith.Assets.Values.Enums
         Materials,
         Mixtures,
         Machines,
+        MachineOutgoes,
         Outgoes,
         OutgoCategories,
         Personnel,

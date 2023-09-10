@@ -115,6 +115,9 @@
     <Compile Update="Views\CreateOrUpdateViews\ChequePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\CreateOrUpdateViews\MachineOutgoPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateOrUpdateViews\SitePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,6 +142,9 @@
     <Compile Update="Views\ListViews\DeliveryListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ListViews\MachineOutgoListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ListViews\SiteListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -161,6 +167,9 @@
 
   <ItemGroup>
     <Page Update="Views\ListViews\OutgoCategoryListPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListViews\MachineOutgoListPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

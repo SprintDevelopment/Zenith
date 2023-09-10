@@ -5,11 +5,13 @@ using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reactive.Linq;
 using Zenith.Assets.Attributes;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Constants;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
@@ -30,10 +32,13 @@ namespace Zenith.Models
         public string DisplayName { get; set; }
 
         [Reactive]
-        public long BuyPrice { get; set; }
+        public long SalePrice { get; set; }
 
         [Reactive]
-        public long SalePrice { get; set; }
+        public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;
+
+        [NotMapped]
+        public string SalePriceWithUnit => $"{SalePrice} ({CommonSaleUnit})";
 
         [Reactive]
         public int RelatedMaterialId { get; set; }
