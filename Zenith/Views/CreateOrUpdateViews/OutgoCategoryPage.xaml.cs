@@ -26,9 +26,8 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             this.WhenActivated(d =>
             {
-                parentOutgoCategoryTreeView.ViewModel.ItemsSource = new OutgoCategoryRepository().All();
-
-                this.Bind(ViewModel, vm => vm.PageModel.Parent, v => v.parentOutgoCategoryTreeView.ViewModel.SelectedItem).DisposeWith(d);
+                //parentOutgoCategoryTreeView.ViewModel.ItemsSource = new OutgoCategoryRepository().All();
+                //this.Bind(ViewModel, vm => vm.PageModel.Parent, v => v.parentOutgoCategoryTreeView.ViewModel.SelectedItem).DisposeWith(d);
             });
         }
     }

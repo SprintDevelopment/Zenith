@@ -19,6 +19,8 @@ namespace Zenith.Assets.Utils
             cfg.CreateMap<Material, Material>();
             cfg.CreateMap<Note, Note>();
             cfg.CreateMap<Person, Person>();
+            cfg.CreateMap<Outgo, Outgo>();
+            cfg.CreateMap<MachineOutgo, MachineOutgo>();
             cfg.CreateMap<OutgoCategory, OutgoCategory>();
             cfg.CreateMap<Sale, Sale>();
             cfg.CreateMap<SaleItem, SaleItem>();

@@ -87,8 +87,8 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.OutgoesSubMenuItem}" Shortcut="Ctrl+Shift+O" Command="{Binding NavigateToOutgoesCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.MachineOutgoesSubMenuItem}" Shortcut="Ctrl+Shift+D" Command="{Binding NavigateToMachineOutgoesCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.OutgoCategoriesSubMenuItem}" Shortcut="Ctrl+Shift+G" Command="{Binding NavigateToOutgoCategoriesCommand}" />
-                            <controls:SubMenuItem Title="{DynamicResource MainWindow.DieselSubMenuItem}" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

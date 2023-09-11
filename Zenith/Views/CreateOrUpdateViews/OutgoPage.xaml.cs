@@ -24,10 +24,8 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             this.WhenActivated(d =>
             {
-                outgoCategoryTreeView.ViewModel.ItemsSource = new OutgoCategoryRepository().All();
-                companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Seller).ToList();
-
-                this.Bind(ViewModel, vm => vm.PageModel.OutgoCategory, v => v.outgoCategoryTreeView.ViewModel.SelectedItem).DisposeWith(d);
+                outgoCategoryComboBox.ItemsSource = new OutgoCategoryRepository().Find(oc => oc.CostCenter == CostCenters.Workshop).ToList();
+                companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
             });
         }
     }

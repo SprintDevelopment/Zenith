@@ -5,13 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using ReactiveUI.Fody.Helpers;
 
 namespace Zenith.Models
 {
-    public class MachineOutgo : Outgo
+    public class MachineOutgo : OutgoBase
     {
+        [Reactive]
         public int MachineId { get; set; }
 
+        [ForeignKey(nameof(MachineId))]
+        [Reactive]
         public virtual Machine Machine { get; set; }
 
         public MachineOutgo()

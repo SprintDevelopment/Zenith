@@ -15,13 +15,6 @@ namespace Zenith.Models
         [Reactive]
         public short OutgoCategoryId { get; set; }
 
-        [Reactive]
-        public short? ParentOutgoCategoryId { get; set; }
-
-        [ForeignKey(nameof(ParentOutgoCategoryId))]
-        [Reactive]
-        public virtual OutgoCategory Parent { get; set; }
-
         [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]

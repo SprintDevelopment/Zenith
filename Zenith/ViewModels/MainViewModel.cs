@@ -50,6 +50,7 @@ namespace Zenith.ViewModels
             NavigateToMaterialsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MaterialListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Materials && p.HasReadAccess)));
             NavigateToMixturesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MixtureListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Mixtures && p.HasReadAccess)));
             NavigateToMachinesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Machines && p.HasReadAccess)));
+            NavigateToMachineOutgoesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineOutgoListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.MachineOutgoes && p.HasReadAccess)));
             NavigateToOutgoesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Outgoes && p.HasReadAccess)));
             NavigateToOutgoCategoriesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoCategoryListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.OutgoCategories && p.HasReadAccess)));
             NavigateToPersonnelCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(PersonListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Personnel && p.HasReadAccess)));
@@ -217,6 +218,7 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> NavigateToMaterialsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToMixturesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToMachinesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToMachineOutgoesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToOutgoesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToOutgoCategoriesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToPersonnelCommand { get; set; }

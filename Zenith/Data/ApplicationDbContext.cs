@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith.Models;
@@ -51,6 +52,8 @@ namespace Zenith.Data
                 .WithMany(s => s.Deliveries)
                 .HasForeignKey(d => d.SiteId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Outgo>().UseTptMappingStrategy();
         }
     }
 }

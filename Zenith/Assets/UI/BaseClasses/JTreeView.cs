@@ -95,7 +95,7 @@ namespace Zenith.Assets.UI.BaseClasses
                     .Subscribe().DisposeWith(d);
 
                 this.WhenAnyValue(v => v.Title)
-                    .BindTo(this, v => v.selectedItemTitleTextBox.Text)
+                    .BindTo(this, v => v.selectedItemTitleTextBox.Title)
                     .DisposeWith(d);
 
                 this.WhenAnyValue(v => v.selectedItemTitleTextBox.ActualWidth)

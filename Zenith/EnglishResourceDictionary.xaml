@@ -17,6 +17,7 @@
     <system:String x:Key="CompanyTypes.Buyer">Buyer</system:String>
     <system:String x:Key="CompanyTypes.Seller">Seller</system:String>
     <system:String x:Key="CompanyTypes.Both">Both buyer and seller</system:String>
+    <system:String x:Key="CompanyTypes.Other">Other</system:String>
 
     <!-- COST CENTERS -->
     <system:String x:Key="CostCenters.DontCare">_</system:String>
