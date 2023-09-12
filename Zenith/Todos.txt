@@ -1,27 +1,23 @@
-﻿################################################ 1st priorities -> 13.5h (Excellent if finished at Friday 24)
-Cheques - 1.5h												
-Mixed Materials - 1h										
-Personnel Salary - 1.5h
-Materials Conversion Between Capacity And Density - 1h
-Outgoes - 2h
-Diesel - 1h
-Payments From Companies - 2.5h
-Payments To Companies - 1h
-Calculation - 2h
+﻿Payments - 3h						1h
+Cheques - 2h						1h
+Personnel Salary - 2h				1h
+Outgoes - 2h						1h
+Print Factor - 2h					1h
 
-################################################ 2nd priorities -> 13h (Excellent if finished at Monday 24)
-Language Issues - 1h
-Configurations - 2.5h
-Backup - 20m
-Restore - 10m
-Machine Reports - 2h
-Driver Reports - 2h
-Print Factor - 2h
-Integrities - 3h
+Driver Report - 2h					1h
+Machine Report - 1h					1h
+Integrities - 3h					1h
+Benefit - 3h						1h
 
+Other - 4h							1h
 
+Total - 24h							10h
 
-Total - 30h
+Tuesday - 12h
+Wednesday - 12h
+Thursday - 12h
+Friday - 12h
 
-Keep going ...
+FINISHED
+
 Do your best and trust the process ...

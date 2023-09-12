@@ -72,6 +72,17 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
+                <controls:MenuItem Icon="Resources/Images/Menu/payments.png" Title="{DynamicResource MainWindow.RecievesAndPaymentsMenuItem}" Margin="0,1">
+                    <controls:MenuItem.AdditionalContent>
+                        <StackPanel>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.RecievesSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToBuysCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.PaymentsSubMenuItem}" Shortcut="Ctrl+Shift+S" Command="{Binding NavigateToSalesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.RecievedChequesSubMenuItem}" Shortcut="Ctrl+Shift+Q" Command="{Binding NavigateToChequesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.PaidChequesSubMenuItem}" Shortcut="Ctrl+Shift+Q" Command="{Binding NavigateToChequesCommand}"/>
+                            <!--<controls:SubMenuItem Title="لیست تحویل ها" Shortcut="Ctrl+Shift+D" Command="{Binding Navigate}" CommandParameter="{x:Type listViews:DeliveryListPage}"/>-->
+                        </StackPanel>
+                    </controls:MenuItem.AdditionalContent>
+                </controls:MenuItem>
                 <controls:MenuItem Icon="Resources/Images/Menu/definitions.png" Title="{DynamicResource MainWindow.DefinitionsMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>

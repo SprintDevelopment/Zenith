@@ -39,6 +39,7 @@
     <None Remove="Resources\Images\Menu\deliveries.png" />
     <None Remove="Resources\Images\Menu\help.png" />
     <None Remove="Resources\Images\Menu\outgoes.png" />
+    <None Remove="Resources\Images\Menu\payments.png" />
     <None Remove="Resources\Images\Menu\personnel.png" />
     <None Remove="Resources\Images\Menu\reports.png" />
     <None Remove="Resources\Images\Menu\security.png" />
@@ -102,6 +103,7 @@
     <Resource Include="Resources\Images\Menu\deliveries.png" />
     <Resource Include="Resources\Images\Menu\help.png" />
     <Resource Include="Resources\Images\Menu\outgoes.png" />
+    <Resource Include="Resources\Images\Menu\payments.png" />
     <Resource Include="Resources\Images\Menu\personnel.png" />
     <Resource Include="Resources\Images\Menu\reports.png" />
     <Resource Include="Resources\Images\Menu\security.png" />

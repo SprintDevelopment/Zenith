@@ -103,7 +103,11 @@
     <system:String x:Key="MainWindow.BuySaleMenuItem">Buy and sale</system:String>
     <system:String x:Key="MainWindow.BuysSubMenuItem">Buys</system:String>
     <system:String x:Key="MainWindow.SalesSubMenuItem">Sales</system:String>
-    <system:String x:Key="MainWindow.ChequesSubMenuItem">Cheques</system:String>
+    <system:String x:Key="MainWindow.RecievesAndPaymentsMenuItem">Recieves and payments</system:String>
+    <system:String x:Key="MainWindow.RecievesSubMenuItem">Recieves</system:String>
+    <system:String x:Key="MainWindow.PaymentsSubMenuItem">Payments</system:String>
+    <system:String x:Key="MainWindow.RecievedChequesSubMenuItem">Recieved cheques</system:String>
+    <system:String x:Key="MainWindow.PaidChequesSubMenuItem">Paid cheques</system:String>
     <system:String x:Key="MainWindow.DefinitionsMenuItem">Definitions</system:String>
     <system:String x:Key="MainWindow.CompaniesSubMenuItem">Companies</system:String>
     <system:String x:Key="MainWindow.CompanySitesSubMenuItem">Company sites</system:String>
@@ -152,7 +156,7 @@
 
     <!-- CHEQUE PAGE -->
     <system:String x:Key="ChequePage.ChequeNumberTextBoxTitle">Cheque number</system:String>
-    <system:String x:Key="ChequePage.ChequeValueTextBoxTitle">Cheque value</system:String>
+    <system:String x:Key="ChequePage.ValueTextBoxTitle">Cheque value</system:String>
     <system:String x:Key="ChequePage.ChequeDateTimeTitle">Cheque date</system:String>
     <system:String x:Key="ChequePage.IssueDateTimeTitle">Issue date</system:String>
     <system:String x:Key="ChequePage.CommentTextBoxTitle">Optional Comment</system:String>
@@ -162,7 +166,7 @@
     <system:String x:Key="ChequeListPage.CompanyNameColumnTextBlockText">Company name</system:String>
     <system:String x:Key="ChequeListPage.SaleNumberColumnTextBlockText">Sale number</system:String>
     <system:String x:Key="ChequeListPage.ChequeNumberColumnTextBlockText">Cheque number</system:String>
-    <system:String x:Key="ChequeListPage.ChequeValueColumnTextBlockText">Cheque value</system:String>
+    <system:String x:Key="ChequeListPage.ValueColumnTextBlockText">Cheque value</system:String>
     <system:String x:Key="ChequeListPage.ChequeDateColumnTextBlockText">Cheque date</system:String>
 
     <!-- COMPANY PAGE -->
@@ -220,7 +224,7 @@
     <system:String x:Key="MachineOutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
     <system:String x:Key="MachineOutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
     <system:String x:Key="MachineOutgoListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
-    <system:String x:Key="MachineOutgoListPage.RelatedMachineColumnTextBlockText">Related company</system:String>
+    <system:String x:Key="MachineOutgoListPage.RelatedMachineColumnTextBlockText">Related machine</system:String>
     <system:String x:Key="MachineOutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
 
     <!-- MATERIAL PAGE -->

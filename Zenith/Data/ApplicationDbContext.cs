@@ -18,6 +18,7 @@ namespace Zenith.Data
 
         public DbSet<Buy> Buys { get; set; }
         public DbSet<BuyItem> BuyItems { get; set; }
+        public DbSet<Cash> Cashes { get; set; }
         public DbSet<Cheque> Cheques { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
@@ -52,8 +53,6 @@ namespace Zenith.Data
                 .WithMany(s => s.Deliveries)
                 .HasForeignKey(d => d.SiteId)
                 .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Outgo>().UseTptMappingStrategy();
         }
     }
 }
