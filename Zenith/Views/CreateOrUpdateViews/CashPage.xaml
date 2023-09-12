@@ -1,5 +1,5 @@
-﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.ChequePage"
-      x:TypeArguments="model:Cheque" 
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.CashPage"
+      x:TypeArguments="model:Cash" 
       xmlns:model="clr-namespace:Zenith.Models"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -29,14 +29,15 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel Grid.Row="1">
-                <baseclasses:JTextBox Text="{Binding PageModel.ChequeNumber, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource ChequePage.ChequeNumberTextBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource ChequePage.ChequeValueTextBoxTitle}"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource ChequePage.ChequeDateTimeTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.CommentTextBoxTitle}" />
+                <ComboBox x:Name="transferDirectionsComboBox" SelectedValue="{Binding PageModel.TransferDirection, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" IsEnabled="False" Tag="{DynamicResource CashPage.TransferDirectionComboBoxTitle}"/>
+                <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource CashPage.CompanyComboBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource CashPage.ValueTextBoxTitle}"/>
+                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource CashPage.IssueDateTimeTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CashPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="{DynamicResource ChequePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Button Content="{DynamicResource CashPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

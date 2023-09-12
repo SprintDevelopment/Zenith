@@ -27,8 +27,10 @@
     <None Remove="Resources\Images\Common\next.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
     <None Remove="Resources\Images\Common\partialSelection.png" />
+    <None Remove="Resources\Images\Common\payment.png" />
     <None Remove="Resources\Images\Common\previous.png" />
     <None Remove="Resources\Images\Common\print.png" />
+    <None Remove="Resources\Images\Common\receive.png" />
     <None Remove="Resources\Images\Common\remove.png" />
     <None Remove="Resources\Images\Common\search.png" />
     <None Remove="Resources\Images\Common\send.png" />
@@ -91,8 +93,10 @@
     <Resource Include="Resources\Images\Common\next.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />
     <Resource Include="Resources\Images\Common\partialSelection.png" />
+    <Resource Include="Resources\Images\Common\payment.png" />
     <Resource Include="Resources\Images\Common\previous.png" />
     <Resource Include="Resources\Images\Common\print.png" />
+    <Resource Include="Resources\Images\Common\receive.png" />
     <Resource Include="Resources\Images\Common\remove.png" />
     <Resource Include="Resources\Images\Common\search.png" />
     <Resource Include="Resources\Images\Common\send.png" />
@@ -111,6 +115,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CreateOrUpdateViews\CashPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateOrUpdateViews\MixturePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

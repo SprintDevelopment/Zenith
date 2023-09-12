@@ -44,6 +44,7 @@ namespace Zenith.ViewModels
 
             NavigateToBuysCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(BuyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Buys && p.HasReadAccess)));
             NavigateToSalesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SaleListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Sales && p.HasReadAccess)));
+            NavigateToCashesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CashListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Cashes && p.HasReadAccess)));
             NavigateToChequesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(ChequeListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Cheques && p.HasReadAccess)));
             NavigateToCompaniesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CompanyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Companies && p.HasReadAccess)));
             NavigateToSitesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SiteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Sites && p.HasReadAccess)));
@@ -212,6 +213,7 @@ namespace Zenith.ViewModels
         //
         public ReactiveCommand<Unit, Unit> NavigateToBuysCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSalesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToCashesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToChequesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToCompaniesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSitesCommand { get; set; }

@@ -37,6 +37,7 @@ namespace Zenith.Models
 
         public MoneyTransaction()
         {
+            this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select related company");
             this.ValidationRule(vm => vm.Value, v => v > 0, "Value must be greater than 0");
         }
     }

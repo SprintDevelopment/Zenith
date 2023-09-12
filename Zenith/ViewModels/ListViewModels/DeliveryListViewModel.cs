@@ -29,7 +29,6 @@ namespace Zenith.ViewModels.ListViewModels
             SourceList.Clear();
             SourceList.AddRange(Repository.Find(d => relatedSale.Items.Contains(d.SaleItem)));
 
-
             SourceList.Connect()
                 .Filter(criteria, ListFilterPolicy.ClearAndReplace)
                 .Sort(SortExpressionComparer<Delivery>.Ascending(d => d.DateTime))
@@ -51,7 +50,11 @@ namespace Zenith.ViewModels.ListViewModels
 
             AddNewDeliveryCommand = ReactiveCommand.CreateFromObservable<SaleItem, Unit>(saleItem => 
                 CreateCommand.Execute()
-                .Do(_ => CreateUpdatePage.ViewModel.PageModel = new Delivery { SaleItem = saleItem, SaleItemId = saleItem.SaleItemId }));
+                .Do(_ => 
+                {
+                    CreateUpdatePage.ViewModel.PageModel.SaleItem = saleItem;
+                    CreateUpdatePage.ViewModel.PageModel.SaleItemId = saleItem.SaleItemId;
+                }));
 
         }
 
