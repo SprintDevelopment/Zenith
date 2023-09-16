@@ -5,7 +5,7 @@
              xmlns:dtos="clr-namespace:Zenith.Assets.Values.Dtos"
              xmlns:converters="clr-namespace:Zenith.Assets.UI.Converters"
              xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" xmlns:sys="clr-namespace:System;assembly=netstandard"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml" Startup="Application_Startup">
     <Application.Resources>
 
         <ResourceDictionary>
@@ -28,6 +28,7 @@
             <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
             <converters:CountToVisibilityConverter x:Key="countToVisibilityConverter"/>
             <converters:ImageToBinaryConverter x:Key="imageToBianaryConverter"/>
+            <converters:TransferDicrectionToColorConverter x:Key="transferDirectionToColorConverter"/>
             <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
             <converters:EnumConverter x:Key="enumConverter"/>
 

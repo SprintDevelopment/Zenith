@@ -18,22 +18,22 @@ using Zenith.Assets.Values.Enums;
 namespace Zenith.Views.ListViews
 {
     /// <summary>
-    /// Interaction logic for ChequeListPage.xaml
+    /// Interaction logic for SalaryPaymentListPage.xaml
     /// </summary>
-    public partial class ChequeListPage : BaseListPage<Cheque>
+    public partial class SalaryPaymentListPage : BaseListPage<SalaryPayment>
     {
-        public ChequeListPage()
+        public SalaryPaymentListPage()
         {
             InitializeComponent();
-            var searchModel = new ChequeSearchModel();
+            var searchModel = new SalaryPaymentSearchModel();
 
-            IObservable<Func<Cheque, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
+            IObservable<Func<SalaryPayment, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new { Title = s }).Select(s => new Func<Cheque, bool>(p => true));
+                .Select(s => new { Title = s }).Select(s => new Func<SalaryPayment, bool>(p => true));
 
-            ViewModel = new ChequeListViewModel(new ChequeRepository(), searchModel, dynamicFilter)
+            ViewModel = new BaseListViewModel<SalaryPayment>(new SalaryPaymentRepository(), searchModel, dynamicFilter, PermissionTypes.SalaryPayments)
             {
-                CreateUpdatePage = new ChequePage()
+                CreateUpdatePage = new SalaryPaymentPage()
             };
 
             this.WhenActivated(d => 

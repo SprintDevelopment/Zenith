@@ -12,6 +12,12 @@
     <system:String x:Key="AppLanguages.English">English</system:String>
     <system:String x:Key="AppLanguages.Persian">فارسی</system:String>
 
+    <!-- CHEQUE STATES -->
+    <system:String x:Key="ChequeStates.DontCare">_</system:String>
+    <system:String x:Key="ChequeStates.NotDue">Not due</system:String>
+    <system:String x:Key="ChequeStates.Passed">Passed</system:String>
+    <system:String x:Key="ChequeStates.Overdue">Overdue</system:String>
+
     <!-- COMPANY TYPES -->
     <system:String x:Key="CompanyTypes.DontCare">_</system:String>
     <system:String x:Key="CompanyTypes.Buyer">Buyer</system:String>
@@ -57,6 +63,7 @@
     <system:String x:Key="PermissionTypes.Outgoes">Outgoes</system:String>
     <system:String x:Key="PermissionTypes.OutgoCategories">Outgo Categories</system:String>
     <system:String x:Key="PermissionTypes.Personnel">Personnel</system:String>
+    <system:String x:Key="PermissionTypes.SalaryPayments">Salary payments</system:String>
     <system:String x:Key="PermissionTypes.Users">Users</system:String>
     <system:String x:Key="PermissionTypes.Notes">Notes</system:String>
 
@@ -96,6 +103,8 @@
     <system:String x:Key="MultipleResources.OutgoCategory">Outgo categories</system:String>
     <system:String x:Key="SingleResources.Person">Personnel</system:String>
     <system:String x:Key="MultipleResources.Person">Personnel</system:String>
+    <system:String x:Key="SingleResources.SalaryPayment">Salary payment</system:String>
+    <system:String x:Key="MultipleResources.SalaryPayment">Salary payments</system:String>
     <system:String x:Key="SingleResources.Sale">Sale</system:String>
     <system:String x:Key="MultipleResources.Sale">Sales</system:String>
     <system:String x:Key="SingleResources.SaleItem">Sale item</system:String>
@@ -124,8 +133,9 @@
     <system:String x:Key="MainWindow.OutgoesSubMenuItem">Outgoes</system:String>
     <system:String x:Key="MainWindow.MachineOutgoesSubMenuItem">Machine outgoes</system:String>
     <system:String x:Key="MainWindow.OutgoCategoriesSubMenuItem">Outgo categories</system:String>
-    <system:String x:Key="MainWindow.PersonnelSubMenuItem">Personnel and salary</system:String>
-    <system:String x:Key="MainWindow.PersonnelMenuItem">Personnel</system:String>
+    <system:String x:Key="MainWindow.PersonnelMenuItem">Personnel and salary</system:String>
+    <system:String x:Key="MainWindow.PersonnelSubMenuItem">Personnel</system:String>
+    <system:String x:Key="MainWindow.SalaryPaymentsSubMenuItem">Salary payments</system:String>
     <system:String x:Key="MainWindow.ReportsMenuItem">Reports</system:String>
     <system:String x:Key="MainWindow.DashboardSubMenuItem">Dashboard</system:String>
     <system:String x:Key="MainWindow.ReportsSubMenuItem">Reports</system:String>
@@ -170,6 +180,7 @@
 
     <!-- CASH LIST PAGE -->
     <system:String x:Key="CashListPage.CompanyNameColumnTextBlockText">Company name</system:String>
+    <system:String x:Key="CashListPage.TransferDirectionColumnTextBlockText">Direction</system:String>
     <system:String x:Key="CashListPage.ValueColumnTextBlockText">Value</system:String>
     <system:String x:Key="CashListPage.IssueDateColumnTextBlockText">Issue date</system:String>
     <system:String x:Key="CashListPage.CommentColumnTextBlockText">Comment</system:String>
@@ -178,18 +189,20 @@
     <system:String x:Key="ChequePage.TransferDirectionComboBoxTitle">Transfer direction</system:String>
     <system:String x:Key="ChequePage.CompanyComboBoxTitle">Company</system:String>
     <system:String x:Key="ChequePage.ChequeNumberTextBoxTitle">Cheque number</system:String>
-    <system:String x:Key="ChequePage.ValueTextBoxTitle">Cheque value</system:String>
+    <system:String x:Key="ChequePage.ChequeValueTextBoxTitle">Cheque value</system:String>
     <system:String x:Key="ChequePage.ChequeDateTimeTitle">Cheque date</system:String>
+    <system:String x:Key="ChequePage.ChequeStateComboBoxTitle">Cheque state</system:String>
     <system:String x:Key="ChequePage.IssueDateTimeTitle">Issue date</system:String>
     <system:String x:Key="ChequePage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="ChequePage.ConfirmButtonContent">Confirm</system:String>
 
     <!-- CHEQUE LIST PAGE -->
     <system:String x:Key="ChequeListPage.CompanyNameColumnTextBlockText">Company name</system:String>
+    <system:String x:Key="ChequeListPage.TransferDirectionColumnTextBlockText">Direction</system:String>
     <system:String x:Key="ChequeListPage.ChequeNumberColumnTextBlockText">Cheque number</system:String>
-    <system:String x:Key="ChequeListPage.ValueColumnTextBlockText">Cheque value</system:String>
-    <system:String x:Key="ChequeListPage.IssueDateColumnTextBlockText">Issue date</system:String>
+    <system:String x:Key="ChequeListPage.ChequeValueColumnTextBlockText">Cheque value</system:String>
     <system:String x:Key="ChequeListPage.ChequeDateColumnTextBlockText">Cheque date</system:String>
+    <system:String x:Key="ChequeListPage.ChequeStateColumnTextBlockText">Cheque state</system:String>
 
     <!-- COMPANY PAGE -->
     <system:String x:Key="CompanyPage.NameTextBoxTitle">Company name</system:String>
@@ -346,13 +359,28 @@
     <system:String x:Key="PersonListPage.TelColumnTextBlockText">Tel</system:String>
     <system:String x:Key="PersonListPage.RoleColumnTextBlockText">Role</system:String>
     
-    <!-- PERSON PAGE -->
+    <!-- PERSON ABSENCE PAGE -->
     <system:String x:Key="PersonAbsencePage.PersonnelComboBoxTitle">Personnel</system:String>
     <system:String x:Key="PersonAbsencePage.DateDateTimeTitle">Date</system:String>
     <system:String x:Key="PersonAbsencePage.MobileTextBoxTitle">Optional comment</system:String>
     <system:String x:Key="PersonAbsencePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="PersonAbsencePage.EditButtonContent">Edit</system:String>
     <system:String x:Key="PersonAbsencePage.DeleteButtonContent">Delete</system:String>
+
+    <!-- SALARY PAYMENT PAGE -->
+    <system:String x:Key="SalaryPaymentPage.PersonnelComboBoxTitle">Related personnel</system:String>
+    <system:String x:Key="SalaryPaymentPage.PaidValueTextBoxTitle">Paid value</system:String>
+    <system:String x:Key="SalaryPaymentPage.CostCenterComboBoxTitle">Cost Center</system:String>
+    <system:String x:Key="SalaryPaymentPage.DateTimeTitle">Payment date time</system:String>
+    <system:String x:Key="SalaryPaymentPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="SalaryPaymentPage.ConfirmButtonContent">Confirm</system:String>
+
+    <!-- SALARY PAYMENT LIST PAGE -->
+    <system:String x:Key="SalaryPaymentListPage.PersonnelColumnTextBlockText">Related personnel</system:String>
+    <system:String x:Key="SalaryPaymentListPage.PaidValueColumnTextBlockText">Paid value</system:String>
+    <system:String x:Key="SalaryPaymentListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
+    <system:String x:Key="SalaryPaymentListPage.DateTimeColumnTextBlockText">Payment date time</system:String>
+    <system:String x:Key="SalaryPaymentListPage.CommentColumnTextBlockText">Comment</system:String>
     
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>

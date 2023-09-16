@@ -98,10 +98,11 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="{DynamicResource MainWindow.PersonnelSubMenuItem}" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/personnel.png" Title="{DynamicResource MainWindow.PersonnelMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="{DynamicResource MainWindow.PersonnelMenuItem}" Shortcut="Ctrl+Shift+P" Command="{Binding NavigateToPersonnelCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.PersonnelSubMenuItem}" Shortcut="Ctrl+Shift+P" Command="{Binding NavigateToPersonnelCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.SalaryPaymentsSubMenuItem}" Shortcut="Ctrl+Shift+P" Command="{Binding NavigateToSalaryPaymentsCommand}" />
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

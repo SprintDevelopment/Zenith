@@ -23,6 +23,7 @@ namespace Zenith.Assets.Values.Enums
         Outgoes,
         OutgoCategories,
         Personnel,
+        SalaryPayments,
         Users,
         Notes,
     }

@@ -55,6 +55,7 @@ namespace Zenith.ViewModels
             NavigateToOutgoesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Outgoes && p.HasReadAccess)));
             NavigateToOutgoCategoriesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoCategoryListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.OutgoCategories && p.HasReadAccess)));
             NavigateToPersonnelCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(PersonListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Personnel && p.HasReadAccess)));
+            NavigateToSalaryPaymentsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SalaryPaymentListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.SalaryPayments && p.HasReadAccess)));
             NavigateToUsersCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(UserListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
             NavigateToNotesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(NoteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Notes && p.HasReadAccess)));
 
@@ -97,24 +98,25 @@ namespace Zenith.ViewModels
 
             BackupCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
-                var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
-                _alerts.Add(new AlertViewModel
-                {
-                    Guid = new Guid(),
-                    Title = backupResult.ResultTitle,
-                    Description = backupResult.ResultDescription,
-                    DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
-                    ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
-                        "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
-                    ActionCommand = ReactiveCommand.Create<Unit>(_ =>
-                    {
-                        if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
-                            Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
-                        else
-                            Process.Start("notepad.exe", @"C:\file.txt");
-                    })
-                });
+                //var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
+                //_alerts.Add(new AlertViewModel
+                //{
+                //    Guid = new Guid(),
+                //    Title = backupResult.ResultTitle,
+                //    Description = backupResult.ResultDescription,
+                //    DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
+                //    ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
+                //        "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
+                //    ActionCommand = ReactiveCommand.Create<Unit>(_ =>
+                //    {
+                //        if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
+                //            Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
+                //        else
+                //            Process.Start("notepad.exe", @"C:\file.txt");
+                //    })
+                //});
 
+                WordUtil.PrintFactor(new SaleRepository().Single(1));
             });
 
             RestoreCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
@@ -224,6 +226,7 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> NavigateToOutgoesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToOutgoCategoriesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToPersonnelCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToSalaryPaymentsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToUsersCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToNotesCommand { get; set; }
         //

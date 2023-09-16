@@ -12,21 +12,21 @@ using Zenith.ViewModels.CreateOrUpdateViewModels;
 namespace Zenith.Views.CreateOrUpdateViews
 {
     /// <summary>
-    /// Interaction logic for ChequePage.xaml
+    /// Interaction logic for SalaryPaymentPage.xaml
     /// </summary>
-    public partial class ChequePage : BaseCreateOrUpdatePage<Cheque>
+    public partial class SalaryPaymentPage : BaseCreateOrUpdatePage<SalaryPayment>
     {
-        public ChequePage()
+        public SalaryPaymentPage()
         {
             InitializeComponent();
 
-            ViewModel = new BaseCreateOrUpdateViewModel<Cheque>(new ChequeRepository());
-            transferDirectionsComboBox.ItemsSource = typeof(TransferDirections).ToCollection();
-            chequeStatesComboBox.ItemsSource = typeof(ChequeStates).ToCollection();
+            ViewModel = new BaseCreateOrUpdateViewModel<SalaryPayment>(new SalaryPaymentRepository());
+
+            costCenterComboBox.ItemsSource = typeof(CostCenters).ToCollection();
 
             this.WhenActivated(d =>
             {
-                companyComboBox.ItemsSource = new CompanyRepository().All().ToList();
+                personnelComboBox.ItemsSource = new PersonRepository().All().ToList();
             });
         }
     }
