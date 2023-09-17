@@ -152,9 +152,9 @@ namespace Zenith.Assets.Utils
                 totalDeliveriesRow.Cells[2].Range.Bold = 1;
             }
 
-            //document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
-            wordApp.Visible = true;
-            //document.Close(false);
+            document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+            //wordApp.Visible = true;
+            document.Close(false);
 
             return null;
         }

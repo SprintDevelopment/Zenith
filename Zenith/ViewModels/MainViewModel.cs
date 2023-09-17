@@ -98,25 +98,23 @@ namespace Zenith.ViewModels
 
             BackupCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
-                //var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
-                //_alerts.Add(new AlertViewModel
-                //{
-                //    Guid = new Guid(),
-                //    Title = backupResult.ResultTitle,
-                //    Description = backupResult.ResultDescription,
-                //    DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
-                //    ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
-                //        "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
-                //    ActionCommand = ReactiveCommand.Create<Unit>(_ =>
-                //    {
-                //        if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
-                //            Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
-                //        else
-                //            Process.Start("notepad.exe", @"C:\file.txt");
-                //    })
-                //});
-
-                WordUtil.PrintFactor(new SaleRepository().Single(1));
+                var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
+                _alerts.Add(new AlertViewModel
+                {
+                    Guid = new Guid(),
+                    Title = backupResult.ResultTitle,
+                    Description = backupResult.ResultDescription,
+                    DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
+                    ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
+                        "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
+                    ActionCommand = ReactiveCommand.Create<Unit>(_ =>
+                    {
+                        if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
+                            Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
+                        else
+                            Process.Start("notepad.exe", @"C:\file.txt");
+                    })
+                });
             });
 
             RestoreCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>

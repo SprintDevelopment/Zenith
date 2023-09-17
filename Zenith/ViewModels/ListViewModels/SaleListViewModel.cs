@@ -19,6 +19,12 @@ namespace Zenith.ViewModels.ListViewModels
         public SaleListViewModel(Repository<Sale> repository, SearchBaseDto searchModel, IObservable<Func<Sale, bool>> criteria)
             : base(repository, searchModel, criteria, PermissionTypes.Sales)
         {
+            PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
+            {
+                WordUtil.PrintFactor(new SaleRepository().Single(sale.SaleId));
+            });
+
         }
+        public ReactiveCommand<Sale, Unit> PrintFactorCommand { get; set; }
     }
 }
