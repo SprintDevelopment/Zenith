@@ -30,8 +30,8 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachinePage.MachineNameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MachinePage.CapacityTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.DefaultDeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MachinePage.DefaultDeliveryFeeTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Capacity, StringFormat={}{0:n2}}" Title="{DynamicResource MachinePage.CapacityTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.DefaultDeliveryFee, StringFormat={}{0:n2}}" Title="{DynamicResource MachinePage.DefaultDeliveryFeeTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachinePage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

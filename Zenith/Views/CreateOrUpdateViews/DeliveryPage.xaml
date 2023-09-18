@@ -53,8 +53,8 @@
                     </ToggleButton>
                 </Grid>
 
-                <baseclasses:JTextBox Text="{Binding PageModel.Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.CountTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.DeliveryFeeTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Count, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.CountTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.DeliveryFeeTextBoxTitle}" />
                 <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource DeliveryPage.DriverComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryNumberTextBoxTitle}" />
                 <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource DeliveryPage.DeliveryDateTimeTitle}"/>

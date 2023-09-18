@@ -30,7 +30,7 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <ComboBox x:Name="personnelComboBox" SelectedValue="{Binding PageModel.PersonId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource SalaryPaymentPage.PersonnelComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.PaidValue, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource SalaryPaymentPage.PaidValueTextBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.PaidValue, StringFormat={}{0:n2}}" Title="{DynamicResource SalaryPaymentPage.PaidValueTextBoxTitle}"/>
                 <ComboBox x:Name="costCenterComboBox" SelectedValue="{Binding PageModel.CostCenter, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SalaryPaymentPage.CostCenterComboBoxTitle}"/>
                 <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource SalaryPaymentPage.DateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalaryPaymentPage.CommentTextBoxTitle}" />
