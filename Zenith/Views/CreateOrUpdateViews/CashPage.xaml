@@ -31,7 +31,7 @@
             <StackPanel Grid.Row="1">
                 <ComboBox x:Name="transferDirectionsComboBox" SelectedValue="{Binding PageModel.TransferDirection, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" IsEnabled="False" Tag="{DynamicResource CashPage.TransferDirectionComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource CashPage.CompanyComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource CashPage.ValueTextBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource CashPage.ValueTextBoxTitle}"/>
                 <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource CashPage.IssueDateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CashPage.CommentTextBoxTitle}" />
 

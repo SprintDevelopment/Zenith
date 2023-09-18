@@ -25,10 +25,19 @@ namespace Zenith.Models
         public virtual Company Company { get; set; }
 
         [Reactive]
-        public long Value { get; set; }
+        public float Value { get; set; }
 
         [Reactive]
         public DateTime IssueDateTime { get; set; }
+
+        [Reactive]
+        public MoneyTransactionTypes MoneyTransactionType { get; set; }
+
+        [Reactive]
+        public CostCenters CostCenter { get; set; }
+
+        [Reactive]
+        public int RelatedEntityId { get; set; } = -1;
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

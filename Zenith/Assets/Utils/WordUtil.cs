@@ -43,7 +43,7 @@ namespace Zenith.Assets.Utils
             document.Range().Paragraphs.Add();
             var rangeForItems = document.Range().Paragraphs.Add().Range;
             rangeForItems.Text = $"#;Material;Qty;Unit;Price;Total\n";
-            rangeForItems.Text += sale.Items.Select((item, i) => $"{i + 1};{item.Material.Name};{item.Count};{item.SaleCountUnit};{item.UnitPrice:n0};{item.TotalPrice:n0}").Join("\n");
+            rangeForItems.Text += sale.Items.Select((item, i) => $"{i + 1};{item.Material.Name};{item.Count};{item.SaleCountUnit};{item.UnitPrice:n2};{item.TotalPrice:n2}").Join("\n");
 
             var itemsTable = rangeForItems.ConvertToTable(Separator: ";");
             itemsTable.Range.ParagraphFormat.SpaceAfter = 3;
@@ -84,7 +84,7 @@ namespace Zenith.Assets.Utils
             totalRow.Cells[1].Range.Text = "Total";
             totalRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
 
-            totalRow.Cells[2].Range.Text = sale.Items.Sum(i => i.TotalPrice).ToString("n0");
+            totalRow.Cells[2].Range.Text = sale.Items.Sum(i => i.TotalPrice).ToString("n2");
             totalRow.Cells[2].Range.Bold = 1;
 
             var deliveries = sale.Items.SelectMany(si => si.Deliveries).ToList();
@@ -96,7 +96,7 @@ namespace Zenith.Assets.Utils
                 var rangeForDeliveries = document.Range().Paragraphs.Add().Range;
                 rangeForDeliveries.Text = $"#;Material;Site;Machine;Qty;Date;Del. number;Del. fee\n";
                 rangeForDeliveries.Text += deliveries
-                    .Select((delivery, i) => $"{i + 1};{delivery.SaleItem.Material.Name};{delivery.Site.Name};{delivery.Machine.Name};{delivery.Count};{delivery.DateTime:yy-MM-dd};{delivery.DeliveryNumber};{delivery.DeliveryFee:n0}").Join("\n");
+                    .Select((delivery, i) => $"{i + 1};{delivery.SaleItem.Material.Name};{delivery.Site.Name};{delivery.Machine.Name};{delivery.Count};{delivery.DateTime:yy-MM-dd};{delivery.DeliveryNumber};{delivery.DeliveryFee:n2}").Join("\n");
 
                 var deliveriestable = rangeForDeliveries.ConvertToTable(Separator: ";");
                 deliveriestable.Range.ParagraphFormat.SpaceAfter = 3;
@@ -148,11 +148,11 @@ namespace Zenith.Assets.Utils
                 totalDeliveriesRow.Cells[1].Range.Text = "Total";
                 totalDeliveriesRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
 
-                totalDeliveriesRow.Cells[2].Range.Text = deliveries.Sum(d => d.DeliveryFee).ToString("n0");
+                totalDeliveriesRow.Cells[2].Range.Text = deliveries.Sum(d => d.DeliveryFee).ToString("n2");
                 totalDeliveriesRow.Cells[2].Range.Bold = 1;
             }
 
-            document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+            document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
             //wordApp.Visible = true;
             document.Close(false);
 

@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Zenith.Assets.Utils;
 using System.Collections.Generic;
-using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Repositories
 {
     public class SaleRepository : Repository<Sale>
     {
         SaleItemRepository SaleItemRepository = new SaleItemRepository();
+        CashRepository CashRepository = new CashRepository();
 
         public override IEnumerable<Sale> All()
         {
@@ -36,6 +37,30 @@ namespace Zenith.Repositories
         {
             base.Add(sale);
             SaleItemRepository.AddRange(sale.Items.Select(si => { si.SaleId = sale.SaleId; return si; }));
+
+            CashRepository.Add(new Cash
+            {
+                TransferDirection = TransferDirections.ToCompany,
+                CompanyId = sale.CompanyId,
+                CostCenter = CostCenters.Workshop,
+                Value = sale.Items.Sum(si => si.TotalPrice),
+                IssueDateTime = sale.DateTime,
+                MoneyTransactionType = MoneyTransactionTypes.Sale,
+                RelatedEntityId = sale.SaleId,
+                Comment = ""
+            });
+
+            CashRepository.Add(new Cash
+            {
+                TransferDirection = TransferDirections.ToCompany,
+                CompanyId = sale.CompanyId,
+                CostCenter = CostCenters.Transportation,
+                Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee)),
+                IssueDateTime = sale.DateTime,
+                MoneyTransactionType = MoneyTransactionTypes.Sale,
+                RelatedEntityId = sale.SaleId,
+                Comment = ""
+            });
 
             return sale;
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230917151456_AddTypeToMoneyTransaction")]
+    partial class AddTypeToMoneyTransaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,8 +72,8 @@ namespace Zenith.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Count")
-                        .HasColumnType("real");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
@@ -78,8 +81,8 @@ namespace Zenith.Migrations
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
-                    b.Property<float>("UnitPrice")
-                        .HasColumnType("real");
+                    b.Property<long>("UnitPrice")
+                        .HasColumnType("bigint");
 
                     b.HasKey("BuyItemId");
 
@@ -106,9 +109,6 @@ namespace Zenith.Migrations
                     b.Property<short>("CompanyId")
                         .HasColumnType("smallint");
 
-                    b.Property<int>("CostCenter")
-                        .HasColumnType("int");
-
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
@@ -124,8 +124,8 @@ namespace Zenith.Migrations
                     b.Property<int>("TransferDirection")
                         .HasColumnType("int");
 
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
+                    b.Property<long>("Value")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CashId");
 
@@ -160,9 +160,6 @@ namespace Zenith.Migrations
                     b.Property<short>("CompanyId")
                         .HasColumnType("smallint");
 
-                    b.Property<int>("CostCenter")
-                        .HasColumnType("int");
-
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
@@ -178,8 +175,8 @@ namespace Zenith.Migrations
                     b.Property<int>("TransferDirection")
                         .HasColumnType("int");
 
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
+                    b.Property<long>("Value")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ChequeId");
 
@@ -209,8 +206,8 @@ namespace Zenith.Migrations
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
 
-                    b.Property<float>("CreditValue")
-                        .HasColumnType("real");
+                    b.Property<long>("CreditValue")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -258,14 +255,14 @@ namespace Zenith.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
-                    b.Property<float>("Count")
-                        .HasColumnType("real");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("DeliveryFee")
-                        .HasColumnType("real");
+                    b.Property<long>("DeliveryFee")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("DeliveryNumber")
                         .IsRequired()
@@ -308,16 +305,16 @@ namespace Zenith.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MachineId"));
 
-                    b.Property<float>("Capacity")
-                        .HasColumnType("real");
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
-                    b.Property<float>("DefaultDeliveryFee")
-                        .HasColumnType("real");
+                    b.Property<long>("DefaultDeliveryFee")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
@@ -360,8 +357,8 @@ namespace Zenith.Migrations
                     b.Property<short>("OutgoCategoryId")
                         .HasColumnType("smallint");
 
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
+                    b.Property<long>("Value")
+                        .HasColumnType("bigint");
 
                     b.HasKey("OutgoId");
 
@@ -382,11 +379,11 @@ namespace Zenith.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
 
-                    b.Property<float>("AvailableAmount")
-                        .HasColumnType("real");
+                    b.Property<int>("AvailableAmount")
+                        .HasColumnType("int");
 
-                    b.Property<float>("BuyPrice")
-                        .HasColumnType("real");
+                    b.Property<long>("BuyPrice")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -405,16 +402,16 @@ namespace Zenith.Migrations
                     b.Property<bool>("IsMixed")
                         .HasColumnType("bit");
 
-                    b.Property<float>("MetersPerTon")
-                        .HasColumnType("real");
+                    b.Property<int>("MetersPerTon")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<float>("SalePrice")
-                        .HasColumnType("real");
+                    b.Property<long>("SalePrice")
+                        .HasColumnType("bigint");
 
                     b.HasKey("MaterialId");
 
@@ -452,8 +449,8 @@ namespace Zenith.Migrations
                     b.Property<int>("RelatedMaterialId")
                         .HasColumnType("int");
 
-                    b.Property<float>("SalePrice")
-                        .HasColumnType("real");
+                    b.Property<long>("SalePrice")
+                        .HasColumnType("bigint");
 
                     b.HasKey("MixtureId");
 
@@ -550,8 +547,8 @@ namespace Zenith.Migrations
                     b.Property<short>("OutgoCategoryId")
                         .HasColumnType("smallint");
 
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
+                    b.Property<long>("Value")
+                        .HasColumnType("bigint");
 
                     b.HasKey("OutgoId");
 
@@ -636,8 +633,8 @@ namespace Zenith.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<float>("Salary")
-                        .HasColumnType("real");
+                    b.Property<long>("Salary")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Tel")
                         .IsRequired()
@@ -700,8 +697,8 @@ namespace Zenith.Migrations
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
-                    b.Property<float>("PaidValue")
-                        .HasColumnType("real");
+                    b.Property<long>("PaidValue")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
@@ -754,8 +751,8 @@ namespace Zenith.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Count")
-                        .HasColumnType("real");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
@@ -769,8 +766,8 @@ namespace Zenith.Migrations
                     b.Property<int>("SaleId")
                         .HasColumnType("int");
 
-                    b.Property<float>("UnitPrice")
-                        .HasColumnType("real");
+                    b.Property<long>("UnitPrice")
+                        .HasColumnType("bigint");
 
                     b.HasKey("SaleItemId");
 
@@ -842,7 +839,7 @@ namespace Zenith.Migrations
                         new
                         {
                             Username = "admin",
-                            CreateDateTime = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateDateTime = new DateTime(2023, 9, 17, 0, 0, 0, 0, DateTimeKind.Local),
                             HasErrors = false,
                             HashedPassword = "b9bcda38c0de9edcda3b12bc5d91de5959e2de031a1fcc13a3860d9c39eeb3b2"
                         });

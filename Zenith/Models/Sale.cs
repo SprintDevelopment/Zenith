@@ -41,11 +41,11 @@ namespace Zenith.Models
 
         [NotMapped]
         [Reactive]
-        public long Price { get; set; }
+        public float Price { get; set; }
 
         [NotMapped]
         [Reactive]
-        public long DeliveryFee { get; set; }
+        public float DeliveryFee { get; set; }
 
         public Sale()
         {

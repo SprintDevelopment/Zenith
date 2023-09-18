@@ -48,6 +48,15 @@
     <system:String x:Key="NotifyTypes.NoNeedToNotify">No need to remind</system:String>
     <system:String x:Key="NotifyTypes.FooterNotify">Show at bottom</system:String>
 
+    <!-- NOTIFY TYPES -->
+    <system:String x:Key="MoneyTransactionTypes.DontCare">_</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Direct">Normal</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Buy">Buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Sale">Sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Outgo">Outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Salary">Salary</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Cheque">Cheque</system:String>
+
     <!-- PERMISSION TYPES -->
     <system:String x:Key="PermissionTypes.DontCare">_</system:String>
     <system:String x:Key="PermissionTypes.Buys">Buys</system:String>
@@ -183,7 +192,7 @@
     <system:String x:Key="CashListPage.TransferDirectionColumnTextBlockText">Direction</system:String>
     <system:String x:Key="CashListPage.ValueColumnTextBlockText">Value</system:String>
     <system:String x:Key="CashListPage.IssueDateColumnTextBlockText">Issue date</system:String>
-    <system:String x:Key="CashListPage.CommentColumnTextBlockText">Comment</system:String>
+    <system:String x:Key="CashListPage.MoneyTransactionTypeColumnTextBlockText">Type</system:String>
 
     <!-- CHEQUE PAGE -->
     <system:String x:Key="ChequePage.TransferDirectionComboBoxTitle">Transfer direction</system:String>

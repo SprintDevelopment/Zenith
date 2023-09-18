@@ -76,7 +76,7 @@
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" />
                                     <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="4" StrokeThickness="0.5"/>
                                 </baseclasses:JGrid>
@@ -137,10 +137,10 @@
                                     <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="1" Margin="8,0,0,0"/>
+                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Grid.Column="1" Margin="8,0,0,0"/>
                                 <usercontrols:UnitSelectorControl DataContext="{Binding UnitSelectorViewModel}" Grid.Column="2"/>
-                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Grid.Column="3" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Grid.Column="3" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                                 <Button Style="{StaticResource SimpleButtonStyle}" Grid.Column="5" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding Material}">
                                     <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Button>

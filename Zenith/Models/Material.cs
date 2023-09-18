@@ -30,7 +30,7 @@ namespace Zenith.Models
         public CountUnits CommonBuyUnit { get; set; } = CountUnits.Ton;
 
         [Reactive]
-        public long BuyPrice { get; set; }
+        public float BuyPrice { get; set; }
 
         [NotMapped]
         public string BuyPriceWithUnit => $"{BuyPrice} ({App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
@@ -39,16 +39,16 @@ namespace Zenith.Models
         public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;
 
         [Reactive]
-        public long SalePrice { get; set; }
+        public float SalePrice { get; set; }
 
         [NotMapped]
         public string SalePriceWithUnit => $"{SalePrice} ({App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
 
         [Reactive]
-        public int AvailableAmount { get; set; }
+        public float AvailableAmount { get; set; }
 
         [Reactive]
-        public int MetersPerTon { get; set; }
+        public float MetersPerTon { get; set; }
 
         [Reactive]
         public bool IsMixed { get; set; }

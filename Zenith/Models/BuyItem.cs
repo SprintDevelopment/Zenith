@@ -32,10 +32,10 @@ namespace Zenith.Models
         public virtual Material Material { get; set; }
 
         [Reactive]
-        public long UnitPrice { get; set; }
+        public float UnitPrice { get; set; }
 
         [Reactive]
-        public int Count { get; set; }
+        public float Count { get; set; }
 
         [Reactive]
         public CountUnits BuyCountUnit { get; set; }
@@ -46,7 +46,7 @@ namespace Zenith.Models
 
         [NotMapped]
         [Reactive]
-        public long TotalPrice { get; set; }
+        public float TotalPrice { get; set; }
 
         [Reactive]
         public string Comment { get; set; } = string.Empty;

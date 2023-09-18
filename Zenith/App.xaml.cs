@@ -20,6 +20,8 @@ namespace Zenith
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Exit += (s, e) => { if (WordUtil.wordApp != null && !WordUtil.wordApp.Visible) WordUtil.wordApp.Quit(false); };
+
+            DispatcherUnhandledException += (s, ee) => { MessageBox.Show(ee.Exception.Message); ee.Handled = true; };
         }
     }
 }

@@ -53,7 +53,7 @@
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -63,7 +63,7 @@
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.TransferDirectionColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <TextBlock HorizontalAlignment="Center" Text="{DynamicResource CashListPage.ValueColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.IssueDateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.CommentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.MoneyTransactionTypeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
             </Grid>
             
@@ -95,12 +95,12 @@
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TransferDirection, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:TransferDirections}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="4" Foreground="{Binding TransferDirection, Converter={StaticResource transferDirectionToColorConverter}}" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Foreground="{Binding TransferDirection, Converter={StaticResource transferDirectionToColorConverter}}" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding IssueDateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Comment}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding MoneyTransactionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:MoneyTransactionTypes}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>

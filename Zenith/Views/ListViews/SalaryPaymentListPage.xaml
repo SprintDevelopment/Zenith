@@ -89,9 +89,9 @@
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Personnel.FullName}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding PaidValue, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding PaidValue, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding CostCenter, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:CostCenters}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>

@@ -30,7 +30,7 @@ namespace Zenith.Models
         public virtual Site Site { get; set; }
 
         [Reactive]
-        public int Count { get; set; }
+        public float Count { get; set; }
 
         [Reactive]
         public int MachineId { get; set; }
@@ -56,7 +56,7 @@ namespace Zenith.Models
         public string DeliveryNumber { get; set; } = string.Empty;
 
         [Reactive]
-        public long DeliveryFee { get; set; }
+        public float DeliveryFee { get; set; }
 
         [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;

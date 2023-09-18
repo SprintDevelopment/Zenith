@@ -35,7 +35,7 @@ namespace Zenith.Models
         public DateTime DateTime { get; set; } = DateTime.Now;
 
         [Reactive]
-        public long Value { get; set; }
+        public float Value { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

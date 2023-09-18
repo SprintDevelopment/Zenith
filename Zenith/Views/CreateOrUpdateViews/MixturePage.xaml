@@ -43,7 +43,7 @@
                     <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.MixtureNameTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.DisplayNameTextBoxTitle}" />
                     <ComboBox x:Name="saleUnitComboBox" SelectedValue="{Binding PageModel.CommonSaleUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MixturePage.CommonSaleUnitComboBoxTitle}"/>
-                    <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MixturePage.SalePriceTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MixturePage.SalePriceTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.CommentTextBoxTitle}" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">
@@ -78,7 +78,7 @@
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" />
                                     <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="4" StrokeThickness="0.5"/>
                                 </baseclasses:JGrid>

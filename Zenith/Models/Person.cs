@@ -56,7 +56,7 @@ namespace Zenith.Models
         }
 
         [Reactive]
-        public long Salary { get; set; }
+        public float Salary { get; set; }
 
         [Reactive]
         public CostCenters CostCenter { get; set; }

@@ -32,7 +32,7 @@ namespace Zenith.Models
         public string DisplayName { get; set; }
 
         [Reactive]
-        public long SalePrice { get; set; }
+        public float SalePrice { get; set; }
 
         [Reactive]
         public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;

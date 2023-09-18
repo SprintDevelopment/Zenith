@@ -95,13 +95,13 @@
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder}" VerticalAlignment="Center" Grid.Column="1"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaxRegistrationNumber}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" />
                             <TextBlock HorizontalAlignment="Left" Text="{Binding CompanyType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:CompanyTypes}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Tel}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Fax}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding CreditValue, StringFormat={}{0:n0}}" FontStyle="Italic" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding CreditValue, StringFormat={}{0:n2}}" FontStyle="Italic" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>

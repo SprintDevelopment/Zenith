@@ -30,12 +30,12 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.MaterialNameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.MetersPerTon, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.MetersPerTonTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.AvailableAmount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.AvailableAmountTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.MetersPerTon, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MaterialPage.MetersPerTonTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.AvailableAmount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MaterialPage.AvailableAmountTextBoxTitle}" />
                 <ComboBox x:Name="buyUnitComboBox" SelectedValue="{Binding PageModel.CommonBuyUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MaterialPage.CommonBuyUnitComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.BuyPriceTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.BuyPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MaterialPage.BuyPriceTextBoxTitle}" />
                 <ComboBox x:Name="saleUnitComboBox" SelectedValue="{Binding PageModel.CommonSaleUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MaterialPage.CommonSaleUnitComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n0}}" Title="{DynamicResource MaterialPage.SalePriceTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.SalePrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:n2}}" Title="{DynamicResource MaterialPage.SalePriceTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MaterialPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

@@ -20,11 +20,11 @@ namespace Zenith.Models
 
         [Range(1, int.MaxValue)]
         [Reactive]
-        public int Capacity { get; set; }
+        public float Capacity { get; set; }
 
         [Range(1, int.MaxValue)]
         [Reactive]
-        public long DefaultDeliveryFee { get; set; }
+        public float DefaultDeliveryFee { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

@@ -22,7 +22,7 @@ namespace Zenith.Models
         public virtual Person Personnel { get; set; }
 
         [Reactive]
-        public long PaidValue { get; set; }
+        public float PaidValue { get; set; }
 
         [Reactive]
         public CostCenters CostCenter { get; set; }
@@ -43,7 +43,7 @@ namespace Zenith.Models
 
         public override string ToString()
         {
-            return $"{Personnel?.FullName} ({PaidValue:n0})";
+            return $"{Personnel?.FullName} ({PaidValue:n2})";
         }
     }
 }
