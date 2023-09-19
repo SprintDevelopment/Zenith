@@ -1,18 +1,9 @@
-﻿using DynamicData;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Zenith.Assets.Extensions;
 using Zenith.Models;
 using Zenith.Repositories;
 using System.Reactive.Linq;
-using Zenith.Assets.Extensions;
 using System.Reactive;
 
 namespace Zenith.ViewModels.CreateOrUpdateViewModels
@@ -24,7 +15,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
         {
             DeletePersonnelAbsenceCommand = ReactiveCommand.Create<Unit>(_ =>
             {
-                repository.Remove(PageModel);
+                repository.RemoveRange(Enumerable.Empty<PersonnelAbsence>().Append(PageModel));
                 ReturnCommand.Execute().Subscribe();
             });
         }

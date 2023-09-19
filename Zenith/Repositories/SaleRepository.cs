@@ -4,6 +4,7 @@ using System.Linq;
 using Zenith.Assets.Utils;
 using System.Collections.Generic;
 using Zenith.Assets.Values.Enums;
+using AutoMapper;
 
 namespace Zenith.Repositories
 {
@@ -33,39 +34,33 @@ namespace Zenith.Repositories
                 .SingleOrDefault(s => s.SaleId == intId);
         }
 
-        public override Sale Add(Sale sale) 
+        public override Sale Add(Sale sale)
         {
             base.Add(sale);
             SaleItemRepository.AddRange(sale.Items.Select(si => { si.SaleId = sale.SaleId; return si; }));
 
-            CashRepository.Add(new Cash
+            var cashForWorkshop = new Cash 
             {
-                TransferDirection = TransferDirections.ToCompany,
-                CompanyId = sale.CompanyId,
                 CostCenter = CostCenters.Workshop,
-                Value = sale.Items.Sum(si => si.TotalPrice),
-                IssueDateTime = sale.DateTime,
-                MoneyTransactionType = MoneyTransactionTypes.Sale,
-                RelatedEntityId = sale.SaleId,
-                Comment = ""
-            });
+                Value = sale.Items.Sum(si => si.TotalPrice)
+            };
 
-            CashRepository.Add(new Cash
+            var cashForTransportation = new Cash 
             {
-                TransferDirection = TransferDirections.ToCompany,
-                CompanyId = sale.CompanyId,
                 CostCenter = CostCenters.Transportation,
-                Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee)),
-                IssueDateTime = sale.DateTime,
-                MoneyTransactionType = MoneyTransactionTypes.Sale,
-                RelatedEntityId = sale.SaleId,
-                Comment = ""
-            });
+                Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee))
+            };
+
+            MapperUtil.Mapper.Map(sale, cashForWorkshop);
+            MapperUtil.Mapper.Map(sale, cashForTransportation);
+
+            CashRepository.Add(cashForWorkshop);
+            CashRepository.Add(cashForTransportation);
 
             return sale;
         }
 
-        public override Sale Update(Sale sale, dynamic saleId) 
+        public override Sale Update(Sale sale, dynamic saleId)
         {
             base.Update(sale, sale.SaleId);
 
@@ -80,10 +75,47 @@ namespace Zenith.Repositories
                     SaleItemRepository.Add(si);
                 }
                 else
-                SaleItemRepository.Update(si, si.SaleItemId);
+                    SaleItemRepository.Update(si, si.SaleItemId);
             });
 
+            var relatedCashes = CashRepository
+                .Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Sale && c.RelatedEntityId == sale.SaleId)
+                .Select(c => MapperUtil.Mapper.Map<Cash>(c))
+                .Take(2);
+            
+            var workshopCash = relatedCashes.FirstOrDefault(c => c.CostCenter == CostCenters.Workshop);
+            if (workshopCash is not null)
+            {
+                workshopCash.Value = sale.Items.Sum(si => si.TotalPrice);
+                workshopCash.IssueDateTime = sale.DateTime;
+
+                CashRepository.Update(workshopCash, workshopCash.CashId);
+            }
+
+            var transportationCash = relatedCashes.First(c => c.CostCenter == CostCenters.Transportation);
+            if (transportationCash is not null)
+            {
+                transportationCash.Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee));
+                transportationCash.IssueDateTime = sale.DateTime;
+
+                CashRepository.Update(transportationCash, transportationCash.CashId);
+            }
+            
             return sale;
+        }
+
+        public override void RemoveRange(IEnumerable<Sale> sales)
+        {
+            var salesIds = sales.Select(s => s.SaleId).ToList();
+
+            // Integrity for materials available amount
+            //var items = SaleItemRepository.Find(si => salesIds.Contains(si.SaleId)).ToList();
+            //SaleItemRepository.RemoveRange(items);
+
+            base.RemoveRange(sales);
+
+            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Sale && salesIds.Contains(c.RelatedEntityId)).Take(2);
+            CashRepository.RemoveRange(relatedCashes);
         }
     }
 }

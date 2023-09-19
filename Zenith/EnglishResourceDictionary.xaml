@@ -48,12 +48,13 @@
     <system:String x:Key="NotifyTypes.NoNeedToNotify">No need to remind</system:String>
     <system:String x:Key="NotifyTypes.FooterNotify">Show at bottom</system:String>
 
-    <!-- NOTIFY TYPES -->
+    <!-- MONEY TRANSACTION TYPES -->
     <system:String x:Key="MoneyTransactionTypes.DontCare">_</system:String>
     <system:String x:Key="MoneyTransactionTypes.Direct">Normal</system:String>
     <system:String x:Key="MoneyTransactionTypes.Buy">Buy</system:String>
     <system:String x:Key="MoneyTransactionTypes.Sale">Sale</system:String>
     <system:String x:Key="MoneyTransactionTypes.Outgo">Outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.MachineOutgo">Machine outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.Salary">Salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.Cheque">Cheque</system:String>
 

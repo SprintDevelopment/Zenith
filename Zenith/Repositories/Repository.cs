@@ -20,7 +20,9 @@ namespace Zenith.Repositories
         public Repository()
         {
             if (_context == null)
+            {
                 _context = new DbContextFactory().CreateDbContext(null);
+            }
         }
 
         public virtual IEnumerable<T> All() => _context.Set<T>().AsEnumerable();
@@ -57,7 +59,7 @@ namespace Zenith.Repositories
             return entity;
         }
 
-        public virtual void Remove(T entity) { _context.Set<T>().Remove(entity); _context.SaveChanges(); }
+        //public virtual void Remove(T entity) { _context.Set<T>().Remove(entity); _context.SaveChanges(); }
         public virtual void AddRange(IEnumerable<T> entities) { _context.Set<T>().AddRange(entities.Select(e => e.LightClone())); _context.SaveChanges(); }
         public virtual void RemoveRange(IEnumerable<T> entities) { _context.Set<T>().RemoveRange(entities); _context.SaveChanges(); }
     }

@@ -13,6 +13,7 @@ namespace Zenith.Assets.Values.Enums
         Buy,
         Sale,
         Outgo,
+        MachineOutgo,
         Salary,
         Cheque
     }
