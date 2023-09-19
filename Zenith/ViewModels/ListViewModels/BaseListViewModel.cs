@@ -152,7 +152,9 @@ namespace Zenith.ViewModels.ListViewModels
                 {
                     if (!changeSet.IsNullOrEmpty())
                     {
-                        MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), itemToUpdate);
+                        changeSet.FirstOrDefault().IsSelected = itemToUpdate.IsSelected;
+                        SourceList.Replace(itemToUpdate, changeSet.FirstOrDefault());
+                        //MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), itemToUpdate);
                         searchModel.OnlyForRefreshAfterUpdate++;
                     }
 
