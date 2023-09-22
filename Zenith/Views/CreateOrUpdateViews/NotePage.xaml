@@ -31,7 +31,7 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.Subject, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource NotePage.SubjectTextBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource NotePage.CommentTextBoxTitle}" />
                 <ComboBox x:Name="notifyTypeComboBox" SelectedValue="{Binding PageModel.NotifyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource NotePage.ReminderTypeComboBoxTitle}"/>
-                <usercontrols:DatePicker x:Name="notifyDateTimePicker" Title="{DynamicResource NotePage.ReminderDateTimeTitle}"/>
+                <usercontrols:DatePicker x:Name="notifyDateTimePicker" DateTime="{Binding PageModel.NotifyDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource NotePage.ReminderDateTimeTitle}"/>
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 

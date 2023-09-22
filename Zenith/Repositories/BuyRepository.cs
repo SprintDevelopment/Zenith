@@ -76,8 +76,8 @@ namespace Zenith.Repositories
             var buysIds = buys.Select(b => b.BuyId).ToList();
 
             // Integrity for materials available amount
-            //var items = BuyItemRepository.Find(si => buysIds.Contains(bi.BuyId)).ToList();
-            //BuyItemRepository.RemoveRange(items);
+            var items = BuyItemRepository.Find(bi => buysIds.Contains(bi.BuyId)).ToList();
+            BuyItemRepository.RemoveRange(items);
 
             base.RemoveRange(buys);
 

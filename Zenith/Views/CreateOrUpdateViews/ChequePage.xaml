@@ -33,9 +33,9 @@
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource ChequePage.CompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource ChequePage.ChequeValueTextBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.ChequeNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.ChequeNumberTextBoxTitle}"/>
-                <usercontrols:DatePicker x:Name="chequeDateDateTimePicker" Title="{DynamicResource ChequePage.ChequeDateTimeTitle}"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.ChequeDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.ChequeDateTimeTitle}"/>
                 <ComboBox x:Name="chequeStatesComboBox" SelectedValue="{Binding PageModel.ChequeState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource ChequePage.ChequeStateComboBoxTitle}"/>
-                <usercontrols:DatePicker x:Name="issuedateDateTimePicker" Title="{DynamicResource ChequePage.IssueDateTimeTitle}"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.IssueDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.IssueDateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

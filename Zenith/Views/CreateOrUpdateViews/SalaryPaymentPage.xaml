@@ -32,7 +32,7 @@
                 <ComboBox x:Name="personnelComboBox" SelectedValue="{Binding PageModel.PersonId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource SalaryPaymentPage.PersonnelComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.PaidValue, StringFormat={}{0:n2}}" Title="{DynamicResource SalaryPaymentPage.PaidValueTextBoxTitle}"/>
                 <ComboBox x:Name="costCenterComboBox" SelectedValue="{Binding PageModel.CostCenter, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SalaryPaymentPage.CostCenterComboBoxTitle}"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource SalaryPaymentPage.DateTimeTitle}"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalaryPaymentPage.DateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalaryPaymentPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

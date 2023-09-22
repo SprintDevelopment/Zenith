@@ -372,7 +372,7 @@
     <!-- PERSON ABSENCE PAGE -->
     <system:String x:Key="PersonAbsencePage.PersonnelComboBoxTitle">Personnel</system:String>
     <system:String x:Key="PersonAbsencePage.DateDateTimeTitle">Date</system:String>
-    <system:String x:Key="PersonAbsencePage.MobileTextBoxTitle">Optional comment</system:String>
+    <system:String x:Key="PersonAbsencePage.CommentTextBoxTitle">Optional comment</system:String>
     <system:String x:Key="PersonAbsencePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="PersonAbsencePage.EditButtonContent">Edit</system:String>
     <system:String x:Key="PersonAbsencePage.DeleteButtonContent">Delete</system:String>

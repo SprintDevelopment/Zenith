@@ -29,7 +29,7 @@ namespace Zenith.Views.ListViews
 
             IObservable<Func<Company, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name, n => n.OnlyForRefreshAfterUpdate)
                 .Select(x => x.Item1)
-                .Throttle(TimeSpan.FromMilliseconds(250))
+                //.Throttle(TimeSpan.FromMilliseconds(250))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(name => new Func<Company, bool>(p => name.IsNullOrWhiteSpace() || p.Name.Contains(name)));
 

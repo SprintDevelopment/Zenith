@@ -29,7 +29,7 @@ namespace Zenith.Views.ListViews
 
             IObservable<Func<Cash, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new { Title = s }).Select(s => new Func<Cash, bool>(p => true));
+                .Select(s => new { Title = s }).Select(s => new Func<Cash, bool>(c => c.Value > 0));
 
             ViewModel = new CashListViewModel(new CashRepository(), searchModel, dynamicFilter)
             {

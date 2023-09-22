@@ -25,6 +25,7 @@
     <None Remove="Resources\Images\Common\minimize.png" />
     <None Remove="Resources\Images\Common\mixed.png" />
     <None Remove="Resources\Images\Common\next.png" />
+    <None Remove="Resources\Images\Common\no-tax.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
     <None Remove="Resources\Images\Common\partialSelection.png" />
     <None Remove="Resources\Images\Common\payment.png" />
@@ -36,6 +37,7 @@
     <None Remove="Resources\Images\Common\search.png" />
     <None Remove="Resources\Images\Common\send.png" />
     <None Remove="Resources\Images\Common\show-list.png" />
+    <None Remove="Resources\Images\Common\tax.png" />
     <None Remove="Resources\Images\Common\unlock.png" />
     <None Remove="Resources\Images\Menu\configs.png" />
     <None Remove="Resources\Images\Menu\definitions.png" />
@@ -105,6 +107,7 @@
     <Resource Include="Resources\Images\Common\minimize.png" />
     <Resource Include="Resources\Images\Common\mixed.png" />
     <Resource Include="Resources\Images\Common\next.png" />
+    <Resource Include="Resources\Images\Common\no-tax.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />
     <Resource Include="Resources\Images\Common\partialSelection.png" />
     <Resource Include="Resources\Images\Common\payment.png" />
@@ -116,6 +119,7 @@
     <Resource Include="Resources\Images\Common\search.png" />
     <Resource Include="Resources\Images\Common\send.png" />
     <Resource Include="Resources\Images\Common\show-list.png" />
+    <Resource Include="Resources\Images\Common\tax.png" />
     <Resource Include="Resources\Images\Common\unlock.png" />
     <Resource Include="Resources\Images\Menu\configs.png" />
     <Resource Include="Resources\Images\Menu\definitions.png" />

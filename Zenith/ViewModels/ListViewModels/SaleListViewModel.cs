@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,13 @@ namespace Zenith.ViewModels.ListViewModels
         {
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
-                WordUtil.PrintFactor(new SaleRepository().Single(sale.SaleId));
+                WordUtil.PrintFactor(new SaleRepository().Single(sale.SaleId), IncludeTRN);
             });
 
         }
         public ReactiveCommand<Sale, Unit> PrintFactorCommand { get; set; }
+
+        [Reactive]
+        public bool IncludeTRN { get; set; }
     }
 }

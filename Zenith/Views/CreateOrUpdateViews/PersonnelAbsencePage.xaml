@@ -29,7 +29,7 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <ComboBox x:Name="personComboBox" SelectedValue="{Binding PageModel.PersonId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource PersonAbsencePage.PersonnelComboBoxTitle}" IsEnabled="False"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource PersonAbsencePage.DateDateTimeTitle}" IsEnabled="False"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonAbsencePage.DateDateTimeTitle}" IsEnabled="False"/>
                 <baseclasses:JTextBox x:Name="optionalCommentTextBox" Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonAbsencePage.CommentTextBoxTitle}" />
 
                 <Button Content="{DynamicResource PersonAbsencePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"  Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

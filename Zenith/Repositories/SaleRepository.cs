@@ -92,7 +92,7 @@ namespace Zenith.Repositories
                 CashRepository.Update(workshopCash, workshopCash.CashId);
             }
 
-            var transportationCash = relatedCashes.First(c => c.CostCenter == CostCenters.Transportation);
+            var transportationCash = relatedCashes.FirstOrDefault(c => c.CostCenter == CostCenters.Transportation);
             if (transportationCash is not null)
             {
                 transportationCash.Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee));
@@ -109,8 +109,8 @@ namespace Zenith.Repositories
             var salesIds = sales.Select(s => s.SaleId).ToList();
 
             // Integrity for materials available amount
-            //var items = SaleItemRepository.Find(si => salesIds.Contains(si.SaleId)).ToList();
-            //SaleItemRepository.RemoveRange(items);
+            var items = SaleItemRepository.Find(si => salesIds.Contains(si.SaleId)).ToList();
+            SaleItemRepository.RemoveRange(items);
 
             base.RemoveRange(sales);
 

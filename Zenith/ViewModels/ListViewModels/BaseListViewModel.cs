@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using ReactiveUI.Fody.Helpers;
 using AutoMapper;
 using Zenith.Assets.Utils;
+using DynamicData.Binding;
 
 namespace Zenith.ViewModels.ListViewModels
 {
@@ -31,6 +32,8 @@ namespace Zenith.ViewModels.ListViewModels
 
             ViewTitle = singleMultipleTitles.multiple;
             Repository = repository;
+            SearchModel = searchModel;
+
             var allItemsSelectedString = App.MainViewModel.Language == AppLanguages.English ?
                 " , all items selected)" : " ، تمامی موارد انتخاب شده)";
 
@@ -59,9 +62,11 @@ namespace Zenith.ViewModels.ListViewModels
             SourceList.Connect()
                 .Filter(criteria, ListFilterPolicy.ClearAndReplace)
                 .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
-                .Bind(out ActiveList)
+                .Bind(ActiveList)
                 .Do(_ => calculate())
                 .Subscribe();
+
+            ActiveList.ObserveCollectionChanges().Do(_ => { }).Subscribe();
 
             SelectAllCommand = ReactiveCommand.Create<Unit>(_ =>
             {
@@ -79,6 +84,8 @@ namespace Zenith.ViewModels.ListViewModels
 
             SelectAllCommand.Merge(SelectOneCommand).Subscribe(_ =>
             {
+                searchModel.OnlyForRefreshAfterUpdate++;
+
                 calculate();
             });
 
@@ -187,7 +194,7 @@ namespace Zenith.ViewModels.ListViewModels
         }
 
         public SourceList<T> SourceList { get; set; } = new SourceList<T>();
-        public ReadOnlyObservableCollection<T> ActiveList;
+        public IObservableCollection<T> ActiveList { get; } = new ObservableCollectionExtended<T>();
 
         public ReactiveCommand<Unit, Unit> SelectAllCommand { get; set; }
         public ReactiveCommand<T, Unit> SelectOneCommand { get; set; }
@@ -201,7 +208,7 @@ namespace Zenith.ViewModels.ListViewModels
         [Reactive]
         public SelectionModes SelectionMode { get; set; }
 
-        public T SearchModel { get; set; }
+        public SearchBaseDto SearchModel { get; set; }
         public BaseCreateOrUpdatePage<T> CreateUpdatePage { get; set; }
         public Repository<T> Repository { get; set; }
     }

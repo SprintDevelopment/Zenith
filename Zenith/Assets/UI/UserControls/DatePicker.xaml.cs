@@ -22,6 +22,13 @@ namespace Zenith.Assets.UI.UserControls
             set { base.SetValue(TitleProperty, value); }
         }
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(DatePicker), new PropertyMetadata(""));
+        
+        public DateTime DateTime
+        {
+            get { return (DateTime)base.GetValue(DateTimeProperty); }
+            set { base.SetValue(DateTimeProperty, value); }
+        }
+        public static readonly DependencyProperty DateTimeProperty = DependencyProperty.Register("DateTime", typeof(DateTime), typeof(DatePicker), new FrameworkPropertyMetadata(DateTime.Now, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public DatePicker()
         {
@@ -30,6 +37,8 @@ namespace Zenith.Assets.UI.UserControls
 
             this.WhenActivated(d =>
             {
+                ViewModel.DateTime = DateTime;
+
                 var today = DateTime.Today;
                 todayButton.Tag = today;
                 todayButton.Content = today.ToString("dddd, dd MMMM yyyy");
@@ -45,6 +54,8 @@ namespace Zenith.Assets.UI.UserControls
                         ViewModel.Month = dt.Month;
                         ViewModel.Day = dt.Day;
                     }).Subscribe().DisposeWith(d);
+
+                this.Bind(ViewModel, vm => vm.DateTime, v => v.DateTime).DisposeWith(d);
 
                 Observable.FromEventPattern(yearMonthModeButton, nameof(Button.Click))
                     .Do(_ => ViewModel.IsInMonthlyMode = !ViewModel.IsInMonthlyMode)
@@ -140,6 +151,6 @@ namespace Zenith.Assets.UI.UserControls
         public bool IsInMonthlyMode { get; set; }
 
         [Reactive]
-        public DateTime DateTime { get; set; } = DateTime.Today;
+        public DateTime DateTime { get; set; }
     }
 }

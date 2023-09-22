@@ -90,7 +90,7 @@
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="150"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>

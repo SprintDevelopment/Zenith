@@ -41,7 +41,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel>
                     <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource BuyPage.SellerCompanyComboBoxTitle}"/>
-                    <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource BuyPage.BuyDateTimeTitle}"/>
+                    <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource BuyPage.BuyDateTimeTitle}"/>
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource BuyPage.CommentTextBoxTitle}" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0,24,0,0">

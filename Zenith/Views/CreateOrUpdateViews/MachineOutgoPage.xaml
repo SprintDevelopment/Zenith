@@ -33,7 +33,7 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource MachineOutgoPage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource MachineOutgoPage.RelatedMachineComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource MachineOutgoPage.RelatedCompanyComboBoxTitle}"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource MachineOutgoPage.DateTimeTitle}"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineOutgoPage.DateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineOutgoPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

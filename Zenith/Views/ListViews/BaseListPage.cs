@@ -28,6 +28,7 @@ namespace Zenith.Views.ListViews
             this.WhenActivated(d =>
             {
                 ViewModel.InitiateSearchCommand.Execute().Subscribe().Dispose();
+                ViewModel.SearchModel.OnlyForRefreshAfterUpdate++;
 
                 this.DataContext = ViewModel;
             });

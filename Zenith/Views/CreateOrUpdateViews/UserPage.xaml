@@ -33,7 +33,7 @@
                 <baseclasses:JTextBox Text="{Binding PageModel.Username, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource UserPage.UsernameTextBoxTitle}" IsEnabled="{Binding IsNew}"/>
                 <PasswordBox x:Name="passPasswordBox" Tag="{DynamicResource UserPage.PasswordPasswordBoxTitle}" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
                 <PasswordBox x:Name="repeatPassPasswordBox" Tag="{DynamicResource UserPage.ConfirmPasswordBoxTitle}" PasswordChar="*" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
-                <usercontrols:DatePicker x:Name="dateDateTimePicker" Title="{DynamicResource UserPage.CreateDateTimeTitle}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.CreateDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource UserPage.CreateDateTimeTitle}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
                 <Grid Grid.Column="1" Margin="24,16,24,0" Background="#FFFDFDFD">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
