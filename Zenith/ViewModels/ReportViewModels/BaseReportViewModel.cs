@@ -63,7 +63,7 @@ namespace Zenith.ViewModels.ReportViewModels
                 .Filter(criteria, ListFilterPolicy.ClearAndReplace)
                 .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
                 .Bind(ActiveList)
-                .Do(_ => calculate())
+                //.Do(_ => calculate())
                 .Subscribe();
 
             ActiveList.ObserveCollectionChanges().Do(_ => { }).Subscribe();

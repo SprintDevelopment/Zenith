@@ -210,7 +210,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Models\ReportModels\" />
     <Folder Include="Repositories\ReportRepositories\" />
     <Folder Include="Views\ReportViews\" />
   </ItemGroup>
