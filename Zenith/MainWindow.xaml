@@ -70,9 +70,10 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/payments.png" Title="{DynamicResource MainWindow.RecievesAndPaymentsMenuItem}" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/payments.png" Title="{DynamicResource MainWindow.AccountsAndTransactionsMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.AccountsSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToAccountsCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.CashesSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToCashesCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.ChequesSubMenuItem}" Shortcut="Ctrl+Shift+Q" Command="{Binding NavigateToChequesCommand}"/>
                         </StackPanel>

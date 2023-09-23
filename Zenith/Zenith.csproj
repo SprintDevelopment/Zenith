@@ -167,6 +167,9 @@
     <Compile Update="Views\CreateOrUpdateViews\OutgoCategoryPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ListViews\AccountListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ListViews\MixtureListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -207,6 +210,9 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Models\ReportModels\" />
+    <Folder Include="Repositories\ReportRepositories\" />
+    <Folder Include="Views\ReportViews\" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 
 namespace Zenith.Data
@@ -16,6 +17,7 @@ namespace Zenith.Data
         {
         }
 
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<Buy> Buys { get; set; }
         public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<Cash> Cashes { get; set; }
@@ -48,6 +50,26 @@ namespace Zenith.Data
                     CreateDateTime = DateTime.Today,
                 }
             );
+
+            modelBuilder.Entity<Account>().HasData(
+                new Account
+                {
+                    AccountId = 1,
+                    Name = "Workshop Account",
+                    CostCenter = CostCenters.Workshop,
+                    Balance = 0,
+                    CreditValue = 0,
+                    Comment = string.Empty
+                },
+                new Account
+                {
+                    AccountId = 2,
+                    Name = "Transportation Account",
+                    CostCenter = CostCenters.Transportation,
+                    Balance = 0,
+                    CreditValue = 0,
+                    Comment = string.Empty
+                });
 
             modelBuilder.Entity<Delivery>()
                 .HasOne(d => d.Site)

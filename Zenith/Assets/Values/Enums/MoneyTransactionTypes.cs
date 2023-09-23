@@ -12,6 +12,7 @@ namespace Zenith.Assets.Values.Enums
         Direct,
         Buy,
         Sale,
+        Delivery,
         Outgo,
         MachineOutgo,
         Salary,

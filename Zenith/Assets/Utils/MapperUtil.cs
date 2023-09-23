@@ -37,7 +37,6 @@ namespace Zenith.Assets.Utils
             cfg.CreateMap<Sale, Cash>()
                 .ForMember(cash => cash.TransferDirection, opt => opt.MapFrom(_ => TransferDirections.ToCompany))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
-                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(_ => MoneyTransactionTypes.Sale))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.SaleId));
 
             cfg.CreateMap<Buy, Cash>()

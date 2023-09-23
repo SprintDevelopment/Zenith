@@ -28,7 +28,7 @@ namespace Zenith.Models
         public float Value { get; set; }
 
         [Reactive]
-        public DateTime IssueDateTime { get; set; }
+        public DateTime IssueDateTime { get; set; } = DateTime.Today;
 
         [Reactive]
         public MoneyTransactionTypes MoneyTransactionType { get; set; }

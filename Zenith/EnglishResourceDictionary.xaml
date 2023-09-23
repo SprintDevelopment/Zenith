@@ -53,6 +53,7 @@
     <system:String x:Key="MoneyTransactionTypes.Direct">Normal</system:String>
     <system:String x:Key="MoneyTransactionTypes.Buy">Buy</system:String>
     <system:String x:Key="MoneyTransactionTypes.Sale">Sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Delivery">Delivery</system:String>
     <system:String x:Key="MoneyTransactionTypes.Outgo">Outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.MachineOutgo">Machine outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.Salary">Salary</system:String>
@@ -62,6 +63,7 @@
     <system:String x:Key="PermissionTypes.DontCare">_</system:String>
     <system:String x:Key="PermissionTypes.Buys">Buys</system:String>
     <system:String x:Key="PermissionTypes.Sales">Sales</system:String>
+    <system:String x:Key="PermissionTypes.Accounts">Accounts</system:String>
     <system:String x:Key="PermissionTypes.Cashes">Cashes</system:String>
     <system:String x:Key="PermissionTypes.Cheques">Cheques</system:String>
     <system:String x:Key="PermissionTypes.Companies">Companies</system:String>
@@ -83,6 +85,8 @@
     <system:String x:Key="TransferDirections.ToCompany">Paid</system:String>
 
     <!-- SINGLE & MULTIPLE RESOURCE NAMES -->
+    <system:String x:Key="SingleResources.Account">Account</system:String>
+    <system:String x:Key="MultipleResources.Account">Accounts</system:String>
     <system:String x:Key="SingleResources.Buy">Buy</system:String>
     <system:String x:Key="MultipleResources.Buy">Buys</system:String>
     <system:String x:Key="SingleResources.BuyItem">Buy item</system:String>
@@ -130,7 +134,8 @@
     <system:String x:Key="MainWindow.BuySaleMenuItem">Buy and sale</system:String>
     <system:String x:Key="MainWindow.BuysSubMenuItem">Buys</system:String>
     <system:String x:Key="MainWindow.SalesSubMenuItem">Sales</system:String>
-    <system:String x:Key="MainWindow.RecievesAndPaymentsMenuItem">Recieves and payments</system:String>
+    <system:String x:Key="MainWindow.AccountsAndTransactionsMenuItem">Accounts and transactions</system:String>
+    <system:String x:Key="MainWindow.AccountsSubMenuItem">Accounts</system:String>
     <system:String x:Key="MainWindow.CashesSubMenuItem">Cash</system:String>
     <system:String x:Key="MainWindow.ChequesSubMenuItem">Cheque</system:String>
     <system:String x:Key="MainWindow.DefinitionsMenuItem">Definitions</system:String>
@@ -162,6 +167,12 @@
     <system:String x:Key="MainWindow.HelpMenuItem">Help and support</system:String>
     <system:String x:Key="MainWindow.TextHelpSubMenuItem">Text help</system:String>
     <system:String x:Key="MainWindow.AboutSubMenuItem">About us</system:String>
+
+    <!-- ACCOUNT LIST PAGE -->
+    <system:String x:Key="AccountListPage.NameColumnTextBlockText">Company name</system:String>
+    <system:String x:Key="AccountListPage.BalanceValueColumnTextBlockText">Balance</system:String>
+    <system:String x:Key="AccountListPage.CreditValueColumnTextBlockText">Credit</system:String>
+    <system:String x:Key="AccountListPage.ChequeValueColumnTextBlockText">Cheque</system:String>
 
     <!-- BUY PAGE -->
     <system:String x:Key="BuyPage.SellerCompanyComboBoxTitle">Seller company</system:String>

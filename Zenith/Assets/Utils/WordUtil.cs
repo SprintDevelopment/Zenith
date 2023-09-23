@@ -97,7 +97,7 @@ namespace Zenith.Assets.Utils
                 //subTotalRow.Cells[1].Borders.Enable = 0;
                 //subTotalRow.Cells[2].Range.Text = "Sub total";
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 

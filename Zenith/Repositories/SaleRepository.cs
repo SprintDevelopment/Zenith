@@ -42,12 +42,14 @@ namespace Zenith.Repositories
             var cashForWorkshop = new Cash 
             {
                 CostCenter = CostCenters.Workshop,
+                MoneyTransactionType = MoneyTransactionTypes.Sale,
                 Value = sale.Items.Sum(si => si.TotalPrice)
             };
 
             var cashForTransportation = new Cash 
             {
                 CostCenter = CostCenters.Transportation,
+                MoneyTransactionType = MoneyTransactionTypes.Delivery,
                 Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee))
             };
 
@@ -79,7 +81,7 @@ namespace Zenith.Repositories
             });
 
             var relatedCashes = CashRepository
-                .Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Sale && c.RelatedEntityId == sale.SaleId)
+                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.Sale || c.MoneyTransactionType == MoneyTransactionTypes.Delivery) && c.RelatedEntityId == sale.SaleId)
                 .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                 .Take(2);
             
