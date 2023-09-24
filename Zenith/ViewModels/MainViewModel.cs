@@ -20,6 +20,7 @@ using Zenith.Data;
 using Zenith.Models;
 using Zenith.Repositories;
 using Zenith.Views.ListViews;
+using Zenith.Views.ReportViews;
 
 namespace Zenith.ViewModels
 {
@@ -57,6 +58,8 @@ namespace Zenith.ViewModels
             NavigateToOutgoCategoriesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoCategoryListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.OutgoCategories && p.HasReadAccess)));
             NavigateToPersonnelCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(PersonListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Personnel && p.HasReadAccess)));
             NavigateToSalaryPaymentsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SalaryPaymentListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.SalaryPayments && p.HasReadAccess)));
+            NavigateToMachineReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.MachineReport && p.HasReadAccess)));
+            NavigateToCompanyAggregateReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CompanyAggregateReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.CompanyAggregateReport && p.HasReadAccess)));
             NavigateToUsersCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(UserListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
             NavigateToNotesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(NoteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Notes && p.HasReadAccess)));
 
@@ -227,6 +230,8 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> NavigateToOutgoCategoriesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToPersonnelCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSalaryPaymentsCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToMachineReportCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToCompanyAggregateReportCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToUsersCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToNotesCommand { get; set; }
         //

@@ -110,7 +110,8 @@
                 <controls:MenuItem Icon="Resources/Images/Menu/reports.png" Title="{DynamicResource MainWindow.ReportsMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
-                            <controls:SubMenuItem Title="{DynamicResource MainWindow.DashboardSubMenuItem}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.MachineReportSubMenuItem}" Command="{Binding NavigateToMachineReportCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.CompanyAggregateReportSubMenuItem}" Command="{Binding NavigateToCompanyAggregateReportCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.ReportsSubMenuItem}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>

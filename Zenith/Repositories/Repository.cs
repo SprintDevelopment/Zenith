@@ -34,6 +34,13 @@ namespace Zenith.Repositories
             return all;
         }
         public virtual IEnumerable<T> Find(Expression<Func<T, bool>> predicate) => _context.Set<T>().Where(predicate).AsEnumerable();
+        public virtual IEnumerable<T> FindForSearch(Expression<Func<T, bool>> predicate)
+        {
+            var foundItems = _context.Set<T>().Where(predicate).AsEnumerable().ToList();
+            foundItems.Insert(0, new T());
+
+            return foundItems;
+        }
         public virtual T Single(dynamic id) => _context.Set<T>().Find(id);
 
         public virtual T Add(T entity)

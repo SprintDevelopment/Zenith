@@ -17,20 +17,18 @@ using ReactiveUI.Fody.Helpers;
 using AutoMapper;
 using Zenith.Assets.Utils;
 using DynamicData.Binding;
+using Zenith.Models.ReportModels;
+using Zenith.Repositories.ReportRepositories;
 
 namespace Zenith.ViewModels.ReportViewModels
 {
-    public class BaseReportViewModel<T> : BaseViewModel<T> where T : Model, new()
+    public class BaseReportViewModel<T> : BaseViewModel<T> where T : ReportModel, new()
     {
-        public BaseReportViewModel(Repository<T> repository, SearchBaseDto searchModel, IObservable<Func<T, bool>> criteria, PermissionTypes permissionType)
+        public BaseReportViewModel(ReportRepository<T> repository, BaseDto searchModel, PermissionTypes permissionType)
         {
-            var singleMultipleTitles = new
-            {
-                single = (string)App.Current.Resources[$"SingleResources.{typeof(T).Name}"],
-                multiple = (string)App.Current.Resources[$"MultipleResources.{typeof(T).Name}"]
-            };
+            ViewTitle = (string)App.Current.Resources[$"ReportViewTitleResources.{typeof(T).Name}"];
+            SearchGridTitle = (string)App.Current.Resources[$"ReportSearchGridTitleResources.{typeof(T).Name}"];
 
-            ViewTitle = singleMultipleTitles.multiple;
             Repository = repository;
             SearchModel = searchModel;
 
@@ -40,7 +38,6 @@ namespace Zenith.ViewModels.ReportViewModels
             //var nItemsSelectedStringFormat = App.MainViewModel.Language == AppLanguages.English ?
             //    " , {0:n0} item(s) selected)" : " ، {0:n0} مورد انتخاب شده)";
 
-            //SourceList.AddRange(Repository.All());
             //void calculate()
             //{
             //    var itemsCount = ActiveList.Count();
@@ -60,7 +57,6 @@ namespace Zenith.ViewModels.ReportViewModels
             //};
 
             SourceList.Connect()
-                .Filter(criteria, ListFilterPolicy.ClearAndReplace)
                 .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
                 .Bind(ActiveList)
                 //.Do(_ => calculate())
@@ -68,72 +64,52 @@ namespace Zenith.ViewModels.ReportViewModels
 
             ActiveList.ObserveCollectionChanges().Do(_ => { }).Subscribe();
 
-            //SelectAllCommand = ReactiveCommand.Create<Unit>(_ =>
-            //{
-            //    SelectionMode = SelectionMode != SelectionModes.AllItemsSelected ? SelectionModes.AllItemsSelected : SelectionModes.NoItemSelected;
-            //    foreach (var item in ActiveList)
-            //    {
-            //        item.IsSelected = SelectionMode == SelectionModes.AllItemsSelected;
-            //    }
-            //});
-
-            //SelectOneCommand = ReactiveCommand.Create<T>(item =>
-            //{
-            //    item.IsSelected = !item.IsSelected;
-            //});
-
-            //SelectAllCommand.Merge(SelectOneCommand).Subscribe(_ =>
-            //{
-            //    searchModel.OnlyForRefreshAfterUpdate++;
-
-            //    calculate();
-            //});
-
             IDisposable viewItemDisposable = null;
             ViewCommand = ReactiveCommand.Create<T>(itemToUpdate =>
             {
-                viewItemDisposable?.Dispose();
+                //viewItemDisposable?.Dispose();
 
-                viewItemDisposable = CreateUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
-                {
-                });
+                //viewItemDisposable = CreateUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
+                //{
+                //});
 
-                CreateUpdatePage.ViewModel.PrepareCommand.Execute(itemToUpdate.GetKeyPropertyValue()).Subscribe();
-                App.MainViewModel.ShowCreateUpdatePageCommand.Execute(CreateUpdatePage).Subscribe();
+                //CreateUpdatePage.ViewModel.PrepareCommand.Execute(itemToUpdate.GetKeyPropertyValue()).Subscribe();
+                //App.MainViewModel.ShowCreateUpdatePageCommand.Execute(CreateUpdatePage).Subscribe();
             }, App.MainViewModel.WhenAnyValue(mvm => mvm.LoggedInUser)
                 .Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == permissionType && p.HasUpdateAccess)));
 
-            SearchCommand = ReactiveCommand.Create<Unit>(_ =>
+            CreateReportCommand = ReactiveCommand.Create<Unit>(_ =>
             {
+                SourceList.Clear();
+                SourceList.AddRange(Repository.Find(searchModel));
+
+                IsInSearchMode = false;
             });
 
-            //searchModel.Title = $"Search in {modelAttributes.MultipleResourceName}";
-            //InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearchCommand.Execute(searchModel));
+            HideSearchGridCommand = ReactiveCommand.Create<Unit>(_ => IsInSearchMode = false);
 
             DisposeCommand = ReactiveCommand.Create<Unit>(_ =>
             {
-                //SelectAllCommand?.Dispose();
-                //SelectOneCommand?.Dispose();
                 ViewCommand?.Dispose();
-                SearchCommand?.Dispose();
+                CreateReportCommand?.Dispose();
             });
         }
 
         public SourceList<T> SourceList { get; set; } = new SourceList<T>();
         public IObservableCollection<T> ActiveList { get; } = new ObservableCollectionExtended<T>();
 
-        //public ReactiveCommand<Unit, Unit> SelectAllCommand { get; set; }
-        //public ReactiveCommand<T, Unit> SelectOneCommand { get; set; }
         public ReactiveCommand<T, Unit> ViewCommand { get; set; }
-        //public ReactiveCommand<Unit, SearchBaseDto> InitiateSearchCommand { get; set; }
-        public ReactiveCommand<Unit, Unit> SearchCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> HideSearchGridCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> CreateReportCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DisposeCommand { get; set; }
 
         [Reactive]
-        public SelectionModes SelectionMode { get; set; }
+        public string SearchGridTitle { get; set; }
 
-        public SearchBaseDto SearchModel { get; set; }
-        public BaseCreateOrUpdatePage<T> CreateUpdatePage { get; set; }
-        public Repository<T> Repository { get; set; }
+        [Reactive]
+        public bool IsInSearchMode { get; set; }
+        public BaseDto SearchModel { get; set; }
+        //public BaseCreateOrUpdatePage<T> CreateUpdatePage { get; set; }
+        public ReportRepository<T> Repository { get; set; }
     }
 }

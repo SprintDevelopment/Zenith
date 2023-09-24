@@ -9,7 +9,7 @@ using Zenith.Models;
 
 namespace Zenith.ViewModels
 {
-    public class BaseViewModel<T> : ReactiveObject where T : Model, new()
+    public class BaseViewModel<T> : ReactiveObject where T : class, new()
     {
         public BaseViewModel()
         {
