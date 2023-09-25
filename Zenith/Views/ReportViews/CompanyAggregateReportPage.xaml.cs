@@ -38,7 +38,7 @@ namespace Zenith.Views.ReportViews
             InitializeComponent();
             var searchModel = new CompanyAggregateReportSearchModel();
 
-            ViewModel = new BaseReportViewModel<CompanyAggregateReport>(new CompanyAggregateReportRepository(), searchModel, PermissionTypes.CompanyAggregateReport)
+            ViewModel = new CompanyAggregateReportViewModel(new CompanyAggregateReportRepository(), searchModel, PermissionTypes.CompanyAggregateReport)
             {
                 //CreateUpdatePage = new BuyPage()
             };

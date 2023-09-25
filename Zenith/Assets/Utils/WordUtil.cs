@@ -11,6 +11,7 @@ using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Models;
 using Zenith.Models.ReportModels;
+using Zenith.Repositories;
 using Word = Microsoft.Office.Interop.Word;
 namespace Zenith.Assets.Utils
 {
@@ -98,7 +99,7 @@ namespace Zenith.Assets.Utils
             return null;
         }
 
-        public static OperationResultDto PrintCompanyAggregateReport(ObservableCollection<CompanyAggregateReport> reportItems, bool includeCustomerTRN = false)
+        public static OperationResultDto PrintCompanyAggregateReport(short companyId, ObservableCollection<CompanyAggregateReport> reportItems, bool includeCustomerTRN = false)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
@@ -111,36 +112,35 @@ namespace Zenith.Assets.Utils
                 wordApp.Documents.Open(templateFileFullName);
 
                 var document = wordApp.ActiveDocument;
+                
+                var company = new CompanyRepository().Single(companyId);
 
                 var companyTable = document.Tables[1];
-                companyTable.Cell(1, 1).Range.Text = $"Customer Code: {sale.Company.CompanyId:CPY0000}";
-                companyTable.Cell(1, 3).Range.Text = $"{sale.SaleId:INV0000}";
-                companyTable.Cell(2, 1).Range.Text = sale.Company.Name;
-                companyTable.Cell(2, 3).Range.Text = $"{sale.DateTime:yyyy-MMM-dd}";
-                companyTable.Cell(3, 1).Range.Text = $"Tel: {sale.Company.Tel}";
-                companyTable.Cell(4, 1).Range.Text = $"Fax: {sale.Company.Fax}";
+                companyTable.Cell(1, 1).Range.Text = $"Customer Code: {company.CompanyId:CPY0000}";
+                companyTable.Cell(1, 3).Range.Text = $"";
+                companyTable.Cell(2, 1).Range.Text = company.Name;
+                companyTable.Cell(2, 3).Range.Text = $"{DateTime.Today:yyyy-MMM-dd}";
+                companyTable.Cell(3, 1).Range.Text = $"Tel: {company.Tel}";
+                companyTable.Cell(4, 1).Range.Text = $"Fax: {company.Fax}";
                 if (includeCustomerTRN)
-                    companyTable.Cell(5, 1).Range.Text = $"TRN: {sale.Company.TaxRegistrationNumber}";
+                    companyTable.Cell(5, 1).Range.Text = $"TRN: {company.TaxRegistrationNumber}";
 
                 var deliveriesTable = document.Tables[2];
 
-                sale.Items.SelectMany(si => si.Deliveries)
-                    .Select((d, i) =>
+                reportItems
+                    .Select((ri, i) =>
                     {
                         var newRow = deliveriesTable.Rows.Add();
                         newRow.Cells[1].Range.Text = $"{i + 1}";
-                        newRow.Cells[2].Range.Text = d.SaleItem.Material.Name;
-                        newRow.Cells[3].Range.Text = d.Site.Name;
-                        newRow.Cells[4].Range.Text = "Trip";
-                        newRow.Cells[5].Range.Text = d.Machine.Name;
-                        newRow.Cells[6].Range.Text = d.DeliveryNumber;
-                        newRow.Cells[7].Range.Text = $"{d.Count:n2} (m)";
-                        newRow.Cells[8].Range.Text = $"{(d.DeliveryFee + d.SaleItem.TotalPrice):n2}";
+                        newRow.Cells[2].Range.Text = $"{ri.Month} of {ri.Year}";
+                        newRow.Cells[3].Range.Text = ri.SiteName;
+                        newRow.Cells[4].Range.Text = ri.InvoiceNo;
+                        newRow.Cells[5].Range.Text = $"{ri.TotalAmount:n2} (m)";
 
-                        return d;
+                        return ri;
                     }).ToList();
 
-                var totalPrice = sale.Items.Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee));
+                var totalPrice = reportItems.Sum(ri => ri.TotalAmount);
 
                 var rowsContents = new Tuple<string, string>[]
                 {
@@ -155,9 +155,6 @@ namespace Zenith.Assets.Utils
 
                     if (i == 0)
                     {
-                        newRow.Cells[1].Merge(newRow.Cells[2]);
-                        newRow.Cells[1].Merge(newRow.Cells[2]);
-                        newRow.Cells[1].Merge(newRow.Cells[2]);
                         newRow.Cells[1].Merge(newRow.Cells[2]);
                         newRow.Cells[1].Merge(newRow.Cells[2]);
                         newRow.Cells[1].Merge(newRow.Cells[2]);

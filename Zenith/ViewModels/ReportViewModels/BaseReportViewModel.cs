@@ -101,6 +101,7 @@ namespace Zenith.ViewModels.ReportViewModels
         public ReactiveCommand<T, Unit> ViewCommand { get; set; }
         public ReactiveCommand<Unit, Unit> HideSearchGridCommand { get; set; }
         public ReactiveCommand<Unit, Unit> CreateReportCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> PrintCommand { get; set; }
         public ReactiveCommand<Unit, Unit> DisposeCommand { get; set; }
 
         [Reactive]
