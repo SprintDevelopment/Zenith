@@ -12,11 +12,11 @@ namespace Zenith.Models.ReportModels.ReportSearchModels
         
         [Reactive]
         public int SiteId { get; set; }
+
+        [Reactive]
+        public int Year { get; set; } = DateTime.Today.Year;
         
         [Reactive]
-        public int Year { get; set; }
-        
-        [Reactive]
-        public Months Month { get; set; }
+        public Months Month { get; set; } = (Months)DateTime.Today.Month;
     }
 }

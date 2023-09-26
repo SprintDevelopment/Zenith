@@ -55,7 +55,7 @@ namespace Zenith.Views.ReportViews
                 Observable.FromEventPattern(companyComboBox, nameof(ComboBox.SelectionChanged))
                     .Do(_ =>
                     {
-                        siteComboBox.ItemsSource = new SiteRepository().FindForSearch(s => s.CompanyId == searchModel.CompanyId).ToList();
+                        siteComboBox.ItemsSource = new SiteRepository().FindForSearch(s => s.CompanyId == searchModel.CompanyId);
                     }).Subscribe().DisposeWith(d);
 
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
