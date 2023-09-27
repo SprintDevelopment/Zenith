@@ -18,7 +18,7 @@ namespace Zenith.Assets.Utils
     public class WordUtil
     {
         public static Word.Application wordApp;
-        public static OperationResultDto PrintFactor(Sale sale, bool includeCustomerTRN = false)
+        public static OperationResultDto PrintFactor(bool includeCustomerTRN = false, params Sale[] sales)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
@@ -33,18 +33,18 @@ namespace Zenith.Assets.Utils
                 var document = wordApp.ActiveDocument;
 
                 var companyTable = document.Tables[1];
-                companyTable.Cell(1, 1).Range.Text = $"Customer Code: {sale.Company.CompanyId:CPY0000}";
-                companyTable.Cell(1, 3).Range.Text = $"{sale.SaleId:INV0000}";
-                companyTable.Cell(2, 1).Range.Text = sale.Company.Name;
-                companyTable.Cell(2, 3).Range.Text = $"{sale.DateTime:yyyy-MMM-dd}";
-                companyTable.Cell(3, 1).Range.Text = $"Tel: {sale.Company.Tel}";
-                companyTable.Cell(4, 1).Range.Text = $"Fax: {sale.Company.Fax}";
+                companyTable.Cell(1, 1).Range.Text = $"Customer Code: {sales[0].Company.CompanyId:CPY0000}";
+                companyTable.Cell(1, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].SaleId:INV0000}" : "";
+                companyTable.Cell(2, 1).Range.Text = sales[0].Company.Name;
+                companyTable.Cell(2, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].DateTime:yyyy-MMM-dd}": $"{sales[0].DateTime:yyyy-MMM}";
+                companyTable.Cell(3, 1).Range.Text = $"Tel: {sales[0].Company.Tel}";
+                companyTable.Cell(4, 1).Range.Text = $"Fax: {sales[0].Company.Fax}";
                 if (includeCustomerTRN)
-                    companyTable.Cell(5, 1).Range.Text = $"TRN: {sale.Company.TaxRegistrationNumber}";
+                    companyTable.Cell(5, 1).Range.Text = $"TRN: {sales[0].Company.TaxRegistrationNumber}";
 
                 var deliveriesTable = document.Tables[2];
 
-                sale.Items.SelectMany(si => si.Deliveries)
+                sales.SelectMany(s => s.Items).SelectMany(si => si.Deliveries)
                     .Select((d, i) =>
                     {
                         var newRow = deliveriesTable.Rows.Add();
@@ -60,7 +60,7 @@ namespace Zenith.Assets.Utils
                         return d;
                     }).ToList();
 
-                var totalPrice = sale.Items.Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee));
+                var totalPrice = sales.Sum(s => s.Items.Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
 
                 var rowsContents = new Tuple<string, string>[]
                 {

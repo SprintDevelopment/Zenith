@@ -26,6 +26,7 @@ namespace Zenith.Data
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Machine> Machines { get; set; }
         public DbSet<MachineOutgo> MachineOutgoes { get; set; }
+        public DbSet<MaterialAvailability> MaterialAvailabilities { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Mixture> Mixtures { get; set; }
         public DbSet<MixtureItem> MixtureItems { get; set; }
