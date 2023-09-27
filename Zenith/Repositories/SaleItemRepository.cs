@@ -11,6 +11,7 @@ namespace Zenith.Repositories
     public class SaleItemRepository : Repository<SaleItem>
     {
         MaterialRepository MaterialRepository = new MaterialRepository();
+        MaterialAvailabilityRepository MaterialAvailabilityRepository = new MaterialAvailabilityRepository();
 
         public override void AddRange(IEnumerable<SaleItem> saleItems)
         {
@@ -18,17 +19,23 @@ namespace Zenith.Repositories
 
             saleItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
                 .ToList()
-                .ForEach(m => MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1));
+                .ForEach(m =>
+                {
+                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1);
+                    MaterialAvailabilityRepository.UpdateCountOnly(m.MaterialId, m.Count);
+                });
         }
 
         public override SaleItem Update(SaleItem saleItem, dynamic saleItemId)
         {
             var preSaleItem = Single((long)saleItemId);
             MaterialRepository.UpdateAmount(preSaleItem.MaterialId, preSaleItem.Count);
+            MaterialAvailabilityRepository.UpdateCountOnly(preSaleItem.MaterialId, preSaleItem.Count * -1);
 
             base.Update(saleItem, saleItem.SaleItemId);
             
             MaterialRepository.UpdateAmount(saleItem.MaterialId, saleItem.Count * -1);
+            MaterialAvailabilityRepository.UpdateCountOnly(saleItem.MaterialId, saleItem.Count);
 
             return saleItem;
         }
@@ -37,7 +44,11 @@ namespace Zenith.Repositories
         {
             saleItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
                 .ToList()
-                .ForEach(m => MaterialRepository.UpdateAmount(m.MaterialId, m.Count));
+                .ForEach(m =>
+                {
+                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count);
+                    MaterialAvailabilityRepository.UpdateCountOnly(m.MaterialId, m.Count * -1);
+                });
 
             //base.RemoveRange(saleItems);
         }

@@ -11,13 +11,13 @@ namespace Zenith.Repositories
             var materialAvailability = _context.Set<MaterialAvailability>()
                 .FirstOrDefault(ma => ma.MaterialId == materialId && ma.BuyPrice == buyPrice);
 
-            if(materialAvailability is null) 
+            if (materialAvailability is null)
             {
                 materialAvailability = new MaterialAvailability
                 {
                     MaterialId = materialId,
-                    BuyPrice= buyPrice,
-                    AvailableCount= count,
+                    BuyPrice = buyPrice,
+                    AvailableCount = count,
                     TotalBoughtCount = count
                 };
 
@@ -32,6 +32,35 @@ namespace Zenith.Repositories
             }
         }
 
-        public void 
+        public void UpdateCountOnly(int materialId, float count)
+        {
+            if (count > 0)
+            {
+                //var sumOfAchievedCount = 0f;
+
+                var itemsToUpdateCount = _context.Set<MaterialAvailability>()
+                    .Where(ma => ma.MaterialId == materialId && ma.AvailableCount != 0)
+                    .AsEnumerable()
+                    .TakeWhile(ma => count > 0)
+                    .Select(ma => { count -= ma.AvailableCount; ma.AvailableCount = 0; return ma; });
+
+                itemsToUpdateCount.Last()
+                    .AvailableCount = count * -1;
+            }
+            else
+            {
+                var itemsToUpdateCount = _context.Set<MaterialAvailability>()
+                    .Where(ma => ma.MaterialId == materialId && ma.TotalBoughtCount > ma.AvailableCount)
+                    .AsEnumerable()
+                    .OrderByDescending(ma => ma.MaterialAvailabilityId)
+                    .TakeWhile(ma => count < 0)
+                    .Select(ma => { count += ma.TotalBoughtCount - ma.AvailableCount; ma.AvailableCount = ma.TotalBoughtCount; return ma; });
+
+                itemsToUpdateCount.Last()
+                    .AvailableCount -= count * 1;
+            }
+
+            _context.SaveChanges();
+        }
     }
 }

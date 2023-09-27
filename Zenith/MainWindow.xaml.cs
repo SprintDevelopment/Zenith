@@ -41,6 +41,8 @@ namespace Zenith
         {
             InitializeComponent();
 
+            var mar = new MaterialAvailabilityRepository();
+
             App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("EnglishResourceDictionary.xaml", UriKind.Relative) });
 
             var blankPage = new BlankPage();
