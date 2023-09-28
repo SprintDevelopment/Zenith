@@ -111,6 +111,7 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.MachineReportSubMenuItem}" Command="{Binding NavigateToMachineReportCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.SaleProfitReportSubMenuItem}" Command="{Binding NavigateToSaleProfitReportCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.CompanyAggregateReportSubMenuItem}" Command="{Binding NavigateToCompanyAggregateReportCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.ReportsSubMenuItem}"/>
                         </StackPanel>

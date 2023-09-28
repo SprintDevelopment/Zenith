@@ -22,7 +22,6 @@ namespace Zenith.Repositories
                 .ForEach(m =>
                 {
                     MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1);
-                    MaterialAvailabilityRepository.UpdateCountOnly(m.MaterialId, m.Count);
                 });
         }
 
@@ -30,12 +29,10 @@ namespace Zenith.Repositories
         {
             var preSaleItem = Single((long)saleItemId);
             MaterialRepository.UpdateAmount(preSaleItem.MaterialId, preSaleItem.Count);
-            MaterialAvailabilityRepository.UpdateCountOnly(preSaleItem.MaterialId, preSaleItem.Count * -1);
 
             base.Update(saleItem, saleItem.SaleItemId);
             
             MaterialRepository.UpdateAmount(saleItem.MaterialId, saleItem.Count * -1);
-            MaterialAvailabilityRepository.UpdateCountOnly(saleItem.MaterialId, saleItem.Count);
 
             return saleItem;
         }
@@ -47,7 +44,6 @@ namespace Zenith.Repositories
                 .ForEach(m =>
                 {
                     MaterialRepository.UpdateAmount(m.MaterialId, m.Count);
-                    MaterialAvailabilityRepository.UpdateCountOnly(m.MaterialId, m.Count * -1);
                 });
 
             //base.RemoveRange(saleItems);

@@ -26,6 +26,7 @@ namespace Zenith.Assets.Values.Enums
         Personnel,
         SalaryPayments,
         MachineReport,
+        SaleProfitReport,
         CompanyAggregateReport,
         Users,
         Notes,

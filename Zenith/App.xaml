@@ -28,7 +28,7 @@
             <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
             <converters:CountToVisibilityConverter x:Key="countToVisibilityConverter"/>
             <converters:ImageToBinaryConverter x:Key="imageToBianaryConverter"/>
-            <converters:TransferDicrectionToColorConverter x:Key="transferDirectionToColorConverter"/>
+            <converters:NullableBoolToGreenBlackRedColorConverter x:Key="nullableBoolToGreenBlackRedColorConverter"/>
             <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
             <converters:EnumConverter x:Key="enumConverter"/>
 

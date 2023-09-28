@@ -26,25 +26,29 @@ namespace Zenith.Repositories
         public void UpdateAmount(int materialId, float addedAmount)
         {
             var material = Single(materialId);
-            var mixtureItems = new List<MixtureItem>() 
-            { 
-                new MixtureItem { Material = material, Percent = 100 } 
-            };
+            //var mixtureItems = new List<MixtureItem>() 
+            //{ 
+            //    new MixtureItem { Material = material, Percent = 100 } 
+            //};
 
-            if (material.IsMixed)
-            {
-                mixtureItems = _context.Set<Mixture>()
-                    .Include(m => m.Items).ThenInclude(mi => mi.Material)
-                    .FirstOrDefault(m => m.RelatedMaterialId == materialId).Items.ToList();
-            }
+            //if (material.IsMixed)
+            //{
+            //    mixtureItems = _context.Set<Mixture>()
+            //        .Include(m => m.Items).ThenInclude(mi => mi.Material)
+            //        .FirstOrDefault(m => m.RelatedMaterialId == materialId).Items.ToList();
+            //}
 
-            mixtureItems.ForEach(m =>
-            {
-                m.Material.AvailableAmount += addedAmount * m.Percent / 100;
-            });
+            //mixtureItems.ForEach(m =>
+            //{
+            //    m.Material.AvailableAmount += addedAmount * m.Percent / 100;
+            //});
 
+            //_context.Set<Material>()
+            //    .UpdateRange(mixtureItems.Select(mi => mi.Material));
+
+            material.AvailableAmount += addedAmount;
             _context.Set<Material>()
-                .UpdateRange(mixtureItems.Select(mi => mi.Material));
+                .Update(material);
 
             _context.SaveChanges();
         }

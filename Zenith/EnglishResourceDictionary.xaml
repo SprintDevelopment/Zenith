@@ -98,6 +98,7 @@
     <system:String x:Key="PermissionTypes.SalaryPayments">Salary payments</system:String>
     <system:String x:Key="PermissionTypes.MachineReport">Machine report</system:String>
     <system:String x:Key="PermissionTypes.CompanyAggregateReport">Company aggregate report</system:String>
+    <system:String x:Key="PermissionTypes.SaleProfitReport">Sale profit report</system:String>
     <system:String x:Key="PermissionTypes.Users">Users</system:String>
     <system:String x:Key="PermissionTypes.Notes">Notes</system:String>
 
@@ -155,6 +156,8 @@
     <!-- REPORT VIEW AND SEARCH GRID TITLE RESOURCE NAMES -->
     <system:String x:Key="ReportViewTitleResources.MachineReport">Machine report</system:String>
     <system:String x:Key="ReportSearchGridTitleResources.MachineReport">Filter machine report</system:String>
+    <system:String x:Key="ReportViewTitleResources.SaleProfitReport">Sale profit report</system:String>
+    <system:String x:Key="ReportSearchGridTitleResources.SaleProfitReport">Filter sale profit report</system:String>
     <system:String x:Key="ReportViewTitleResources.CompanyAggregateReport">Company aggregate report</system:String>
     <system:String x:Key="ReportSearchGridTitleResources.CompanyAggregateReport">Filter company aggregate report</system:String>
 
@@ -181,6 +184,7 @@
     <system:String x:Key="MainWindow.SalaryPaymentsSubMenuItem">Salary payments</system:String>
     <system:String x:Key="MainWindow.ReportsMenuItem">Reports</system:String>
     <system:String x:Key="MainWindow.MachineReportSubMenuItem">Machine report</system:String>
+    <system:String x:Key="MainWindow.SaleProfitReportSubMenuItem">Sale profit report</system:String>
     <system:String x:Key="MainWindow.CompanyAggregateReportSubMenuItem">Company aggregate report</system:String>
     <system:String x:Key="MainWindow.ReportsSubMenuItem">Reports</system:String>
     <system:String x:Key="MainWindow.UsersPermissionsMenuItem">User and permissions</system:String>
@@ -273,6 +277,19 @@
     <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">Fax</system:String>
     <system:String x:Key="CompanyListPage.CreditValueColumnTextBlockText">Credit</system:String>
 
+    <!-- COMPANY AGGREGATE REPORT PAGE -->
+    <system:String x:Key="CompanyAggregateReportPage.CompanyNameColumnTextBlockText">Company name</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.YearColumnTextBlockText">Year</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.MonthColumnTextBlockText">Month</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.SiteColumnTextBlockText">Site</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.InvoiceColumnTextBlockText">Invoice no</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.TotalAmountColumnTextBlockText">Total amount</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.SearchCompanyComboBoxTitle">Company</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.SearchYearComboBoxTitle">Year</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.SearchMonthComboBoxTitle">Month</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.SearchSiteComboBoxTitle">Site</system:String>
+    <system:String x:Key="CompanyAggregateReportPage.CreateReportButtonContent">Create report</system:String>
+
     <!-- DELIVERY PAGE -->
     <system:String x:Key="DeliveryPage.SiteComboBoxTitle">Site for delivery</system:String>
     <system:String x:Key="DeliveryPage.MachineComboBoxTitle">Machine</system:String>
@@ -309,20 +326,6 @@
     <system:String x:Key="MachineReportPage.SearchStartDateTimeTitle">Report start date</system:String>
     <system:String x:Key="MachineReportPage.SearchEndDateTimeTitle">Report end date</system:String>
     <system:String x:Key="MachineReportPage.CreateReportButtonContent">Create report</system:String>
-
-    <!-- COMPANY AGGREGATE REPORT PAGE -->
-    <system:String x:Key="CompanyAggregateReportPage.CompanyNameColumnTextBlockText">Company name</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.YearColumnTextBlockText">Year</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.MonthColumnTextBlockText">Month</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.SiteColumnTextBlockText">Site</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.InvoiceColumnTextBlockText">Invoice no</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.TotalAmountColumnTextBlockText">Total amount</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.SearchCompanyComboBoxTitle">Company</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.SearchYearComboBoxTitle">Year</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.SearchMonthComboBoxTitle">Month</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.SearchSiteComboBoxTitle">Site</system:String>
-    <system:String x:Key="CompanyAggregateReportPage.CreateReportButtonContent">Create report</system:String>
-    
     
     <!-- MACHINE OUTGO PAGE -->
     <system:String x:Key="MachineOutgoPage.RelatedMachineComboBoxTitle">Related machine</system:String>
@@ -485,7 +488,19 @@
     <system:String x:Key="SaleListPage.DeliveriesPriceColumnTextBlockText">Deliveries' price</system:String>
     <system:String x:Key="SaleListPage.StateColumnTextBlockText">State</system:String>
     <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
-    
+
+    <!-- SALE PROFIT REPORT PAGE -->
+    <system:String x:Key="SaleProfitReportPage.YearColumnTextBlockText">Year</system:String>
+    <system:String x:Key="SaleProfitReportPage.MonthColumnTextBlockText">Month</system:String>
+    <system:String x:Key="SaleProfitReportPage.MaterialNameColumnTextBlockText">Material name</system:String>
+    <system:String x:Key="SaleProfitReportPage.SoldAmountColumnTextBlockText">Sale amount</system:String>
+    <system:String x:Key="SaleProfitReportPage.SoldPriceColumnTextBlockText">Sale price</system:String>
+    <system:String x:Key="SaleProfitReportPage.BoughtPriceColumnTextBlockText">Buy price</system:String>
+    <system:String x:Key="SaleProfitReportPage.ProfitColumnTextBlockText">Profit</system:String>
+    <system:String x:Key="SaleProfitReportPage.SearchYearComboBoxTitle">Year</system:String>
+    <system:String x:Key="SaleProfitReportPage.SearchMonthComboBoxTitle">Month</system:String>
+    <system:String x:Key="SaleProfitReportPage.CreateReportButtonContent">Create report</system:String>
+
     <!-- SITE PAGE -->
     <system:String x:Key="SitePage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="SitePage.NameTextBoxTitle">Site name</system:String>

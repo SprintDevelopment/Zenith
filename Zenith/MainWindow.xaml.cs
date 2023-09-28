@@ -29,6 +29,9 @@ using Zenith.Assets.UI.UserControls;
 using DynamicData;
 using Zenith.Views;
 using Zenith.Repositories;
+using Zenith.Repositories.ReportRepositories;
+using Zenith.Models.ReportModels;
+using Zenith.Models.ReportModels.ReportSearchModels;
 
 namespace Zenith
 {
@@ -40,10 +43,6 @@ namespace Zenith
         public MainWindow()
         {
             InitializeComponent();
-
-            var mar = new MaterialAvailabilityRepository();
-
-            App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("EnglishResourceDictionary.xaml", UriKind.Relative) });
 
             var blankPage = new BlankPage();
 

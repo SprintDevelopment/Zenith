@@ -22,7 +22,7 @@ namespace Zenith.Repositories
                 .ForEach(m =>
                 {
                     MaterialRepository.UpdateAmount(m.MaterialId, m.Count);
-                    MaterialAvailabilityRepository.AddOrUpdate(m.MaterialId, m.UnitPrice, m.Count);
+                    //MaterialAvailabilityRepository.AddOrUpdate(m.MaterialId, m.UnitPrice, m.Count);
                 });
         }
 
@@ -30,12 +30,12 @@ namespace Zenith.Repositories
         {
             var preBuyItem = Single((long)buyItemId);
             MaterialRepository.UpdateAmount(preBuyItem.MaterialId, preBuyItem.Count * -1);
-            MaterialAvailabilityRepository.AddOrUpdate(preBuyItem.MaterialId, preBuyItem.UnitPrice, preBuyItem.Count * -1);
+            //MaterialAvailabilityRepository.AddOrUpdate(preBuyItem.MaterialId, preBuyItem.UnitPrice, preBuyItem.Count * -1);
 
             base.Update(buyItem, buyItem.BuyItemId);
 
             MaterialRepository.UpdateAmount(buyItem.MaterialId, buyItem.Count);
-            MaterialAvailabilityRepository.AddOrUpdate(buyItem.MaterialId, buyItem.UnitPrice, buyItem.Count);
+            //MaterialAvailabilityRepository.AddOrUpdate(buyItem.MaterialId, buyItem.UnitPrice, buyItem.Count);
 
             return buyItem;
         }
@@ -47,7 +47,7 @@ namespace Zenith.Repositories
                 .ForEach(m =>
                 {
                     MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1);
-                    MaterialAvailabilityRepository.AddOrUpdate(m.MaterialId, m.UnitPrice, m.Count * -1);
+                    //MaterialAvailabilityRepository.AddOrUpdate(m.MaterialId, m.UnitPrice, m.Count * -1);
                 });
 
             //base.RemoveRange(buyItems);

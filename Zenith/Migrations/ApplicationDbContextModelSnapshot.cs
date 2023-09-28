@@ -57,7 +57,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("AccountId");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
 
                     b.HasData(
                         new
@@ -110,7 +110,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Buys");
+                    b.ToTable("Buys", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.BuyItem", b =>
@@ -149,7 +149,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("BuyItems");
+                    b.ToTable("BuyItems", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Cash", b =>
@@ -193,7 +193,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Cashes");
+                    b.ToTable("Cashes", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Cheque", b =>
@@ -247,7 +247,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Cheques");
+                    b.ToTable("Cheques", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Company", b =>
@@ -304,7 +304,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Delivery", b =>
@@ -359,7 +359,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("Deliveries");
+                    b.ToTable("Deliveries", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Machine", b =>
@@ -391,7 +391,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("MachineId");
 
-                    b.ToTable("Machines");
+                    b.ToTable("Machines", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.MachineOutgo", b =>
@@ -433,7 +433,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("OutgoCategoryId");
 
-                    b.ToTable("MachineOutgoes");
+                    b.ToTable("MachineOutgoes", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Material", b =>
@@ -480,35 +480,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("MaterialId");
 
-                    b.ToTable("Materials");
-                });
-
-            modelBuilder.Entity("Zenith.Models.MaterialAvailability", b =>
-                {
-                    b.Property<long>("MaterialAvailabilityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("MaterialAvailabilityId"));
-
-                    b.Property<float>("AvailableCount")
-                        .HasColumnType("real");
-
-                    b.Property<float>("BuyPrice")
-                        .HasColumnType("real");
-
-                    b.Property<bool>("HasErrors")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("TotalBoughtCount")
-                        .HasColumnType("real");
-
-                    b.HasKey("MaterialAvailabilityId");
-
-                    b.ToTable("MaterialAvailabilities");
+                    b.ToTable("Materials", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Mixture", b =>
@@ -547,7 +519,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("MixtureId");
 
-                    b.ToTable("Mixtures");
+                    b.ToTable("Mixtures", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.MixtureItem", b =>
@@ -580,7 +552,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("MixtureId");
 
-                    b.ToTable("MixtureItems");
+                    b.ToTable("MixtureItems", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Note", b =>
@@ -612,7 +584,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("NoteId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("Notes", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Outgo", b =>
@@ -649,7 +621,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("OutgoCategoryId");
 
-                    b.ToTable("Outgoes");
+                    b.ToTable("Outgoes", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.OutgoCategory", b =>
@@ -678,7 +650,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("OutgoCategoryId");
 
-                    b.ToTable("OutgoCategories");
+                    b.ToTable("OutgoCategories", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Person", b =>
@@ -736,7 +708,7 @@ namespace Zenith.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.PersonnelAbsence", b =>
@@ -765,7 +737,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("PersonnelAbsence");
+                    b.ToTable("PersonnelAbsence", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.SalaryPayment", b =>
@@ -800,7 +772,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("SalaryPayments");
+                    b.ToTable("SalaryPayments", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Sale", b =>
@@ -829,7 +801,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.SaleItem", b =>
@@ -868,7 +840,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("SaleItems");
+                    b.ToTable("SaleItems", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Site", b =>
@@ -904,7 +876,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Sites");
+                    b.ToTable("Sites", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.User", b =>
@@ -926,13 +898,13 @@ namespace Zenith.Migrations
 
                     b.HasKey("Username");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
                         {
                             Username = "admin",
-                            CreateDateTime = new DateTime(2023, 9, 26, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateDateTime = new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Local),
                             HasErrors = false,
                             HashedPassword = "b9bcda38c0de9edcda3b12bc5d91de5959e2de031a1fcc13a3860d9c39eeb3b2"
                         });
@@ -964,7 +936,7 @@ namespace Zenith.Migrations
 
                     b.HasIndex("Username");
 
-                    b.ToTable("UserPermissions");
+                    b.ToTable("UserPermissions", (string)null);
                 });
 
             modelBuilder.Entity("Zenith.Models.Buy", b =>
