@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith.Models;
@@ -11,13 +12,28 @@ namespace Zenith.Repositories
     public class SaleItemRepository : Repository<SaleItem>
     {
         MaterialRepository MaterialRepository = new MaterialRepository();
-        MaterialAvailabilityRepository MaterialAvailabilityRepository = new MaterialAvailabilityRepository();
+        MixtureRepository MixtureRepository = new MixtureRepository();
 
         public override void AddRange(IEnumerable<SaleItem> saleItems)
         {
-            base.AddRange(saleItems);
+            var mixtureItemsToAdd = saleItems.Where(si => si.Material.IsMixed)
+                .SelectMany(si => MixtureRepository
+                    .GetItemsByRelatedMaterial(si.Material.MaterialId)
+                    .Select(mi => new SaleItem
+                    {
+                        SaleId = si.SaleId,
+                        MaterialId = mi.MaterialId,
+                        UnitPrice = si.UnitPrice,
+                        SaleCountUnit = si.SaleCountUnit,
+                        MixtureMaterialId = si.MaterialId,
+                        Count = si.Count * mi.Percent / 100f
+                    }));
 
-            saleItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
+            var finalItems = saleItems.Union(mixtureItemsToAdd);
+
+            base.AddRange(finalItems);
+
+            finalItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
                 .ToList()
                 .ForEach(m =>
                 {
@@ -31,10 +47,46 @@ namespace Zenith.Repositories
             MaterialRepository.UpdateAmount(preSaleItem.MaterialId, preSaleItem.Count);
 
             base.Update(saleItem, saleItem.SaleItemId);
-            
+
             MaterialRepository.UpdateAmount(saleItem.MaterialId, saleItem.Count * -1);
 
+            var relatedMixtureItems = saleItem.Material.IsMixed ?
+                MixtureRepository.GetItemsByRelatedMaterial(saleItem.MaterialId) :
+                Enumerable.Empty<MixtureItem>();
+
+            var mixedItems = _context.SaleItems
+                .Where(si => si.SaleId == saleItem.SaleId && si.MixtureMaterialId == saleItem.MaterialId)
+                .AsEnumerable()
+                .Select(si =>
+                {
+                    var preCount = si.Count;
+
+                    si.Count = saleItem.Count / 100f *
+                        (relatedMixtureItems.FirstOrDefault(mi => mi.MaterialId == si.MaterialId) ?? new MixtureItem()).Percent;
+
+                    MaterialRepository.UpdateAmount(si.MaterialId, -1 * (si.Count - preCount));
+
+                    return si;
+                })
+                .ToList();
+
+            _context.SaveChanges();
+
             return saleItem;
+        }
+
+        public void RemoveRangeAfterUpdate(IEnumerable<SaleItem> saleItems)
+        {
+            saleItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
+                .ToList()
+                .ForEach(m =>
+                {
+                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count);
+                });
+
+            base.RemoveRange(saleItems.SelectMany(saleItem => _context.SaleItems
+                .Where(si => si.SaleId == saleItem.SaleId && si.MixtureMaterialId == saleItem.MaterialId)));
+            base.RemoveRange(saleItems);
         }
 
         public override void RemoveRange(IEnumerable<SaleItem> saleItems)

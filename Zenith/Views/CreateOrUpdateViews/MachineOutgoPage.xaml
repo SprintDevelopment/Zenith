@@ -28,7 +28,7 @@
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
-            <StackPanel Grid.Row="1">
+            <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <ComboBox x:Name="outgoCategoryComboBox" SelectedValue="{Binding PageModel.OutgoCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="OutgoCategoryId" Tag="{DynamicResource OutgoPage.OutgoCategoryComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource MachineOutgoPage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource MachineOutgoPage.RelatedMachineComboBoxTitle}"/>

@@ -46,11 +46,14 @@ namespace Zenith.Repositories
             //_context.Set<Material>()
             //    .UpdateRange(mixtureItems.Select(mi => mi.Material));
 
-            material.AvailableAmount += addedAmount;
-            _context.Set<Material>()
-                .Update(material);
+            if (!material.IsMixed)
+            {
+                material.AvailableAmount += addedAmount;
+                _context.Set<Material>()
+                    .Update(material);
 
-            _context.SaveChanges();
+                _context.SaveChanges();
+            }
         }
     }
 }

@@ -55,12 +55,23 @@ namespace Zenith.Models
         [Reactive]
         public virtual ObservableCollection<Delivery> Deliveries { get; set; } = new ObservableCollection<Delivery>();
 
+        [Reactive]
+        public int? MixtureMaterialId { get; set; }
+
+        [NotMapped]
+        [Reactive]
+        public bool IsFormAMixture { get; private set; }
+
         [NotMapped]
         [Reactive]
         public bool IsDeliveriesVisible { get; set; }
 
         public SaleItem()
         {
+            this.WhenAnyValue(m => m.MixtureMaterialId)
+                .Select(x => x is not null)
+                .BindTo(this, m => m.IsFormAMixture);
+
             this.WhenAnyValue(m => m.UnitPrice, m => m.Count)
                 .Select(x => x.Item1 * x.Item2)
                 .BindTo(this, m => m.TotalPrice);

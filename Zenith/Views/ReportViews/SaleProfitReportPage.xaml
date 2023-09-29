@@ -28,9 +28,6 @@
                 <ToggleButton Width="50" BorderThickness="1,0,0,0" IsChecked="{Binding IsInSearchMode}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </ToggleButton>
-                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding PrintCommand}">
-                    <Image Source="/Zenith;component/Resources/Images/Common/print.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
             </StackPanel>
             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeThickness="0.5"/>
         </Grid>
@@ -95,7 +92,7 @@
                             <TextBlock HorizontalAlignment="Center" Text="{Binding SoldCount, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding BoughtPrice, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding SoldPrice, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Profit, StringFormat={}{0:n2}}" Foreground="{Binding ProfitState, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Profit, StringFormat={}{0:n2}}" Foreground="{Binding ProfitState, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>

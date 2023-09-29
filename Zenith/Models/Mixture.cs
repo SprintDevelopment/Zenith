@@ -55,7 +55,6 @@ namespace Zenith.Models
                 .SelectMany(items => items.ToObservableChangeSet())
                 .AutoRefresh(bi => bi.Percent)
                 .ToCollection();
-                
 
             this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name of mixture");
             this.ValidationRule(vm => vm.DisplayName, displayName => !displayName.IsNullOrWhiteSpace(), "Enter name for display in factor");

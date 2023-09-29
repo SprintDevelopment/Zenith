@@ -1,6 +1,9 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using DynamicData.Binding;
+using ReactiveUI;
 using System;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
@@ -32,7 +35,20 @@ namespace Zenith.Views.ListViews
                 CreateUpdatePage = new SalePage()
             };
 
-            this.WhenActivated(d => { listItemsControl.ItemsSource = ViewModel.ActiveList; });
+            this.WhenActivated(d =>
+            {
+                listItemsControl.ItemsSource = ViewModel.ActiveList;
+
+                //ViewModel.ActiveList
+                //    .AsObservableChangeSet()
+                //    .QueryWhenChanged()
+                //    .Throttle(TimeSpan.FromMilliseconds(250))
+                //    .ObserveOn(RxApp.MainThreadScheduler)
+                //    .Do(cs => ViewModel.SummaryItem = new Sale
+                //    {
+                //        Price = cs.Sum(i => i.Price)
+                //    }).Subscribe().DisposeWith(d);
+            });
         }
     }
 }

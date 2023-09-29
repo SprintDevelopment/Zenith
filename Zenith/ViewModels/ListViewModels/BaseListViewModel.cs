@@ -40,7 +40,6 @@ namespace Zenith.ViewModels.ListViewModels
             var nItemsSelectedStringFormat = App.MainViewModel.Language == AppLanguages.English ?
                 " , {0:n0} item(s) selected)" : " ، {0:n0} مورد انتخاب شده)";
 
-            SourceList.AddRange(Repository.All());
             void calculate()
             {
                 var itemsCount = ActiveList.Count();
@@ -66,7 +65,7 @@ namespace Zenith.ViewModels.ListViewModels
                 .Do(_ => calculate())
                 .Subscribe();
 
-            ActiveList.ObserveCollectionChanges().Do(_ => { }).Subscribe();
+            SourceList.AddRange(Repository.All());
 
             SelectAllCommand = ReactiveCommand.Create<Unit>(_ =>
             {
@@ -211,5 +210,8 @@ namespace Zenith.ViewModels.ListViewModels
         public SearchBaseDto SearchModel { get; set; }
         public BaseCreateOrUpdatePage<T> CreateUpdatePage { get; set; }
         public Repository<T> Repository { get; set; }
+
+        [Reactive]
+        public T SummaryItem { get; set; }
     }
 }

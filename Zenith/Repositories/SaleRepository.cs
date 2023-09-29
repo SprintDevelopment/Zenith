@@ -67,9 +67,12 @@ namespace Zenith.Repositories
             base.Update(sale, sale.SaleId);
 
             var oldItems = SaleItemRepository.Find(si => si.SaleId == sale.SaleId).ToList();
-            SaleItemRepository.RemoveRange(oldItems.Where(si => !sale.Items.Any(rbi => rbi.SaleItemId == si.SaleItemId)));
+            SaleItemRepository.RemoveRangeAfterUpdate(
+                oldItems.Where(si => si.MixtureMaterialId is null && !sale.Items.Any(rbi => rbi.SaleItemId == si.SaleItemId))
+                .Union(
+                    oldItems.Where(si => si.MixtureMaterialId is not null && !sale.Items.Any(rbi => rbi.MixtureMaterialId == si.MixtureMaterialId))));
 
-            sale.Items.ToList().ForEach(si =>
+            sale.Items.Where(si => si.MixtureMaterialId is null).ToList().ForEach(si =>
             {
                 if (si.SaleId == 0)
                 {
@@ -88,7 +91,7 @@ namespace Zenith.Repositories
             var workshopCash = relatedCashes.FirstOrDefault(c => c.CostCenter == CostCenters.Workshop);
             if (workshopCash is not null)
             {
-                workshopCash.Value = sale.Items.Sum(si => si.TotalPrice);
+                workshopCash.Value = sale.Items.Where(si => si.MixtureMaterialId is null).Sum(si => si.TotalPrice);
                 workshopCash.IssueDateTime = sale.DateTime;
 
                 CashRepository.Update(workshopCash, workshopCash.CashId);

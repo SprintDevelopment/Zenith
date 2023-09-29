@@ -28,7 +28,7 @@
                 <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
-            <StackPanel Grid.Row="1">
+            <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Title, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoCategoryPage.TitleTextBoxTitle}"/>
                 <!--<projUsercontrols:OutgoCategoriesTreeView x:Name="parentOutgoCategoryTreeView" Title="{DynamicResource OutgoCategoryPage.ParentOutgoCategoryComboBoxTitle}"/>-->
                 <ComboBox x:Name="costCenterComboBox" SelectedValue="{Binding PageModel.CostCenter, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource OutgoCategoryPage.CostCenterComboBoxTitle}"/>

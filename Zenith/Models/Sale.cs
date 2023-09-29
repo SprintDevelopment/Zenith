@@ -55,7 +55,7 @@ namespace Zenith.Models
             itemsObservable
                 .AutoRefresh(si => si.TotalPrice)
                 .ToCollection()
-                .Select(items => items.Sum(si => si.TotalPrice))
+                .Select(items => items.Where(si => si.MixtureMaterialId is null).Sum(si => si.TotalPrice))
                 .BindTo(this, m => m.Price);
 
             itemsObservable

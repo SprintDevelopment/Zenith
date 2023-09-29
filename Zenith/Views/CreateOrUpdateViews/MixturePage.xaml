@@ -39,7 +39,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel>
+                <StackPanel x:Name="inputControlsStackPanel">
                     <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.MixtureNameTextBoxTitle}" />
                     <baseclasses:JTextBox Text="{Binding PageModel.DisplayName, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MixturePage.DisplayNameTextBoxTitle}" />
                     <ComboBox x:Name="saleUnitComboBox" SelectedValue="{Binding PageModel.CommonSaleUnit, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MixturePage.CommonSaleUnitComboBoxTitle}"/>

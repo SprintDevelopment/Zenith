@@ -28,6 +28,13 @@ namespace Zenith.Repositories
                 .SingleOrDefault(b => b.MixtureId == intId);
         }
 
+        public IEnumerable<MixtureItem> GetItemsByRelatedMaterial(int relatedMaterialId)
+        {
+            return _context.Set<Mixture>()
+                .Include(m => m.Items).ThenInclude(mi => mi.Material)
+                .FirstOrDefault(m => m.RelatedMaterialId == relatedMaterialId).Items;
+        }
+
         public override Mixture Add(Mixture mixture) 
         {
             var newMaterial = MapperUtil.Mapper.Map<Material>(mixture);

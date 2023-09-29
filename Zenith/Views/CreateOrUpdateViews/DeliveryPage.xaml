@@ -41,28 +41,30 @@
                         </TextBlock>
                     </Grid>
                 </Border>
-                <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="SiteId" Tag="{DynamicResource DeliveryPage.SiteComboBoxTitle}"/>
+                <StackPanel x:Name="inputControlsStackPanel">
+                    <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="SiteId" Tag="{DynamicResource DeliveryPage.SiteComboBoxTitle}"/>
 
-                <Grid>
-                    <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="{DynamicResource DeliveryPage.MachineComboBoxTitle}"/>
-                    <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.InfoIsRelatedToMachine}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,64,0">
-                        <Grid>
-                            <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}}"/>
-                            <Image Source="/Zenith;component/Resources/Images/Common/unlock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                        </Grid>
-                    </ToggleButton>
-                </Grid>
+                    <Grid>
+                        <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="{DynamicResource DeliveryPage.MachineComboBoxTitle}"/>
+                        <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.InfoIsRelatedToMachine}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,64,0">
+                            <Grid>
+                                <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/unlock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                            </Grid>
+                        </ToggleButton>
+                    </Grid>
 
-                <baseclasses:JTextBox Text="{Binding PageModel.Count, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.CountTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.DeliveryFeeTextBoxTitle}" />
-                <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource DeliveryPage.DriverComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryNumberTextBoxTitle}" />
-                <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryDateTimeTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.CommentTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.Count, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.CountTextBoxTitle}" />
+                    <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, StringFormat={}{0:n2}}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Title="{DynamicResource DeliveryPage.DeliveryFeeTextBoxTitle}" />
+                    <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource DeliveryPage.DriverComboBoxTitle}"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryNumberTextBoxTitle}" />
+                    <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryDateTimeTitle}"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.CommentTextBoxTitle}" />
 
-                <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+                    <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
 
-                <Button Content="{DynamicResource DeliveryPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                    <Button Content="{DynamicResource DeliveryPage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

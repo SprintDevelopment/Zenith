@@ -488,6 +488,7 @@
     <system:String x:Key="SaleListPage.DeliveriesPriceColumnTextBlockText">Deliveries' price</system:String>
     <system:String x:Key="SaleListPage.StateColumnTextBlockText">State</system:String>
     <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
+    <system:String x:Key="SaleListPage.SummaryTotalColumnTextBlockText">Total</system:String>
 
     <!-- SALE PROFIT REPORT PAGE -->
     <system:String x:Key="SaleProfitReportPage.YearColumnTextBlockText">Year</system:String>

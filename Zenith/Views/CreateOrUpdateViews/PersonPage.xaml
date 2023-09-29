@@ -33,7 +33,7 @@
             </Grid>
             <Rectangle Fill="#FFF8F8F8" HorizontalAlignment="Right" Grid.Row="1" Width="1"/>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

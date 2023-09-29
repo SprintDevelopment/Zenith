@@ -15,6 +15,9 @@ using ReactiveUI;
 using System.Windows.Shapes;
 using Zenith.Assets.UI.Helpers;
 using Zenith.ViewModels.ListViewModels;
+using System.Reactive.Linq;
+using System.Reactive;
+using System.Reactive.Disposables;
 
 namespace Zenith.Views.CreateOrUpdateViews
 {
@@ -40,6 +43,14 @@ namespace Zenith.Views.CreateOrUpdateViews
 
                 if(!((Grid)Content).Children.OfType<Rectangle>().Any(r => r.Name == "modalBackRect"))
                     ((Grid)Content).Children.Insert(0, modalBackRect);
+
+                var inputControlsStackPanel = (StackPanel)FindName("inputControlsStackPanel");
+
+                Observable.Range(0, 1).Select(_ => Unit.Default)
+                    .Merge(ViewModel.CreateOrUpdateCommand)
+                    .Select(_ => inputControlsStackPanel.Children[0] is Grid g ? g.Children[0] : inputControlsStackPanel.Children[0])
+                    .Do(control => control.Focus())
+                    .Subscribe().DisposeWith(d);
             });
 
             //WindowPreviewKeyDownEventHandler = (s, e) => { CreateUpdateBasePage_PreviewKeyDown(s, e); };
