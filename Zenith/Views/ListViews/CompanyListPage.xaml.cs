@@ -14,6 +14,9 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
+using DynamicData.Binding;
+using System.Reactive.Disposables;
+using DynamicData;
 
 namespace Zenith.Views.ListViews
 {
@@ -27,20 +30,30 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new CompanySearchModel();
 
-            IObservable<Func<Company, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name, n => n.OnlyForRefreshAfterUpdate)
-                .Select(x => x.Item1)
-                //.Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(name => new Func<Company, bool>(p => name.IsNullOrWhiteSpace() || p.Name.Contains(name)));
+            IObservable<Func<Company, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
+                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
+                .Select(s => new Func<Company, bool>(c =>
+                    (s.Name.IsNullOrWhiteSpace() || c.Name.Contains(s.Name))));
 
             ViewModel = new BaseListViewModel<Company>(new CompanyRepository(), searchModel, dynamicFilter, PermissionTypes.Companies)
             {
                 CreateUpdatePage = new CompanyPage()
             };
 
-            this.WhenActivated(d => 
+            this.WhenActivated(d =>
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
+
+                ViewModel.SummaryItem = new Company();
+                Observable.FromEventPattern(ViewModel.ActiveList, nameof(ViewModel.ActiveList.CollectionChanged))
+                    .Throttle(TimeSpan.FromMicroseconds(500))
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Do(_ =>
+                    {
+                        ViewModel.SummaryItem.CreditValue = ViewModel.ActiveList.Sum(i => i.CreditValue);
+                    }).Subscribe().DisposeWith(d);
             });
         }
     }

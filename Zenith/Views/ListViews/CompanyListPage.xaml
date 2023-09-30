@@ -37,10 +37,11 @@
             </StackPanel>
             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeThickness="0.5"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="0,1,0,4" Background="#FFFDFDFD">
+        <Grid Grid.Row="1" Margin="0,1,0,0" Background="#FFFDFDFD">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition />
+                <RowDefinition Height="32"/>
             </Grid.RowDefinitions>
             <Grid Background="White" Height="40" >
                 <Grid.ColumnDefinitions>
@@ -103,11 +104,25 @@
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Fax}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding CreditValue, StringFormat={}{0:n2}}" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
-                            <!---->
                         </baseclasses:JGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Grid Grid.Row="2" Background="WhiteSmoke">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Stroke="Silver" VerticalAlignment="Top" Grid.ColumnSpan="8" StrokeThickness="1"/>
+                <TextBlock HorizontalAlignment="Left" Text="TOTAL" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="7" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.CreditValue, StringFormat={}{0:n2}}" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
+            </Grid>
         </Grid>
     </Grid>
 </local:BaseListPage>
