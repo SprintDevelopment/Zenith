@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using DynamicData.Binding;
+using ReactiveUI;
 using System;
 using System.Linq;
 using System.Reactive.Linq;
@@ -23,13 +24,13 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new NoteSearchModel();
 
-            IObservable<Func<Note, bool>> dynamicFilter = searchModel.WhenAnyValue(n => n.Subject, n => n.NotifyType, n => n.OnlyForRefreshAfterUpdate)
-                .Select(x => new { subject = x.Item1, notifyType = x.Item2})
-                .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(x => new Func<Note, bool>(p => 
-                    (x.subject.IsNullOrWhiteSpace() || p.Subject.Contains(x.subject)) &&
-                    (x.notifyType == NotifyTypes.DontCare || p.NotifyType == x.notifyType)));
+            IObservable<Func<Note, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
+                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
+                .Select(s => new Func<Note, bool>(n => 
+                    (s.Subject.IsNullOrWhiteSpace() || n.Subject.Contains(s.Subject)) &&
+                    (s.NotifyType == NotifyTypes.DontCare || n.NotifyType == s.NotifyType)));
 
             ViewModel = new BaseListViewModel<Note>(new NoteRepository(), searchModel, dynamicFilter, PermissionTypes.Notes)
             {

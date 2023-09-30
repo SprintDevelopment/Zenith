@@ -13,11 +13,11 @@ namespace Zenith.Models.SearchModels
 {
     public class NoteSearchModel : SearchBaseDto
     {
-        [Search(Title = "موضوع یادداشت")]
+        [Search]
         [Reactive]
         public string Subject { get; set; }
 
-        [Search(Title = "نوع یادآوری", ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(NotifyTypes))]
+        [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(NotifyTypes))]
         [Reactive]
         public NotifyTypes NotifyType { get; set; } = NotifyTypes.DontCare;
     }

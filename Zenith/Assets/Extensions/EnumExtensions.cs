@@ -27,7 +27,7 @@ namespace Zenith.Assets.Extensions
 
         public static string GetDescription(this Enum enumValue)
         {
-            return (string)App.Current.Resources[$"{enumValue.GetType().Name}.{enumValue}"];
+            return ((string)App.Current.Resources[$"{enumValue.GetType().Name}.{enumValue}"]).Replace("_", "");
         }
     }
 }

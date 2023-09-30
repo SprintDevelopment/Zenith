@@ -224,6 +224,10 @@
     <system:String x:Key="BuyListPage.StateColumnTextBlockText">State</system:String>
     <system:String x:Key="BuyListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
 
+    <!-- BUY SEARCH CONTROL -->
+    <system:String x:Key="BuySearchModel.SearchBarTitle">Search in buys</system:String>
+    <system:String x:Key="BuySearchModel.CompanyId">Company name</system:String>
+
     <!-- CASH PAGE -->
     <system:String x:Key="CashPage.TransferDirectionComboBoxTitle">Transfer direction</system:String>
     <system:String x:Key="CashPage.CompanyComboBoxTitle">Company</system:String>
@@ -238,6 +242,13 @@
     <system:String x:Key="CashListPage.ValueColumnTextBlockText">Value</system:String>
     <system:String x:Key="CashListPage.IssueDateColumnTextBlockText">Issue date</system:String>
     <system:String x:Key="CashListPage.MoneyTransactionTypeColumnTextBlockText">Type</system:String>
+
+    <!-- CASH SEARCH CONTROL -->
+    <system:String x:Key="CashSearchModel.SearchBarTitle">Search in cashes</system:String>
+    <system:String x:Key="CashSearchModel.TransferDirection">Transfer direction</system:String>
+    <system:String x:Key="CashSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="CashSearchModel.MoneyTransactionType">Money transfer type</system:String>
+    <system:String x:Key="CashSearchModel.CostCenter">Cost center</system:String>
 
     <!-- CHEQUE PAGE -->
     <system:String x:Key="ChequePage.TransferDirectionComboBoxTitle">Transfer direction</system:String>
@@ -258,6 +269,13 @@
     <system:String x:Key="ChequeListPage.ChequeDateColumnTextBlockText">Cheque date</system:String>
     <system:String x:Key="ChequeListPage.ChequeStateColumnTextBlockText">Cheque state</system:String>
 
+    <!-- BUY SEARCH CONTROL -->
+    <system:String x:Key="ChequeSearchModel.SearchBarTitle">Search in cashes</system:String>
+    <system:String x:Key="ChequeSearchModel.TransferDirection">Transfer direction</system:String>
+    <system:String x:Key="ChequeSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="ChequeSearchModel.MoneyTransactionType">Money transfer type</system:String>
+    <system:String x:Key="ChequeSearchModel.CostCenter">Cost center</system:String>
+
     <!-- COMPANY PAGE -->
     <system:String x:Key="CompanyPage.NameTextBoxTitle">Company name</system:String>
     <system:String x:Key="CompanyPage.TRNTextBoxTitle">Tax registration number (TRN)</system:String>
@@ -276,6 +294,10 @@
     <system:String x:Key="CompanyListPage.TelColumnTextBlockText">Tel</system:String>
     <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">Fax</system:String>
     <system:String x:Key="CompanyListPage.CreditValueColumnTextBlockText">Credit</system:String>
+    
+    <!-- COMPANY SEARCH CONTROL -->
+    <system:String x:Key="CompanySearchModel.SearchBarTitle">Search in companies</system:String>
+    <system:String x:Key="CompanySearchModel.Name">Company name</system:String>
 
     <!-- COMPANY AGGREGATE REPORT PAGE -->
     <system:String x:Key="CompanyAggregateReportPage.CompanyNameColumnTextBlockText">Company name</system:String>
@@ -343,6 +365,12 @@
     <system:String x:Key="MachineOutgoListPage.RelatedMachineColumnTextBlockText">Related machine</system:String>
     <system:String x:Key="MachineOutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
 
+    <!-- MACHINE OUTGO SEARCH CONTROL -->
+    <system:String x:Key="MachineOutgoSearchModel.SearchBarTitle">Search in machine outgoes</system:String>
+    <system:String x:Key="MachineOutgoSearchModel.MachineId">Machine name</system:String>
+    <system:String x:Key="MachineOutgoSearchModel.OutgoCategoryId">Outgo category</system:String>
+    <system:String x:Key="MachineOutgoSearchModel.CompanyId">Company name</system:String>
+
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">Material name</system:String>
     <system:String x:Key="MaterialPage.MetersPerTonTextBoxTitle">Meters per ton</system:String>
@@ -362,6 +390,10 @@
     <system:String x:Key="MaterialListPage.BuyPriceColumnTextBlockText">Buy price</system:String>
     <system:String x:Key="MaterialListPage.SalePriceColumnTextBlockText">Sale price</system:String>
     
+    <!-- MATERIAL SEARCH CONTROL -->
+    <system:String x:Key="MaterialSearchModel.SearchBarTitle">Search in materials</system:String>
+    <system:String x:Key="MaterialSearchModel.Name">Material name</system:String>
+
     <!-- MIXTURE PAGE -->
     <system:String x:Key="MixturePage.MixtureNameTextBoxTitle">Mixture name</system:String>
     <system:String x:Key="MixturePage.DisplayNameTextBoxTitle">Display name (to use in factor)</system:String>
@@ -391,6 +423,11 @@
     <system:String x:Key="NoteListPage.ReminderTypeColumnTextBlockText">Remider type</system:String>
     <system:String x:Key="NoteListPage.ReminderDateTimeColumnTextBlockText">Reminder date time</system:String>
 
+    <!-- NOTE SEARCH CONTROL -->
+    <system:String x:Key="NoteSearchModel.SearchBarTitle">Search in notes</system:String>
+    <system:String x:Key="NoteSearchModel.Subject">Subject</system:String>
+    <system:String x:Key="NoteSearchModel.NotifyType">Notify type</system:String>
+
     <!-- OUTGO PAGE -->
     <system:String x:Key="OutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
@@ -405,7 +442,12 @@
     <system:String x:Key="OutgoListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
     <system:String x:Key="OutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
     <system:String x:Key="OutgoListPage.CommentColumnTextBlockText">Comment</system:String>
-    
+
+    <!-- OUTGO SEARCH CONTROL -->
+    <system:String x:Key="OutgoSearchModel.SearchBarTitle">Search in outgoes</system:String>
+    <system:String x:Key="OutgoSearchModel.OutgoCategoryId">Outgo category</system:String>
+    <system:String x:Key="OutgoSearchModel.CompanyId">Company name</system:String>
+
     <!-- OUTGO CATEGORY PAGE -->
     <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">Category title</system:String>
     <system:String x:Key="OutgoCategoryPage.ParentOutgoCategoryComboBoxTitle">Parent category</system:String>
@@ -439,7 +481,13 @@
     <system:String x:Key="PersonListPage.MobileColumnTextBlockText">Mobile</system:String>
     <system:String x:Key="PersonListPage.TelColumnTextBlockText">Tel</system:String>
     <system:String x:Key="PersonListPage.RoleColumnTextBlockText">Role</system:String>
-    
+
+    <!-- PERSON SEARCH CONTROL -->
+    <system:String x:Key="PersonSearchModel.SearchBarTitle">Search in personnel</system:String>
+    <system:String x:Key="PersonSearchModel.Name">Personnel name</system:String>
+    <system:String x:Key="PersonSearchModel.Job">Job</system:String>
+    <system:String x:Key="PersonSearchModel.CostCenter">Cost center</system:String>
+
     <!-- PERSON ABSENCE PAGE -->
     <system:String x:Key="PersonAbsencePage.PersonnelComboBoxTitle">Personnel</system:String>
     <system:String x:Key="PersonAbsencePage.DateDateTimeTitle">Date</system:String>
@@ -462,7 +510,12 @@
     <system:String x:Key="SalaryPaymentListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="SalaryPaymentListPage.DateTimeColumnTextBlockText">Payment date time</system:String>
     <system:String x:Key="SalaryPaymentListPage.CommentColumnTextBlockText">Comment</system:String>
-    
+
+    <!-- SALARY PAYMENT SEARCH CONTROL -->
+    <system:String x:Key="SalaryPaymentSearchModel.SearchBarTitle">Search in salary payments</system:String>
+    <system:String x:Key="SalaryPaymentSearchModel.PersonId">Personnel name</system:String>
+    <system:String x:Key="SalaryPaymentSearchModel.CostCenter">Cost center</system:String>
+
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>
     <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
@@ -490,6 +543,10 @@
     <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
     <system:String x:Key="SaleListPage.SummaryTotalColumnTextBlockText">Total</system:String>
 
+    <!-- SALE SEARCH CONTROL -->
+    <system:String x:Key="SaleSearchModel.SearchBarTitle">Search in sales</system:String>
+    <system:String x:Key="SaleSearchModel.CompanyId">Company name</system:String>
+
     <!-- SALE PROFIT REPORT PAGE -->
     <system:String x:Key="SaleProfitReportPage.YearColumnTextBlockText">Year</system:String>
     <system:String x:Key="SaleProfitReportPage.MonthColumnTextBlockText">Month</system:String>
@@ -513,6 +570,11 @@
     <system:String x:Key="SiteListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
     <system:String x:Key="SiteListPage.NameColumnTextBlockText">Site name</system:String>
     <system:String x:Key="SiteListPage.AddressColumnTextBlockText">Address</system:String>
+
+    <!-- SITE SEARCH CONTROL -->
+    <system:String x:Key="SiteSearchModel.SearchBarTitle">Search in company sites</system:String>
+    <system:String x:Key="SiteSearchModel.Name">Site name</system:String>
+    <system:String x:Key="SiteSearchModel.CompanyId">Company name</system:String>
 
     <!-- USER PAGE -->
     <system:String x:Key="UserPage.UsernameTextBoxTitle">Username</system:String>

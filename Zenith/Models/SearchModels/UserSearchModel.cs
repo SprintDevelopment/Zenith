@@ -6,7 +6,7 @@ namespace Zenith.Models.SearchModels
 {
     public class UserSearchModel : SearchBaseDto
     {
-        [Search(Title = "نام کاربری")]
+        [Search]
         [Reactive]
         public string Username { get; set; }
     }

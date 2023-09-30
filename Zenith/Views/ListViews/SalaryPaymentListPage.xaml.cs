@@ -14,6 +14,7 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
+using DynamicData.Binding;
 
 namespace Zenith.Views.ListViews
 {
@@ -27,9 +28,13 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new SalaryPaymentSearchModel();
 
-            IObservable<Func<SalaryPayment, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
+            IObservable<Func<SalaryPayment, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new { Title = s }).Select(s => new Func<SalaryPayment, bool>(p => true));
+                .Select(s => new Func<SalaryPayment, bool>(sp =>
+                    (s.PersonId == 0 || sp.PersonId == s.PersonId) &&
+                    (s.CostCenter == CostCenters.DontCare || sp.CostCenter == s.CostCenter)));
 
             ViewModel = new BaseListViewModel<SalaryPayment>(new SalaryPaymentRepository(), searchModel, dynamicFilter, PermissionTypes.SalaryPayments)
             {

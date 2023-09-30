@@ -14,6 +14,7 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
+using DynamicData.Binding;
 
 namespace Zenith.Views.ListViews
 {
@@ -27,11 +28,14 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new PersonSearchModel();
 
-            IObservable<Func<Person, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Name, n => n.OnlyForRefreshAfterUpdate)
-                .Select(x => x.Item1)
-                .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(subject => new Func<Person, bool>(p => subject.IsNullOrWhiteSpace() || p.FullName.Contains(subject)));
+            IObservable<Func<Person, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
+                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
+                .Select(s => new Func<Person, bool>(p => 
+                    (s.Name.IsNullOrWhiteSpace() || p.FullName.Contains(s.Name)) &&
+                    (s.Job == Jobs.DontCare || p.Job == s.Job) &&
+                    (s.CostCenter == CostCenters.DontCare || p.CostCenter == s.CostCenter)));
 
             ViewModel = new BaseListViewModel<Person>(new PersonRepository(), searchModel, dynamicFilter, PermissionTypes.Personnel)
             {

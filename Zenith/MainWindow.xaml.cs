@@ -115,7 +115,13 @@ namespace Zenith
                                 .Do(isMenuVisible =>
                                 {
                                     if (isMenuVisible)
+                                    {
+                                        ViewModel.SwapIndicatorZeroNoneOneMenuTwoSearch = ViewModel.IsSearchVisible ? 2 : 0;
                                         ViewModel.IsSearchVisible = false;
+                                    }
+                                    else
+                                        ViewModel.IsSearchVisible = ViewModel.SwapIndicatorZeroNoneOneMenuTwoSearch > 0;
+
                                     var storyboard = Resources[isMenuVisible ? "ShowMenuStoryboard" : "HideMenuStoryboard"] as Storyboard;
                                     storyboard.Begin();
                                 }).Subscribe().DisposeWith(disposable);
@@ -124,7 +130,14 @@ namespace Zenith
                                 .Do(isSearchVisible =>
                                 {
                                     if (isSearchVisible)
+                                    {
+                                        ViewModel.SwapIndicatorZeroNoneOneMenuTwoSearch = ViewModel.IsMenuVisible ? 1 : 0;
                                         ViewModel.IsMenuVisible = false;
+                                        ((StackPanel)searchUserControl.FindName("SearchMemberStackPanel")).Children.OfType<Control>().FirstOrDefault()?.Focus();
+                                    }
+                                    else
+                                        ViewModel.IsMenuVisible = ViewModel.SwapIndicatorZeroNoneOneMenuTwoSearch > 0;
+
                                     var storyboard = Resources[isSearchVisible ? "ShowSearchStoryboard" : "HideSearchStoryboard"] as Storyboard;
                                     storyboard.Begin();
                                 }).Subscribe().DisposeWith(disposable);

@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using DynamicData.Binding;
+using ReactiveUI;
 using System;
 using System.Linq;
 using System.Reactive.Linq;
@@ -23,10 +24,14 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new MachineOutgoSearchModel();
 
-            IObservable<Func<MachineOutgo, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
-                .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(subject => new Func<MachineOutgo, bool>(oc => true));
+            IObservable<Func<MachineOutgo, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
+                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
+                .Select(s => new Func<MachineOutgo, bool>(mo =>
+                    (s.MachineId == 0 || mo.MachineId == s.MachineId) &&
+                    (s.OutgoCategoryId == 0 || mo.OutgoCategoryId == s.OutgoCategoryId) &&
+                    (s.CompanyId == 0 || mo.CompanyId == s.CompanyId)));
 
             ViewModel = new BaseListViewModel<MachineOutgo>(new MachineOutgoRepository(), searchModel, dynamicFilter, PermissionTypes.MachineOutgoes)
             {

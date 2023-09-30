@@ -194,6 +194,9 @@ namespace Zenith.ViewModels
         public bool IsSearchVisible { get; set; }
 
         [Reactive]
+        public int SwapIndicatorZeroNoneOneMenuTwoSearch { get; set; }
+
+        [Reactive]
         public bool IsLocked { get; set; }
 
         [Reactive]

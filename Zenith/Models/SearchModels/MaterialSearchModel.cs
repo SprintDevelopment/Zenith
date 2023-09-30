@@ -6,5 +6,8 @@ namespace Zenith.Models.SearchModels
 {
     public class MaterialSearchModel : SearchBaseDto
     {
+        [Search]
+        [Reactive]
+        public string Name { get; set; }
     }
 }

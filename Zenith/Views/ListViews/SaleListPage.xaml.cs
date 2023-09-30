@@ -25,10 +25,12 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new SaleSearchModel();
 
-            IObservable<Func<Sale, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
-                .Throttle(TimeSpan.FromMilliseconds(250))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(subject => new Func<Sale, bool>(oc => true));
+            IObservable<Func<Sale, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
+                .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
+                .Select(s => new Func<Sale, bool>(sale =>
+                    (s.CompanyId == 0 || sale.CompanyId == s.CompanyId)));
 
             ViewModel = new SaleListViewModel(new SaleRepository(), searchModel, dynamicFilter)
             {

@@ -8,7 +8,7 @@ namespace Zenith.Models.SearchModels
 {
     public class BuySearchModel : SearchBaseDto
     {
-        [Search(Title = "شرکت فروشنده", ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(CompanyRepository))]
+        [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(CompanyRepository))]
         [Reactive]
         public short CompanyId { get; set; }
     }

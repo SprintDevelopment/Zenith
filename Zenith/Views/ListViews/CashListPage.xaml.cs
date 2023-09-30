@@ -14,6 +14,7 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
+using DynamicData.Binding;
 
 namespace Zenith.Views.ListViews
 {
@@ -27,16 +28,23 @@ namespace Zenith.Views.ListViews
             InitializeComponent();
             var searchModel = new CashSearchModel();
 
-            IObservable<Func<Cash, bool>> dynamicFilter = searchModel.WhenAnyValue(s => s.Title, n => n.OnlyForRefreshAfterUpdate)
+            IObservable<Func<Cash, bool>> dynamicFilter = searchModel
+                .WhenAnyPropertyChanged()
+                .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new { Title = s }).Select(s => new Func<Cash, bool>(c => c.Value > 0));
+                .Select(s => new Func<Cash, bool>(c => 
+                    (c.Value > 0) && 
+                    (s.TransferDirection == TransferDirections.DontCare || c.TransferDirection == s.TransferDirection) &&
+                    (s.CompanyId == 0 || c.CompanyId == s.CompanyId) &&
+                    (s.MoneyTransactionType == MoneyTransactionTypes.DontCare || c.MoneyTransactionType == s.MoneyTransactionType) &&
+                    (s.CostCenter == CostCenters.DontCare || c.CostCenter == s.CostCenter)));
 
             ViewModel = new CashListViewModel(new CashRepository(), searchModel, dynamicFilter)
             {
                 CreateUpdatePage = new CashPage()
             };
 
-            this.WhenActivated(d => 
+            this.WhenActivated(d =>
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
             });

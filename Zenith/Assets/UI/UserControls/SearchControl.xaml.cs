@@ -21,10 +21,13 @@ namespace Zenith.Assets.UI.UserControls
         public SearchControl()
         {
             InitializeComponent();
+
+            closeButton.Click += (s, e) => { App.MainViewModel.IsSearchVisible = false; };
         }
+
         public void Initialize(SearchBaseDto model)
         {
-            TitleTextBlock.Text = model.Title;
+            TitleTextBlock.Text = (string)App.Current.Resources[$"{model.GetType().Name}.SearchBarTitle"];
             SearchMemberStackPanel.Children.Clear();
 
             var SearchProperties = model.GetType().GetProperties().Where(p => p.GetCustomAttribute(typeof(SearchAttribute), false) != null).ToList();
@@ -39,7 +42,7 @@ namespace Zenith.Assets.UI.UserControls
                     {
                         case SearchItemControlTypes.TextBox:
                             {
-                                var newTextBox = UiGenerator.GetTextBox(searchAttribute.Title);
+                                var newTextBox = UiGenerator.GetTextBox($"{model.GetType().Name}.{property.Name}");
                                 var binding = new Binding(property.Name);
                                 binding.Source = model;
                                 binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
@@ -50,7 +53,7 @@ namespace Zenith.Assets.UI.UserControls
 
                         case SearchItemControlTypes.ComboBox:
                             {
-                                var newComboBox = UiGenerator.GetComboBox(searchAttribute.Title);
+                                var newComboBox = UiGenerator.GetComboBox($"{model.GetType().Name}.{property.Name}");
 
                                 if (searchAttribute.ValueSourceType.IsEnum)
                                 {
