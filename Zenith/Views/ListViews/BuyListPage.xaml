@@ -109,8 +109,10 @@
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Price, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="6" StrokeThickness="1"/>
+                <TextBlock HorizontalAlignment="Center" Text="*" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="1" />
+                <TextBlock HorizontalAlignment="Left" Text="Total" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="2" />
+                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Price, StringFormat={}{0:n2}}" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
             </Grid>
         </Grid>
     </Grid>

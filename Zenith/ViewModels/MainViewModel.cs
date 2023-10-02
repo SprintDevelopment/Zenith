@@ -1,10 +1,12 @@
 ﻿using DynamicData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -101,32 +103,48 @@ namespace Zenith.ViewModels
 
             //ChangeLanguageCommand = ReactiveCommand.Create<Unit>(_ => Language = Language == AppLanguages.English ? AppLanguages.Persian : AppLanguages.English);
 
-            BackupCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
-            {
-                var backupResult = DatabaseUtil.Backup(@"D:\Backups\");
-                _alerts.Add(new AlertViewModel
-                {
-                    Guid = new Guid(),
-                    Title = backupResult.ResultTitle,
-                    Description = backupResult.ResultDescription,
-                    DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
-                    ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
-                        "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
-                    ActionCommand = ReactiveCommand.Create<Unit>(_ =>
+            BackupCommand = ReactiveCommand.CreateFromObservable<Unit>(() =>
+                Observable.Using(() => new CommonOpenFileDialog() { IsFolderPicker = true, Title = "Select backup folder ..." },
+                                                    ofd => ofd.ShowDialog() != CommonFileDialogResult.Ok
+                                                        ? Observable.Empty<string>()
+                                                        : Observable.Return(ofd.FileName))
+                    .SubscribeOn(RxApp.MainThreadScheduler)
+                    .WhereNotNull()
+                    .ObserveOn(RxApp.TaskpoolScheduler)
+                    .Select(filePath =>
                     {
-                        if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
-                            Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
-                        else
-                            Process.Start("notepad.exe", @"C:\file.txt");
+                        var backupResult = DatabaseUtil.Backup(filePath);
+                        _alerts.Add(new AlertViewModel
+                        {
+                            Guid = new Guid(),
+                            Title = backupResult.ResultTitle,
+                            Description = backupResult.ResultDescription,
+                            DialogType = backupResult.OperationResultType == OperationResultTypes.Succeeded ? DialogTypes.Success : DialogTypes.Danger,
+                            ActionContent = backupResult.OperationResultType == OperationResultTypes.Succeeded ?
+                                "مشاهده فایل پشتیبان" : "مشاهده فایل لاگ برنامه",
+                            ActionCommand = ReactiveCommand.Create<Unit>(_ =>
+                            {
+                                if (backupResult.OperationResultType == OperationResultTypes.Succeeded)
+                                    Process.Start("explorer.exe", $"/select, \"{backupResult.UsefulParameter}\"");
+                                else
+                                    Process.Start("notepad.exe", @"C:\file.txt");
+                            })
+                        });
+                        return Unit.Default;
                     })
-                });
-            });
+            );
 
-            RestoreCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
-            {
-                var restoreResult = DatabaseUtil.Restore(@"D:\Backups\");
-                if (restoreResult is not null)
+            RestoreCommand = ReactiveCommand.CreateFromObservable<Unit>(() =>
+            Observable.Using(() => new CommonOpenFileDialog() { Title = "Select backup file ..." },
+                ofd => ofd.ShowDialog() != CommonFileDialogResult.Ok
+                    ? Observable.Empty<string>()
+                    : Observable.Return(ofd.FileName))
+                .SubscribeOn(RxApp.MainThreadScheduler)
+                .WhereNotNull()
+                .ObserveOn(RxApp.TaskpoolScheduler)
+                .Select(fileName =>
                 {
+                    var restoreResult = DatabaseUtil.Restore(fileName);
                     _alerts.Add(new AlertViewModel
                     {
                         Guid = new Guid(),
@@ -137,8 +155,10 @@ namespace Zenith.ViewModels
                         ActionCommand = restoreResult.OperationResultType == OperationResultTypes.Succeeded ?
                             null : ReactiveCommand.Create<Unit>(_ => { Process.Start("notepad.exe", @"C:\file.txt"); })
                     });
-                }
-            });
+
+                    return Unit.Default;
+                })
+            );
 
             CreateDatabaseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ => new DbContextFactory().CreateDbContext(null).Database.Migrate());
 

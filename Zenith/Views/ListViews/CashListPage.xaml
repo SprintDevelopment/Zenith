@@ -44,6 +44,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition />
+                <RowDefinition Height="32"/>
             </Grid.RowDefinitions>
             <Grid Background="White" Height="40" >
                 <Grid.ColumnDefinitions>
@@ -60,13 +61,13 @@
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.CompanyNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.TransferDirectionColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource CashListPage.ValueColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.IssueDateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.MoneyTransactionTypeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.IssueDateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.MoneyTransactionTypeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource CashListPage.TransferDirectionColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource CashListPage.ValueColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
             </Grid>
-            
+
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" >
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -97,16 +98,32 @@
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding TransferDirection, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:TransferDirections}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Foreground="{Binding TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding IssueDateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding MoneyTransactionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:MoneyTransactionTypes}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding IssueDateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding MoneyTransactionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:MoneyTransactionTypes}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding TransferDirection, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:TransferDirections}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Foreground="{Binding TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="7" StrokeThickness="1"/>
+                <TextBlock HorizontalAlignment="Center" Text="*" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="1" />
+                <TextBlock HorizontalAlignment="Left" Text="Total" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="2" />
+                <TextBlock HorizontalAlignment="Left" Text="{Binding SummaryItem.TransferDirection, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:TransferDirections}}" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Foreground="{Binding SummaryItem.TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
+            </Grid>
         </Grid>
     </Grid>
 </local:BaseListPage>

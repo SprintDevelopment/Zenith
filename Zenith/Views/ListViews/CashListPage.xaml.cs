@@ -15,6 +15,7 @@ using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using DynamicData.Binding;
+using System.Reactive.Disposables;
 
 namespace Zenith.Views.ListViews
 {
@@ -47,6 +48,20 @@ namespace Zenith.Views.ListViews
             this.WhenActivated(d =>
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
+
+                ViewModel.SummaryItem = new Cash();
+                Observable.FromEventPattern(ViewModel.ActiveList, nameof(ViewModel.ActiveList.CollectionChanged))
+                    .Throttle(TimeSpan.FromMicroseconds(500))
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Do(_ =>
+                    {
+                        ViewModel.SummaryItem.Value = ViewModel.ActiveList.Sum(i => i.Value * (i.TransferDirection == TransferDirections.FromCompnay ? +1 : -1));
+                    }).Do(_ =>
+                    {
+                        ViewModel.SummaryItem.TransferDirection = ViewModel.SummaryItem.Value > 0 ? TransferDirections.FromCompnay : TransferDirections.ToCompany;
+                        if (ViewModel.SummaryItem.Value < 0)
+                            ViewModel.SummaryItem.Value *= -1;
+                    }).Subscribe().DisposeWith(d);
             });
         }
     }

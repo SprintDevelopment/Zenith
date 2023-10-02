@@ -92,7 +92,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="5" StrokeThickness="1"/>
                 <TextBlock HorizontalAlignment="Center" Text="*" Foreground="DarkRed" VerticalAlignment="Center" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="Total" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="1" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Balance, StringFormat={}{0:n2}}" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>

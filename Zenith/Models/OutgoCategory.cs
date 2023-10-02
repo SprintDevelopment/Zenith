@@ -23,6 +23,14 @@ namespace Zenith.Models
         [Reactive]
         public CostCenters CostCenter { get; set; }
 
+        [Reactive]
+        public float ReservedAmount { get; set; }
+
+        [Reactive]
+        [Required(AllowEmptyStrings = true)]
+        [MaxLength(LengthConstants.MEDIUM_STRING)]
+        public string CountUnitTitle { get; set; } = string.Empty;
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]
         [Reactive]
