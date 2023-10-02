@@ -14,6 +14,7 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
+using System.Reactive.Disposables;
 
 namespace Zenith.Views.ListViews
 {
@@ -40,6 +41,17 @@ namespace Zenith.Views.ListViews
             this.WhenActivated(d => 
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
+
+                ViewModel.SummaryItem = new Account();
+                Observable.FromEventPattern(ViewModel.ActiveList, nameof(ViewModel.ActiveList.CollectionChanged))
+                    .Throttle(TimeSpan.FromMicroseconds(500))
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Do(_ =>
+                    {
+                        ViewModel.SummaryItem.Balance = ViewModel.ActiveList.Sum(i => i.Balance);
+                        ViewModel.SummaryItem.CreditValue = ViewModel.ActiveList.Sum(i => i.CreditValue);
+                        ViewModel.SummaryItem.ChequeValue = ViewModel.ActiveList.Sum(i => i.ChequeValue);
+                    }).Subscribe().DisposeWith(d);
             });
         }
     }

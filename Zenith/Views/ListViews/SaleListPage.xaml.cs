@@ -41,15 +41,15 @@ namespace Zenith.Views.ListViews
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
 
-                //ViewModel.ActiveList
-                //    .AsObservableChangeSet()
-                //    .QueryWhenChanged()
-                //    .Throttle(TimeSpan.FromMilliseconds(250))
-                //    .ObserveOn(RxApp.MainThreadScheduler)
-                //    .Do(cs => ViewModel.SummaryItem = new Sale
-                //    {
-                //        Price = cs.Sum(i => i.Price)
-                //    }).Subscribe().DisposeWith(d);
+                ViewModel.SummaryItem = new Sale();
+                Observable.FromEventPattern(ViewModel.ActiveList, nameof(ViewModel.ActiveList.CollectionChanged))
+                    .Throttle(TimeSpan.FromMicroseconds(500))
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Do(_ =>
+                    {
+                        ViewModel.SummaryItem.Price = ViewModel.ActiveList.Sum(i => i.Price);
+                        ViewModel.SummaryItem.DeliveryFee = ViewModel.ActiveList.Sum(i => i.DeliveryFee);
+                    }).Subscribe().DisposeWith(d);
             });
         }
     }
