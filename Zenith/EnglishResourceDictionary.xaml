@@ -79,6 +79,12 @@
     <system:String x:Key="NotifyTypes.NoNeedToNotify">No need to remind</system:String>
     <system:String x:Key="NotifyTypes.FooterNotify">Show at bottom</system:String>
 
+    <!-- OUTGO TYPES -->
+    <system:String x:Key="OutgoTypes.DontCare">_</system:String>
+    <system:String x:Key="OutgoTypes.Direct">Direct outgo</system:String>
+    <system:String x:Key="OutgoTypes.BuyConsumables">Buy consumables</system:String>
+    <system:String x:Key="OutgoTypes.UseConsumables">Use consumables</system:String>
+
     <!-- PERMISSION TYPES -->
     <system:String x:Key="PermissionTypes.DontCare">_</system:String>
     <system:String x:Key="PermissionTypes.Buys">Buys</system:String>
@@ -429,9 +435,11 @@
     <system:String x:Key="NoteSearchModel.NotifyType">Notify type</system:String>
 
     <!-- OUTGO PAGE -->
+    <system:String x:Key="OutgoPage.OutgoTypeComboBoxTitle">Outgo type</system:String>
     <system:String x:Key="OutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
+    <system:String x:Key="OutgoPage.AmountTextBoxTitle">Amount</system:String>
     <system:String x:Key="OutgoPage.DateTimeTitle">Outgo date time</system:String>
     <system:String x:Key="OutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoPage.ConfirmButtonContent">Confirm</system:String>
@@ -450,6 +458,7 @@
 
     <!-- OUTGO CATEGORY PAGE -->
     <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">Category title</system:String>
+    <system:String x:Key="OutgoCategoryPage.CountUnitTitleTextBoxTitle">Count unit title</system:String>
     <system:String x:Key="OutgoCategoryPage.ParentOutgoCategoryComboBoxTitle">Parent category</system:String>
     <system:String x:Key="OutgoCategoryPage.CostCenterComboBoxTitle">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryPage.CommentTextBoxTitle">Optional Comment</system:String>
@@ -457,7 +466,7 @@
     
     <!-- OUTGO CATEGORY LIST PAGE -->
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
-    <system:String x:Key="OutgoCategoryListPage.ParentOutgoCategoryColumnTextBlockText">Parent category</system:String>
+    <system:String x:Key="OutgoCategoryListPage.CountUnitTitleColumnTextBlockText">Count unit title</system:String>
     <system:String x:Key="OutgoCategoryListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
     

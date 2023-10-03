@@ -12,6 +12,7 @@ namespace Zenith.Assets.Values.Enums
         DontCare = -1,
         Workshop,
         Transportation,
+        Consumables,
         Both
     }
 }

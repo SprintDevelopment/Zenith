@@ -12,9 +12,11 @@
     <None Remove="Resources\Images\Common\add-new.png" />
     <None Remove="Resources\Images\Common\add-tab.png" />
     <None Remove="Resources\Images\Common\allSelection.png" />
+    <None Remove="Resources\Images\Common\buy-consumable.png" />
     <None Remove="Resources\Images\Common\close.png" />
     <None Remove="Resources\Images\Common\collapse.png" />
     <None Remove="Resources\Images\Common\delete.png" />
+    <None Remove="Resources\Images\Common\direct-outgo.png" />
     <None Remove="Resources\Images\Common\down.png" />
     <None Remove="Resources\Images\Common\edit.png" />
     <None Remove="Resources\Images\Common\expand.png" />
@@ -39,6 +41,7 @@
     <None Remove="Resources\Images\Common\show-list.png" />
     <None Remove="Resources\Images\Common\tax.png" />
     <None Remove="Resources\Images\Common\unlock.png" />
+    <None Remove="Resources\Images\Common\use-consumable.png" />
     <None Remove="Resources\Images\Menu\configs.png" />
     <None Remove="Resources\Images\Menu\definitions.png" />
     <None Remove="Resources\Images\Menu\deliveries.png" />
@@ -95,9 +98,11 @@
     <Resource Include="Resources\Images\Common\add-new.png" />
     <Resource Include="Resources\Images\Common\add-tab.png" />
     <Resource Include="Resources\Images\Common\allSelection.png" />
+    <Resource Include="Resources\Images\Common\buy-consumable.png" />
     <Resource Include="Resources\Images\Common\close.png" />
     <Resource Include="Resources\Images\Common\collapse.png" />
     <Resource Include="Resources\Images\Common\delete.png" />
+    <Resource Include="Resources\Images\Common\direct-outgo.png" />
     <Resource Include="Resources\Images\Common\down.png" />
     <Resource Include="Resources\Images\Common\edit.png" />
     <Resource Include="Resources\Images\Common\expand.png" />
@@ -122,6 +127,7 @@
     <Resource Include="Resources\Images\Common\show-list.png" />
     <Resource Include="Resources\Images\Common\tax.png" />
     <Resource Include="Resources\Images\Common\unlock.png" />
+    <Resource Include="Resources\Images\Common\use-consumable.png" />
     <Resource Include="Resources\Images\Menu\configs.png" />
     <Resource Include="Resources\Images\Menu\definitions.png" />
     <Resource Include="Resources\Images\Menu\deliveries.png" />

@@ -70,6 +70,15 @@ namespace Zenith.Data
                     Balance = 0,
                     CreditValue = 0,
                     Comment = string.Empty
+                },
+                new Account
+                {
+                    AccountId = 3,
+                    Name = "Consumables Account",
+                    CostCenter = CostCenters.Consumables,
+                    Balance = 0,
+                    CreditValue = 0,
+                    Comment = string.Empty
                 });
 
             modelBuilder.Entity<Delivery>()

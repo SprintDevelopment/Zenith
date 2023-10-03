@@ -10,7 +10,7 @@ namespace Zenith.Assets.Values.Enums
     {
         DontCare = -1,
         Direct,
-        ForReservation,
-        FromReserved,
+        BuyConsumables,
+        UseConsumables,
     }
 }

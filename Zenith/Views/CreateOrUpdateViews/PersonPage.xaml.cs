@@ -27,7 +27,7 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             // Should be out of this.WhenActivated !!
             jobComboBox.ItemsSource = typeof(Jobs).ToCollection();
-            costCenterComboBox.ItemsSource = typeof(CostCenters).ToCollection();
+            costCenterComboBox.ItemsSource = typeof(CostCenters).ToCollection().Where(cc => (CostCenters)cc.Value != CostCenters.Consumables);
 
             this.WhenActivated(d =>
             {
@@ -36,10 +36,8 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Do(pas => { timeSheetControl.ViewModel.HighligtDates = pas.Select(pa => pa.DateTime).ToObservableCollection(); })
                     .Subscribe().DisposeWith(d);
 
-                //Observable.FromEventPattern(timeSheetControl, nameof(timeSheetControl.DayClicked))
-                //    .Select(x => (DateTime)x.EventArgs)
-                //    .Do(dt =>
-                //    {
+                // temp hack
+                ViewModel.PageModel.PersonnelAbsences.Add(new PersonnelAbsence { DateTime = DateTime.Today.AddYears(-10) }); 
                 timeSheetControl.DayClicked += (s, e) =>
                 {
                     var prePersonnelAbsence = ViewModel.PageModel.PersonnelAbsences.FirstOrDefault(item => item.DateTime == e);
@@ -48,7 +46,6 @@ namespace Zenith.Views.CreateOrUpdateViews
                     else
                         CastedViewModel.UpdatePersonnelAbsenceCommand.Execute(prePersonnelAbsence).Subscribe();
                 };
-                    //}).Subscribe().DisposeWith(d);
             });
         }
     }

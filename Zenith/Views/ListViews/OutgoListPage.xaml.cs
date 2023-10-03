@@ -32,7 +32,7 @@ namespace Zenith.Views.ListViews
                     (s.OutgoCategoryId == 0 || o.OutgoCategoryId == s.OutgoCategoryId) &&
                     (s.CompanyId == 0 || o.CompanyId == s.CompanyId)));
 
-            ViewModel = new BaseListViewModel<Outgo>(new OutgoRepository(), searchModel, dynamicFilter, PermissionTypes.Outgoes)
+            ViewModel = new OutgoListViewModel(new OutgoRepository(), searchModel, dynamicFilter)
             {
                 CreateUpdatePage = new OutgoPage()
             };

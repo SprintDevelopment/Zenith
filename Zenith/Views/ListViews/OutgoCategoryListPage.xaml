@@ -47,15 +47,15 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.TitleColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CostCenterColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CommentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CountUnitTitleColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoCategoryListPage.CostCenterColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
             </Grid>
 
@@ -80,15 +80,15 @@
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Title}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding CostCenter, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:CostCenters}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Comment}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding CountUnitTitle}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding CostCenter, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:CostCenters}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                             
                         </baseclasses:JGrid>

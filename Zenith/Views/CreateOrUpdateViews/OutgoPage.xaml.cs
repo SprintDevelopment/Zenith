@@ -22,9 +22,11 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             ViewModel = new BaseCreateOrUpdateViewModel<Outgo>(new OutgoRepository());
 
+            outgoTypeComboBox.ItemsSource = typeof(OutgoTypes).ToCollection();
+
             this.WhenActivated(d =>
             {
-                outgoCategoryComboBox.ItemsSource = new OutgoCategoryRepository().Find(oc => oc.CostCenter == CostCenters.Workshop).ToList();
+                outgoCategoryComboBox.ItemsSource = new OutgoCategoryRepository().Find(oc => oc.CostCenter != CostCenters.Transportation).ToList();
                 companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
             });
         }

@@ -15,6 +15,7 @@ namespace Zenith.Assets.Values.Enums
         Delivery,
         Outgo,
         MachineOutgo,
+        BuyConsumables,
         Salary,
         Cheque
     }

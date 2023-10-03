@@ -55,6 +55,7 @@ namespace Zenith.Assets.UI.UserControls
                     .Subscribe().DisposeWith(d);
 
                 ViewModel.WhenAnyValue(vm => vm.HighligtDates)
+                    .WhereNotNull()
                     .SelectMany(h => h.ToObservableChangeSet().QueryWhenChanged())
                     .Select(h => ViewModel.WhenAnyValue(vm => vm.Year, vm => vm.Month)
                             .Select(x => new { year = x.Item1, month = x.Item2, offDays = h })

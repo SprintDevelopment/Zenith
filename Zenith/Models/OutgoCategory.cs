@@ -43,7 +43,7 @@ namespace Zenith.Models
 
         public override string ToString()
         {
-            return Title;
+            return Title + (ReservedAmount != 0 ? $" ({ReservedAmount:n2} {CountUnitTitle})" : "");
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Zenith.Repositories
     public class OutgoRepository : Repository<Outgo>
     {
         CashRepository CashRepository = new CashRepository();
+        AccountRepository AccountRepository = new AccountRepository();
 
         public override IEnumerable<Outgo> All()
         {
@@ -32,7 +33,20 @@ namespace Zenith.Repositories
         {
             base.Add(outgo);
 
-            CashRepository.Add(MapperUtil.Mapper.Map<Cash>(outgo));
+            if (outgo.OutgoType != OutgoTypes.UseConsumables)
+                CashRepository.Add(MapperUtil.Mapper.Map<Cash>(outgo));
+            else
+            {
+                var consumableAccount = AccountRepository.Single((short)3);
+                consumableAccount.Balance -= outgo.Value;
+                consumableAccount.CreditValue += outgo.Value;
+                AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+
+                var workshopAccount = AccountRepository.Single((short)1);
+                workshopAccount.Balance += outgo.Value;
+                workshopAccount.CreditValue -= outgo.Value;
+                AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+            }
 
             return outgo;
         }
@@ -41,14 +55,17 @@ namespace Zenith.Repositories
         {
             base.Update(outgo, outgo.OutgoId);
 
-            var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Outgo && c.RelatedEntityId == outgo.OutgoId)
-                .Select(c => MapperUtil.Mapper.Map<Cash>(c))
-                .FirstOrDefault();
-
-            if (relatedCash is not null)
+            if (outgo.OutgoType != OutgoTypes.UseConsumables)
             {
-                MapperUtil.Mapper.Map(outgo, relatedCash);
-                CashRepository.Update(relatedCash, relatedCash.CashId);
+                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Outgo && c.RelatedEntityId == outgo.OutgoId)
+                    .Select(c => MapperUtil.Mapper.Map<Cash>(c))
+                    .FirstOrDefault();
+
+                if (relatedCash is not null)
+                {
+                    MapperUtil.Mapper.Map(outgo, relatedCash);
+                    CashRepository.Update(relatedCash, relatedCash.CashId);
+                }
             }
 
             return outgo;
@@ -56,7 +73,7 @@ namespace Zenith.Repositories
 
         public override void RemoveRange(IEnumerable<Outgo> outgoes)
         {
-            var outgoesIds = outgoes.Select(b => b.OutgoId).ToList();
+            var outgoesIds = outgoes.Where(o => o.OutgoType != OutgoTypes.UseConsumables).Select(b => b.OutgoId).ToList();
 
             base.RemoveRange(outgoes);
 
