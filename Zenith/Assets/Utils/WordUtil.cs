@@ -54,6 +54,7 @@ namespace Zenith.Assets.Utils
                         newRow.Cells[4].Range.Text = "Trip";
                         newRow.Cells[5].Range.Text = d.Machine.Name;
                         newRow.Cells[6].Range.Text = d.DeliveryNumber;
+                        newRow.Cells[6].Range.Text = $"{d.DateTime:yyyy-MM-dd}";
                         newRow.Cells[7].Range.Text = $"{d.Count:n2} (m)";
                         newRow.Cells[8].Range.Text = $"{(d.DeliveryFee + d.SaleItem.TotalPrice):n2}";
 
@@ -75,6 +76,7 @@ namespace Zenith.Assets.Utils
 
                     if (i == 0)
                     {
+                        newRow.Cells[1].Merge(newRow.Cells[2]);
                         newRow.Cells[1].Merge(newRow.Cells[2]);
                         newRow.Cells[1].Merge(newRow.Cells[2]);
                         newRow.Cells[1].Merge(newRow.Cells[2]);

@@ -10,6 +10,8 @@ namespace Zenith.Repositories
     public class MachineOutgoRepository : Repository<MachineOutgo>
     {
         CashRepository CashRepository = new CashRepository();
+        AccountRepository AccountRepository = new AccountRepository();
+        OutgoCategoryRepository OutgoCategoryRepository = new OutgoCategoryRepository();
 
         public override IEnumerable<MachineOutgo> All()
         {
@@ -34,36 +36,87 @@ namespace Zenith.Repositories
         {
             base.Add(machineOutgo);
 
-            CashRepository.Add(MapperUtil.Mapper.Map<Cash>(machineOutgo));
+            if (machineOutgo.OutgoType != OutgoTypes.UseConsumables)
+                CashRepository.Add(MapperUtil.Mapper.Map<Cash>(machineOutgo));
+            else
+            {
+                var consumableAccount = AccountRepository.Single((short)3);
+                consumableAccount.CreditValue += machineOutgo.Value;
+                AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+
+                var transportationAccount = AccountRepository.Single((short)2);
+                transportationAccount.CreditValue -= machineOutgo.Value;
+                AccountRepository.Update(transportationAccount, transportationAccount.AccountId);
+            }
+
+            if (machineOutgo.OutgoType != OutgoTypes.Direct)
+                OutgoCategoryRepository.UpdateAmount(machineOutgo.OutgoCategoryId, machineOutgo.Amount * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), machineOutgo.Value * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
 
             return machineOutgo;
         }
 
         public override MachineOutgo Update(MachineOutgo machineOutgo, dynamic machineOutgoId)
         {
+            var oldMachineOutgo = Single((int)machineOutgoId);
+
+            if (machineOutgo.OutgoType != OutgoTypes.Direct)
+                OutgoCategoryRepository.UpdateAmount(oldMachineOutgo.OutgoCategoryId, oldMachineOutgo.Amount * (oldMachineOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), oldMachineOutgo.Value * (oldMachineOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1));
+
             base.Update(machineOutgo, machineOutgo.OutgoId);
 
-            var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.MachineOutgo && c.RelatedEntityId == machineOutgo.OutgoId)
-                .Select(c => MapperUtil.Mapper.Map<Cash>(c))
-                .FirstOrDefault();
-
-            if (relatedCash is not null)
+            if (machineOutgo.OutgoType != OutgoTypes.UseConsumables)
             {
-                MapperUtil.Mapper.Map(machineOutgo, relatedCash);
-                CashRepository.Update(relatedCash, relatedCash.CashId);
+                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.MachineOutgo && c.RelatedEntityId == machineOutgo.OutgoId)
+                    .Select(c => MapperUtil.Mapper.Map<Cash>(c))
+                    .FirstOrDefault();
+
+                if (relatedCash is not null)
+                {
+                    MapperUtil.Mapper.Map(machineOutgo, relatedCash);
+                    CashRepository.Update(relatedCash, relatedCash.CashId);
+                }
             }
+            else
+            {
+                var consumableAccount = AccountRepository.Single((short)3);
+                consumableAccount.CreditValue += machineOutgo.Value - oldMachineOutgo.Value;
+                AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+
+                var transportationAccount = AccountRepository.Single((short)2);
+                transportationAccount.CreditValue -= machineOutgo.Value - oldMachineOutgo.Value;
+                AccountRepository.Update(transportationAccount, transportationAccount.AccountId);
+            }
+
+            if (machineOutgo.OutgoType != OutgoTypes.Direct)
+                OutgoCategoryRepository.UpdateAmount(machineOutgo.OutgoCategoryId, machineOutgo.Amount * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), machineOutgo.Value * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
 
             return machineOutgo;
         }
 
         public override void RemoveRange(IEnumerable<MachineOutgo> machineOutgoes)
         {
-            var machineOutgoesIds = machineOutgoes.Select(b => b.OutgoId).ToList();
+            var machineOutgoesIds = machineOutgoes.Where(o => o.OutgoType != OutgoTypes.UseConsumables).Select(b => b.OutgoId).ToList();
 
             base.RemoveRange(machineOutgoes);
 
-            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.MachineOutgo && machineOutgoesIds.Contains(c.RelatedEntityId));
+            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.MachineOutgo || c.MoneyTransactionType == MoneyTransactionTypes.BuyConsumables) && machineOutgoesIds.Contains(c.RelatedEntityId));
             CashRepository.RemoveRange(relatedCashes);
+
+            var valueToSubtractFromConsumableAccountAndAddToTransportationAccountCredits = machineOutgoes.Where(o => o.OutgoType == OutgoTypes.UseConsumables)
+                .Sum(o => o.Value);
+
+            var consumableAccount = AccountRepository.Single((short)3);
+            consumableAccount.CreditValue -= valueToSubtractFromConsumableAccountAndAddToTransportationAccountCredits;
+            AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+
+            var transportationAccount = AccountRepository.Single((short)2);
+            transportationAccount.CreditValue += valueToSubtractFromConsumableAccountAndAddToTransportationAccountCredits;
+            AccountRepository.Update(transportationAccount, transportationAccount.AccountId);
+
+
+            machineOutgoes.Where(mo => mo.OutgoType != OutgoTypes.Direct)
+                .ToList()
+                .ForEach(o => OutgoCategoryRepository.UpdateAmount(o.OutgoCategoryId, o.Amount * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), o.Value * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1)));
         }
     }
 }

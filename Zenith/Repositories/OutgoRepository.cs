@@ -11,6 +11,7 @@ namespace Zenith.Repositories
     {
         CashRepository CashRepository = new CashRepository();
         AccountRepository AccountRepository = new AccountRepository();
+        OutgoCategoryRepository OutgoCategoryRepository = new OutgoCategoryRepository();
 
         public override IEnumerable<Outgo> All()
         {
@@ -38,26 +39,32 @@ namespace Zenith.Repositories
             else
             {
                 var consumableAccount = AccountRepository.Single((short)3);
-                consumableAccount.Balance -= outgo.Value;
                 consumableAccount.CreditValue += outgo.Value;
                 AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
 
                 var workshopAccount = AccountRepository.Single((short)1);
-                workshopAccount.Balance += outgo.Value;
                 workshopAccount.CreditValue -= outgo.Value;
-                AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+                AccountRepository.Update(workshopAccount, workshopAccount.AccountId);
             }
+
+            if (outgo.OutgoType != OutgoTypes.Direct)
+                OutgoCategoryRepository.UpdateAmount(outgo.OutgoCategoryId, outgo.Amount * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), outgo.Value * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
 
             return outgo;
         }
 
         public override Outgo Update(Outgo outgo, dynamic outgoId)
         {
+            var oldOutgo = Single((int)outgoId);
+
+            if (outgo.OutgoType != OutgoTypes.Direct)
+                OutgoCategoryRepository.UpdateAmount(oldOutgo.OutgoCategoryId, oldOutgo.Amount * (oldOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), oldOutgo.Value * (oldOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1));
+
             base.Update(outgo, outgo.OutgoId);
 
             if (outgo.OutgoType != OutgoTypes.UseConsumables)
             {
-                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Outgo && c.RelatedEntityId == outgo.OutgoId)
+                var relatedCash = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.Outgo || c.MoneyTransactionType == MoneyTransactionTypes.BuyConsumables) && c.RelatedEntityId == outgo.OutgoId)
                     .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                     .FirstOrDefault();
 
@@ -67,6 +74,19 @@ namespace Zenith.Repositories
                     CashRepository.Update(relatedCash, relatedCash.CashId);
                 }
             }
+            else
+            {
+                var consumableAccount = AccountRepository.Single((short)3);
+                consumableAccount.CreditValue += outgo.Value - oldOutgo.Value;
+                AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+
+                var workshopAccount = AccountRepository.Single((short)1);
+                workshopAccount.CreditValue -= outgo.Value - oldOutgo.Value;
+                AccountRepository.Update(workshopAccount, workshopAccount.AccountId);
+            }
+
+            if (outgo.OutgoType != OutgoTypes.Direct)
+                OutgoCategoryRepository.UpdateAmount(outgo.OutgoCategoryId, outgo.Amount * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), outgo.Value * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
 
             return outgo;
         }
@@ -77,8 +97,24 @@ namespace Zenith.Repositories
 
             base.RemoveRange(outgoes);
 
-            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Outgo && outgoesIds.Contains(c.RelatedEntityId));
+            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.Outgo || c.MoneyTransactionType == MoneyTransactionTypes.BuyConsumables) && outgoesIds.Contains(c.RelatedEntityId));
             CashRepository.RemoveRange(relatedCashes);
+
+            var valueToSubtractFromConsumableAccountAndAddToWorkshopAccountCredits = outgoes.Where(o => o.OutgoType == OutgoTypes.UseConsumables)
+                .Sum(o => o.Value);
+
+            var consumableAccount = AccountRepository.Single((short)3);
+            consumableAccount.CreditValue -= valueToSubtractFromConsumableAccountAndAddToWorkshopAccountCredits;
+            AccountRepository.Update(consumableAccount, consumableAccount.AccountId);
+
+            var workshopAccount = AccountRepository.Single((short)1);
+            workshopAccount.CreditValue += valueToSubtractFromConsumableAccountAndAddToWorkshopAccountCredits;
+            AccountRepository.Update(workshopAccount, workshopAccount.AccountId);
+
+
+            outgoes.Where(o => o.OutgoType != OutgoTypes.Direct)
+                .ToList()
+                .ForEach(o => OutgoCategoryRepository.UpdateAmount(o.OutgoCategoryId, o.Amount * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), o.Value * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1)));
         }
     }
 }

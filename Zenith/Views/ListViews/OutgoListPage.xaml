@@ -73,26 +73,27 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition />
+                <RowDefinition Height="32"/>
             </Grid.RowDefinitions>
             <Grid Background="White" Height="40" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="#" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF3AB05A" Cursor="Hand"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.OutgoCategoryColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.ValueColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.RelatedCompanyColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.DateTimeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.CommentColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.RelatedCompanyColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource OutgoListPage.DateTimeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource OutgoListPage.AmountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource OutgoListPage.ValueColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
             </Grid>
 
@@ -116,26 +117,41 @@
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding OutgoCategory.Title}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Comment}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Amount, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
 
                         </baseclasses:JGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="7" StrokeThickness="1"/>
+                <TextBlock HorizontalAlignment="Center" Text="*" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="1" />
+                <TextBlock HorizontalAlignment="Left" Text="Total" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="2" />
+                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+            </Grid>
         </Grid>
     </Grid>
 </local:BaseListPage>

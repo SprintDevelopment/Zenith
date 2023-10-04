@@ -27,6 +27,9 @@ namespace Zenith.Models
         public float ReservedAmount { get; set; }
 
         [Reactive]
+        public float ApproxPriceForEach { get; set; }
+
+        [Reactive]
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         public string CountUnitTitle { get; set; } = string.Empty;

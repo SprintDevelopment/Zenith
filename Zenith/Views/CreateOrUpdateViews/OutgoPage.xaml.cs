@@ -28,6 +28,8 @@ namespace Zenith.Views.CreateOrUpdateViews
             {
                 outgoCategoryComboBox.ItemsSource = new OutgoCategoryRepository().Find(oc => oc.CostCenter != CostCenters.Transportation).ToList();
                 companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
+
+                this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.companyComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
             });
         }
     }

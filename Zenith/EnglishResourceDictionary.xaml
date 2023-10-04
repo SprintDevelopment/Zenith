@@ -29,6 +29,7 @@
     <system:String x:Key="CostCenters.DontCare">_</system:String>
     <system:String x:Key="CostCenters.Workshop">Workshop</system:String>
     <system:String x:Key="CostCenters.Transportation">Transportation</system:String>
+    <system:String x:Key="CostCenters.Consumables">Consumables</system:String>
     <system:String x:Key="CostCenters.Both">Both workshop and transportation</system:String>
 
     <!-- COUNT UNITS -->
@@ -56,6 +57,7 @@
     <system:String x:Key="MoneyTransactionTypes.Delivery">Delivery</system:String>
     <system:String x:Key="MoneyTransactionTypes.Outgo">Outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.MachineOutgo">Machine outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.BuyConsumables">Buy consumables</system:String>
     <system:String x:Key="MoneyTransactionTypes.Salary">Salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.Cheque">Cheque</system:String>
 
@@ -367,6 +369,7 @@
     <!-- MACHINE OUTGO LIST PAGE -->
     <system:String x:Key="MachineOutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
     <system:String x:Key="MachineOutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
+    <system:String x:Key="MachineOutgoListPage.AmountColumnTextBlockText">Amount</system:String>
     <system:String x:Key="MachineOutgoListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
     <system:String x:Key="MachineOutgoListPage.RelatedMachineColumnTextBlockText">Related machine</system:String>
     <system:String x:Key="MachineOutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
@@ -447,6 +450,7 @@
     <!-- OUTGO LIST PAGE -->
     <system:String x:Key="OutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
     <system:String x:Key="OutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
+    <system:String x:Key="OutgoListPage.AmountColumnTextBlockText">Amount</system:String>
     <system:String x:Key="OutgoListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
     <system:String x:Key="OutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
     <system:String x:Key="OutgoListPage.CommentColumnTextBlockText">Comment</system:String>
@@ -466,6 +470,7 @@
     
     <!-- OUTGO CATEGORY LIST PAGE -->
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
+    <system:String x:Key="OutgoCategoryListPage.ReservedAmountColumnTextBlockText">Reserved amount</system:String>
     <system:String x:Key="OutgoCategoryListPage.CountUnitTitleColumnTextBlockText">Count unit title</system:String>
     <system:String x:Key="OutgoCategoryListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
