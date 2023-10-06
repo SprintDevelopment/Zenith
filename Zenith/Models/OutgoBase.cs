@@ -35,6 +35,11 @@ namespace Zenith.Models
         [Reactive]
         public virtual Company? Company { get; set; }
 
+        [Required(AllowEmptyStrings = true)]
+        [MaxLength(LengthConstants.MEDIUM_STRING)]
+        [Reactive]
+        public string FactorNumber { get; set; } = string.Empty;
+
         [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;
 

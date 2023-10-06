@@ -11,6 +11,7 @@ namespace Zenith.Repositories
             int intId = (int)id;
             return _context.Set<Person>()
                 .Include(s => s.PersonnelAbsences)
+                .Include(s => s.PersonnelOvertimes)
                 .SingleOrDefault(s => s.PersonId == intId);
         }
     }

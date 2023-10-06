@@ -40,6 +40,7 @@
 
                 </Grid>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource OutgoPage.RelatedCompanyComboBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource OutgoPage.FactorNumberTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.DateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.CommentTextBoxTitle}" />
 

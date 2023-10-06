@@ -362,6 +362,7 @@
     <system:String x:Key="MachineOutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="MachineOutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="MachineOutgoPage.ValueTextBoxTitle">Outgo value</system:String>
+    <system:String x:Key="MachineOutgoPage.FactorNumberTextBoxTitle">Factor number</system:String>
     <system:String x:Key="MachineOutgoPage.DateTimeTitle">Outgo date time</system:String>
     <system:String x:Key="MachineOutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MachineOutgoPage.ConfirmButtonContent">Confirm</system:String>
@@ -443,6 +444,7 @@
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
     <system:String x:Key="OutgoPage.AmountTextBoxTitle">Amount</system:String>
+    <system:String x:Key="OutgoPage.FactorNumberTextBoxTitle">Factor number</system:String>
     <system:String x:Key="OutgoPage.DateTimeTitle">Outgo date time</system:String>
     <system:String x:Key="OutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoPage.ConfirmButtonContent">Confirm</system:String>
@@ -483,6 +485,7 @@
     <system:String x:Key="PersonPage.SalaryTextBoxTitle">Salary</system:String>
     <system:String x:Key="PersonPage.CostCenterComboBoxTitle">Cost Center</system:String>
     <system:String x:Key="PersonPage.RoleComboBoxTitle">Role</system:String>
+    <system:String x:Key="PersonPage.StartDateDateTimeTitle">Start date</system:String>
     <system:String x:Key="PersonPage.AddressTextBoxTitle">Address</system:String>
     <system:String x:Key="PersonPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="PersonPage.PersonTimeSheetTextBlockText">Time sheet</system:String>
@@ -495,6 +498,7 @@
     <system:String x:Key="PersonListPage.MobileColumnTextBlockText">Mobile</system:String>
     <system:String x:Key="PersonListPage.TelColumnTextBlockText">Tel</system:String>
     <system:String x:Key="PersonListPage.RoleColumnTextBlockText">Role</system:String>
+    <system:String x:Key="PersonListPage.StartDateColumnTextBlockText">Start date</system:String>
 
     <!-- PERSON SEARCH CONTROL -->
     <system:String x:Key="PersonSearchModel.SearchBarTitle">Search in personnel</system:String>
@@ -509,6 +513,15 @@
     <system:String x:Key="PersonAbsencePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="PersonAbsencePage.EditButtonContent">Edit</system:String>
     <system:String x:Key="PersonAbsencePage.DeleteButtonContent">Delete</system:String>
+
+    <!-- PERSON OVERTIME PAGE -->
+    <system:String x:Key="PersonnelOvertimePage.PersonnelComboBoxTitle">Personnel</system:String>
+    <system:String x:Key="PersonnelOvertimePage.DateDateTimeTitle">Date</system:String>
+    <system:String x:Key="PersonnelOvertimePage.AmountTextBoxTitle">Overtime amount</system:String>
+    <system:String x:Key="PersonnelOvertimePage.CommentTextBoxTitle">Optional comment</system:String>
+    <system:String x:Key="PersonnelOvertimePage.ConfirmButtonContent">Confirm</system:String>
+    <system:String x:Key="PersonnelOvertimePage.EditButtonContent">Edit</system:String>
+    <system:String x:Key="PersonnelOvertimePage.DeleteButtonContent">Delete</system:String>
 
     <!-- SALARY PAYMENT PAGE -->
     <system:String x:Key="SalaryPaymentPage.PersonnelComboBoxTitle">Related personnel</system:String>
@@ -589,6 +602,7 @@
     <system:String x:Key="SiteSearchModel.SearchBarTitle">Search in company sites</system:String>
     <system:String x:Key="SiteSearchModel.Name">Site name</system:String>
     <system:String x:Key="SiteSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="SiteSearchModel.Address">Address</system:String>
 
     <!-- USER PAGE -->
     <system:String x:Key="UserPage.UsernameTextBoxTitle">Username</system:String>

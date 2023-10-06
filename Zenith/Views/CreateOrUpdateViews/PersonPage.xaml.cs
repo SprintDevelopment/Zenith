@@ -36,15 +36,32 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Do(pas => { timeSheetControl.ViewModel.HighligtDates = pas.Select(pa => pa.DateTime).ToObservableCollection(); })
                     .Subscribe().DisposeWith(d);
 
+                ViewModel.WhenAnyValue(vm => vm.PageModel.PersonnelOvertimes)
+                    .SelectMany(pas => pas.ToObservableChangeSet().QueryWhenChanged())
+                    .Do(pas => { timeSheetControl.ViewModel.OvertimeDates = pas.ToObservableCollection(); })
+                    .Subscribe().DisposeWith(d);
+
                 // temp hack
-                ViewModel.PageModel.PersonnelAbsences.Add(new PersonnelAbsence { DateTime = DateTime.Today.AddYears(-10) }); 
+                ViewModel.PageModel.PersonnelAbsences.Add(new PersonnelAbsence { DateTime = DateTime.Today.AddYears(-10) });
+                ViewModel.PageModel.PersonnelOvertimes.Add(new PersonnelOvertime { DateTime = DateTime.Today.AddYears(-10) });
                 timeSheetControl.DayClicked += (s, e) =>
                 {
-                    var prePersonnelAbsence = ViewModel.PageModel.PersonnelAbsences.FirstOrDefault(item => item.DateTime == e);
-                    if (prePersonnelAbsence is null)
-                        CastedViewModel.AddNewPersonnelAbsenceCommand.Execute(e).Subscribe();
+                    if (timeSheetControl.ViewModel.ShowInAbcenseMode)
+                    {
+                        var prePersonnelAbsence = ViewModel.PageModel.PersonnelAbsences.FirstOrDefault(item => item.DateTime == e);
+                        if (prePersonnelAbsence is null)
+                            CastedViewModel.AddNewPersonnelAbsenceCommand.Execute(e).Subscribe();
+                        else
+                            CastedViewModel.UpdatePersonnelAbsenceCommand.Execute(prePersonnelAbsence).Subscribe();
+                    }
                     else
-                        CastedViewModel.UpdatePersonnelAbsenceCommand.Execute(prePersonnelAbsence).Subscribe();
+                    {
+                        var prePersonnelOvertime = ViewModel.PageModel.PersonnelOvertimes.FirstOrDefault(item => item.DateTime == e);
+                        if (prePersonnelOvertime is null)
+                            CastedViewModel.AddNewPersonnelOvertimeCommand.Execute(e).Subscribe();
+                        else
+                            CastedViewModel.UpdatePersonnelOvertimeCommand.Execute(prePersonnelOvertime).Subscribe();
+                    }
                 };
             });
         }

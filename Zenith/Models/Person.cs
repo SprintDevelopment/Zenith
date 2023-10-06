@@ -7,6 +7,7 @@ using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
 using Zenith.Assets.Extensions;
 using System.Collections.ObjectModel;
+using System;
 
 namespace Zenith.Models
 {
@@ -61,6 +62,9 @@ namespace Zenith.Models
         [Reactive]
         public CostCenters CostCenter { get; set; }
 
+        [Reactive]
+        public DateTime StartDate { get; set; } = DateTime.Today;
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.LARGE_STRING)]
         [Reactive]
@@ -68,6 +72,9 @@ namespace Zenith.Models
 
         [Reactive]
         public virtual ObservableCollection<PersonnelAbsence> PersonnelAbsences { get; set; } = new ObservableCollection<PersonnelAbsence>();
+
+        [Reactive]
+        public virtual ObservableCollection<PersonnelOvertime> PersonnelOvertimes { get; set; } = new ObservableCollection<PersonnelOvertime>();
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

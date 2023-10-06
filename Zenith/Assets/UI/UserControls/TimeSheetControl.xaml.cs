@@ -23,6 +23,7 @@ using System.Collections.ObjectModel;
 using Zenith.Assets.UI.BaseClasses;
 using DynamicData.Binding;
 using DynamicData;
+using Zenith.Models;
 
 namespace Zenith.Assets.UI.UserControls
 {
@@ -38,6 +39,7 @@ namespace Zenith.Assets.UI.UserControls
 
             this.WhenActivated(d =>
             {
+                this.DataContext = ViewModel;
                 ViewModel.WhenAnyValue(vm => vm.DateTime)
                     .Do(dt =>
                     {
@@ -54,11 +56,27 @@ namespace Zenith.Assets.UI.UserControls
                     .Do(_ => ViewModel.DateTime = ViewModel.DateTime.AddMonths(1))
                     .Subscribe().DisposeWith(d);
 
-                ViewModel.WhenAnyValue(vm => vm.HighligtDates)
+                ViewModel.WhenAnyValue(vm => vm.HighligtDates, vm => vm.Year, vm => vm.Month)
+                    .Select(x => x.Item1)
+                    .SelectMany(hd => hd.ToObservableChangeSet().QueryWhenChanged())
+                    .Select(oc => oc.Where(o => o.Year == ViewModel.Year && o.Month == ViewModel.Month).Count())
+                    .BindTo(ViewModel, vm => vm.AbsenceDays)
+                    .DisposeWith(d);
+
+                ViewModel.WhenAnyValue(vm => vm.OvertimeDates, vm => vm.Year, vm => vm.Month)
+                    .Select(x => x.Item1)
+                    .SelectMany(od => od.ToObservableChangeSet().QueryWhenChanged())
+                    .Select(oc => oc.Where(o => o.DateTime.Year == ViewModel.Year && o.DateTime.Month == ViewModel.Month).Sum(o => o.Amount))
+                    .BindTo(ViewModel, vm => vm.Overtime)
+                    .DisposeWith(d);
+
+                ViewModel.WhenAnyValue(vm => vm.HighligtDates, vm => vm.OvertimeDates)
                     .WhereNotNull()
+                    .Select(x => new ObservableCollection<PersonnelOvertime>(
+                        x.Item1.Select(i => new PersonnelOvertime { DateTime = i }).Union(x.Item2)))
                     .SelectMany(h => h.ToObservableChangeSet().QueryWhenChanged())
-                    .Select(h => ViewModel.WhenAnyValue(vm => vm.Year, vm => vm.Month)
-                            .Select(x => new { year = x.Item1, month = x.Item2, offDays = h })
+                    .Select(h => ViewModel.WhenAnyValue(vm => vm.Year, vm => vm.Month, vm => vm.ShowInAbcenseMode)
+                            .Select(x => new { year = x.Item1, month = x.Item2, offDays = h, showMode = x.Item3 })
                             .Where(x => x.month > 0 && x.year > 0))
                     .Switch()
                     .Do(x =>
@@ -75,14 +93,27 @@ namespace Zenith.Assets.UI.UserControls
                             y.btn.Opacity = y.date.Month == x.month ? 1 : 0.3;
                             y.btn.Content = y.date.Day.ToString();
                             y.btn.Tag = y.date;
-                            y.btn.IsAbsent = x.offDays.Contains(y.date);
+                            var overtimeInfo = x.offDays.FirstOrDefault(od => od.DateTime == y.date);
+                            if (overtimeInfo != null)
+                            {
+                                y.btn.IsAbsent = x.showMode && overtimeInfo.Amount == 0;
+                                y.btn.Overtime = (!x.showMode && overtimeInfo.Amount != 0) ? overtimeInfo.Amount.ToString("+#;-#;'n2'") : "";
+                            }
+                            else
+                            {
+                                y.btn.IsAbsent = false;
+                                y.btn.Overtime = "";
+                            }
                             return y;
                         }).ToList();
                     }).Subscribe().DisposeWith(d);
 
                 daysGrid.Children.OfType<JTimeSheetDayButton>()
                     .ToList()
-                    .ForEach(btn => btn.Click += (s, e) => { DayClicked?.Invoke(this, (DateTime)((JTimeSheetDayButton)s).Tag); });
+                    .ForEach(btn => btn.Click += (s, e) =>
+                    {
+                        DayClicked?.Invoke(this, (DateTime)((JTimeSheetDayButton)s).Tag);
+                    });
 
                 var dayOfWeek = (short)DateTime.Today.AddDays(-1 * DateTime.Today.Day + 1).DayOfWeek % 7;
 
@@ -98,6 +129,15 @@ namespace Zenith.Assets.UI.UserControls
                     .Select(x => $"{DateTimeFormatInfo.InvariantInfo.MonthNames[x.Item2 - 1]} {x.Item1}")
                     .BindTo(this, v => v.yearMonthTextBlock.Text)
                     .DisposeWith(d);
+
+                ViewModel.WhenAnyValue(vm => vm.ShowInAbcenseMode)
+                    .Do(mode => modeIndicatorGrid.SetValue(Grid.ColumnProperty, mode ? 1 : 2))
+                    .Subscribe().DisposeWith(d);
+
+                Observable.FromEventPattern(switchToAbsenceMode, nameof(Button.Click)).Select(_ => true)
+                    .Merge(Observable.FromEventPattern(switchToOvertimeMode, nameof(Button.Click)).Select(_ => false))
+                    .Do(m => ViewModel.ShowInAbcenseMode = m)
+                    .Subscribe().DisposeWith(d);
             });
         }
 
@@ -126,6 +166,17 @@ namespace Zenith.Assets.UI.UserControls
         public DateTime DateTime { get; set; } = DateTime.Today;
 
         [Reactive]
+        public float Overtime { get; set; }
+
+        [Reactive]
+        public int AbsenceDays { get; set; }
+
+        [Reactive]
+        public bool ShowInAbcenseMode { get; set; } = true;
+
+        [Reactive]
         public ObservableCollection<DateTime> HighligtDates { get; set; } = new ObservableCollection<DateTime>();
+        [Reactive]
+        public ObservableCollection<PersonnelOvertime> OvertimeDates { get; set; } = new ObservableCollection<PersonnelOvertime>();
     }
 }

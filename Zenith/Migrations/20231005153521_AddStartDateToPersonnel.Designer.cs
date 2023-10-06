@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231005153521_AddStartDateToPersonnel")]
+    partial class AddStartDateToPersonnel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -427,11 +430,6 @@ namespace Zenith.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FactorNumber")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
@@ -631,11 +629,6 @@ namespace Zenith.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FactorNumber")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
@@ -785,38 +778,6 @@ namespace Zenith.Migrations
                     b.HasIndex("PersonId");
 
                     b.ToTable("PersonnelAbsence");
-                });
-
-            modelBuilder.Entity("Zenith.Models.PersonnelOvertime", b =>
-                {
-                    b.Property<int>("PersonnelOvertimeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonnelOvertimeId"));
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("HasErrors")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PersonnelOvertimeId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonnelOvertime");
                 });
 
             modelBuilder.Entity("Zenith.Models.SalaryPayment", b =>
@@ -986,7 +947,7 @@ namespace Zenith.Migrations
                         new
                         {
                             Username = "admin",
-                            CreateDateTime = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateDateTime = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             HasErrors = false,
                             HashedPassword = "b9bcda38c0de9edcda3b12bc5d91de5959e2de031a1fcc13a3860d9c39eeb3b2"
                         });
@@ -1180,17 +1141,6 @@ namespace Zenith.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Zenith.Models.PersonnelOvertime", b =>
-                {
-                    b.HasOne("Zenith.Models.Person", "Person")
-                        .WithMany("PersonnelOvertimes")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-                });
-
             modelBuilder.Entity("Zenith.Models.SalaryPayment", b =>
                 {
                     b.HasOne("Zenith.Models.Person", "Personnel")
@@ -1267,8 +1217,6 @@ namespace Zenith.Migrations
             modelBuilder.Entity("Zenith.Models.Person", b =>
                 {
                     b.Navigation("PersonnelAbsences");
-
-                    b.Navigation("PersonnelOvertimes");
                 });
 
             modelBuilder.Entity("Zenith.Models.Sale", b =>

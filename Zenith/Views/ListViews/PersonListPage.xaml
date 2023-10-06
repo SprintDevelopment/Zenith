@@ -52,6 +52,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -63,7 +64,8 @@
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource PersonListPage.MobileColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource PersonListPage.TelColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource PersonListPage.RoleColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="7" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource PersonListPage.StartDateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="8" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="9" StrokeThickness="0.5"/>
             </Grid>
 
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" >
@@ -91,6 +93,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
@@ -102,7 +105,8 @@
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Mobile}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Tel}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Job, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:Jobs}}" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
-                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding StartDate, StringFormat={}{0:yyyy-MM-dd}}" VerticalAlignment="Center" Grid.Column="8" Margin="8,0,0,0"/>
+                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="9" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>
                     </DataTemplate>

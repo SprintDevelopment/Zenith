@@ -31,6 +31,7 @@ namespace Zenith.Views.CreateOrUpdateViews
                 machineComboBox.ItemsSource = new MachineRepository().All().ToList();
 
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.companyComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
+                this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.factorNumberTextBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
             });
         }
     }

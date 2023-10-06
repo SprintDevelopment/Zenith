@@ -30,6 +30,7 @@ namespace Zenith.Views.CreateOrUpdateViews
                 companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
 
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.companyComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
+                this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.factorNumberTextBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
             });
         }
     }

@@ -15,5 +15,9 @@ namespace Zenith.Models.SearchModels
         [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(CompanyRepository))]
         [Reactive]
         public short CompanyId { get; set; }
+
+        [Search]
+        [Reactive]
+        public string Address { get; set; }
     }
 }

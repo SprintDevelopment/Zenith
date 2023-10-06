@@ -26,8 +26,31 @@
             <Button Name="nextButton" Grid.Column="1" BorderThickness="0,0,1,0"  Style="{StaticResource SimpleCenteredButtonStyle}">
                 <Image Source="/Zenith;component/Resources/Images/Common/next.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
             </Button>
-            <TextBlock x:Name="yearMonthTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF00AD97" />
-            <Rectangle Grid.ColumnSpan="3" VerticalAlignment="Bottom" Height="1" Fill="#FFF8F8F8" />
+            <Rectangle Grid.ColumnSpan="3" VerticalAlignment="Bottom" Height="1" Fill="#FF3CA3F4" />
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="180" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="yearMonthTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF00AD97" />
+                <Button x:Name="switchToAbsenceMode" Grid.Column="1" BorderThickness="1,0,0,0" Margin="0,1" ToolTip="View absence" Style="{StaticResource SimpleButtonStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="8,0">
+                        <Image Source="/Zenith;component/Resources/Images/Common/absence.png" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding AbsenceDays, StringFormat={}{0:n0} Off days}" VerticalAlignment="Center" Margin="8"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="switchToOvertimeMode" Grid.Column="2" BorderThickness="1,0,0,0" Margin="0,1" ToolTip="View overtime" Style="{StaticResource SimpleButtonStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="8,0">
+                        <Image Source="/Zenith;component/Resources/Images/Common/overtime.png" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Overtime, StringFormat={}{0:+#;-#;'n2'} Overtime}" VerticalAlignment="Center" Margin="8"/>
+                    </StackPanel>
+                </Button>
+                <Grid x:Name="modeIndicatorGrid">
+                    <Rectangle Grid.Column="1" Stroke="#FF3CA3F4" />
+                    <Rectangle Grid.Column="1" VerticalAlignment="Bottom" Height="1" Margin="1,0" Stroke="White" />
+                </Grid>
+            </Grid>
         </Grid>
         <Grid Name="daysGrid" Grid.Row="1" Margin="-1,0,0,0">
             <Grid.ColumnDefinitions>
@@ -97,7 +120,7 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Grid.Column="3" Text="We"/>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Grid.Column="4" Text="Th"/>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Grid.Column="5" Text="Fr"/>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFF7878" Grid.Column="6" Text="Sa"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Grid.Column="6" Text="Sa"/>
 
             <Rectangle Name="dayIndentifierRect" Stroke="#FF3CA3F4" Grid.Row="1"/>
         </Grid>

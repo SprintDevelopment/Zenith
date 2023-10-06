@@ -36,7 +36,7 @@ namespace Zenith.Assets.Utils
                 companyTable.Cell(1, 1).Range.Text = $"Customer Code: {sales[0].Company.CompanyId:CPY0000}";
                 companyTable.Cell(1, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].SaleId:INV0000}" : "";
                 companyTable.Cell(2, 1).Range.Text = sales[0].Company.Name;
-                companyTable.Cell(2, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].DateTime:yyyy-MMM-dd}": $"{sales[0].DateTime:yyyy-MMM}";
+                companyTable.Cell(2, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].DateTime:yyyy-MMM-dd}" : $"{sales[0].DateTime:yyyy-MMM}";
                 companyTable.Cell(3, 1).Range.Text = $"Tel: {sales[0].Company.Tel}";
                 companyTable.Cell(4, 1).Range.Text = $"Fax: {sales[0].Company.Fax}";
                 if (includeCustomerTRN)
@@ -45,20 +45,23 @@ namespace Zenith.Assets.Utils
                 var deliveriesTable = document.Tables[2];
 
                 sales.SelectMany(s => s.Items).SelectMany(si => si.Deliveries)
-                    .Select((d, i) =>
+                    .GroupBy(d => new { d.MachineId, d.SiteId, d.DeliveryNumber })
+                    .Select((deliveries, i) =>
                     {
+                        var deliveriesCount = deliveries.Count();
+
                         var newRow = deliveriesTable.Rows.Add();
                         newRow.Cells[1].Range.Text = $"{i + 1}";
-                        newRow.Cells[2].Range.Text = d.SaleItem.Material.Name;
-                        newRow.Cells[3].Range.Text = d.Site.Name;
-                        newRow.Cells[4].Range.Text = "Trip";
-                        newRow.Cells[5].Range.Text = d.Machine.Name;
-                        newRow.Cells[6].Range.Text = d.DeliveryNumber;
-                        newRow.Cells[6].Range.Text = $"{d.DateTime:yyyy-MM-dd}";
-                        newRow.Cells[7].Range.Text = $"{d.Count:n2} (m)";
-                        newRow.Cells[8].Range.Text = $"{(d.DeliveryFee + d.SaleItem.TotalPrice):n2}";
+                        newRow.Cells[2].Range.Text = deliveries.First().SaleItem.Material.Name;
+                        newRow.Cells[3].Range.Text = deliveries.First().Site.Name;
+                        newRow.Cells[4].Range.Text = deliveriesCount == 1 ? "1 Trip" : $"{deliveriesCount} Trips";
+                        newRow.Cells[5].Range.Text = deliveriesCount == 1 ? deliveries.First().Machine.Name : "";
+                        newRow.Cells[6].Range.Text = deliveries.First().DeliveryNumber;
+                        newRow.Cells[7].Range.Text = $"{deliveries.First().DateTime:yyyy-MM-dd}";
+                        newRow.Cells[8].Range.Text = $"{deliveries.Sum(d => d.Count):n2} (m)";
+                        newRow.Cells[9].Range.Text = $"{deliveries.Sum(d => d.DeliveryFee + d.SaleItem.TotalPrice):n2}";
 
-                        return d;
+                        return deliveries;
                     }).ToList();
 
                 var totalPrice = sales.Sum(s => s.Items.Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
@@ -90,7 +93,7 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"d:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 
@@ -114,7 +117,7 @@ namespace Zenith.Assets.Utils
                 wordApp.Documents.Open(templateFileFullName);
 
                 var document = wordApp.ActiveDocument;
-                
+
                 var company = new CompanyRepository().Single(companyId);
 
                 var companyTable = document.Tables[1];

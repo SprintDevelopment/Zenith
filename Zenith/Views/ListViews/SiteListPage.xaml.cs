@@ -30,7 +30,8 @@ namespace Zenith.Views.ListViews
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
                 .Select(s => new Func<Site, bool>(site =>
                     (s.Name.IsNullOrWhiteSpace() || site.Name.Contains(s.Name)) &&
-                    (s.CompanyId == 0 || site.CompanyId == s.CompanyId)));
+                    (s.CompanyId == 0 || site.CompanyId == s.CompanyId) &&
+                    (s.Address.IsNullOrWhiteSpace() || site.Address.Contains(s.Address))));
 
             ViewModel = new BaseListViewModel<Site>(new SiteRepository(), searchModel, dynamicFilter, PermissionTypes.Sites)
             {

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\App\icon.png" />
+    <None Remove="Resources\Images\Common\absence.png" />
     <None Remove="Resources\Images\Common\add-new.png" />
     <None Remove="Resources\Images\Common\add-tab.png" />
     <None Remove="Resources\Images\Common\allSelection.png" />
@@ -29,6 +30,7 @@
     <None Remove="Resources\Images\Common\next.png" />
     <None Remove="Resources\Images\Common\no-tax.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
+    <None Remove="Resources\Images\Common\overtime.png" />
     <None Remove="Resources\Images\Common\partialSelection.png" />
     <None Remove="Resources\Images\Common\payment.png" />
     <None Remove="Resources\Images\Common\previous.png" />
@@ -95,6 +97,7 @@
     </Resource>
     <Resource Include="EnglishResourceDictionary.xaml" />
     <Resource Include="Resources\Images\App\icon.png" />
+    <Resource Include="Resources\Images\Common\absence.png" />
     <Resource Include="Resources\Images\Common\add-new.png" />
     <Resource Include="Resources\Images\Common\add-tab.png" />
     <Resource Include="Resources\Images\Common\allSelection.png" />
@@ -115,6 +118,7 @@
     <Resource Include="Resources\Images\Common\next.png" />
     <Resource Include="Resources\Images\Common\no-tax.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />
+    <Resource Include="Resources\Images\Common\overtime.png" />
     <Resource Include="Resources\Images\Common\partialSelection.png" />
     <Resource Include="Resources\Images\Common\payment.png" />
     <Resource Include="Resources\Images\Common\previous.png" />

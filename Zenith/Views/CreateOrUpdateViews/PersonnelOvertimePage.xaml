@@ -1,0 +1,50 @@
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.PersonnelOvertimePage"
+      x:TypeArguments="model:PersonnelOvertime" 
+      xmlns:model="clr-namespace:Zenith.Models"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
+      xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
+      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls">
+    <Grid>
+        <Grid Width="450" Height="auto" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                    <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
+                </Button>
+                <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
+                <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
+            </Grid>
+            <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
+                <ComboBox x:Name="personComboBox" SelectedValue="{Binding PageModel.PersonId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource PersonnelOvertimePage.PersonnelComboBoxTitle}" IsEnabled="False"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonnelOvertimePage.DateDateTimeTitle}" IsEnabled="False"/>
+                <baseclasses:JTextBox x:Name="amountTextBox" Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource PersonnelOvertimePage.AmountTextBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonnelOvertimePage.CommentTextBoxTitle}" />
+
+                <Button Content="{DynamicResource PersonnelOvertimePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"  Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+
+                <Grid Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="{DynamicResource PersonnelOvertimePage.EditButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,8,16" Style="{StaticResource ConfirmButtonStyle}" Command="{Binding CreateOrUpdateCommand}" />
+                    <Button Content="{DynamicResource PersonnelOvertimePage.DeleteButtonContent}" Height="38" VerticalAlignment="Top" Margin="8,24,24,16" Grid.Column="1" Style="{StaticResource ConfirmButtonStyle}" Command="{Binding DeletePersonnelOvertimeCommand}" />
+                </Grid>
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</local:BaseCreateOrUpdatePage>

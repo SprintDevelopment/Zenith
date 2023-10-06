@@ -16,5 +16,12 @@ namespace Zenith.Assets.UI.BaseClasses
             set { base.SetValue(IsAbsentProperty, value); }
         }
         public static readonly DependencyProperty IsAbsentProperty = DependencyProperty.Register("IsAbsent", typeof(bool), typeof(JTimeSheetDayButton), new PropertyMetadata(false));
+
+        public string Overtime
+        {
+            get { return (string)base.GetValue(OvertimeProperty); }
+            set { base.SetValue(OvertimeProperty, value); }
+        }
+        public static readonly DependencyProperty OvertimeProperty = DependencyProperty.Register("Overtime", typeof(string), typeof(JTimeSheetDayButton), new PropertyMetadata(""));
     }
 }
