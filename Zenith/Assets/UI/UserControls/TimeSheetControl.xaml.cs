@@ -24,6 +24,7 @@ using Zenith.Assets.UI.BaseClasses;
 using DynamicData.Binding;
 using DynamicData;
 using Zenith.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Zenith.Assets.UI.UserControls
 {
@@ -39,7 +40,6 @@ namespace Zenith.Assets.UI.UserControls
 
             this.WhenActivated(d =>
             {
-                this.DataContext = ViewModel;
                 ViewModel.WhenAnyValue(vm => vm.DateTime)
                     .Do(dt =>
                     {
@@ -138,6 +138,9 @@ namespace Zenith.Assets.UI.UserControls
                     .Merge(Observable.FromEventPattern(switchToOvertimeMode, nameof(Button.Click)).Select(_ => false))
                     .Do(m => ViewModel.ShowInAbcenseMode = m)
                     .Subscribe().DisposeWith(d);
+
+                this.OneWayBind(ViewModel, vm => vm.AbsenceDays, v => v.absencsDaysTextBlock.Text, ad => $"{ad:n0} Off days").DisposeWith(d);
+                this.OneWayBind(ViewModel, vm => vm.Overtime, v => v.overtimeTextBlock.Text, o => o > 0 ? $"+{o:n2} Overtime" : "No overtime").DisposeWith(d);
             });
         }
 
