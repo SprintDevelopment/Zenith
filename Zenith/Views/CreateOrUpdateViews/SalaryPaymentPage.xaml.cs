@@ -20,13 +20,18 @@ namespace Zenith.Views.CreateOrUpdateViews
         {
             InitializeComponent();
 
-            ViewModel = new BaseCreateOrUpdateViewModel<SalaryPayment>(new SalaryPaymentRepository());
+            ViewModel = new SalaryPaymentCreateOrUpdateViewModel(new SalaryPaymentRepository());
 
             costCenterComboBox.ItemsSource = typeof(CostCenters).ToCollection();
 
             this.WhenActivated(d =>
             {
                 personnelComboBox.ItemsSource = new PersonRepository().All().ToList();
+
+                ViewModel.PageModel.WhenAnyValue(pm => pm.PersonId)
+                    .Select(pi => (pi > 0).Viz())
+                    .BindTo(this, v => v.statisticsGrid.Visibility)
+                    .DisposeWith(d);
             });
         }
     }

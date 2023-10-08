@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Windows.Controls;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
@@ -28,6 +29,22 @@ namespace Zenith.Views.CreateOrUpdateViews
             {
                 outgoCategoryComboBox.ItemsSource = new OutgoCategoryRepository().Find(oc => oc.CostCenter != CostCenters.Transportation).ToList();
                 companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
+
+                if (ViewModel.PageModel.OutgoType == OutgoTypes.UseConsumables)
+                {
+                    valueTextBox.IsEnabled = false;
+
+                    ViewModel.PageModel.WhenAnyValue(pm => pm.OutgoCategoryId)
+                        .Select(_ => ViewModel.PageModel.WhenAnyValue(pm => pm.Amount))
+                        .Switch()
+                        .Do(_ =>
+                        {
+                            var oc = outgoCategoryComboBox.SelectedItem as OutgoCategory ?? new OutgoCategory();
+                            ViewModel.PageModel.Value = ViewModel.PageModel.Amount * oc.ApproxUnitPrice;
+                        }).Subscribe().DisposeWith(d);
+                }
+                else
+                    valueTextBox.IsEnabled = true;
 
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.companyComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.factorNumberTextBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 
@@ -23,10 +24,13 @@ namespace Zenith.Repositories
             base.Add(cash);
 
             var valueToAddToBalanceAndMinusFromCredit = (cash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * cash.Value;
-            
-            var relatedCompany = CompanyRepository.Single(cash.CompanyId);
-            relatedCompany.CreditValue += valueToAddToBalanceAndMinusFromCredit;
-            CompanyRepository.Update(relatedCompany, cash.CompanyId);
+
+            if (cash.CompanyId.HasValue)
+            {
+                var relatedCompany = CompanyRepository.Single(cash.CompanyId);
+                relatedCompany.CreditValue += valueToAddToBalanceAndMinusFromCredit;
+                CompanyRepository.Update(relatedCompany, cash.CompanyId);
+            }
 
             var relatedAccount = AccountRepository.Single((short)(cash.CostCenter == CostCenters.Workshop ? 1 : cash.CostCenter == CostCenters.Transportation ? 2 : 3));
 
@@ -35,7 +39,10 @@ namespace Zenith.Repositories
                 relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
                 relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
             }
-            else if (cash.MoneyTransactionType == MoneyTransactionTypes.Cheque) { }
+            else if (cash.MoneyTransactionType == MoneyTransactionTypes.Outgo || cash.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || cash.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
+            {
+                relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
+            }
             else
             {
                 relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
@@ -48,12 +55,15 @@ namespace Zenith.Repositories
 
         public override Cash Update(Cash cash, dynamic cashId)
         {
-            var oldCash = Single(cashId);
+            var oldCash = Single((int)cashId);
 
-            var relatedCompany = CompanyRepository.Single(oldCash.CompanyId);
-            relatedCompany.CreditValue -= (oldCash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * oldCash.Value;
-            CompanyRepository.Update(relatedCompany, oldCash.CompanyId);
-           
+            if (oldCash.CompanyId.HasValue)
+            {
+                var relatedCompany = CompanyRepository.Single(oldCash.CompanyId);
+                relatedCompany.CreditValue -= (oldCash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * oldCash.Value;
+                CompanyRepository.Update(relatedCompany, oldCash.CompanyId);
+            }
+
             var differenceBetweenOldAndNewCash = (oldCash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * (cash.Value - oldCash.Value);
 
             var relatedAccount = AccountRepository.Single((short)(cash.CostCenter == CostCenters.Workshop ? 1 : cash.CostCenter == CostCenters.Transportation ? 2 : 3));
@@ -61,16 +71,22 @@ namespace Zenith.Repositories
 
             base.Update(cash, cash.CashId);
 
-            relatedCompany = CompanyRepository.Single(cash.CompanyId);
-            relatedCompany.CreditValue += (cash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * cash.Value;
-            CompanyRepository.Update(relatedCompany, cash.CompanyId);
+            if (cash.CompanyId.HasValue)
+            {
+                var relatedCompany = CompanyRepository.Single(cash.CompanyId);
+                relatedCompany.CreditValue += (cash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * cash.Value;
+                CompanyRepository.Update(relatedCompany, cash.CompanyId);
+            }
 
             if (cash.MoneyTransactionType == MoneyTransactionTypes.Direct)
             {
                 relatedAccount.Balance += differenceBetweenOldAndNewCash;
                 relatedAccount.CreditValue -= differenceBetweenOldAndNewCash;
             }
-            else if (cash.MoneyTransactionType == MoneyTransactionTypes.Cheque) { }
+            else if (cash.MoneyTransactionType == MoneyTransactionTypes.Outgo || cash.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || cash.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
+            {
+                relatedAccount.Balance += differenceBetweenOldAndNewCash;
+            }
             else
             {
                 relatedAccount.CreditValue -= differenceBetweenOldAndNewCash;
@@ -84,7 +100,7 @@ namespace Zenith.Repositories
 
         public override void RemoveRange(IEnumerable<Cash> cashes)
         {
-            cashes.GroupBy(c => c.CompanyId).Select(g => new
+            cashes.Where(c => c.CompanyId.HasValue).GroupBy(c => c.CompanyId).Select(g => new
             {
                 relatedCompany = CompanyRepository.Single(g.Key),
                 changes = g.Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value)
@@ -97,13 +113,14 @@ namespace Zenith.Repositories
             cashes.GroupBy(c => c.CostCenter).Select(g => new
             {
                 relatedAccount = AccountRepository.Single((short)(g.Key == CostCenters.Workshop ? 1 : g.Key == CostCenters.Transportation ? 2 : 3)),
-                changes = g.Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value),
-                directChanges = g.Where(c => c.MoneyTransactionType == MoneyTransactionTypes.Direct).Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value)
+                allChanges = g.Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value),
+                swapChanges = g.Where(c => c.MoneyTransactionType == MoneyTransactionTypes.Direct).Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value),
+                onlyPaidChanges = g.Where(c => c.MoneyTransactionType == MoneyTransactionTypes.Outgo || c.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || c.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
+                    .Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value)
             }).ToList().ForEach(x =>
             {
-                x.relatedAccount.CreditValue += x.changes;
-                x.relatedAccount.Balance += x.directChanges;
-                x.relatedAccount.CreditValue -= x.directChanges;
+                x.relatedAccount.CreditValue += x.allChanges - x.swapChanges - x.onlyPaidChanges;
+                x.relatedAccount.Balance -= x.swapChanges + x.onlyPaidChanges;
                 AccountRepository.Update(x.relatedAccount, x.relatedAccount.AccountId);
             });
 

@@ -27,7 +27,7 @@ namespace Zenith.Models
         public float ReservedAmount { get; set; }
 
         [Reactive]
-        public float ApproxPriceForEach { get; set; }
+        public float ApproxUnitPrice { get; set; }
 
         [Reactive]
         [Required(AllowEmptyStrings = true)]

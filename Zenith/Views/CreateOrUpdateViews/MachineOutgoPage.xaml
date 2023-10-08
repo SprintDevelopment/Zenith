@@ -31,14 +31,13 @@
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <ComboBox x:Name="outgoTypeComboBox" SelectedValue="{Binding PageModel.OutgoType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource OutgoPage.OutgoTypeComboBoxTitle}" IsEnabled="False"/>
                 <ComboBox x:Name="outgoCategoryComboBox" SelectedValue="{Binding PageModel.OutgoCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="OutgoCategoryId" Tag="{DynamicResource OutgoPage.OutgoCategoryComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource MachineOutgoPage.ValueTextBoxTitle}"/>
                 <Grid>
                     <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.AmountTextBoxTitle}"/>
                     <Grid x:Name="countUnitTitleGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24,0,24,0">
                         <TextBlock Text="{Binding SelectedItem.CountUnitTitle, ElementName=outgoCategoryComboBox}" Margin="8,4" Foreground="DarkRed"/>
                     </Grid>
-
                 </Grid>
+                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource MachineOutgoPage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource MachineOutgoPage.RelatedMachineComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource MachineOutgoPage.RelatedCompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource MachineOutgoPage.FactorNumberTextBoxTitle}"/>

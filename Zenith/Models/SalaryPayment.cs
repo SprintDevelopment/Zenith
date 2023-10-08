@@ -25,6 +25,9 @@ namespace Zenith.Models
         public float PaidValue { get; set; }
 
         [Reactive]
+        public float Credit { get; set; }
+
+        [Reactive]
         public CostCenters CostCenter { get; set; }
 
         [Reactive]

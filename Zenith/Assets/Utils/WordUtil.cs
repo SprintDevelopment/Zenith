@@ -44,8 +44,8 @@ namespace Zenith.Assets.Utils
 
                 var deliveriesTable = document.Tables[2];
 
-                sales.SelectMany(s => s.Items).SelectMany(si => si.Deliveries)
-                    .GroupBy(d => new { d.MachineId, d.SiteId, d.DeliveryNumber })
+                sales.SelectMany(s => s.Items).Where(si => si.Deliveries.Any()).SelectMany(si => si.Deliveries)
+                    .GroupBy(d => new { d.SiteId, d.DeliveryNumber })
                     .Select((deliveries, i) =>
                     {
                         var deliveriesCount = deliveries.Count();
@@ -59,12 +59,12 @@ namespace Zenith.Assets.Utils
                         newRow.Cells[6].Range.Text = deliveries.First().DeliveryNumber;
                         newRow.Cells[7].Range.Text = $"{deliveries.First().DateTime:yyyy-MM-dd}";
                         newRow.Cells[8].Range.Text = $"{deliveries.Sum(d => d.Count):n2} (m)";
-                        newRow.Cells[9].Range.Text = $"{deliveries.Sum(d => d.DeliveryFee + d.SaleItem.TotalPrice):n2}";
+                        newRow.Cells[9].Range.Text = $"{(deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice):n2}";
 
                         return deliveries;
                     }).ToList();
 
-                var totalPrice = sales.Sum(s => s.Items.Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
+                var totalPrice = sales.Sum(s => s.Items.Where(si => si.Deliveries.Any()).Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
 
                 var rowsContents = new Tuple<string, string>[]
                 {
@@ -93,7 +93,7 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"d:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 

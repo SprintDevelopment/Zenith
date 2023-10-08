@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 
@@ -48,21 +49,29 @@ namespace Zenith.Assets.Utils
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.BuyId));
 
             cfg.CreateMap<Outgo, Cash>()
-                .ForMember(cash => cash.TransferDirection, opt => opt.MapFrom(_ => TransferDirections.FromCompnay))
+                .ForMember(cash => cash.TransferDirection, opt => opt.MapFrom(_ => TransferDirections.ToCompany))
                 .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(order => order.OutgoType == OutgoTypes.Direct ? CostCenters.Workshop : CostCenters.Consumables))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
                 .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.OutgoType == OutgoTypes.Direct ? MoneyTransactionTypes.Outgo : MoneyTransactionTypes.BuyConsumables))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.OutgoId));
 
+            cfg.CreateMap<SalaryPayment, Cash>()
+                .ForMember(cash => cash.TransferDirection, opt => opt.MapFrom(_ => TransferDirections.ToCompany))
+                .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
+                .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.PaidValue))
+                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CostCenter == CostCenters.Workshop ? MoneyTransactionTypes.WorkshopSalary : MoneyTransactionTypes.TransportaionSalary))
+                .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.SalaryPaymentId));
+
             cfg.CreateMap<MachineOutgo, Cash>()
-                .ForMember(cash => cash.TransferDirection, opt => opt.MapFrom(_ => TransferDirections.FromCompnay))
+                .ForMember(cash => cash.TransferDirection, opt => opt.MapFrom(_ => TransferDirections.ToCompany))
                 .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(_ => CostCenters.Transportation))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
                 .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(_ => MoneyTransactionTypes.MachineOutgo))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.OutgoId));
 
+            cfg.CreateMap<SalaryStatisticsDto, SalaryStatisticsDto>();
         }));
     }
 }

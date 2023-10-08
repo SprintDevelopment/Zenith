@@ -16,7 +16,8 @@ namespace Zenith.Assets.Values.Enums
         Outgo,
         MachineOutgo,
         BuyConsumables,
-        Salary,
+        WorkshopSalary,
+        TransportaionSalary,
         Cheque
     }
 }

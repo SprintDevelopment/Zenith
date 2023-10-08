@@ -58,7 +58,8 @@
     <system:String x:Key="MoneyTransactionTypes.Outgo">Outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.MachineOutgo">Machine outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.BuyConsumables">Buy consumables</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Salary">Salary</system:String>
+    <system:String x:Key="MoneyTransactionTypes.WorkshopSalary">Workshop salary</system:String>
+    <system:String x:Key="MoneyTransactionTypes.TransportaionSalary">Transportaion salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.Cheque">Cheque</system:String>
 
     <!-- MONTHS -->
@@ -474,6 +475,7 @@
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
     <system:String x:Key="OutgoCategoryListPage.ReservedAmountColumnTextBlockText">Reserved amount</system:String>
     <system:String x:Key="OutgoCategoryListPage.CountUnitTitleColumnTextBlockText">Count unit title</system:String>
+    <system:String x:Key="OutgoCategoryListPage.ApproxUnitPriceTitleColumnTextBlockText">Approx. unit price</system:String>
     <system:String x:Key="OutgoCategoryListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
     
@@ -526,6 +528,11 @@
     <!-- SALARY PAYMENT PAGE -->
     <system:String x:Key="SalaryPaymentPage.PersonnelComboBoxTitle">Related personnel</system:String>
     <system:String x:Key="SalaryPaymentPage.PaidValueTextBoxTitle">Paid value</system:String>
+    <system:String x:Key="SalaryPaymentPage.LastPaymentAndDaysLastStringFormat">Last payment on '{0:yyyy-MM-dd}' => '{1:n0}' days ago</system:String>
+    <system:String x:Key="SalaryPaymentPage.OffDaysAndWorkingDaysStringFormat">'{0:n0}' days off => '{1:n0}' working days</system:String>
+    <system:String x:Key="SalaryPaymentPage.SalaryAndDailySalaryStringFormat">Salary = '{0:f2}' => Daily salary = '{1:f2}' => Working salary = '{2:f2}'</system:String>
+    <system:String x:Key="SalaryPaymentPage.CreditAndOvertimeStringFormat">Credit = '{0:f2}' | Overtime = '{1:f2}'</system:String>
+    <system:String x:Key="SalaryPaymentPage.OverallStringFormat">Overall = '{0:f2}' + '{1:f2}' + '{2:f2}' = '{3:f2}'</system:String>
     <system:String x:Key="SalaryPaymentPage.CostCenterComboBoxTitle">Cost Center</system:String>
     <system:String x:Key="SalaryPaymentPage.DateTimeTitle">Payment date time</system:String>
     <system:String x:Key="SalaryPaymentPage.CommentTextBoxTitle">Optional Comment</system:String>
@@ -534,7 +541,6 @@
     <!-- SALARY PAYMENT LIST PAGE -->
     <system:String x:Key="SalaryPaymentListPage.PersonnelColumnTextBlockText">Related personnel</system:String>
     <system:String x:Key="SalaryPaymentListPage.PaidValueColumnTextBlockText">Paid value</system:String>
-    <system:String x:Key="SalaryPaymentListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="SalaryPaymentListPage.DateTimeColumnTextBlockText">Payment date time</system:String>
     <system:String x:Key="SalaryPaymentListPage.CommentColumnTextBlockText">Comment</system:String>
 

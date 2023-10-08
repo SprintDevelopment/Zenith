@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231008051309_ChangeApproxPriceForEach")]
+    partial class ChangeApproxPriceForEach
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,7 +179,7 @@ namespace Zenith.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
-                    b.Property<short?>("CompanyId")
+                    b.Property<short>("CompanyId")
                         .HasColumnType("smallint");
 
                     b.Property<int>("CostCenter")
@@ -230,7 +233,7 @@ namespace Zenith.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
-                    b.Property<short?>("CompanyId")
+                    b.Property<short>("CompanyId")
                         .HasColumnType("smallint");
 
                     b.Property<int>("CostCenter")
@@ -835,9 +838,6 @@ namespace Zenith.Migrations
                     b.Property<int>("CostCenter")
                         .HasColumnType("int");
 
-                    b.Property<float>("Credit")
-                        .HasColumnType("real");
-
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
@@ -1058,7 +1058,9 @@ namespace Zenith.Migrations
                 {
                     b.HasOne("Zenith.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Company");
                 });
@@ -1067,7 +1069,9 @@ namespace Zenith.Migrations
                 {
                     b.HasOne("Zenith.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Company");
                 });

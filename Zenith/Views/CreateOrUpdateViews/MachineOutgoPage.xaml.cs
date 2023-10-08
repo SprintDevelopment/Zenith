@@ -30,6 +30,22 @@ namespace Zenith.Views.CreateOrUpdateViews
                 companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
                 machineComboBox.ItemsSource = new MachineRepository().All().ToList();
 
+                if (ViewModel.PageModel.OutgoType == OutgoTypes.UseConsumables)
+                {
+                    valueTextBox.IsEnabled = false;
+
+                    ViewModel.PageModel.WhenAnyValue(pm => pm.OutgoCategoryId)
+                        .Select(_ => ViewModel.PageModel.WhenAnyValue(pm => pm.Amount))
+                        .Switch()
+                        .Do(_ =>
+                        {
+                            var oc = outgoCategoryComboBox.SelectedItem as OutgoCategory ?? new OutgoCategory();
+                            ViewModel.PageModel.Value = ViewModel.PageModel.Amount * oc.ApproxUnitPrice;
+                        }).Subscribe().DisposeWith(d);
+                }
+                else
+                    valueTextBox.IsEnabled = true;
+
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.companyComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.factorNumberTextBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
             });

@@ -47,10 +47,7 @@ namespace Zenith.Repositories
                 .ForEach(m =>
                 {
                     MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1);
-                    //MaterialAvailabilityRepository.AddOrUpdate(m.MaterialId, m.UnitPrice, m.Count * -1);
                 });
-
-            //base.RemoveRange(buyItems);
         }
     }
 }

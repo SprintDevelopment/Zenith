@@ -24,11 +24,11 @@ namespace Zenith.Models
         public bool? TransferDirectionPlusValueToNullableBool { get; set; }
 
         [Reactive]
-        public short CompanyId { get; set; }
+        public short? CompanyId { get; set; }
 
         [ForeignKey(nameof(CompanyId))]
         [Reactive]
-        public virtual Company Company { get; set; }
+        public virtual Company? Company { get; set; }
 
         [Reactive]
         public float Value { get; set; }

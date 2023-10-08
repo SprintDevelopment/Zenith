@@ -60,10 +60,10 @@ namespace Zenith.Models
             this.ValidationRule(vm => vm.Value, value => value > 0, "Outgo value must be greater than 0");
             this.ValidationRule(vm => vm.Amount, amount => amount > 0, "Amount must be greater than 0");
 
-            this.WhenAnyValue(m => m.OutgoCategory)
-                .WhereNotNull()
-                .Do(oc => OutgoCategoryId = oc.OutgoCategoryId)
-                .Subscribe();
+            //this.WhenAnyValue(m => m.OutgoCategory)
+            //    .WhereNotNull()
+            //    .Do(oc => OutgoCategoryId = oc.OutgoCategoryId)
+            //    .Subscribe();
         }
 
         public override string ToString()
