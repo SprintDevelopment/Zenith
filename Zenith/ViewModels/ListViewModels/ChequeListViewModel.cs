@@ -18,16 +18,16 @@ namespace Zenith.ViewModels.ListViewModels
         public ChequeListViewModel(ChequeRepository repository, SearchBaseDto searchModel, IObservable<Func<Cheque, bool>> criteria)
             : base(repository, searchModel, criteria, PermissionTypes.Cheques)
         {
-            AddNewCommand = ReactiveCommand.CreateFromObservable<TransferDirections, Unit>(transferDirection =>
+            AddNewCommand = ReactiveCommand.CreateFromObservable<MoneyTransactionTypes, Unit>(moneyTransactionTyp =>
                 CreateCommand.Execute()
                 .Do(_ =>
                 {
-                    CreateUpdatePage.ViewModel.PageModel.TransferDirection = transferDirection;
+                    CreateUpdatePage.ViewModel.PageModel.MoneyTransactionType = moneyTransactionTyp;
                     CreateUpdatePage.ViewModel.PageModel.ChequeState = ChequeStates.NotDue;
                 }));
 
         }
 
-        public ReactiveCommand<TransferDirections, Unit> AddNewCommand { get; set; }
+        public ReactiveCommand<MoneyTransactionTypes, Unit> AddNewCommand { get; set; }
     }
 }

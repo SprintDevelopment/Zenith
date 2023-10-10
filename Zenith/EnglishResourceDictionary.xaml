@@ -12,6 +12,11 @@
     <system:String x:Key="AppLanguages.English">English</system:String>
     <system:String x:Key="AppLanguages.Persian">فارسی</system:String>
 
+    <!-- CASH STATES -->
+    <system:String x:Key="CashStates.DontCare">_</system:String>
+    <system:String x:Key="CashStates.NonCash">Non cash</system:String>
+    <system:String x:Key="CashStates.Cash">Cash</system:String>
+
     <!-- CHEQUE STATES -->
     <system:String x:Key="ChequeStates.DontCare">_</system:String>
     <system:String x:Key="ChequeStates.NotDue">Not due</system:String>
@@ -51,13 +56,20 @@
 
     <!-- MONEY TRANSACTION TYPES -->
     <system:String x:Key="MoneyTransactionTypes.DontCare">_</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Direct">Normal</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Buy">Buy</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Sale">Sale</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Delivery">Delivery</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Outgo">Outgo</system:String>
-    <system:String x:Key="MoneyTransactionTypes.MachineOutgo">Machine outgo</system:String>
-    <system:String x:Key="MoneyTransactionTypes.BuyConsumables">Buy consumables</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Recieve">Recieve</system:String>
+    <system:String x:Key="MoneyTransactionTypes.Payment">Payment</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCahBuy">Non cah buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CahBuy">Cah buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashSale">Non cash sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashSale">Cash sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashDelivery">Non cash delivery</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashDelivery">Cash delivery</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashOutgo">Non cash outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashOutgo">Cash outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashMachineOutgo">Non cash machine outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashMachineOutgo">Cash machine outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashBuyConsumables">Non cash buy consumables</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashBuyConsumables">Cash buy consumables</system:String>
     <system:String x:Key="MoneyTransactionTypes.WorkshopSalary">Workshop salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.TransportaionSalary">Transportaion salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.Cheque">Cheque</system:String>
@@ -218,6 +230,7 @@
 
     <!-- BUY PAGE -->
     <system:String x:Key="BuyPage.SellerCompanyComboBoxTitle">Seller company</system:String>
+    <system:String x:Key="BuyPage.CashStateComboBoxTitle">Cash state</system:String>
     <system:String x:Key="BuyPage.BuyDateTimeTitle">Buy date time</system:String>
     <system:String x:Key="BuyPage.CommentTextBoxTitle">Optional comment</system:String>
     <system:String x:Key="BuyPage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
@@ -361,6 +374,8 @@
     <!-- MACHINE OUTGO PAGE -->
     <system:String x:Key="MachineOutgoPage.RelatedMachineComboBoxTitle">Related machine</system:String>
     <system:String x:Key="MachineOutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
+    <system:String x:Key="MachineOutgoPage.OutgoTypeComboBoxTitle">Outgo type</system:String>
+    <system:String x:Key="MachineOutgoPage.CashStateComboBoxTitle">Cash state</system:String>
     <system:String x:Key="MachineOutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="MachineOutgoPage.ValueTextBoxTitle">Outgo value</system:String>
     <system:String x:Key="MachineOutgoPage.FactorNumberTextBoxTitle">Factor number</system:String>
@@ -446,6 +461,7 @@
     <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
     <system:String x:Key="OutgoPage.AmountTextBoxTitle">Amount</system:String>
     <system:String x:Key="OutgoPage.FactorNumberTextBoxTitle">Factor number</system:String>
+    <system:String x:Key="OutgoPage.CashStateComboBoxTitle">Cash state</system:String>
     <system:String x:Key="OutgoPage.DateTimeTitle">Outgo date time</system:String>
     <system:String x:Key="OutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoPage.ConfirmButtonContent">Confirm</system:String>
@@ -551,6 +567,7 @@
 
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>
+    <system:String x:Key="SalePage.CashStateComboBoxTitle">Cash state</system:String>
     <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
     <system:String x:Key="SalePage.CommentTextBoxTitle">Optional comment</system:String>
     <system:String x:Key="SalePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>

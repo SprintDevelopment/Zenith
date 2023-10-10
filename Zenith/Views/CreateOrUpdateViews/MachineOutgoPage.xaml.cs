@@ -23,6 +23,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             ViewModel = new BaseCreateOrUpdateViewModel<MachineOutgo>(new MachineOutgoRepository());
 
             outgoTypeComboBox.ItemsSource = typeof(OutgoTypes).ToCollection();
+            cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
 
             this.WhenActivated(d =>
             {

@@ -15,7 +15,7 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    public class Sale : Model
+    public class Sale : TransactionModel
     {
         [Key]
         [Reactive]

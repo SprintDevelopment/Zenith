@@ -32,7 +32,7 @@ namespace Zenith.Repositories.ReportRepositories
                      {
                          MachineName = machineName,
                          Title = "Delivery",
-                         TransferDirection = TransferDirections.FromCompnay,
+                         TransferDirectionSign = +1,
                          Value = d.DeliveryFee,
                          DateTime = d.DateTime,
                          MoreInfo = $"Company: {d.Site.Company.Name}, Site : {d.Site.Name}"
@@ -47,7 +47,7 @@ namespace Zenith.Repositories.ReportRepositories
                     {
                         MachineName = machineName,
                         Title = "Machine outgo",
-                        TransferDirection = TransferDirections.ToCompany,
+                        TransferDirectionSign = -1,
                         Value = mo.Value,
                         DateTime = mo.DateTime,
                         MoreInfo = $"Company: {mo.Company.Name}, Category : {mo.OutgoCategory.Title}"
@@ -58,7 +58,7 @@ namespace Zenith.Repositories.ReportRepositories
                 .OrderBy(r => r.DateTime)
                 .Select(r =>
                 {
-                    sum += (r.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * r.Value;
+                    sum += r.Value * r.TransferDirectionSign;
                     r.Remained = sum;
                     return r;
                 });

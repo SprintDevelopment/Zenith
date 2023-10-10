@@ -42,14 +42,14 @@ namespace Zenith.Repositories
             var cashForWorkshop = new Cash 
             {
                 CostCenter = CostCenters.Workshop,
-                MoneyTransactionType = MoneyTransactionTypes.Sale,
+                MoneyTransactionType = MoneyTransactionTypes.NonCashSale,
                 Value = sale.Items.Sum(si => si.TotalPrice)
             };
 
             var cashForTransportation = new Cash 
             {
                 CostCenter = CostCenters.Transportation,
-                MoneyTransactionType = MoneyTransactionTypes.Delivery,
+                MoneyTransactionType = MoneyTransactionTypes.NonCashDelivery,
                 Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee))
             };
 
@@ -84,7 +84,7 @@ namespace Zenith.Repositories
             });
 
             var relatedCashes = CashRepository
-                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.Sale || c.MoneyTransactionType == MoneyTransactionTypes.Delivery) && c.RelatedEntityId == sale.SaleId)
+                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale || c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && c.RelatedEntityId == sale.SaleId)
                 .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                 .Take(2);
             
@@ -119,7 +119,7 @@ namespace Zenith.Repositories
 
             base.RemoveRange(sales);
 
-            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Sale && salesIds.Contains(c.RelatedEntityId)).Take(2);
+            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale || c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && salesIds.Contains(c.RelatedEntityId)).Take(2);
             CashRepository.RemoveRange(relatedCashes);
         }
     }

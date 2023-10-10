@@ -58,7 +58,7 @@ namespace Zenith.Repositories
                     BuyItemRepository.Update(bi, bi.BuyItemId);
             });
 
-            var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Buy && c.RelatedEntityId == buy.BuyId)
+            var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCahBuy && c.RelatedEntityId == buy.BuyId)
                 .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                 .FirstOrDefault();
 
@@ -81,7 +81,7 @@ namespace Zenith.Repositories
 
             base.RemoveRange(buys);
 
-            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.Buy && buysIds.Contains(c.RelatedEntityId));
+            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCahBuy && buysIds.Contains(c.RelatedEntityId));
             CashRepository.RemoveRange(relatedCashes);
         }
     }

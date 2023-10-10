@@ -30,6 +30,7 @@
             </Grid>
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <ComboBox x:Name="outgoTypeComboBox" SelectedValue="{Binding PageModel.OutgoType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource OutgoPage.OutgoTypeComboBoxTitle}" IsEnabled="False"/>
+                <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource OutgoPage.CashStateComboBoxTitle}"/>
                 <ComboBox x:Name="outgoCategoryComboBox" SelectedValue="{Binding PageModel.OutgoCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="OutgoCategoryId" Tag="{DynamicResource OutgoPage.OutgoCategoryComboBoxTitle}"/>
                 <Grid>
                     <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.AmountTextBoxTitle}"/>

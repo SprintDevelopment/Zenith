@@ -8,7 +8,7 @@ using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
-    public class SalaryPayment : Model
+    public class SalaryPayment : TransactionModel
     {
         [Key]
         [Reactive]
@@ -40,6 +40,8 @@ namespace Zenith.Models
 
         public SalaryPayment()
         {
+            CashState = CashStates.Cash;
+
             this.ValidationRule(vm => vm.PersonId, pi => pi > 0, "Select personnel");
             this.ValidationRule(vm => vm.PaidValue, value => value > 0, "Paid value must be greater than 0");
         }

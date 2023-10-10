@@ -35,7 +35,6 @@ namespace Zenith.Views.ListViews
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
                 .Select(s => new Func<Cash, bool>(c => 
                     (c.Value > 0) && 
-                    (s.TransferDirection == TransferDirections.DontCare || c.TransferDirection == s.TransferDirection) &&
                     (s.CompanyId == 0 || c.CompanyId == s.CompanyId) &&
                     (s.MoneyTransactionType == MoneyTransactionTypes.DontCare || c.MoneyTransactionType == s.MoneyTransactionType) &&
                     (s.CostCenter == CostCenters.DontCare || c.CostCenter == s.CostCenter)));
@@ -55,10 +54,9 @@ namespace Zenith.Views.ListViews
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Do(_ =>
                     {
-                        ViewModel.SummaryItem.Value = ViewModel.ActiveList.Sum(i => i.Value * (i.TransferDirection == TransferDirections.FromCompnay ? +1 : -1));
+                        ViewModel.SummaryItem.Value = ViewModel.ActiveList.Sum(i => i.Value * i.MoneyTransactionType.ToChangeCoefficient().CompCredCoeff);
                     }).Do(_ =>
                     {
-                        ViewModel.SummaryItem.TransferDirection = ViewModel.SummaryItem.Value > 0 ? TransferDirections.FromCompnay : TransferDirections.ToCompany;
                         if (ViewModel.SummaryItem.Value < 0)
                             ViewModel.SummaryItem.Value *= -1;
                     }).Subscribe().DisposeWith(d);

@@ -82,6 +82,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 //Important
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItem = saleItem;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItemId = saleItem.SaleItemId;
+                deliveryCreateOrUpdatePage.ViewModel.PageModel.CashState = PageModel.CashState;
 
                 App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });

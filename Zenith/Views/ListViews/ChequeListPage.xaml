@@ -25,12 +25,12 @@
                 <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
-                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding AddNewCommand}" CommandParameter="{x:Static enums:TransferDirections.ToCompany}">
+                <!--<Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding AddNewCommand}" CommandParameter="{x:Static enums:TransferDirections.ToCompany}">
                     <Image Source="/Zenith;component/Resources/Images/Common/payment.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding AddNewCommand}" CommandParameter="{x:Static enums:TransferDirections.FromCompnay}">
                     <Image Source="/Zenith;component/Resources/Images/Common/receive.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
+                </Button>-->
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -100,7 +100,7 @@
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding TransferDirection, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:TransferDirections}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <!--<TextBlock HorizontalAlignment="Left" Text="{Binding TransferDirection, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:TransferDirections}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>-->
                             <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeNumber}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding ChequeValue, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeDate, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>

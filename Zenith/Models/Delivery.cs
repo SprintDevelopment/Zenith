@@ -9,7 +9,7 @@ using Zenith.Assets.Values.Constants;
 
 namespace Zenith.Models
 {
-    public class Delivery : Model
+    public class Delivery : TransactionModel
     {
         [Key]
         [Reactive]

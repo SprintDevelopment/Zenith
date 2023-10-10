@@ -8,9 +8,9 @@ namespace Zenith.Models.SearchModels
 {
     public class ChequeSearchModel : SearchBaseDto
     {
-        [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(TransferDirections))]
-        [Reactive]
-        public TransferDirections TransferDirection { get; set; } = TransferDirections.DontCare;
+        //[Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(TransferDirections))]
+        //[Reactive]
+        //public TransferDirections TransferDirection { get; set; } = TransferDirections.DontCare;
 
         [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(CompanyRepository))]
         [Reactive]

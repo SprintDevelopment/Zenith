@@ -18,12 +18,12 @@ namespace Zenith.ViewModels.ListViewModels
         public CashListViewModel(CashRepository repository, SearchBaseDto searchModel, IObservable<Func<Cash, bool>> criteria)
             : base(repository, searchModel, criteria, PermissionTypes.Cashes)
         {
-            AddNewCommand = ReactiveCommand.CreateFromObservable<TransferDirections, Unit>(transferDirection =>
+            AddNewCommand = ReactiveCommand.CreateFromObservable<MoneyTransactionTypes, Unit>(moneyTransactionType =>
                 CreateCommand.Execute()
-                .Do(_ => CreateUpdatePage.ViewModel.PageModel.TransferDirection = transferDirection));
+                .Do(_ => CreateUpdatePage.ViewModel.PageModel.MoneyTransactionType = moneyTransactionType));
 
         }
 
-        public ReactiveCommand<TransferDirections, Unit> AddNewCommand { get; set; }
+        public ReactiveCommand<MoneyTransactionTypes, Unit> AddNewCommand { get; set; }
     }
 }

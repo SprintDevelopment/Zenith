@@ -66,7 +66,7 @@ namespace Zenith.Repositories
 
             if (machineOutgo.OutgoType != OutgoTypes.UseConsumables)
             {
-                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.MachineOutgo && c.RelatedEntityId == machineOutgo.OutgoId)
+                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCashMachineOutgo && c.RelatedEntityId == machineOutgo.OutgoId)
                     .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                     .FirstOrDefault();
 
@@ -99,7 +99,7 @@ namespace Zenith.Repositories
 
             base.RemoveRange(machineOutgoes);
 
-            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.MachineOutgo || c.MoneyTransactionType == MoneyTransactionTypes.BuyConsumables) && machineOutgoesIds.Contains(c.RelatedEntityId));
+            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCashMachineOutgo && machineOutgoesIds.Contains(c.RelatedEntityId));
             CashRepository.RemoveRange(relatedCashes);
 
             var valueToSubtractFromConsumableAccountAndAddToTransportationAccountCredits = machineOutgoes.Where(o => o.OutgoType == OutgoTypes.UseConsumables)

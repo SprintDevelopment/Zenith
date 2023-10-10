@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231010111919_BulkChanges")]
+    partial class BulkChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +105,6 @@ namespace Zenith.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyId"));
-
-                    b.Property<int>("CashState")
-                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -323,9 +323,6 @@ namespace Zenith.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DeliveryId"));
 
-                    b.Property<int>("CashState")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(2048)
@@ -415,9 +412,6 @@ namespace Zenith.Migrations
 
                     b.Property<float>("Amount")
                         .HasColumnType("real");
-
-                    b.Property<int>("CashState")
-                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -622,9 +616,6 @@ namespace Zenith.Migrations
 
                     b.Property<float>("Amount")
                         .HasColumnType("real");
-
-                    b.Property<int>("CashState")
-                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -833,9 +824,6 @@ namespace Zenith.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalaryPaymentId"));
 
-                    b.Property<int>("CashState")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(2048)
@@ -873,9 +861,6 @@ namespace Zenith.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleId"));
-
-                    b.Property<int>("CashState")
-                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .IsRequired()

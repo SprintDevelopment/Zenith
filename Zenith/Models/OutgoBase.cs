@@ -12,7 +12,7 @@ using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
-    public class OutgoBase : Model
+    public class OutgoBase : TransactionModel
     {
         [Key]
         [Reactive]

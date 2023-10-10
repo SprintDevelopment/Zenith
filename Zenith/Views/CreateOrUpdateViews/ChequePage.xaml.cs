@@ -21,7 +21,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BaseCreateOrUpdateViewModel<Cheque>(new ChequeRepository());
-            transferDirectionsComboBox.ItemsSource = typeof(TransferDirections).ToCollection();
+            //transferDirectionsComboBox.ItemsSource = typeof(TransferDirections).ToCollection();
             chequeStatesComboBox.ItemsSource = typeof(ChequeStates).ToCollection();
 
             this.WhenActivated(d =>

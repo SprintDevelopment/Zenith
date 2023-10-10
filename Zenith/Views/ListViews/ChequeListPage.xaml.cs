@@ -34,7 +34,6 @@ namespace Zenith.Views.ListViews
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
                 .Select(s => new Func<Cheque, bool>(c =>
                     (c.Value > 0) &&
-                    (s.TransferDirection == TransferDirections.DontCare || c.TransferDirection == s.TransferDirection) &&
                     (s.CompanyId == 0 || c.CompanyId == s.CompanyId) &&
                     (s.MoneyTransactionType == MoneyTransactionTypes.DontCare || c.MoneyTransactionType == s.MoneyTransactionType) &&
                     (s.CostCenter == CostCenters.DontCare || c.CostCenter == s.CostCenter)));

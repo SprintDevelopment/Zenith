@@ -22,6 +22,9 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BuyCreateOrUpdateViewModel(new BuyRepository());
+            
+            cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
+           
             var CastedViewModel = (BuyCreateOrUpdateViewModel)ViewModel;
 
             this.WhenActivated(d =>

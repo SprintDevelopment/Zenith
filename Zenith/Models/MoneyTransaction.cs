@@ -16,12 +16,9 @@ namespace Zenith.Models
 {
     public class MoneyTransaction : Model
     {
-        [Reactive]
-        public TransferDirections TransferDirection { get; set; }
-
-        [NotMapped]
-        [Reactive]
-        public bool? TransferDirectionPlusValueToNullableBool { get; set; }
+        //[NotMapped]
+        //[Reactive]
+        //public bool? TransferDirectionPlusValueToNullableBool { get; set; }
 
         [Reactive]
         public short? CompanyId { get; set; }
@@ -55,9 +52,9 @@ namespace Zenith.Models
             this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select related company");
             this.ValidationRule(vm => vm.Value, v => v > 0, "Value must be greater than 0");
 
-            this.WhenAnyValue(m => m.Value, m => m.TransferDirection)
-                .Select(m => m.Item1 != 0 ? m.Item2 == TransferDirections.FromCompnay : (bool?)null)
-                .BindTo(this, m => m.TransferDirectionPlusValueToNullableBool);
+            //this.WhenAnyValue(m => m.Value, m => m.TransferDirection)
+            //    .Select(m => m.Item1 != 0 ? m.Item2 == TransferDirections.FromCompnay : (bool?)null)
+            //    .BindTo(this, m => m.TransferDirectionPlusValueToNullableBool);
         }
     }
 }

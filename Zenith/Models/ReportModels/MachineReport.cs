@@ -17,7 +17,7 @@ namespace Zenith.Models.ReportModels
         public string Title { get; set; }
 
         [Reactive]
-        public TransferDirections TransferDirection { get; set; }
+        public int TransferDirectionSign { get; set; }
 
         [Reactive]
         public float Value { get; set; }

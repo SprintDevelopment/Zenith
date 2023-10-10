@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 
@@ -23,30 +24,32 @@ namespace Zenith.Repositories
         {
             base.Add(cash);
 
-            var valueToAddToBalanceAndMinusFromCredit = (cash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * cash.Value;
+            var changeCoefficients = cash.MoneyTransactionType.ToChangeCoefficient();
 
             if (cash.CompanyId.HasValue)
             {
                 var relatedCompany = CompanyRepository.Single(cash.CompanyId);
-                relatedCompany.CreditValue += valueToAddToBalanceAndMinusFromCredit;
+                relatedCompany.CreditValue += cash.Value * changeCoefficients.CompCredCoeff;
                 CompanyRepository.Update(relatedCompany, cash.CompanyId);
             }
 
+            //if (cash.MoneyTransactionType == MoneyTransactionTypes.Direct)
+            //{
+            //    relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
+            //    relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
+            //}
+            //else if (cash.MoneyTransactionType == MoneyTransactionTypes.Outgo || cash.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || cash.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
+            //{
+            //    relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
+            //}
+            //else
+            //{
+            //    relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
+            //}
+            
             var relatedAccount = AccountRepository.Single((short)(cash.CostCenter == CostCenters.Workshop ? 1 : cash.CostCenter == CostCenters.Transportation ? 2 : 3));
-
-            if (cash.MoneyTransactionType == MoneyTransactionTypes.Direct)
-            {
-                relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
-                relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
-            }
-            else if (cash.MoneyTransactionType == MoneyTransactionTypes.Outgo || cash.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || cash.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
-            {
-                relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
-            }
-            else
-            {
-                relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
-            }
+            relatedAccount.Balance += cash.Value * changeCoefficients.AccBalanceCoeff;
+            relatedAccount.CreditValue += cash.Value * changeCoefficients.AccCredCoeff;
 
             AccountRepository.Update(relatedAccount, relatedAccount.AccountId);
 
@@ -56,42 +59,36 @@ namespace Zenith.Repositories
         public override Cash Update(Cash cash, dynamic cashId)
         {
             var oldCash = Single((int)cashId);
+            var changeCoefficients = oldCash.MoneyTransactionType.ToChangeCoefficient();
 
             if (oldCash.CompanyId.HasValue)
             {
                 var relatedCompany = CompanyRepository.Single(oldCash.CompanyId);
-                relatedCompany.CreditValue -= (oldCash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * oldCash.Value;
+                relatedCompany.CreditValue -= oldCash.Value * changeCoefficients.CompCredCoeff;
                 CompanyRepository.Update(relatedCompany, oldCash.CompanyId);
             }
 
-            var differenceBetweenOldAndNewCash = (oldCash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * (cash.Value - oldCash.Value);
 
             var relatedAccount = AccountRepository.Single((short)(cash.CostCenter == CostCenters.Workshop ? 1 : cash.CostCenter == CostCenters.Transportation ? 2 : 3));
+
+            relatedAccount.Balance -= oldCash.Value * changeCoefficients.AccBalanceCoeff;
+            relatedAccount.CreditValue -= oldCash.Value * changeCoefficients.AccCredCoeff;
+            AccountRepository.Update(relatedAccount, relatedAccount.AccountId);
 
 
             base.Update(cash, cash.CashId);
 
+            var newChangeCoefficients = cash.MoneyTransactionType.ToChangeCoefficient();
+
             if (cash.CompanyId.HasValue)
             {
                 var relatedCompany = CompanyRepository.Single(cash.CompanyId);
-                relatedCompany.CreditValue += (cash.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * cash.Value;
+                relatedCompany.CreditValue += cash.Value * newChangeCoefficients.CompCredCoeff;
                 CompanyRepository.Update(relatedCompany, cash.CompanyId);
             }
 
-            if (cash.MoneyTransactionType == MoneyTransactionTypes.Direct)
-            {
-                relatedAccount.Balance += differenceBetweenOldAndNewCash;
-                relatedAccount.CreditValue -= differenceBetweenOldAndNewCash;
-            }
-            else if (cash.MoneyTransactionType == MoneyTransactionTypes.Outgo || cash.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || cash.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
-            {
-                relatedAccount.Balance += differenceBetweenOldAndNewCash;
-            }
-            else
-            {
-                relatedAccount.CreditValue -= differenceBetweenOldAndNewCash;
-            }
-
+            relatedAccount.Balance += cash.Value * newChangeCoefficients.AccBalanceCoeff;
+            relatedAccount.CreditValue += cash.Value * newChangeCoefficients.AccCredCoeff;
             AccountRepository.Update(relatedAccount, relatedAccount.AccountId);
 
 
@@ -103,7 +100,7 @@ namespace Zenith.Repositories
             cashes.Where(c => c.CompanyId.HasValue).GroupBy(c => c.CompanyId).Select(g => new
             {
                 relatedCompany = CompanyRepository.Single(g.Key),
-                changes = g.Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value)
+                changes = g.Sum(c => c.Value * c.MoneyTransactionType.ToChangeCoefficient().CompCredCoeff)
             }).ToList().ForEach(x =>
             {
                 x.relatedCompany.CreditValue -= x.changes;
@@ -113,14 +110,12 @@ namespace Zenith.Repositories
             cashes.GroupBy(c => c.CostCenter).Select(g => new
             {
                 relatedAccount = AccountRepository.Single((short)(g.Key == CostCenters.Workshop ? 1 : g.Key == CostCenters.Transportation ? 2 : 3)),
-                allChanges = g.Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value),
-                swapChanges = g.Where(c => c.MoneyTransactionType == MoneyTransactionTypes.Direct).Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value),
-                onlyPaidChanges = g.Where(c => c.MoneyTransactionType == MoneyTransactionTypes.Outgo || c.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || c.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
-                    .Sum(c => (c.TransferDirection == TransferDirections.FromCompnay ? +1 : -1) * c.Value)
+                creditChanges = g.Sum(c => c.Value * c.MoneyTransactionType.ToChangeCoefficient().AccCredCoeff),
+                balanceChanges = g.Sum(c => c.Value * c.MoneyTransactionType.ToChangeCoefficient().AccBalanceCoeff),
             }).ToList().ForEach(x =>
             {
-                x.relatedAccount.CreditValue += x.allChanges - x.swapChanges - x.onlyPaidChanges;
-                x.relatedAccount.Balance -= x.swapChanges + x.onlyPaidChanges;
+                x.relatedAccount.CreditValue -= x.creditChanges;
+                x.relatedAccount.Balance -= x.balanceChanges;
                 AccountRepository.Update(x.relatedAccount, x.relatedAccount.AccountId);
             });
 

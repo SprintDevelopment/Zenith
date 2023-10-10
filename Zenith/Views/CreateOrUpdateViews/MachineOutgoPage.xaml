@@ -29,8 +29,9 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
-                <ComboBox x:Name="outgoTypeComboBox" SelectedValue="{Binding PageModel.OutgoType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource OutgoPage.OutgoTypeComboBoxTitle}" IsEnabled="False"/>
-                <ComboBox x:Name="outgoCategoryComboBox" SelectedValue="{Binding PageModel.OutgoCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="OutgoCategoryId" Tag="{DynamicResource OutgoPage.OutgoCategoryComboBoxTitle}"/>
+                <ComboBox x:Name="outgoTypeComboBox" SelectedValue="{Binding PageModel.OutgoType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MachineOutgoPage.OutgoTypeComboBoxTitle}" IsEnabled="False"/>
+                <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MachineOutgoPage.CashStateComboBoxTitle}"/>
+                <ComboBox x:Name="outgoCategoryComboBox" SelectedValue="{Binding PageModel.OutgoCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="OutgoCategoryId" Tag="{DynamicResource MachineOutgoPage.OutgoCategoryComboBoxTitle}"/>
                 <Grid>
                     <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.AmountTextBoxTitle}"/>
                     <Grid x:Name="countUnitTitleGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24,0,24,0">

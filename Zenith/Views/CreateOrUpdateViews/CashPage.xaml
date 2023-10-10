@@ -29,7 +29,7 @@
                 <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
             </Grid>
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
-                <ComboBox x:Name="transferDirectionsComboBox" SelectedValue="{Binding PageModel.TransferDirection, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" IsEnabled="False" Tag="{DynamicResource CashPage.TransferDirectionComboBoxTitle}"/>
+                <ComboBox x:Name="moneyTransactionTypesComboBox" SelectedValue="{Binding PageModel.MoneyTransactionType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" IsEnabled="False" Tag="{DynamicResource CashPage.TransferDirectionComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource CashPage.CompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource CashPage.ValueTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.IssueDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CashPage.IssueDateTimeTitle}"/>

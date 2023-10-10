@@ -22,7 +22,7 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             ViewModel = new BaseCreateOrUpdateViewModel<Cash>(new CashRepository());
 
-            transferDirectionsComboBox.ItemsSource = typeof(TransferDirections).ToCollection();
+            moneyTransactionTypesComboBox.ItemsSource = typeof(MoneyTransactionTypes).ToCollection();
 
             this.WhenActivated(d =>
             {
