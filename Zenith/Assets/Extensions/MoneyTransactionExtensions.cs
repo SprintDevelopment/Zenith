@@ -27,8 +27,8 @@ namespace Zenith.Assets.Extensions
                 MoneyTransactionTypes.NonCashMachineOutgo => new ChangeCoefficientsDto { CompCredCoeff = +1, AccCredCoeff = -1, AccBalanceCoeff = 0 },
                 MoneyTransactionTypes.CashMachineOutgo => new ChangeCoefficientsDto { CompCredCoeff = 0, AccCredCoeff = 0, AccBalanceCoeff = -1 },
 
-                //MoneyTransactionTypes.NonCashBuyConsumables => new ChangeCoefficientsDto { CompCredCoeff = +1, AccCredCoeff = -1, AccBalanceCoeff = 0 },
-                //MoneyTransactionTypes.CashBuyConsumables => new ChangeCoefficientsDto { CompCredCoeff = 0, AccCredCoeff = 0, AccBalanceCoeff = -1 },
+                MoneyTransactionTypes.NonCashBuyConsumables => new ChangeCoefficientsDto { CompCredCoeff = +1, AccCredCoeff = -1, AccBalanceCoeff = 0 },
+                MoneyTransactionTypes.CashBuyConsumables => new ChangeCoefficientsDto { CompCredCoeff = 0, AccCredCoeff = 0, AccBalanceCoeff = -1 },
 
                 MoneyTransactionTypes.WorkshopSalary => new ChangeCoefficientsDto { CompCredCoeff = 0, AccCredCoeff = 0, AccBalanceCoeff = -1 },
                 MoneyTransactionTypes.TransportaionSalary => new ChangeCoefficientsDto { CompCredCoeff = 0, AccCredCoeff = 0, AccBalanceCoeff = -1 },
