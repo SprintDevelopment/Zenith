@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
@@ -64,7 +65,10 @@ namespace Zenith.Repositories
 
             if (outgo.OutgoType != OutgoTypes.UseConsumables)
             {
-                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCashOutgo && c.RelatedEntityId == outgo.OutgoId)
+                var relatedCash = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashOutgo ||
+                                                          c.MoneyTransactionType == MoneyTransactionTypes.NonCashOutgo ||
+                                                          c.MoneyTransactionType == MoneyTransactionTypes.CashBuyConsumables ||
+                                                          c.MoneyTransactionType == MoneyTransactionTypes.NonCashBuyConsumables) && c.RelatedEntityId == outgo.OutgoId)
                     .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                     .FirstOrDefault();
 
@@ -97,7 +101,10 @@ namespace Zenith.Repositories
 
             base.RemoveRange(outgoes);
 
-            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCashOutgo && outgoesIds.Contains(c.RelatedEntityId));
+            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashOutgo ||
+                                                          c.MoneyTransactionType == MoneyTransactionTypes.NonCashOutgo ||
+                                                          c.MoneyTransactionType == MoneyTransactionTypes.CashBuyConsumables ||
+                                                          c.MoneyTransactionType == MoneyTransactionTypes.NonCashBuyConsumables) && outgoesIds.Contains(c.RelatedEntityId));
             CashRepository.RemoveRange(relatedCashes);
 
             var valueToSubtractFromConsumableAccountAndAddToWorkshopAccountCredits = outgoes.Where(o => o.OutgoType == OutgoTypes.UseConsumables)

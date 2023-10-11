@@ -34,6 +34,15 @@ namespace Zenith.ViewModels.ListViewModels
             Repository = repository;
             SearchModel = searchModel;
 
+            repository._context.ChangeTracker.DetectedEntityChanges += (s, e) =>
+            {
+                if(e.Entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified && e.Entry.Entity.GetType() == typeof(T)) 
+                {
+                    //e.Entry.Reload();
+                    RefreshSourceList(((T)e.Entry.Entity).GetKeyPropertyValue()); 
+                }
+            };
+
             var allItemsSelectedString = App.MainViewModel.Language == AppLanguages.English ?
                 " , all items selected)" : " ، تمامی موارد انتخاب شده)";
 
@@ -53,7 +62,7 @@ namespace Zenith.ViewModels.ListViewModels
                 }
                 else
                 {
-                    ItemsStatistics += string.Format(nItemsSelectedStringFormat,selectedItemsCount);
+                    ItemsStatistics += string.Format(nItemsSelectedStringFormat, selectedItemsCount);
                     SelectionMode = SelectionModes.SomeItemsSelected;
                 }
             };
@@ -92,7 +101,7 @@ namespace Zenith.ViewModels.ListViewModels
             RemoveCommand = ReactiveCommand.Create<T, bool>(_ =>
             {
                 var selectedItemsCount = ActiveList.Count(x => x.IsSelected);
-                var titleTextAndChoices = new 
+                var titleTextAndChoices = new
                 {
                     titleSingle = App.MainViewModel.Language == AppLanguages.English ? $"Deleting one {singleMultipleTitles.single}" : $"حذف یک {singleMultipleTitles.single}",
                     titleMultiple = App.MainViewModel.Language == AppLanguages.English ? $"Deleting multiple {singleMultipleTitles.multiple}" : $"حذف چند {singleMultipleTitles.single}",
@@ -156,13 +165,7 @@ namespace Zenith.ViewModels.ListViewModels
 
                 createUpdateDisposable = CreateUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
                 {
-                    if (!changeSet.IsNullOrEmpty())
-                    {
-                        changeSet.FirstOrDefault().IsSelected = itemToUpdate.IsSelected;
-                        SourceList.Replace(itemToUpdate, changeSet.FirstOrDefault());
-                        //MapperUtil.Mapper.Map(changeSet.FirstOrDefault(), itemToUpdate);
-                        searchModel.OnlyForRefreshAfterUpdate++;
-                    }
+                    //RefreshSourceList(changeSet);
 
                     App.MainViewModel.CreateUpdatePageReturnedCommand.Execute().Subscribe();
                 });
@@ -178,7 +181,7 @@ namespace Zenith.ViewModels.ListViewModels
             });
 
             //searchModel.Title = $"Search in {modelAttributes.MultipleResourceName}";
-            InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ =>App.MainViewModel.InitiateSearchCommand.Execute(searchModel));
+            InitiateSearchCommand = ReactiveCommand.CreateFromObservable<Unit, SearchBaseDto>(_ => App.MainViewModel.InitiateSearchCommand.Execute(searchModel));
 
             DisposeCommand = ReactiveCommand.Create<Unit>(_ =>
             {
@@ -190,6 +193,29 @@ namespace Zenith.ViewModels.ListViewModels
                 SearchCommand?.Dispose();
                 removeDisposable?.Dispose();
             });
+        }
+
+        private void RefreshSourceList(dynamic entityId)
+        {
+            T updatedEntity = Repository.Single(entityId);
+            //if (!changeSet.IsNullOrEmpty())
+            //{
+            //    var changeSetKeyValues = changeSet.Select(c =>
+            //    {
+                    var itemToUpdate = SourceList.Items.FirstOrDefault(item => item.GetKeyPropertyValue().ToString() == updatedEntity.GetKeyPropertyValue().ToString());
+                    if (itemToUpdate != null)
+                    {
+                //changeSet.FirstOrDefault().IsSelected = itemToUpdate.IsSelected;
+                //SourceList.Replace(itemToUpdate, changeSet.FirstOrDefault());
+                updatedEntity.IsSelected = itemToUpdate.IsSelected;
+                        SourceList.Replace(itemToUpdate, updatedEntity);
+                    }
+
+                //    return c;
+                //}).ToList();
+
+                SearchModel.OnlyForRefreshAfterUpdate++;
+            //}
         }
 
         public SourceList<T> SourceList { get; set; } = new SourceList<T>();

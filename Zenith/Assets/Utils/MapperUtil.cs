@@ -41,7 +41,7 @@ namespace Zenith.Assets.Utils
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.SaleId));
 
             cfg.CreateMap<Buy, Cash>()
-                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CashState == CashStates.Cash ? MoneyTransactionTypes.CahBuy : MoneyTransactionTypes.NonCahBuy))
+                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CashState == CashStates.Cash ? MoneyTransactionTypes.CashBuy : MoneyTransactionTypes.NonCashBuy))
                 .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(_ => CostCenters.Workshop))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Items.Sum(bi => bi.TotalPrice)))

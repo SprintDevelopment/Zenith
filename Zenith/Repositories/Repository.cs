@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -16,13 +17,13 @@ namespace Zenith.Repositories
 {
     public class Repository<T> where T : Model, new()
     {
-        protected static ApplicationDbContext _context;
+        public ApplicationDbContext _context;
         public Repository()
         {
-            if (_context == null)
-            {
-                _context = new DbContextFactory().CreateDbContext(null);
-            }
+            if (App.Context is null)
+                App.Context = new DbContextFactory().CreateDbContext(null);
+
+            _context = App.Context;
         }
 
         public virtual IEnumerable<T> All() => _context.Set<T>().AsEnumerable();

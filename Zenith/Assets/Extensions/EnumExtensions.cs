@@ -29,5 +29,10 @@ namespace Zenith.Assets.Extensions
         {
             return ((string)App.Current.Resources[$"{enumValue.GetType().Name}.{enumValue}"]).Replace("_", "");
         }
+
+        //public static bool ExistsIn(this Enum enumValue, params Enum[] enumValues) 
+        //{
+        //    return enumValues.Any(ev => ev == enumValue);
+        //}
     }
 }

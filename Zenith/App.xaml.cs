@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Zenith.Assets.Utils;
+using Zenith.Data;
 using Zenith.ViewModels;
 
 namespace Zenith
@@ -16,6 +17,7 @@ namespace Zenith
     public partial class App : Application
     {
         public static MainViewModel MainViewModel { get; set; } = new MainViewModel();
+        public static ApplicationDbContext Context { get; set; } 
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {

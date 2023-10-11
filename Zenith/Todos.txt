@@ -1,9 +1,6 @@
-﻿یک شماره فاکتور برای هزینه ها
-یک گزینه برای هزینه ها که نقدی پرداخت شده
-تاریخ شرو ع به کار برای پرسنل
-برای محاسبه حقوق راننده و پرسنل به طور کلی در سود و زیان
-هنوز اینتگریتی مشکل دارد
-در صورتی که تعداد دلیورهایی برای یک سایت و یک شماره دلیوری وجود داشت، مجموعشان نمایش داده شود
-رفرش حل شود
-
-Refresh - 30m
+﻿what can I do for KACHARA
+~ define income model, repo
+~ define income category model, repo
+~ define 2 new money transaction types + related logics in cash repo
+~ add income category list page, cu page and income list and cu pages
+~ continue in paper.

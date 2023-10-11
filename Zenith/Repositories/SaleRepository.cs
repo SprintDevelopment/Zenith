@@ -5,6 +5,7 @@ using Zenith.Assets.Utils;
 using System.Collections.Generic;
 using Zenith.Assets.Values.Enums;
 using AutoMapper;
+using Zenith.Assets.Extensions;
 
 namespace Zenith.Repositories
 {
@@ -84,7 +85,10 @@ namespace Zenith.Repositories
             });
 
             var relatedCashes = CashRepository
-                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale || c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && c.RelatedEntityId == sale.SaleId)
+                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashSale || 
+                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale ||
+                            c.MoneyTransactionType == MoneyTransactionTypes.CashDelivery ||
+                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && c.RelatedEntityId == sale.SaleId)
                 .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                 .Take(2);
             
@@ -119,7 +123,10 @@ namespace Zenith.Repositories
 
             base.RemoveRange(sales);
 
-            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale || c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && salesIds.Contains(c.RelatedEntityId)).Take(2);
+            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashSale ||
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale ||
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.CashDelivery ||
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && salesIds.Contains(c.RelatedEntityId)).Take(2);
             CashRepository.RemoveRange(relatedCashes);
         }
     }

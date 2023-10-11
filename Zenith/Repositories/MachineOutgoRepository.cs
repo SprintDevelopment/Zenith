@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
@@ -50,7 +51,7 @@ namespace Zenith.Repositories
             }
 
             if (machineOutgo.OutgoType != OutgoTypes.Direct)
-                OutgoCategoryRepository.UpdateAmount(machineOutgo.OutgoCategoryId, machineOutgo.Amount * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), machineOutgo.Value * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
+                OutgoCategoryRepository.UpdateAmount(machineOutgo.OutgoCategoryId, machineOutgo.Amount * -1, machineOutgo.Value * -1);
 
             return machineOutgo;
         }
@@ -60,13 +61,13 @@ namespace Zenith.Repositories
             var oldMachineOutgo = Single((int)machineOutgoId);
 
             if (machineOutgo.OutgoType != OutgoTypes.Direct)
-                OutgoCategoryRepository.UpdateAmount(oldMachineOutgo.OutgoCategoryId, oldMachineOutgo.Amount * (oldMachineOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), oldMachineOutgo.Value * (oldMachineOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1));
+                OutgoCategoryRepository.UpdateAmount(oldMachineOutgo.OutgoCategoryId, oldMachineOutgo.Amount * 1, oldMachineOutgo.Value * 1);
 
             base.Update(machineOutgo, machineOutgo.OutgoId);
 
             if (machineOutgo.OutgoType != OutgoTypes.UseConsumables)
             {
-                var relatedCash = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCashMachineOutgo && c.RelatedEntityId == machineOutgo.OutgoId)
+                var relatedCash = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashMachineOutgo || c.MoneyTransactionType == MoneyTransactionTypes.NonCashMachineOutgo) && c.RelatedEntityId == machineOutgo.OutgoId)
                     .Select(c => MapperUtil.Mapper.Map<Cash>(c))
                     .FirstOrDefault();
 
@@ -88,7 +89,7 @@ namespace Zenith.Repositories
             }
 
             if (machineOutgo.OutgoType != OutgoTypes.Direct)
-                OutgoCategoryRepository.UpdateAmount(machineOutgo.OutgoCategoryId, machineOutgo.Amount * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), machineOutgo.Value * (machineOutgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
+                OutgoCategoryRepository.UpdateAmount(machineOutgo.OutgoCategoryId, machineOutgo.Amount * -1, machineOutgo.Value * -1);
 
             return machineOutgo;
         }
@@ -99,7 +100,7 @@ namespace Zenith.Repositories
 
             base.RemoveRange(machineOutgoes);
 
-            var relatedCashes = CashRepository.Find(c => c.MoneyTransactionType == MoneyTransactionTypes.NonCashMachineOutgo && machineOutgoesIds.Contains(c.RelatedEntityId));
+            var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashMachineOutgo || c.MoneyTransactionType == MoneyTransactionTypes.NonCashMachineOutgo) && machineOutgoesIds.Contains(c.RelatedEntityId));
             CashRepository.RemoveRange(relatedCashes);
 
             var valueToSubtractFromConsumableAccountAndAddToTransportationAccountCredits = machineOutgoes.Where(o => o.OutgoType == OutgoTypes.UseConsumables)
@@ -116,7 +117,7 @@ namespace Zenith.Repositories
 
             machineOutgoes.Where(mo => mo.OutgoType != OutgoTypes.Direct)
                 .ToList()
-                .ForEach(o => OutgoCategoryRepository.UpdateAmount(o.OutgoCategoryId, o.Amount * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), o.Value * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1)));
+                .ForEach(o => OutgoCategoryRepository.UpdateAmount(o.OutgoCategoryId, o.Amount * 1, o.Value * 1));
         }
     }
 }

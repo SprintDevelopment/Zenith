@@ -14,7 +14,7 @@ namespace Zenith.Models
 
         public TransactionModel()
         {
-            this.ValidationRule(vm => vm.CashState, cs => cs == CashStates.DontCare, "Select cash state");
+            this.ValidationRule(vm => vm.CashState, cs => cs != CashStates.DontCare, "Select cash state");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Zenith.Models
         public virtual OutgoCategory OutgoCategory { get; set; }
 
         [Reactive]
-        public OutgoTypes OutgoType { get; set; }
+        public OutgoTypes OutgoType { get; set; } = OutgoTypes.DontCare;
 
         [Reactive]
         public short? CompanyId { get; set; }
@@ -60,10 +60,13 @@ namespace Zenith.Models
             this.ValidationRule(vm => vm.Value, value => value > 0, "Outgo value must be greater than 0");
             this.ValidationRule(vm => vm.Amount, amount => amount > 0, "Amount must be greater than 0");
 
-            //this.WhenAnyValue(m => m.OutgoCategory)
-            //    .WhereNotNull()
-            //    .Do(oc => OutgoCategoryId = oc.OutgoCategoryId)
-            //    .Subscribe();
+            this.WhenAnyValue(m => m.OutgoType)
+                .Skip(1)
+                .Do(ot =>
+                {
+                    if (ot != OutgoTypes.UseConsumables)
+                        this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select company");
+                }).Subscribe();
         }
 
         public override string ToString()
