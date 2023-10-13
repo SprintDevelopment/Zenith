@@ -23,6 +23,11 @@
     <system:String x:Key="ChequeStates.Passed">Passed</system:String>
     <system:String x:Key="ChequeStates.Overdue">Overdue</system:String>
 
+    <!-- CHEQUE TYPES -->
+    <system:String x:Key="ChequeTypes.DontCare">_</system:String>
+    <system:String x:Key="ChequeTypes.Paid">Paid</system:String>
+    <system:String x:Key="ChequeTypes.Recieved">Recieved</system:String>
+
     <!-- COMPANY TYPES -->
     <system:String x:Key="CompanyTypes.DontCare">_</system:String>
     <system:String x:Key="CompanyTypes.Buyer">Buyer</system:String>
@@ -58,10 +63,13 @@
     <system:String x:Key="MoneyTransactionTypes.DontCare">_</system:String>
     <system:String x:Key="MoneyTransactionTypes.Recieve">Recieve</system:String>
     <system:String x:Key="MoneyTransactionTypes.Payment">Payment</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCahBuy">Non cah buy</system:String>
-    <system:String x:Key="MoneyTransactionTypes.CahBuy">Cah buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashBuy">Non cash buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashBuy">Cash buy</system:String>
     <system:String x:Key="MoneyTransactionTypes.NonCashSale">Non cash sale</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashSale">Cash sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashIndirectSale">Non cash indirect sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashIndirectBuy">Non cash indirect buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashIndirectSale">Cash indirect sale</system:String>
     <system:String x:Key="MoneyTransactionTypes.NonCashDelivery">Non cash delivery</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashDelivery">Cash delivery</system:String>
     <system:String x:Key="MoneyTransactionTypes.NonCashOutgo">Non cash outgo</system:String>
@@ -70,9 +78,16 @@
     <system:String x:Key="MoneyTransactionTypes.CashMachineOutgo">Cash machine outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.NonCashBuyConsumables">Non cash buy consumables</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashBuyConsumables">Cash buy consumables</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashIncome">Non cash income</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashIncome">Cash income</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashMachineIncome">Non cash machine income</system:String>
+    <system:String x:Key="MoneyTransactionTypes.CashMachineIncome">Cash machine income</system:String>
     <system:String x:Key="MoneyTransactionTypes.WorkshopSalary">Workshop salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.TransportaionSalary">Transportaion salary</system:String>
-    <system:String x:Key="MoneyTransactionTypes.Cheque">Cheque</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NotPassedRecievedCheque">Not passred recieved cheque</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NotPassedPaidCheque">Not passed paid cheque</system:String>
+    <system:String x:Key="MoneyTransactionTypes.PassedRecievedCheque">Passed recieved cheque</system:String>
+    <system:String x:Key="MoneyTransactionTypes.PassedPaidCheque">Passed paid cheque</system:String>
 
     <!-- MONTHS -->
     <system:String x:Key="Months.DontCare">_</system:String>
@@ -113,8 +128,11 @@
     <system:String x:Key="PermissionTypes.Mixtures">Mixtures</system:String>
     <system:String x:Key="PermissionTypes.Machines">Machines</system:String>
     <system:String x:Key="PermissionTypes.MachineOutgoes">Machine outgoes</system:String>
+    <system:String x:Key="PermissionTypes.MachineIncomes">Machine incomes</system:String>
     <system:String x:Key="PermissionTypes.Outgoes">Outgoes</system:String>
-    <system:String x:Key="PermissionTypes.OutgoCategories">Outgo Categories</system:String>
+    <system:String x:Key="PermissionTypes.Incomes">Incomes</system:String>
+    <system:String x:Key="PermissionTypes.OutgoCategories">Outgo categories</system:String>
+    <system:String x:Key="PermissionTypes.IncomeCategories">Income categories</system:String>
     <system:String x:Key="PermissionTypes.Personnel">Personnel</system:String>
     <system:String x:Key="PermissionTypes.SalaryPayments">Salary payments</system:String>
     <system:String x:Key="PermissionTypes.MachineReport">Machine report</system:String>
@@ -122,11 +140,6 @@
     <system:String x:Key="PermissionTypes.SaleProfitReport">Sale profit report</system:String>
     <system:String x:Key="PermissionTypes.Users">Users</system:String>
     <system:String x:Key="PermissionTypes.Notes">Notes</system:String>
-
-    <!-- TRANSFER DIRECTIONS -->
-    <system:String x:Key="TransferDirections.DontCare">_</system:String>
-    <system:String x:Key="TransferDirections.FromCompnay">Recieved</system:String>
-    <system:String x:Key="TransferDirections.ToCompany">Paid</system:String>
 
     <!-- SINGLE & MULTIPLE RESOURCE NAMES -->
     <system:String x:Key="SingleResources.Account">Account</system:String>
@@ -147,6 +160,8 @@
     <system:String x:Key="MultipleResources.Machine">Machines</system:String>
     <system:String x:Key="SingleResources.MachineOutgo">Machine outgo</system:String>
     <system:String x:Key="MultipleResources.MachineOutgo">Machine outgoes</system:String>
+    <system:String x:Key="SingleResources.MachineIncome">Machine income</system:String>
+    <system:String x:Key="MultipleResources.MachineIncome">Machine incomes</system:String>
     <system:String x:Key="SingleResources.Material">Material</system:String>
     <system:String x:Key="MultipleResources.Material">Materials</system:String>
     <system:String x:Key="SingleResources.Mixture">Mixture</system:String>
@@ -159,6 +174,10 @@
     <system:String x:Key="MultipleResources.Outgo">Outgoes</system:String>
     <system:String x:Key="SingleResources.OutgoCategory">Outgo category</system:String>
     <system:String x:Key="MultipleResources.OutgoCategory">Outgo categories</system:String>
+    <system:String x:Key="SingleResources.Income">Income</system:String>
+    <system:String x:Key="MultipleResources.Income">Incomes</system:String>
+    <system:String x:Key="SingleResources.IncomeCategory">Income category</system:String>
+    <system:String x:Key="MultipleResources.IncomeCategory">Income categories</system:String>
     <system:String x:Key="SingleResources.Person">Personnel</system:String>
     <system:String x:Key="MultipleResources.Person">Personnel</system:String>
     <system:String x:Key="SingleResources.SalaryPayment">Salary payment</system:String>
@@ -196,10 +215,13 @@
     <system:String x:Key="MainWindow.MaterialsSubMenuItem">Materials</system:String>
     <system:String x:Key="MainWindow.MixturesSubMenuItem">Mixtures</system:String>
     <system:String x:Key="MainWindow.MachinesSubMenuItem">Machines</system:String>
-    <system:String x:Key="MainWindow.OutgoesMenuItem">Outgoes</system:String>
+    <system:String x:Key="MainWindow.OutgoesAndIncomesMenuItem">Outgoes and incomes</system:String>
     <system:String x:Key="MainWindow.OutgoesSubMenuItem">Outgoes</system:String>
     <system:String x:Key="MainWindow.MachineOutgoesSubMenuItem">Machine outgoes</system:String>
     <system:String x:Key="MainWindow.OutgoCategoriesSubMenuItem">Outgo categories</system:String>
+    <system:String x:Key="MainWindow.IncomesSubMenuItem">Incomes</system:String>
+    <system:String x:Key="MainWindow.MachineIncomesSubMenuItem">Machine incomes</system:String>
+    <system:String x:Key="MainWindow.IncomeCategoriesSubMenuItem">Income categories</system:String>
     <system:String x:Key="MainWindow.PersonnelMenuItem">Personnel and salary</system:String>
     <system:String x:Key="MainWindow.PersonnelSubMenuItem">Personnel</system:String>
     <system:String x:Key="MainWindow.SalaryPaymentsSubMenuItem">Salary payments</system:String>
@@ -273,7 +295,7 @@
     <system:String x:Key="CashSearchModel.CostCenter">Cost center</system:String>
 
     <!-- CHEQUE PAGE -->
-    <system:String x:Key="ChequePage.TransferDirectionComboBoxTitle">Transfer direction</system:String>
+    <system:String x:Key="ChequePage.ChequeTypeComboBoxTitle">Cheque type</system:String>
     <system:String x:Key="ChequePage.CompanyComboBoxTitle">Company</system:String>
     <system:String x:Key="ChequePage.ChequeNumberTextBoxTitle">Cheque number</system:String>
     <system:String x:Key="ChequePage.ChequeValueTextBoxTitle">Cheque value</system:String>
@@ -382,6 +404,17 @@
     <system:String x:Key="MachineOutgoPage.DateTimeTitle">Outgo date time</system:String>
     <system:String x:Key="MachineOutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MachineOutgoPage.ConfirmButtonContent">Confirm</system:String>
+    
+    <!-- MACHINE INCOME PAGE -->
+    <system:String x:Key="MachineIncomePage.RelatedMachineComboBoxTitle">Related machine</system:String>
+    <system:String x:Key="MachineIncomePage.RelatedCompanyComboBoxTitle">Related company</system:String>
+    <system:String x:Key="MachineIncomePage.CashStateComboBoxTitle">Cash state</system:String>
+    <system:String x:Key="MachineIncomePage.IncomeCategoryComboBoxTitle">Income category</system:String>
+    <system:String x:Key="MachineIncomePage.ValueTextBoxTitle">Income value</system:String>
+    <system:String x:Key="MachineIncomePage.FactorNumberTextBoxTitle">Factor number</system:String>
+    <system:String x:Key="MachineIncomePage.DateTimeTitle">Income date time</system:String>
+    <system:String x:Key="MachineIncomePage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="MachineIncomePage.ConfirmButtonContent">Confirm</system:String>
 
     <!-- MACHINE OUTGO LIST PAGE -->
     <system:String x:Key="MachineOutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
@@ -391,11 +424,25 @@
     <system:String x:Key="MachineOutgoListPage.RelatedMachineColumnTextBlockText">Related machine</system:String>
     <system:String x:Key="MachineOutgoListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
 
+    <!-- MACHINE INCOME LIST PAGE -->
+    <system:String x:Key="MachineIncomeListPage.IncomeCategoryColumnTextBlockText">Income category</system:String>
+    <system:String x:Key="MachineIncomeListPage.ValueColumnTextBlockText">Income value</system:String>
+    <system:String x:Key="MachineIncomeListPage.AmountColumnTextBlockText">Amount</system:String>
+    <system:String x:Key="MachineIncomeListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
+    <system:String x:Key="MachineIncomeListPage.RelatedMachineColumnTextBlockText">Related machine</system:String>
+    <system:String x:Key="MachineIncomeListPage.DateTimeColumnTextBlockText">Income date time</system:String>
+
     <!-- MACHINE OUTGO SEARCH CONTROL -->
     <system:String x:Key="MachineOutgoSearchModel.SearchBarTitle">Search in machine outgoes</system:String>
     <system:String x:Key="MachineOutgoSearchModel.MachineId">Machine name</system:String>
     <system:String x:Key="MachineOutgoSearchModel.OutgoCategoryId">Outgo category</system:String>
     <system:String x:Key="MachineOutgoSearchModel.CompanyId">Company name</system:String>
+
+    <!-- MACHINE INCOME SEARCH CONTROL -->
+    <system:String x:Key="MachineIncomeSearchModel.SearchBarTitle">Search in machine incomes</system:String>
+    <system:String x:Key="MachineIncomeSearchModel.MachineId">Machine name</system:String>
+    <system:String x:Key="MachineIncomeSearchModel.IncomeCategoryId">Income category</system:String>
+    <system:String x:Key="MachineIncomeSearchModel.CompanyId">Company name</system:String>
 
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">Material name</system:String>
@@ -466,6 +513,17 @@
     <system:String x:Key="OutgoPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoPage.ConfirmButtonContent">Confirm</system:String>
 
+    <!-- INCOME PAGE -->
+    <system:String x:Key="IncomePage.RelatedCompanyComboBoxTitle">Related company</system:String>
+    <system:String x:Key="IncomePage.IncomeCategoryComboBoxTitle">Income category</system:String>
+    <system:String x:Key="IncomePage.ValueTextBoxTitle">Income value</system:String>
+    <system:String x:Key="IncomePage.AmountTextBoxTitle">Amount</system:String>
+    <system:String x:Key="IncomePage.FactorNumberTextBoxTitle">Factor number</system:String>
+    <system:String x:Key="IncomePage.CashStateComboBoxTitle">Cash state</system:String>
+    <system:String x:Key="IncomePage.DateTimeTitle">Income date time</system:String>
+    <system:String x:Key="IncomePage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="IncomePage.ConfirmButtonContent">Confirm</system:String>
+
     <!-- OUTGO LIST PAGE -->
     <system:String x:Key="OutgoListPage.OutgoCategoryColumnTextBlockText">Outgo category</system:String>
     <system:String x:Key="OutgoListPage.ValueColumnTextBlockText">Outgo value</system:String>
@@ -479,6 +537,14 @@
     <system:String x:Key="OutgoSearchModel.OutgoCategoryId">Outgo category</system:String>
     <system:String x:Key="OutgoSearchModel.CompanyId">Company name</system:String>
 
+    <!-- INCOME LIST PAGE -->
+    <system:String x:Key="IncomeListPage.IncomeCategoryColumnTextBlockText">Income category</system:String>
+    <system:String x:Key="IncomeListPage.ValueColumnTextBlockText">Income value</system:String>
+    <system:String x:Key="IncomeListPage.AmountColumnTextBlockText">Amount</system:String>
+    <system:String x:Key="IncomeListPage.RelatedCompanyColumnTextBlockText">Related company</system:String>
+    <system:String x:Key="IncomeListPage.DateTimeColumnTextBlockText">Outgo date time</system:String>
+    <system:String x:Key="IncomeListPage.CommentColumnTextBlockText">Comment</system:String>
+
     <!-- OUTGO CATEGORY PAGE -->
     <system:String x:Key="OutgoCategoryPage.TitleTextBoxTitle">Category title</system:String>
     <system:String x:Key="OutgoCategoryPage.CountUnitTitleTextBoxTitle">Count unit title</system:String>
@@ -486,6 +552,18 @@
     <system:String x:Key="OutgoCategoryPage.CostCenterComboBoxTitle">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="OutgoCategoryPage.ConfirmButtonContent">Confirm</system:String>
+
+    <!-- INCOME CATEGORY PAGE -->
+    <system:String x:Key="IncomeCategoryPage.TitleTextBoxTitle">Category title</system:String>
+    <system:String x:Key="IncomeCategoryPage.CountUnitTitleTextBoxTitle">Count unit title</system:String>
+    <system:String x:Key="IncomeCategoryPage.CostCenterComboBoxTitle">Cost Center</system:String>
+    <system:String x:Key="IncomeCategoryPage.CommentTextBoxTitle">Optional Comment</system:String>
+    <system:String x:Key="IncomeCategoryPage.ConfirmButtonContent">Confirm</system:String>
+
+    <!-- INCOME SEARCH CONTROL -->
+    <system:String x:Key="IncomeSearchModel.SearchBarTitle">Search in incomes</system:String>
+    <system:String x:Key="IncomeSearchModel.IncomeCategoryId">Income category</system:String>
+    <system:String x:Key="IncomeSearchModel.CompanyId">Company name</system:String>
     
     <!-- OUTGO CATEGORY LIST PAGE -->
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
@@ -494,6 +572,12 @@
     <system:String x:Key="OutgoCategoryListPage.ApproxUnitPriceTitleColumnTextBlockText">Approx. unit price</system:String>
     <system:String x:Key="OutgoCategoryListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
     <system:String x:Key="OutgoCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
+    
+    <!-- INCOME CATEGORY LIST PAGE -->
+    <system:String x:Key="IncomeCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
+    <system:String x:Key="IncomeCategoryListPage.CountUnitTitleColumnTextBlockText">Count unit title</system:String>
+    <system:String x:Key="IncomeCategoryListPage.CostCenterColumnTextBlockText">Cost Center</system:String>
+    <system:String x:Key="IncomeCategoryListPage.CommentColumnTextBlockText">Comment</system:String>
     
     <!-- PERSON PAGE -->
     <system:String x:Key="PersonPage.FirstNameTextBoxTitle">First name</system:String>
@@ -568,6 +652,8 @@
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>
     <system:String x:Key="SalePage.CashStateComboBoxTitle">Cash state</system:String>
+    <system:String x:Key="SalePage.IsIndirectSaleCheckBoxContent">Indirect sale ?</system:String>
+    <system:String x:Key="SalePage.IndirectSellerCompanyComboBoxTitle">Seller company (Indirect)</system:String>
     <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
     <system:String x:Key="SalePage.CommentTextBoxTitle">Optional comment</system:String>
     <system:String x:Key="SalePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
@@ -586,6 +672,8 @@
     <system:String x:Key="SalePage.DeliveryDateTimeColumnTextBlockText">Date time</system:String>
     
     <!-- SALE LIST PAGE -->
+    <system:String x:Key="SaleListPage.DirectSaleMoreButtonContent">Direct sale</system:String>
+    <system:String x:Key="SaleListPage.IndirectSaleMoreButtonContent">Indirect sale</system:String>
     <system:String x:Key="SaleListPage.BuyerCompanyColumnTextBlockText">Buyer company</system:String>
     <system:String x:Key="SaleListPage.MaterialsPriceColumnTextBlockText">Materials' price</system:String>
     <system:String x:Key="SaleListPage.DeliveriesPriceColumnTextBlockText">Deliveries' price</system:String>

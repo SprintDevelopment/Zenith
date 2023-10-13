@@ -104,6 +104,38 @@ namespace Zenith.Assets.Utils
             return null;
         }
 
+        public static OperationResultDto PrintSalaryReceipt(SalaryPayment payment)
+        {
+            if (wordApp == null)
+                wordApp = new Word.Application();
+
+            var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var templateFileFullName = Path.Combine(currentDirectory, @"Factors\SalaryTemplate.docx");
+
+            if (File.Exists(templateFileFullName))
+            {
+                wordApp.Documents.Open(templateFileFullName);
+
+                var document = wordApp.ActiveDocument;
+
+                var companyTable = document.Tables[1];
+                companyTable.Cell(1, 1).Range.Text = $"Personnel ID: {payment.Personnel.PersonId:PID0000}";
+                companyTable.Cell(1, 3).Range.Text = $"{payment.SalaryPaymentId:PMT0000}";
+                companyTable.Cell(2, 1).Range.Text = payment.Personnel.FullName;
+                companyTable.Cell(2, 3).Range.Text = $"{payment.DateTime:yyyy-MMM-dd}";
+                companyTable.Cell(3, 1).Range.Text = $"Amount: {payment.PaidValue:n2}";
+
+                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                //wordApp.Visible = true;
+                document.Close(false);
+
+                //wordApp.Visible = true;
+
+            }
+
+            return null;
+        }
+
         public static OperationResultDto PrintCompanyAggregateReport(short companyId, ObservableCollection<CompanyAggregateReport> reportItems, bool includeCustomerTRN = false)
         {
             if (wordApp == null)

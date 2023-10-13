@@ -30,7 +30,7 @@ namespace Zenith.Models
         public float Balance { get; set; }
 
         [Reactive]
-        public float ChequeValue { get; set; }
+        public float ChequeBalance { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.VERY_LARGE_STRING)]

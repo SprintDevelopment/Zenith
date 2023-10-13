@@ -50,7 +50,7 @@ namespace Zenith.Views.ListViews
                     {
                         ViewModel.SummaryItem.Balance = ViewModel.ActiveList.Sum(i => i.Balance);
                         ViewModel.SummaryItem.CreditValue = ViewModel.ActiveList.Sum(i => i.CreditValue);
-                        ViewModel.SummaryItem.ChequeValue = ViewModel.ActiveList.Sum(i => i.ChequeValue);
+                        ViewModel.SummaryItem.ChequeBalance = ViewModel.ActiveList.Sum(i => i.ChequeBalance);
                     }).Subscribe().DisposeWith(d);
             });
         }

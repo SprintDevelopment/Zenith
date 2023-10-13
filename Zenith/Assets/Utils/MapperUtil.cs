@@ -36,7 +36,6 @@ namespace Zenith.Assets.Utils
                 .ForMember(material => material.IsMixed, opt => opt.MapFrom(mixture => true));
 
             cfg.CreateMap<Sale, Cash>()
-                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CashState == CashStates.Cash ? MoneyTransactionTypes.CashSale : MoneyTransactionTypes.NonCashSale))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.SaleId));
 
@@ -54,6 +53,13 @@ namespace Zenith.Assets.Utils
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.OutgoId));
 
+            cfg.CreateMap<Income, Cash>()
+                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CashState == CashStates.Cash ? MoneyTransactionTypes.CashIncome : MoneyTransactionTypes.NonCashIncome))
+                .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(_ => CostCenters.Workshop))
+                .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
+                .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
+                .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.IncomeId));
+
             cfg.CreateMap<SalaryPayment, Cash>()
                 .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CostCenter == CostCenters.Workshop ? MoneyTransactionTypes.WorkshopSalary : MoneyTransactionTypes.TransportaionSalary))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
@@ -66,6 +72,22 @@ namespace Zenith.Assets.Utils
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.OutgoId));
+
+            cfg.CreateMap<MachineIncome, Cash>()
+                .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CashState == CashStates.Cash ? MoneyTransactionTypes.CashMachineIncome : MoneyTransactionTypes.NonCashMachineIncome))
+                .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(_ => CostCenters.Transportation))
+                .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
+                .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
+                .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.IncomeId));
+
+            cfg.CreateMap<Cheque, Cash>()
+                .ForMember(cash => cash.MoneyTransactionType,
+                    opt => opt.MapFrom(order => order.ChequeType == ChequeTypes.Paid ?
+                        (order.ChequeState == ChequeStates.Passed ? MoneyTransactionTypes.PassedPaidCheque : MoneyTransactionTypes.NotPassedPaidCheque) :
+                        (order.ChequeState == ChequeStates.Passed ? MoneyTransactionTypes.PassedRecievedCheque : MoneyTransactionTypes.NotPassedRecievedCheque)))
+                .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.IssueDateTime))
+                .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
+                .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.ChequeId));
 
             cfg.CreateMap<SalaryStatisticsDto, SalaryStatisticsDto>();
         }));

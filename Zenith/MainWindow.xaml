@@ -90,12 +90,15 @@
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>
-                <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="{DynamicResource MainWindow.OutgoesMenuItem}" Margin="0,1">
+                <controls:MenuItem Icon="Resources/Images/Menu/outgoes.png" Title="{DynamicResource MainWindow.OutgoesAndIncomesMenuItem}" Margin="0,1">
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.OutgoesSubMenuItem}" Shortcut="Ctrl+Shift+O" Command="{Binding NavigateToOutgoesCommand}" />
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.MachineOutgoesSubMenuItem}" Shortcut="Ctrl+Shift+D" Command="{Binding NavigateToMachineOutgoesCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.OutgoCategoriesSubMenuItem}" Shortcut="Ctrl+Shift+G" Command="{Binding NavigateToOutgoCategoriesCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.IncomesSubMenuItem}" Shortcut="Ctrl+Shift+O" Command="{Binding NavigateToIncomesCommand}" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.MachineIncomesSubMenuItem}" Shortcut="Ctrl+Shift+D" Command="{Binding NavigateToMachineIncomesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.IncomeCategoriesSubMenuItem}" Shortcut="Ctrl+Shift+G" Command="{Binding NavigateToIncomeCategoriesCommand}" />
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

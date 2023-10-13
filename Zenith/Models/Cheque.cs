@@ -20,6 +20,9 @@ namespace Zenith.Models
         public DateTime ChequeDate { get; set; }
 
         [Reactive]
+        public ChequeTypes ChequeType { get; set; } = ChequeTypes.Recieved;
+
+        [Reactive]
         public ChequeStates ChequeState { get; set; } = ChequeStates.NotDue;
 
         public Cheque()

@@ -21,18 +21,24 @@ namespace Zenith.ViewModels.ListViewModels
         public SaleListViewModel(Repository<Sale> repository, SearchBaseDto searchModel, IObservable<Func<Sale, bool>> criteria)
             : base(repository, searchModel, criteria, PermissionTypes.Sales)
         {
+            AddNewCommand = ReactiveCommand.CreateFromObservable<bool, Unit>(isIndirectSale =>
+                CreateCommand.Execute()
+                .Do(_ => CreateUpdatePage.ViewModel.PageModel.IsIndirectSale = isIndirectSale));
+
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
-                WordUtil.PrintFactor(IncludeTRN, new SaleRepository().Single(sale.SaleId));
+                WordUtil.PrintFactor(IncludeTRN, repository.Single(sale.SaleId));
             });
 
             PrintAggregateFactorCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
-                WordUtil.PrintFactor(IncludeTRN, ActiveList.Where(item => item.IsSelected).Select(s => new SaleRepository().Single(s.SaleId)).ToArray());
+                WordUtil.PrintFactor(IncludeTRN, ActiveList.Where(item => item.IsSelected).Select(s => repository.Single(s.SaleId)).ToArray());
             }, this.WhenAnyValue(vm => vm.SelectionMode)
                 .Select(selectionMode => selectionMode != SelectionModes.NoItemSelected));
 
         }
+       
+        public ReactiveCommand<bool, Unit> AddNewCommand { get; set; }
         public ReactiveCommand<Sale, Unit> PrintFactorCommand { get; set; }
         public ReactiveCommand<Unit, Unit> PrintAggregateFactorCommand { get; set; }
 

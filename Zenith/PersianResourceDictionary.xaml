@@ -17,6 +17,7 @@
     <system:String x:Key="CompanyTypes.Buyer">خریدار</system:String>
     <system:String x:Key="CompanyTypes.Seller">فروشنده</system:String>
     <system:String x:Key="CompanyTypes.Both">هم خریدار و هم فروشنده</system:String>
+    <system:String x:Key="CompanyTypes.Other">دیگر</system:String>
 
     <!-- JOBS -->
     <system:String x:Key="Jobs.DontCare">_</system:String>

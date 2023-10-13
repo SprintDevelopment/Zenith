@@ -21,12 +21,12 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BaseCreateOrUpdateViewModel<Cheque>(new ChequeRepository());
-            //transferDirectionsComboBox.ItemsSource = typeof(TransferDirections).ToCollection();
+            chequeTypesComboBox.ItemsSource = typeof(ChequeTypes).ToCollection();
             chequeStatesComboBox.ItemsSource = typeof(ChequeStates).ToCollection();
+                companyComboBox.ItemsSource = new CompanyRepository().All().ToList();
 
             this.WhenActivated(d =>
             {
-                companyComboBox.ItemsSource = new CompanyRepository().All().ToList();
             });
         }
     }

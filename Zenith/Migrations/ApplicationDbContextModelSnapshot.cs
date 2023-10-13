@@ -33,7 +33,7 @@ namespace Zenith.Migrations
                     b.Property<float>("Balance")
                         .HasColumnType("real");
 
-                    b.Property<float>("ChequeValue")
+                    b.Property<float>("ChequeBalance")
                         .HasColumnType("real");
 
                     b.Property<string>("Comment")
@@ -64,7 +64,7 @@ namespace Zenith.Migrations
                         {
                             AccountId = (short)1,
                             Balance = 0f,
-                            ChequeValue = 0f,
+                            ChequeBalance = 0f,
                             Comment = "",
                             CostCenter = 0,
                             CreditValue = 0f,
@@ -75,7 +75,7 @@ namespace Zenith.Migrations
                         {
                             AccountId = (short)2,
                             Balance = 0f,
-                            ChequeValue = 0f,
+                            ChequeBalance = 0f,
                             Comment = "",
                             CostCenter = 1,
                             CreditValue = 0f,
@@ -86,7 +86,7 @@ namespace Zenith.Migrations
                         {
                             AccountId = (short)3,
                             Balance = 0f,
-                            ChequeValue = 0f,
+                            ChequeBalance = 0f,
                             Comment = "",
                             CostCenter = 2,
                             CreditValue = 0f,
@@ -223,6 +223,9 @@ namespace Zenith.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ChequeState")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChequeType")
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
@@ -373,6 +376,88 @@ namespace Zenith.Migrations
                     b.ToTable("Deliveries");
                 });
 
+            modelBuilder.Entity("Zenith.Models.Income", b =>
+                {
+                    b.Property<int>("IncomeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncomeId"));
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("CashState")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<short?>("CompanyId")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FactorNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<bool>("HasErrors")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("IncomeCategoryId")
+                        .HasColumnType("smallint");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("IncomeId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("IncomeCategoryId");
+
+                    b.ToTable("Incomes");
+                });
+
+            modelBuilder.Entity("Zenith.Models.IncomeCategory", b =>
+                {
+                    b.Property<short>("IncomeCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("IncomeCategoryId"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<int>("CostCenter")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountUnitTitle")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<bool>("HasErrors")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.HasKey("IncomeCategoryId");
+
+                    b.ToTable("IncomeCategory");
+                });
+
             modelBuilder.Entity("Zenith.Models.Machine", b =>
                 {
                     b.Property<int>("MachineId")
@@ -403,6 +488,59 @@ namespace Zenith.Migrations
                     b.HasKey("MachineId");
 
                     b.ToTable("Machines");
+                });
+
+            modelBuilder.Entity("Zenith.Models.MachineIncome", b =>
+                {
+                    b.Property<int>("IncomeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncomeId"));
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("CashState")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<short?>("CompanyId")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FactorNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<bool>("HasErrors")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("IncomeCategoryId")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("MachineId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("IncomeId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("IncomeCategoryId");
+
+                    b.HasIndex("MachineId");
+
+                    b.ToTable("MachineIncomes");
                 });
 
             modelBuilder.Entity("Zenith.Models.MachineOutgo", b =>
@@ -891,9 +1029,17 @@ namespace Zenith.Migrations
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
 
+                    b.Property<short?>("IndirectSellerCompanyId")
+                        .HasColumnType("smallint");
+
+                    b.Property<bool>("IsIndirectSale")
+                        .HasColumnType("bit");
+
                     b.HasKey("SaleId");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("IndirectSellerCompanyId");
 
                     b.ToTable("Sales");
                 });
@@ -914,6 +1060,9 @@ namespace Zenith.Migrations
                         .HasColumnType("real");
 
                     b.Property<bool>("HasErrors")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsForIndirectSale")
                         .HasColumnType("bit");
 
                     b.Property<int>("MaterialId")
@@ -1001,7 +1150,7 @@ namespace Zenith.Migrations
                         new
                         {
                             Username = "admin",
-                            CreateDateTime = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateDateTime = new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Local),
                             HasErrors = false,
                             HashedPassword = "b9bcda38c0de9edcda3b12bc5d91de5959e2de031a1fcc13a3860d9c39eeb3b2"
                         });
@@ -1119,6 +1268,48 @@ namespace Zenith.Migrations
                     b.Navigation("Site");
                 });
 
+            modelBuilder.Entity("Zenith.Models.Income", b =>
+                {
+                    b.HasOne("Zenith.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("Zenith.Models.IncomeCategory", "IncomeCategory")
+                        .WithMany()
+                        .HasForeignKey("IncomeCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("IncomeCategory");
+                });
+
+            modelBuilder.Entity("Zenith.Models.MachineIncome", b =>
+                {
+                    b.HasOne("Zenith.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("Zenith.Models.IncomeCategory", "IncomeCategory")
+                        .WithMany()
+                        .HasForeignKey("IncomeCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Zenith.Models.Machine", "Machine")
+                        .WithMany()
+                        .HasForeignKey("MachineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("IncomeCategory");
+
+                    b.Navigation("Machine");
+                });
+
             modelBuilder.Entity("Zenith.Models.MachineOutgo", b =>
                 {
                     b.HasOne("Zenith.Models.Company", "Company")
@@ -1221,7 +1412,13 @@ namespace Zenith.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Zenith.Models.Company", "IndirectSellerCompany")
+                        .WithMany()
+                        .HasForeignKey("IndirectSellerCompanyId");
+
                     b.Navigation("Company");
+
+                    b.Navigation("IndirectSellerCompany");
                 });
 
             modelBuilder.Entity("Zenith.Models.SaleItem", b =>

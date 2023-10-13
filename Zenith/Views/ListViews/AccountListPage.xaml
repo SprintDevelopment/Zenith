@@ -77,7 +77,7 @@
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Balance, StringFormat={}{0:n2}}" FontStyle="Italic" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding CreditValue, StringFormat={}{0:n2}}" FontStyle="Italic" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding ChequeValue, StringFormat={}{0:n2}}" FontStyle="Italic" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding ChequeBalance, StringFormat={}{0:n2}}" FontStyle="Italic" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>

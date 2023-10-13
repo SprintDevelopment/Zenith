@@ -38,19 +38,21 @@ namespace Zenith.Repositories
         public override Sale Add(Sale sale)
         {
             base.Add(sale);
-            SaleItemRepository.AddRange(sale.Items.Select(si => { si.SaleId = sale.SaleId; return si; }));
+            SaleItemRepository.AddRange(sale.Items.Select(si => { si.SaleId = sale.SaleId; si.IsForIndirectSale = sale.IsIndirectSale; return si; }));
 
-            var cashForWorkshop = new Cash 
+            var cashForWorkshop = new Cash
             {
                 CostCenter = CostCenters.Workshop,
-                MoneyTransactionType = MoneyTransactionTypes.NonCashSale,
+                MoneyTransactionType = sale.CashState == CashStates.NonCash ?
+                    (sale.IsIndirectSale ? MoneyTransactionTypes.NonCashIndirectSale : MoneyTransactionTypes.NonCashSale) :
+                    (sale.IsIndirectSale ? MoneyTransactionTypes.CashIndirectSale : MoneyTransactionTypes.CashSale),
                 Value = sale.Items.Sum(si => si.TotalPrice)
             };
 
-            var cashForTransportation = new Cash 
+            var cashForTransportation = new Cash
             {
                 CostCenter = CostCenters.Transportation,
-                MoneyTransactionType = MoneyTransactionTypes.NonCashDelivery,
+                MoneyTransactionType = sale.CashState == CashStates.NonCash ? MoneyTransactionTypes.NonCashDelivery : MoneyTransactionTypes.CashDelivery,
                 Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee))
             };
 
@@ -59,6 +61,21 @@ namespace Zenith.Repositories
 
             CashRepository.Add(cashForWorkshop);
             CashRepository.Add(cashForTransportation);
+
+            if (sale.IsIndirectSale)
+            {
+                var cashForIndirectBuy = new Cash
+                {
+                    CostCenter = CostCenters.Workshop,
+                    MoneyTransactionType = MoneyTransactionTypes.NonCashIndirectBuy,
+                    Value = sale.Items.Sum(si => si.TotalPrice)
+                };
+
+                MapperUtil.Mapper.Map(sale, cashForIndirectBuy);
+                cashForIndirectBuy.CompanyId = sale.IndirectSellerCompanyId;
+
+                CashRepository.Add(cashForIndirectBuy);
+            }
 
             return sale;
         }
@@ -75,6 +92,8 @@ namespace Zenith.Repositories
 
             sale.Items.Where(si => si.MixtureMaterialId is null).ToList().ForEach(si =>
             {
+                si.IsForIndirectSale = sale.IsIndirectSale;
+
                 if (si.SaleId == 0)
                 {
                     si.SaleId = sale.SaleId;
@@ -85,31 +104,69 @@ namespace Zenith.Repositories
             });
 
             var relatedCashes = CashRepository
-                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashSale || 
+                .Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashSale ||
                             c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale ||
+                            c.MoneyTransactionType == MoneyTransactionTypes.CashIndirectSale ||
+                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashIndirectSale ||
+                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashIndirectBuy ||
                             c.MoneyTransactionType == MoneyTransactionTypes.CashDelivery ||
                             c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && c.RelatedEntityId == sale.SaleId)
                 .Select(c => MapperUtil.Mapper.Map<Cash>(c))
-                .Take(2);
-            
-            var workshopCash = relatedCashes.FirstOrDefault(c => c.CostCenter == CostCenters.Workshop);
+                .Take(3);
+
+            var workshopCash = relatedCashes
+                .FirstOrDefault(c => c.CostCenter == CostCenters.Workshop && c.MoneyTransactionType != MoneyTransactionTypes.NonCashIndirectBuy);
             if (workshopCash is not null)
             {
+                workshopCash.MoneyTransactionType = sale.CashState == CashStates.NonCash ?
+                    (sale.IsIndirectSale ? MoneyTransactionTypes.NonCashIndirectSale : MoneyTransactionTypes.NonCashSale) :
+                    (sale.IsIndirectSale ? MoneyTransactionTypes.CashIndirectSale : MoneyTransactionTypes.CashSale);
                 workshopCash.Value = sale.Items.Where(si => si.MixtureMaterialId is null).Sum(si => si.TotalPrice);
                 workshopCash.IssueDateTime = sale.DateTime;
 
                 CashRepository.Update(workshopCash, workshopCash.CashId);
             }
 
+            var cashForIndirectBuy = relatedCashes
+                .FirstOrDefault(c => c.CostCenter == CostCenters.Workshop && c.MoneyTransactionType == MoneyTransactionTypes.NonCashIndirectBuy);
+            if(cashForIndirectBuy is not null && sale.IsIndirectSale)
+            {
+                cashForIndirectBuy.Value = sale.Items.Where(si => si.MixtureMaterialId is null).Sum(si => si.TotalPrice);
+                cashForIndirectBuy.IssueDateTime = sale.DateTime;
+                cashForIndirectBuy.CompanyId = sale.IndirectSellerCompanyId;
+
+                CashRepository.Update(cashForIndirectBuy, cashForIndirectBuy.CashId);
+            }
+            else if(sale.IsIndirectSale)
+            {
+                cashForIndirectBuy = new Cash
+                {
+                    CostCenter = CostCenters.Workshop,
+                    MoneyTransactionType = MoneyTransactionTypes.NonCashIndirectBuy,
+                    Value = sale.Items.Sum(si => si.TotalPrice)
+                };
+
+                MapperUtil.Mapper.Map(sale, cashForIndirectBuy);
+                cashForIndirectBuy.CompanyId = sale.IndirectSellerCompanyId;
+
+                CashRepository.Add(cashForIndirectBuy);
+            }
+            else if(cashForIndirectBuy is not null)
+            {
+                cashForIndirectBuy.CompanyId = sale.IndirectSellerCompanyId;
+                CashRepository.RemoveRange(Enumerable.Empty<Cash>().Append(cashForIndirectBuy));
+            }
+
             var transportationCash = relatedCashes.FirstOrDefault(c => c.CostCenter == CostCenters.Transportation);
             if (transportationCash is not null)
             {
+                transportationCash.MoneyTransactionType = sale.CashState == CashStates.NonCash ? MoneyTransactionTypes.NonCashDelivery : MoneyTransactionTypes.CashDelivery;
                 transportationCash.Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee));
                 transportationCash.IssueDateTime = sale.DateTime;
 
                 CashRepository.Update(transportationCash, transportationCash.CashId);
             }
-            
+
             return sale;
         }
 
@@ -125,8 +182,11 @@ namespace Zenith.Repositories
 
             var relatedCashes = CashRepository.Find(c => (c.MoneyTransactionType == MoneyTransactionTypes.CashSale ||
                                                             c.MoneyTransactionType == MoneyTransactionTypes.NonCashSale ||
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.CashIndirectSale ||
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashIndirectSale ||
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashIndirectBuy ||
                                                             c.MoneyTransactionType == MoneyTransactionTypes.CashDelivery ||
-                                                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && salesIds.Contains(c.RelatedEntityId)).Take(2);
+                                                            c.MoneyTransactionType == MoneyTransactionTypes.NonCashDelivery) && salesIds.Contains(c.RelatedEntityId)).Take(3);
             CashRepository.RemoveRange(relatedCashes);
         }
     }

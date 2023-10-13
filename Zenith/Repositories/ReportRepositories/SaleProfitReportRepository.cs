@@ -20,7 +20,7 @@ namespace Zenith.Repositories.ReportRepositories
             var reportSearchModel = (SaleProfitReportSearchModel)searchModel;
 
             return _context.Set<Sale>()
-                .Where(s => s.DateTime < new DateTime(reportSearchModel.Year, (int)reportSearchModel.Month + 1, 1))
+                .Where(s => !s.IsIndirectSale && s.DateTime < new DateTime(reportSearchModel.Year, (int)reportSearchModel.Month + 1, 1))
                 .Include(s => s.Items).ThenInclude(si => si.Material)
                 .SelectMany(s => s.Items.Where(si => !si.Material.IsMixed).Select(si => new { si.MaterialId, si.Material.Name, si.Count, si.UnitPrice, isForPrevSales = s.DateTime < new DateTime(reportSearchModel.Year, (int)reportSearchModel.Month, 1) }))
                 .GroupBy(si => new { si.MaterialId })

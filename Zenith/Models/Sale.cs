@@ -12,6 +12,7 @@ using System.Reactive.Linq;
 using Zenith.Assets.Attributes;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Constants;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
 {
@@ -27,6 +28,16 @@ namespace Zenith.Models
         [ForeignKey(nameof(CompanyId))]
         [Reactive]
         public virtual Company Company { get; set; }
+
+        [Reactive]
+        public bool IsIndirectSale { get; set; }
+
+        [Reactive]
+        public short? IndirectSellerCompanyId { get; set; }
+
+        [ForeignKey(nameof(IndirectSellerCompanyId))]
+        [Reactive]
+        public virtual Company? IndirectSellerCompany { get; set; }
 
         [Reactive]
         public DateTime DateTime { get; set; } = DateTime.Now;
@@ -66,6 +77,16 @@ namespace Zenith.Models
 
             this.ValidationRule(vm => vm.CompanyId, ci => ci > 0, "Select the buyer company");
             this.ValidationRule(vm => vm.Items, itemsObservable.QueryWhenChanged().Select(children => children.Any()), "No material selected");
+
+            this.WhenAnyValue(m => m.IsIndirectSale)
+                .Skip(1)
+                .Do(ot =>
+                {
+                    if (ot)
+                        this.ValidationRule(vm => vm.IndirectSellerCompanyId, ci => ci > 0, "Select seller company");
+                    else
+                        this.ClearValidationRules(vm => vm.IndirectSellerCompanyId);
+                }).Subscribe();
         }
 
         public override string ToString()

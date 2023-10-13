@@ -36,7 +36,7 @@ namespace Zenith.Views.ListViews
                     (s.PersonId == 0 || sp.PersonId == s.PersonId) &&
                     (s.CostCenter == CostCenters.DontCare || sp.CostCenter == s.CostCenter)));
 
-            ViewModel = new BaseListViewModel<SalaryPayment>(new SalaryPaymentRepository(), searchModel, dynamicFilter, PermissionTypes.SalaryPayments)
+            ViewModel = new SalaryPaymentListViewModel(new SalaryPaymentRepository(), searchModel, dynamicFilter)
             {
                 CreateUpdatePage = new SalaryPaymentPage()
             };

@@ -49,6 +49,7 @@ namespace Zenith.Repositories
             
             var relatedAccount = AccountRepository.Single((short)(cash.CostCenter == CostCenters.Workshop ? 1 : cash.CostCenter == CostCenters.Transportation ? 2 : 3));
             relatedAccount.Balance += cash.Value * changeCoefficients.AccBalanceCoeff;
+            relatedAccount.ChequeBalance += cash.Value * changeCoefficients.AccChequeBalanceCoeff;
             relatedAccount.CreditValue += cash.Value * changeCoefficients.AccCredCoeff;
 
             AccountRepository.Update(relatedAccount, relatedAccount.AccountId);
@@ -73,6 +74,7 @@ namespace Zenith.Repositories
 
             relatedAccount.Balance -= oldCash.Value * changeCoefficients.AccBalanceCoeff;
             relatedAccount.CreditValue -= oldCash.Value * changeCoefficients.AccCredCoeff;
+            relatedAccount.ChequeBalance -= oldCash.Value * changeCoefficients.AccChequeBalanceCoeff;
             AccountRepository.Update(relatedAccount, relatedAccount.AccountId);
 
 
@@ -87,8 +89,9 @@ namespace Zenith.Repositories
                 CompanyRepository.Update(relatedCompany, cash.CompanyId);
             }
 
-            relatedAccount.Balance += cash.Value * newChangeCoefficients.AccBalanceCoeff;
             relatedAccount.CreditValue += cash.Value * newChangeCoefficients.AccCredCoeff;
+            relatedAccount.Balance += cash.Value * newChangeCoefficients.AccBalanceCoeff;
+            relatedAccount.ChequeBalance += cash.Value * changeCoefficients.AccChequeBalanceCoeff;
             AccountRepository.Update(relatedAccount, relatedAccount.AccountId);
 
 
@@ -112,10 +115,12 @@ namespace Zenith.Repositories
                 relatedAccount = AccountRepository.Single((short)(g.Key == CostCenters.Workshop ? 1 : g.Key == CostCenters.Transportation ? 2 : 3)),
                 creditChanges = g.Sum(c => c.Value * c.MoneyTransactionType.ToChangeCoefficient().AccCredCoeff),
                 balanceChanges = g.Sum(c => c.Value * c.MoneyTransactionType.ToChangeCoefficient().AccBalanceCoeff),
+                chequeBalanceChanges = g.Sum(c => c.Value * c.MoneyTransactionType.ToChangeCoefficient().AccChequeBalanceCoeff),
             }).ToList().ForEach(x =>
             {
                 x.relatedAccount.CreditValue -= x.creditChanges;
                 x.relatedAccount.Balance -= x.balanceChanges;
+                x.relatedAccount.ChequeBalance -= x.chequeBalanceChanges;
                 AccountRepository.Update(x.relatedAccount, x.relatedAccount.AccountId);
             });
 

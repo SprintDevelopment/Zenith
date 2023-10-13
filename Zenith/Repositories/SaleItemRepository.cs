@@ -26,6 +26,7 @@ namespace Zenith.Repositories
                         UnitPrice = si.UnitPrice,
                         SaleCountUnit = si.SaleCountUnit,
                         MixtureMaterialId = si.MaterialId,
+                        IsForIndirectSale = si.IsForIndirectSale,
                         Count = si.Count * mi.Percent / 100f
                     }));
 
@@ -33,7 +34,7 @@ namespace Zenith.Repositories
 
             base.AddRange(finalItems);
 
-            finalItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
+            finalItems.Where(si => !si.IsForIndirectSale).Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
                 .ToList()
                 .ForEach(m =>
                 {
@@ -44,11 +45,13 @@ namespace Zenith.Repositories
         public override SaleItem Update(SaleItem saleItem, dynamic saleItemId)
         {
             var preSaleItem = Single((long)saleItemId);
-            MaterialRepository.UpdateAmount(preSaleItem.MaterialId, preSaleItem.Count);
+            if (!preSaleItem.IsForIndirectSale)
+                MaterialRepository.UpdateAmount(preSaleItem.MaterialId, preSaleItem.Count);
 
             base.Update(saleItem, saleItem.SaleItemId);
 
-            MaterialRepository.UpdateAmount(saleItem.MaterialId, saleItem.Count * -1);
+            if (!saleItem.IsForIndirectSale)
+                MaterialRepository.UpdateAmount(saleItem.MaterialId, saleItem.Count * -1);
 
             var relatedMixtureItems = saleItem.Material.IsMixed ?
                 MixtureRepository.GetItemsByRelatedMaterial(saleItem.MaterialId) :
@@ -59,9 +62,9 @@ namespace Zenith.Repositories
                 .AsEnumerable()
                 .Select(si =>
                 {
-                    var preCount = si.Count;
+                    var preCount = si.Count * (!si.IsForIndirectSale ? 1 : 0);
 
-                    si.Count = saleItem.Count / 100f *
+                    si.Count = saleItem.Count * (!saleItem.IsForIndirectSale ? 1 : 0) / 100f *
                         (relatedMixtureItems.FirstOrDefault(mi => mi.MaterialId == si.MaterialId) ?? new MixtureItem()).Percent;
 
                     MaterialRepository.UpdateAmount(si.MaterialId, -1 * (si.Count - preCount));
@@ -77,7 +80,7 @@ namespace Zenith.Repositories
 
         public void RemoveRangeAfterUpdate(IEnumerable<SaleItem> saleItems)
         {
-            saleItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
+            saleItems.Where(si => !si.IsForIndirectSale).Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
                 .ToList()
                 .ForEach(m =>
                 {
@@ -91,7 +94,7 @@ namespace Zenith.Repositories
 
         public override void RemoveRange(IEnumerable<SaleItem> saleItems)
         {
-            saleItems.Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
+            saleItems.Where(si => !si.IsForIndirectSale).Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
                 .ToList()
                 .ForEach(m =>
                 {

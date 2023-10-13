@@ -15,6 +15,9 @@ namespace Zenith.Assets.Values.Enums
         CashBuy,
         NonCashSale,
         CashSale,
+        NonCashIndirectBuy,
+        NonCashIndirectSale,
+        CashIndirectSale,
         NonCashDelivery,
         CashDelivery,
         NonCashOutgo,
@@ -23,8 +26,15 @@ namespace Zenith.Assets.Values.Enums
         CashMachineOutgo,
         NonCashBuyConsumables,
         CashBuyConsumables,
+        NonCashIncome,
+        CashIncome,
+        NonCashMachineIncome,
+        CashMachineIncome,
         WorkshopSalary,
         TransportaionSalary,
-        Cheque
+        NotPassedRecievedCheque,
+        NotPassedPaidCheque,
+        PassedRecievedCheque,
+        PassedPaidCheque
     }
 }

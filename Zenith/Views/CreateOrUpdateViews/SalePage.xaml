@@ -42,6 +42,7 @@
                 <StackPanel x:Name="inputControlsStackPanel">
                     <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SalePage.CashStateComboBoxTitle}"/>
                     <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource SalePage.BuyerCompanyComboBoxTitle}"/>
+                    <ComboBox x:Name="sellerCompanyComboBox" SelectedValue="{Binding PageModel.IndirectSellerCompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource SalePage.IndirectSellerCompanyComboBoxTitle}"/>
                     <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalePage.SaleDateTimeTitle}"/>
                     <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalePage.CommentTextBoxTitle}" />
                 </StackPanel>

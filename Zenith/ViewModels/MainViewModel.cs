@@ -58,6 +58,9 @@ namespace Zenith.ViewModels
             NavigateToMachineOutgoesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineOutgoListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.MachineOutgoes && p.HasReadAccess)));
             NavigateToOutgoesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Outgoes && p.HasReadAccess)));
             NavigateToOutgoCategoriesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(OutgoCategoryListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.OutgoCategories && p.HasReadAccess)));
+            NavigateToMachineIncomesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineIncomeListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.MachineIncomes && p.HasReadAccess)));
+            NavigateToIncomesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(IncomeListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Incomes && p.HasReadAccess)));
+            NavigateToIncomeCategoriesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(IncomeCategoryListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.IncomeCategories && p.HasReadAccess)));
             NavigateToPersonnelCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(PersonListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Personnel && p.HasReadAccess)));
             NavigateToSalaryPaymentsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SalaryPaymentListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.SalaryPayments && p.HasReadAccess)));
             NavigateToMachineReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.MachineReport && p.HasReadAccess)));
@@ -173,7 +176,7 @@ namespace Zenith.ViewModels
                 .Subscribe();
 
             var noteRepository = new NoteRepository();
-            Observable.Timer(TimeSpan.Zero, TimeSpan.FromMinutes(1))
+            Observable.Timer(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1))
                 .SelectMany(_ => noteRepository.Find(note => note.NotifyType == NotifyTypes.FooterNotify && note.NotifyDateTime.CompareTo(DateTime.Now) <= 0))
                 .Select(note =>
                 {
@@ -252,6 +255,9 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> NavigateToMachineOutgoesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToOutgoesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToOutgoCategoriesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToMachineIncomesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToIncomesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToIncomeCategoriesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToPersonnelCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSalaryPaymentsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToMachineReportCommand { get; set; }

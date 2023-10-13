@@ -22,14 +22,15 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new SaleCreateOrUpdateViewModel(new SaleRepository());
-            
+
             cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
-           
+            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Buyer).ToList();
+            sellerCompanyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Seller).ToList();
+
             var CastedViewModel = (SaleCreateOrUpdateViewModel)ViewModel;
 
             this.WhenActivated(d =>
             {
-                companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Buyer).ToList();
                 materialListItemsControl.ItemsSource = CastedViewModel.MaterialsActiveList;
                 //itemsListItemsControl.ItemsSource = CastedViewModel.SaleItemsActiveList;
 
@@ -37,6 +38,8 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Select(s => s.IsNullOrWhiteSpace())
                     .Do(i => searchHintTextBlock.Visibility = i ? Visibility.Visible : Visibility.Collapsed)
                     .Subscribe().DisposeWith(d);
+
+                this.OneWayBind(ViewModel, vm => vm.PageModel.IsIndirectSale, v => v.sellerCompanyComboBox.Visibility, ot => (ot).Viz());
             });
         }
     }

@@ -4,3 +4,13 @@
 ~ define 2 new money transaction types + related logics in cash repo
 ~ add income category list page, cu page and income list and cu pages
 ~ continue in paper.
+
+
+
+
+PRINT SALARY PAYMENT 30m
+CHEQUE 1h
+KACHARA 1h
+INDIRECT SALE 2h
+
+TOTAL 4h 30m

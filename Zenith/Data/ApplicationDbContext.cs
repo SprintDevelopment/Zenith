@@ -26,12 +26,14 @@ namespace Zenith.Data
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Machine> Machines { get; set; }
         public DbSet<MachineOutgo> MachineOutgoes { get; set; }
+        public DbSet<MachineIncome> MachineIncomes { get; set; }
         //public DbSet<MaterialAvailability> MaterialAvailabilities { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Mixture> Mixtures { get; set; }
         public DbSet<MixtureItem> MixtureItems { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Outgo> Outgoes { get; set; }
+        public DbSet<Income> Incomes { get; set; }
         public DbSet<OutgoCategory> OutgoCategories { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<SalaryPayment> SalaryPayments { get; set; }

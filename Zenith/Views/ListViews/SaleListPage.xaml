@@ -7,8 +7,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Zenith.Views.ListViews" 
-      xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses"
-      mc:Ignorable="d" FontSize="14" d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
+                    mc:Ignorable="d" FontSize="14" d:DesignHeight="450" d:DesignWidth="800"
       Title="PersonListPage">
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -24,9 +24,32 @@
                 <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
-                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding CreateCommand}">
-                    <Image Source="/Zenith;component/Resources/Images/Common/add-new.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
+                <usercontrols:MoreControl Icon="/Zenith;component/Resources/Images/Common/add-new.png">
+                    <usercontrols:MoreControl.MoreContent>
+                        <StackPanel>
+                            <Button Style="{StaticResource SimpleButtonStyle}" Height="50" Command="{Binding AddNewCommand}" CommandParameter="{StaticResource FalseValue}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" Source="/Zenith;component/Resources/Images/Common/direct-sale.png"/>
+                                    <TextBlock Text="{DynamicResource SaleListPage.DirectSaleMoreButtonContent}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </Button>
+                            <Button Style="{StaticResource SimpleButtonStyle}" BorderThickness="0,1,0,0" Height="50" Command="{Binding AddNewCommand}" CommandParameter="{StaticResource TrueValue}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" Source="/Zenith;component/Resources/Images/Common/indirect-sale.png"/>
+                                    <TextBlock Text="{DynamicResource SaleListPage.IndirectSaleMoreButtonContent}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </usercontrols:MoreControl.MoreContent>
+                </usercontrols:MoreControl>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -106,7 +129,7 @@
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="State" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding CashState, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:CashStates}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Price, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DeliveryFee, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>

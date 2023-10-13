@@ -1,0 +1,53 @@
+﻿<local:BaseCreateOrUpdatePage x:Class="Zenith.Views.CreateOrUpdateViews.IncomePage"
+      x:TypeArguments="model:Income" 
+      xmlns:model="clr-namespace:Zenith.Models"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zenith.Views.CreateOrUpdateViews"
+      xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
+      xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
+      xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls">
+    <Grid>
+        <Grid Width="450" Height="auto" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="HeaderTextBlock" Text="{Binding ViewTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding ReturnCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                    <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
+                </Button>
+                <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
+                <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
+            </Grid>
+            <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
+                <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource IncomePage.CashStateComboBoxTitle}"/>
+                <ComboBox x:Name="incomeCategoryComboBox" SelectedValue="{Binding PageModel.IncomeCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="IncomeCategoryId" Tag="{DynamicResource IncomePage.IncomeCategoryComboBoxTitle}"/>
+                <Grid>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource IncomePage.AmountTextBoxTitle}"/>
+                    <Grid x:Name="countUnitTitleGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24,0,24,0">
+                        <TextBlock Text="{Binding SelectedItem.CountUnitTitle, ElementName=incomeCategoryComboBox}" Margin="8,4" Foreground="DarkRed"/>
+                    </Grid>
+
+                </Grid>
+                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource IncomePage.ValueTextBoxTitle}"/>
+                <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource IncomePage.RelatedCompanyComboBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource IncomePage.FactorNumberTextBoxTitle}"/>
+                <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource IncomePage.DateTimeTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource IncomePage.CommentTextBoxTitle}" />
+
+                <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>
+
+                <Button Content="{DynamicResource IncomePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</local:BaseCreateOrUpdatePage>

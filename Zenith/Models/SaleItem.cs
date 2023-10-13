@@ -58,6 +58,9 @@ namespace Zenith.Models
         [Reactive]
         public int? MixtureMaterialId { get; set; }
 
+        [Reactive]
+        public bool IsForIndirectSale { get; set; }
+
         [NotMapped]
         [Reactive]
         public bool IsFormAMixture { get; private set; }

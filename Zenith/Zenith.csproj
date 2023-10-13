@@ -18,10 +18,12 @@
     <None Remove="Resources\Images\Common\collapse.png" />
     <None Remove="Resources\Images\Common\delete.png" />
     <None Remove="Resources\Images\Common\direct-outgo.png" />
+    <None Remove="Resources\Images\Common\direct-sale.png" />
     <None Remove="Resources\Images\Common\down.png" />
     <None Remove="Resources\Images\Common\edit.png" />
     <None Remove="Resources\Images\Common\expand.png" />
     <None Remove="Resources\Images\Common\filter.png" />
+    <None Remove="Resources\Images\Common\indirect-sale.png" />
     <None Remove="Resources\Images\Common\lock.png" />
     <None Remove="Resources\Images\Common\menu.png" />
     <None Remove="Resources\Images\Common\mini-close.png" />
@@ -106,10 +108,12 @@
     <Resource Include="Resources\Images\Common\collapse.png" />
     <Resource Include="Resources\Images\Common\delete.png" />
     <Resource Include="Resources\Images\Common\direct-outgo.png" />
+    <Resource Include="Resources\Images\Common\direct-sale.png" />
     <Resource Include="Resources\Images\Common\down.png" />
     <Resource Include="Resources\Images\Common\edit.png" />
     <Resource Include="Resources\Images\Common\expand.png" />
     <Resource Include="Resources\Images\Common\filter.png" />
+    <Resource Include="Resources\Images\Common\indirect-sale.png" />
     <Resource Include="Resources\Images\Common\lock.png" />
     <Resource Include="Resources\Images\Common\menu.png" />
     <Resource Include="Resources\Images\Common\mini-close.png" />
@@ -145,6 +149,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CreateOrUpdateViews\IncomeCategoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateOrUpdateViews\MachineIncomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateOrUpdateViews\IncomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateOrUpdateViews\SalaryPaymentPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -181,6 +194,9 @@
     <Compile Update="Views\ListViews\AccountListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ListViews\MachineIncomeListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ListViews\MixtureListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -188,6 +204,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ListViews\MachineOutgoListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\IncomeCategoryListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ListViews\SiteListPage.xaml.cs">
@@ -206,6 +225,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ListViews\OutgoCategoryListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\IncomeListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ReportViews\SaleProfitReportPage.xaml.cs">
