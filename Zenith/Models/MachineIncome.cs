@@ -19,6 +19,8 @@ namespace Zenith.Models
         [Reactive]
         public virtual Machine Machine { get; set; }
 
+        public int? RelatedOutgoPlusTransportId { get; set; }
+
         public MachineIncome()
         {
             this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "Select related machine");
