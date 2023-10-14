@@ -125,7 +125,7 @@ namespace Zenith.Assets.Utils
                 companyTable.Cell(2, 3).Range.Text = $"{payment.DateTime:yyyy-MMM-dd}";
                 companyTable.Cell(3, 1).Range.Text = $"Amount: {payment.PaidValue:n2}";
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 

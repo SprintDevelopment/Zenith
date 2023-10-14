@@ -10,6 +10,7 @@ namespace Zenith.Assets.Values.Enums
     {
         DontCare = -1,
         Direct,
+        DirectPlusTransport,
         BuyConsumables,
         UseConsumables,
     }

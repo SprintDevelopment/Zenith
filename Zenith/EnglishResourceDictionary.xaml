@@ -112,6 +112,7 @@
     <!-- OUTGO TYPES -->
     <system:String x:Key="OutgoTypes.DontCare">_</system:String>
     <system:String x:Key="OutgoTypes.Direct">Direct outgo</system:String>
+    <system:String x:Key="OutgoTypes.DirectIncludeTransportation">Direct outgo</system:String>
     <system:String x:Key="OutgoTypes.BuyConsumables">Buy consumables</system:String>
     <system:String x:Key="OutgoTypes.UseConsumables">Use consumables</system:String>
 
