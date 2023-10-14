@@ -29,6 +29,8 @@ namespace Zenith.Views.CreateOrUpdateViews
             {
                 incomeCategoryComboBox.ItemsSource = new IncomeCategoryRepository().Find(oc => oc.CostCenter != CostCenters.Workshop).ToList();
                 machineComboBox.ItemsSource = new MachineRepository().All().ToList();
+
+                this.OneWayBind(ViewModel, vm => vm.PageModel.RelatedOutgoPlusTransportId.HasValue, v => v.inputControlsStackPanel.IsEnabled).DisposeWith(d);
             });
         }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith.Data;
 
@@ -11,9 +12,11 @@ using Zenith.Data;
 namespace Zenith.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014170554_ForAddCategories")]
+    partial class ForAddCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -796,12 +799,6 @@ namespace Zenith.Migrations
 
                     b.Property<bool>("HasErrors")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("MachineId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("MachineIncomeValue")
-                        .HasColumnType("real");
 
                     b.Property<short>("OutgoCategoryId")
                         .HasColumnType("smallint");

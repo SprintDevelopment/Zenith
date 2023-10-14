@@ -30,6 +30,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             this.WhenActivated(d =>
             {
                 outgoCategoryComboBox.ItemsSource = new OutgoCategoryRepository().Find(oc => oc.CostCenter != CostCenters.Transportation).ToList();
+                machineComboBox.ItemsSource = new MachineRepository().All().ToList();
 
                 if (ViewModel.PageModel.OutgoType == OutgoTypes.UseConsumables)
                 {
@@ -49,6 +50,8 @@ namespace Zenith.Views.CreateOrUpdateViews
 
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.cashStatesComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.companyComboBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
+                this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.machineComboBox.Visibility, ot => (ot == OutgoTypes.DirectIncludeTransportation).Viz());
+                this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.machineIncomeValueTextBox.Visibility, ot => (ot == OutgoTypes.DirectIncludeTransportation).Viz());
                 this.OneWayBind(ViewModel, vm => vm.PageModel.OutgoType, v => v.factorNumberTextBox.Visibility, ot => (ot != OutgoTypes.UseConsumables).Viz());
             });
         }

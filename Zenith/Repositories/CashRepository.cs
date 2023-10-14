@@ -32,20 +32,6 @@ namespace Zenith.Repositories
                 relatedCompany.CreditValue += cash.Value * changeCoefficients.CompCredCoeff;
                 CompanyRepository.Update(relatedCompany, cash.CompanyId);
             }
-
-            //if (cash.MoneyTransactionType == MoneyTransactionTypes.Direct)
-            //{
-            //    relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
-            //    relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
-            //}
-            //else if (cash.MoneyTransactionType == MoneyTransactionTypes.Outgo || cash.MoneyTransactionType == MoneyTransactionTypes.WorkshopSalary || cash.MoneyTransactionType == MoneyTransactionTypes.TransportaionSalary)
-            //{
-            //    relatedAccount.Balance += valueToAddToBalanceAndMinusFromCredit;
-            //}
-            //else
-            //{
-            //    relatedAccount.CreditValue -= valueToAddToBalanceAndMinusFromCredit;
-            //}
             
             var relatedAccount = AccountRepository.Single((short)(cash.CostCenter == CostCenters.Workshop ? 1 : cash.CostCenter == CostCenters.Transportation ? 2 : 3));
             relatedAccount.Balance += cash.Value * changeCoefficients.AccBalanceCoeff;

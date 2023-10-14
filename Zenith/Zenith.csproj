@@ -17,8 +17,9 @@
     <None Remove="Resources\Images\Common\close.png" />
     <None Remove="Resources\Images\Common\collapse.png" />
     <None Remove="Resources\Images\Common\delete.png" />
+    <None Remove="Resources\Images\Common\direct--plus-transport.png" />
+    <None Remove="Resources\Images\Common\direct-outgo-include-transportation.png" />
     <None Remove="Resources\Images\Common\direct-outgo.png" />
-    <None Remove="Resources\Images\Common\direct-plus-transport.png" />
     <None Remove="Resources\Images\Common\direct-sale.png" />
     <None Remove="Resources\Images\Common\down.png" />
     <None Remove="Resources\Images\Common\edit.png" />
@@ -108,8 +109,8 @@
     <Resource Include="Resources\Images\Common\close.png" />
     <Resource Include="Resources\Images\Common\collapse.png" />
     <Resource Include="Resources\Images\Common\delete.png" />
+    <Resource Include="Resources\Images\Common\direct-outgo-include-transportation.png" />
     <Resource Include="Resources\Images\Common\direct-outgo.png" />
-    <Resource Include="Resources\Images\Common\direct-plus-transport.png" />
     <Resource Include="Resources\Images\Common\direct-sale.png" />
     <Resource Include="Resources\Images\Common\down.png" />
     <Resource Include="Resources\Images\Common\edit.png" />

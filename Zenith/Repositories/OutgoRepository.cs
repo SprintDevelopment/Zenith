@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Enums;
@@ -13,12 +16,14 @@ namespace Zenith.Repositories
         CashRepository CashRepository = new CashRepository();
         AccountRepository AccountRepository = new AccountRepository();
         OutgoCategoryRepository OutgoCategoryRepository = new OutgoCategoryRepository();
+        MachineIncomeRepository MachineIncomeRepository = new MachineIncomeRepository();
 
         public override IEnumerable<Outgo> All()
         {
             return _context.Set<Outgo>()
                 .Include(o => o.OutgoCategory)
                 .Include(o => o.Company)
+                .Where(o => o.RelatedOutgoPlusTransportId.HasValue)
                 .AsEnumerable();
         }
 
@@ -36,7 +41,40 @@ namespace Zenith.Repositories
             base.Add(outgo);
 
             if (outgo.OutgoType != OutgoTypes.UseConsumables)
+            {
                 CashRepository.Add(MapperUtil.Mapper.Map<Cash>(outgo));
+
+                if (outgo.OutgoType == OutgoTypes.DirectIncludeTransportation)
+                {
+                    var addedOutgo = MapperUtil.Mapper.Map<Outgo>(outgo);
+
+                    addedOutgo.OutgoId = 0;
+                    addedOutgo.OutgoCategoryId = 1;
+                    addedOutgo.Amount = 1;
+                    addedOutgo.CashState = CashStates.Cash;
+                    addedOutgo.Value = outgo.MachineIncomeValue;
+                    addedOutgo.MachineIncomeValue = 0;
+                    addedOutgo.OutgoType = OutgoTypes.Direct;
+                    addedOutgo.RelatedOutgoPlusTransportId = outgo.OutgoId;
+                    addedOutgo.Comment = $"It's for transport section of outgo #{outgo.OutgoId}";
+
+                    var addedIncome = new MachineIncome
+                    {
+                        IncomeCategoryId = 1,
+                        Amount = 1,
+                        Value = outgo.MachineIncomeValue,
+                        DateTime = outgo.DateTime,
+                        CompanyId = outgo.CompanyId,
+                        CashState = CashStates.Cash,
+                        MachineId = outgo.MachineId.Value,
+                        RelatedOutgoPlusTransportId = outgo.OutgoId,
+                        Comment = $"It's for transport section of outgo #{outgo.OutgoId}",
+                    };
+
+                    Add(addedOutgo);
+                    MachineIncomeRepository.Add(addedIncome);
+                }
+            }
             else
             {
                 var consumableAccount = AccountRepository.Single((short)3);
@@ -48,7 +86,7 @@ namespace Zenith.Repositories
                 AccountRepository.Update(workshopAccount, workshopAccount.AccountId);
             }
 
-            if (outgo.OutgoType != OutgoTypes.Direct)
+            if (outgo.OutgoType != OutgoTypes.Direct && outgo.OutgoType != OutgoTypes.DirectIncludeTransportation)
                 OutgoCategoryRepository.UpdateAmount(outgo.OutgoCategoryId, outgo.Amount * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), outgo.Value * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
 
             return outgo;
@@ -58,7 +96,7 @@ namespace Zenith.Repositories
         {
             var oldOutgo = Single((int)outgoId);
 
-            if (outgo.OutgoType != OutgoTypes.Direct)
+            if (outgo.OutgoType != OutgoTypes.Direct && outgo.OutgoType != OutgoTypes.DirectIncludeTransportation)
                 OutgoCategoryRepository.UpdateAmount(oldOutgo.OutgoCategoryId, oldOutgo.Amount * (oldOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), oldOutgo.Value * (oldOutgo.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1));
 
             base.Update(outgo, outgo.OutgoId);
@@ -77,6 +115,31 @@ namespace Zenith.Repositories
                     MapperUtil.Mapper.Map(outgo, relatedCash);
                     CashRepository.Update(relatedCash, relatedCash.CashId);
                 }
+
+                if (outgo.OutgoType == OutgoTypes.DirectIncludeTransportation)
+                {
+                    var relatedAddedOutgo = _context.Set<Outgo>().FirstOrDefault(o => o.RelatedOutgoPlusTransportId == outgo.OutgoId);
+                    if (relatedAddedOutgo != null)
+                    {
+                        relatedAddedOutgo.OutgoCategoryId = 1;
+                        relatedAddedOutgo.Value = outgo.MachineIncomeValue;
+                        relatedAddedOutgo.CompanyId = outgo.CompanyId;
+                        relatedAddedOutgo.DateTime = outgo.DateTime;
+
+                        Update(relatedAddedOutgo, relatedAddedOutgo.OutgoId);
+                    }
+
+                    var relatedAddedMachineIncome = _context.Set<MachineIncome>().FirstOrDefault(mi => mi.RelatedOutgoPlusTransportId == outgo.OutgoId);
+                    if (relatedAddedMachineIncome != null)
+                    {
+                        relatedAddedMachineIncome.Value = outgo.MachineIncomeValue;
+                        relatedAddedMachineIncome.DateTime = outgo.DateTime;
+                        relatedAddedMachineIncome.CompanyId = outgo.CompanyId;
+                        relatedAddedMachineIncome.MachineId = outgo.MachineId.Value;
+
+                        MachineIncomeRepository.Update(relatedAddedMachineIncome, relatedAddedMachineIncome.IncomeId);
+                    }
+                }
             }
             else
             {
@@ -89,7 +152,7 @@ namespace Zenith.Repositories
                 AccountRepository.Update(workshopAccount, workshopAccount.AccountId);
             }
 
-            if (outgo.OutgoType != OutgoTypes.Direct)
+            if (outgo.OutgoType != OutgoTypes.Direct && outgo.OutgoType != OutgoTypes.DirectIncludeTransportation)
                 OutgoCategoryRepository.UpdateAmount(outgo.OutgoCategoryId, outgo.Amount * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1), outgo.Value * (outgo.OutgoType == OutgoTypes.BuyConsumables ? 1 : -1));
 
             return outgo;
@@ -119,9 +182,20 @@ namespace Zenith.Repositories
             AccountRepository.Update(workshopAccount, workshopAccount.AccountId);
 
 
-            outgoes.Where(o => o.OutgoType != OutgoTypes.Direct)
+            outgoes.Where(o => o.OutgoType != OutgoTypes.Direct && o.OutgoType != OutgoTypes.DirectIncludeTransportation)
                 .ToList()
                 .ForEach(o => OutgoCategoryRepository.UpdateAmount(o.OutgoCategoryId, o.Amount * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1), o.Value * (o.OutgoType == OutgoTypes.BuyConsumables ? -1 : 1)));
+
+            var directIncludeTransportationOutgoesIds = outgoes.Where(o => o.OutgoType == OutgoTypes.DirectIncludeTransportation).Select(o => o.OutgoId).ToList();
+            if (directIncludeTransportationOutgoesIds.Any())
+            {
+                var relatedOutgoes = _context.Set<Outgo>().Where(o => o.RelatedOutgoPlusTransportId.HasValue && outgoesIds.Contains(o.RelatedOutgoPlusTransportId.Value));
+                RemoveRange(relatedOutgoes);
+
+                var relatedMachineIncomes = _context.Set<MachineIncome>().Where(mi => mi.RelatedOutgoPlusTransportId.HasValue && outgoesIds.Contains(mi.RelatedOutgoPlusTransportId.Value));
+                MachineIncomeRepository.RemoveRange(relatedMachineIncomes);
+            }
+
         }
     }
 }

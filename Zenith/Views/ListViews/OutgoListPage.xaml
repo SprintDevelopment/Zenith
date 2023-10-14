@@ -37,6 +37,16 @@
                                     <TextBlock Text="{DynamicResource OutgoTypes.Direct}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                 </Grid>
                             </Button>
+                            <Button Style="{StaticResource SimpleButtonStyle}" Height="50" Command="{Binding AddNewCommand}" CommandParameter="{x:Static enums:OutgoTypes.DirectIncludeTransportation}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality" Source="/Zenith;component/Resources/Images/Common/direct-outgo-include-transportation.png"/>
+                                    <TextBlock Text="{DynamicResource OutgoTypes.DirectIncludeTransportation}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </Button>
                             <Button Style="{StaticResource SimpleButtonStyle}" BorderThickness="0,1,0,0" Height="50" Command="{Binding AddNewCommand}" CommandParameter="{x:Static enums:OutgoTypes.BuyConsumables}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -130,7 +140,7 @@
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Amount, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding TotalOutgoValue, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
 
                         </baseclasses:JGrid>
@@ -150,7 +160,7 @@
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Top" Grid.ColumnSpan="7" StrokeThickness="1"/>
                 <TextBlock HorizontalAlignment="Center" Text="*" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="1" />
                 <TextBlock HorizontalAlignment="Left" Text="Total" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="2" />
-                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.TotalOutgoValue, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
             </Grid>
         </Grid>
     </Grid>

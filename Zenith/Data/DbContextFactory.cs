@@ -13,7 +13,7 @@ namespace Zenith.Data
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
-                        .UseSqlServer(@"Data Source=.\SqlExpress;Initial Catalog=Zenith;Integrated Security=True;Encrypt=False"
+                        .UseSqlServer(@"Data Source=.\Seventeen;Initial Catalog=Zenith;Integrated Security=True;Encrypt=False"
                                         , providerOptions => providerOptions.EnableRetryOnFailure());
 
             return new ApplicationDbContext(optionsBuilder.Options);

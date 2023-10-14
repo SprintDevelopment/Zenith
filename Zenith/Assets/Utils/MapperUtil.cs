@@ -48,7 +48,7 @@ namespace Zenith.Assets.Utils
 
             cfg.CreateMap<Outgo, Cash>()
                 .ForMember(cash => cash.MoneyTransactionType, opt => opt.MapFrom(order => order.CashState == CashStates.Cash ? MoneyTransactionTypes.CashOutgo : MoneyTransactionTypes.NonCashOutgo))
-                .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(order => order.OutgoType == OutgoTypes.Direct ? CostCenters.Workshop : CostCenters.Consumables))
+                .ForMember(cash => cash.CostCenter, opt => opt.MapFrom(order => (order.OutgoType == OutgoTypes.Direct || order.OutgoType == OutgoTypes.DirectIncludeTransportation) ? CostCenters.Workshop : CostCenters.Consumables))
                 .ForMember(cash => cash.IssueDateTime, opt => opt.MapFrom(order => order.DateTime))
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.OutgoId));

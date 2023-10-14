@@ -40,6 +40,8 @@
 
                 </Grid>
                 <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.ValueTextBoxTitle}"/>
+                <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource OutgoPage.RelatedMachineComboBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="machineIncomeValueTextBox" Text="{Binding PageModel.MachineIncomeValue, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.MachineIncomeValueTextBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource OutgoPage.RelatedCompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource OutgoPage.FactorNumberTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.DateTimeTitle}"/>

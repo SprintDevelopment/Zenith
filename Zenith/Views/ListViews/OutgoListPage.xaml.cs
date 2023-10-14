@@ -48,7 +48,7 @@ namespace Zenith.Views.ListViews
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Do(_ =>
                     {
-                        ViewModel.SummaryItem.Value = ViewModel.ActiveList.Where(o => o.OutgoType != OutgoTypes.UseConsumables).Sum(i => i.Value);
+                        ViewModel.SummaryItem.TotalOutgoValue = ViewModel.ActiveList.Where(o => o.OutgoType != OutgoTypes.UseConsumables).Sum(i => i.TotalOutgoValue);
                     }).Subscribe().DisposeWith(d);
             });
         }

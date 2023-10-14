@@ -54,6 +54,26 @@ namespace Zenith.Data
                 }
             );
 
+            modelBuilder.Entity<OutgoCategory>().HasData(
+                new OutgoCategory
+                {
+                    OutgoCategoryId = 1,
+                    Title = "Transportation related outgoes",
+                    CostCenter = CostCenters.Workshop,
+                    CountUnitTitle = "Time(s)",
+                    Comment = string.Empty
+                });
+
+            modelBuilder.Entity<IncomeCategory>().HasData(
+                new IncomeCategory
+                {
+                    IncomeCategoryId = 1,
+                    Title = "Transportation related incomes",
+                    CostCenter = CostCenters.Transportation,
+                    CountUnitTitle = "Time(s)",
+                    Comment = string.Empty,
+                });
+
             modelBuilder.Entity<Account>().HasData(
                 new Account
                 {

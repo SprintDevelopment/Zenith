@@ -507,6 +507,8 @@
     <system:String x:Key="OutgoPage.RelatedCompanyComboBoxTitle">Related company</system:String>
     <system:String x:Key="OutgoPage.OutgoCategoryComboBoxTitle">Outgo category</system:String>
     <system:String x:Key="OutgoPage.ValueTextBoxTitle">Outgo value</system:String>
+    <system:String x:Key="OutgoPage.RelatedMachineComboBoxTitle">Related machine</system:String>
+    <system:String x:Key="OutgoPage.MachineIncomeValueTextBoxTitle">Outgo value for machine</system:String>
     <system:String x:Key="OutgoPage.AmountTextBoxTitle">Amount</system:String>
     <system:String x:Key="OutgoPage.FactorNumberTextBoxTitle">Factor number</system:String>
     <system:String x:Key="OutgoPage.CashStateComboBoxTitle">Cash state</system:String>
