@@ -23,7 +23,7 @@ namespace Zenith.Repositories
             return _context.Set<Outgo>()
                 .Include(o => o.OutgoCategory)
                 .Include(o => o.Company)
-                .Where(o => o.RelatedOutgoPlusTransportId.HasValue)
+                .Where(o => !o.RelatedOutgoPlusTransportId.HasValue)
                 .AsEnumerable();
         }
 

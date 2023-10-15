@@ -31,6 +31,7 @@
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.NameTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.TRNTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.CreditValue, StringFormat={}{0:n2}}" Title="{DynamicResource CompanyPage.CriditValueTextBoxTitle}"/>
                 <ComboBox x:Name="companyTypeComboBox" SelectedValue="{Binding PageModel.CompanyType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource CompanyPage.TypeComboBoxTitle}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

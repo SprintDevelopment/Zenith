@@ -324,6 +324,7 @@
     <!-- COMPANY PAGE -->
     <system:String x:Key="CompanyPage.NameTextBoxTitle">Company name</system:String>
     <system:String x:Key="CompanyPage.TRNTextBoxTitle">Tax registration number (TRN)</system:String>
+    <system:String x:Key="CompanyPage.CriditValueTextBoxTitle">Credit value</system:String>
     <system:String x:Key="CompanyPage.TypeComboBoxTitle">Type</system:String>
     <system:String x:Key="CompanyPage.TelTextBoxTitle">Tel</system:String>
     <system:String x:Key="CompanyPage.FaxTextBoxTitle">Fax</system:String>
