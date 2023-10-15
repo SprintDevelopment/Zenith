@@ -1,16 +1,10 @@
-﻿what can I do for KACHARA
-~ define income model, repo
-~ define income category model, repo
-~ define 2 new money transaction types + related logics in cash repo
-~ add income category list page, cu page and income list and cu pages
-~ continue in paper.
+﻿For Monday, October 16, 2023
 
-
-
-
-PRINT SALARY PAYMENT 30m
-CHEQUE 1h
-KACHARA 1h
-INDIRECT SALE 2h
-
-TOTAL 4h 30m
+~ Wake up at 5:45 and be at office at 7
+~ One hour English
+~ Pay 700 for Maskan and 2,300 for Rasalat
+~ Fix the packaging issues in FFMPEG Native
+~ Create UI for export formats
+~ Add a way for activate product
+~ Add types instead of type for companies
+~ Add some configs to AppConfig [configs like Db ConnectionString]
