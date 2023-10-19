@@ -32,6 +32,7 @@ using Zenith.Repositories;
 using Zenith.Repositories.ReportRepositories;
 using Zenith.Models.ReportModels;
 using Zenith.Models.ReportModels.ReportSearchModels;
+using Zenith.Assets.Utils;
 
 namespace Zenith
 {
@@ -43,6 +44,8 @@ namespace Zenith
         public MainWindow()
         {
             InitializeComponent();
+
+            var processorId = LicenseUtil.GetSerialNumber();
 
             var blankPage = new BlankPage();
 
