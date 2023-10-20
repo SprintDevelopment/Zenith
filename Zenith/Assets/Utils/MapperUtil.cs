@@ -90,6 +90,7 @@ namespace Zenith.Assets.Utils
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.ChequeId));
 
             cfg.CreateMap<SalaryStatisticsDto, SalaryStatisticsDto>();
+            cfg.CreateMap<AppLicenseDto, AppLicenseDto>();
         }));
     }
 }

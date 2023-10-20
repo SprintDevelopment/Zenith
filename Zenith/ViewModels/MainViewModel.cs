@@ -208,6 +208,9 @@ namespace Zenith.ViewModels
         public User LoggedInUser { get; set; }
 
         [Reactive]
+        public AppLicenseDto AppLicense { get; set; }
+
+        [Reactive]
         public AppLanguages Language { get; set; } = AppLanguages.English;
 
         [Reactive]

@@ -11,7 +11,7 @@ namespace Zenith.Assets.Utils
     public class CryptoUtil
     {
         private const string Salt = "NEW_SALT";
-        private const string PassPhrase = "NEW_PASS_PHRASE";
+        private const string PassPhrase = "E546C8DF278CD5931069B522E695D4F2";
 
         private const int Keysize = 256;
         private const int DerivationIterations = 1000;
@@ -24,81 +24,68 @@ namespace Zenith.Assets.Utils
             }
         }
 
-        public static string Encrypt(string plainText)
+        public static string Encrypt(string text)
         {
-            if (string.IsNullOrWhiteSpace(plainText))
-                return "";
+            var key = Encoding.UTF8.GetBytes(PassPhrase);
 
-            var saltStringBytes = Generate256BitsOfRandomEntropy();
-            var ivStringBytes = Generate256BitsOfRandomEntropy();
-            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-
-            using (var password = new Rfc2898DeriveBytes(PassPhrase, saltStringBytes, DerivationIterations))
+            using (var aesAlg = Aes.Create())
             {
-                var keyBytes = password.GetBytes(Keysize / 8);
-                using (var symmetricKey = new RijndaelManaged())
+                using (var encryptor = aesAlg.CreateEncryptor(key, aesAlg.IV))
                 {
-                    symmetricKey.BlockSize = 256;
-                    symmetricKey.Mode = CipherMode.CBC;
-                    symmetricKey.Padding = PaddingMode.PKCS7;
-                    using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, ivStringBytes))
+                    using (var msEncrypt = new MemoryStream())
                     {
-                        using (var memoryStream = new MemoryStream())
+                        using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                        using (var swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-                            {
-                                cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-                                cryptoStream.FlushFinalBlock();
-
-                                var cipherTextBytes = saltStringBytes;
-                                cipherTextBytes = cipherTextBytes.Concat(ivStringBytes).ToArray();
-                                cipherTextBytes = cipherTextBytes.Concat(memoryStream.ToArray()).ToArray();
-                                memoryStream.Close();
-                                cryptoStream.Close();
-                                return Convert.ToBase64String(cipherTextBytes);
-                            }
+                            swEncrypt.Write(text);
                         }
+
+                        var iv = aesAlg.IV;
+
+                        var decryptedContent = msEncrypt.ToArray();
+
+                        var result = new byte[iv.Length + decryptedContent.Length];
+
+                        Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
+                        Buffer.BlockCopy(decryptedContent, 0, result, iv.Length, decryptedContent.Length);
+
+                        return Convert.ToBase64String(result);
                     }
                 }
             }
         }
 
-        public static string Decrypt(string encryptedText)
+        public static string Decrypt(string cipherText)
         {
-            if (string.IsNullOrWhiteSpace(encryptedText))
-                return "";
+            var fullCipher = Convert.FromBase64String(cipherText);
 
-            var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(encryptedText);
-            var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(Keysize / 8).ToArray();
-            var ivStringBytes = cipherTextBytesWithSaltAndIv.Skip(Keysize / 8).Take(Keysize / 8).ToArray();
-            var cipherTextBytes = cipherTextBytesWithSaltAndIv.Skip((Keysize / 8) * 2).Take(cipherTextBytesWithSaltAndIv.Length - ((Keysize / 8) * 2)).ToArray();
+            var iv = new byte[16];
+            var cipher = new byte[16];
 
-            using (var password = new Rfc2898DeriveBytes(PassPhrase, saltStringBytes, DerivationIterations))
+            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
+            var key = Encoding.UTF8.GetBytes(PassPhrase);
+
+            using (var aesAlg = Aes.Create())
             {
-                var keyBytes = password.GetBytes(Keysize / 8);
-                using (var symmetricKey = new RijndaelManaged())
+                using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                 {
-                    symmetricKey.BlockSize = 256;
-                    symmetricKey.Mode = CipherMode.CBC;
-                    symmetricKey.Padding = PaddingMode.PKCS7;
-                    using (var decryptor = symmetricKey.CreateDecryptor(keyBytes, ivStringBytes))
+                    string result;
+                    using (var msDecrypt = new MemoryStream(cipher))
                     {
-                        using (var memoryStream = new MemoryStream(cipherTextBytes))
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                         {
-                            using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                            using (var srDecrypt = new StreamReader(csDecrypt))
                             {
-                                var plainTextBytes = new byte[cipherTextBytes.Length];
-                                var decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-                                memoryStream.Close();
-                                cryptoStream.Close();
-                                return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
+                                result = srDecrypt.ReadToEnd();
                             }
                         }
                     }
+
+                    return result;
                 }
             }
         }
-
         private static byte[] Generate256BitsOfRandomEntropy()
         {
             var randomBytes = new byte[32];

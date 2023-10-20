@@ -1,0 +1,42 @@
+﻿<helpers:ActivatablePage 
+      xmlns:helpers="clr-namespace:Zenith.Assets.UI.Helpers"
+      x:Class="Zenith.Views.LicenseView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:baseclasses="clr-namespace:Zenith.Assets.UI.BaseClasses" 
+      Title="LicensePage">
+    <Grid FlowDirection="{DynamicResource AppFlowDirection}">
+        <Grid Width="450" Height="auto" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                    <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="HeaderTextBlock" Text="{DynamicResource LicenseView.Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding CloseCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                    <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
+                </Button>
+                <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
+                <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
+            </Grid>
+            <StackPanel Grid.Row="1">
+                <baseclasses:JTextBox x:Name="serialNumberTextBox" Text="{Binding License.SerialNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.SerialNumberTextBoxTitle}" IsReadOnly="True" IsReadOnlyCaretVisible="False"/>
+                <baseclasses:JTextBox x:Name="activationCodeTextBox" Text="{Binding ActivationCode, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.ActivationCodeTextBoxTitle}" />
+                <baseclasses:JTextBox x:Name="startDateTextBox" Text="{Binding License.StartDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.StartDateTextBoxTitle}" />
+                <baseclasses:JTextBox x:Name="endDateTextBox" Text="{Binding License.EndDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.EndDateTextBoxTitle}" />
+
+                <Border x:Name="messageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
+                    <TextBlock Text="{DynamicResource LicenseView.InvalidActivationCodeText}" Foreground="Red"/>
+                </Border>
+
+                <Button x:Name="activateButton" Content="{DynamicResource LicenseView.ActivateButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LicenseCommand}"/>
+                <Button x:Name="bottomCloseButton" Content="{DynamicResource LicenseView.CloseButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LicenseCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</helpers:ActivatablePage>

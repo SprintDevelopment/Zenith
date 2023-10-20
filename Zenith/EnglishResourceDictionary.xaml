@@ -742,4 +742,14 @@
     <system:String x:Key="LoginView.LanguageComboBoxTitle">Language</system:String>
     <system:String x:Key="LoginView.IcorrectUserPassText">Incorrect username and/or password</system:String>
     <system:String x:Key="LoginView.LoginButtonContent">Login</system:String>
+
+    <!-- LOGIN VIEW -->
+    <system:String x:Key="LicenseView.Title">Software license</system:String>
+    <system:String x:Key="LicenseView.SerialNumberTextBoxTitle">Serial number</system:String>
+    <system:String x:Key="LicenseView.ActivationCodeTextBoxTitle">Activation code</system:String>
+    <system:String x:Key="LicenseView.StartDateTextBoxTitle">License start date</system:String>
+    <system:String x:Key="LicenseView.EndDateTextBoxTitle">License end date</system:String>
+    <system:String x:Key="LicenseView.InvalidActivationCodeText">Invalid activation code</system:String>
+    <system:String x:Key="LicenseView.ActivateButtonContent">Activate</system:String>
+    <system:String x:Key="LicenseView.CloseButtonContent">Close</system:String>
 </ResourceDictionary>

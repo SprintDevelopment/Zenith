@@ -234,6 +234,9 @@
     <Compile Update="Views\ListViews\IncomeListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\LicenseView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ReportViews\SaleProfitReportPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

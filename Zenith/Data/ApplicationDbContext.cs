@@ -24,6 +24,7 @@ namespace Zenith.Data
         public DbSet<Cheque> Cheques { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
         public DbSet<Machine> Machines { get; set; }
         public DbSet<MachineOutgo> MachineOutgoes { get; set; }
         public DbSet<MachineIncome> MachineIncomes { get; set; }

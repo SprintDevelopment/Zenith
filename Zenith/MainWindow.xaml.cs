@@ -33,6 +33,7 @@ using Zenith.Repositories.ReportRepositories;
 using Zenith.Models.ReportModels;
 using Zenith.Models.ReportModels.ReportSearchModels;
 using Zenith.Assets.Utils;
+using Zenith.Assets.Values.Enums;
 
 namespace Zenith
 {
@@ -45,7 +46,8 @@ namespace Zenith
         {
             InitializeComponent();
 
-            var processorId = LicenseUtil.GetSerialNumber();
+            var encrypted = CryptoUtil.Encrypt("this is a test");
+            var decrypted = CryptoUtil.Decrypt(encrypted);
 
             var blankPage = new BlankPage();
 
@@ -97,10 +99,17 @@ namespace Zenith
 
                 CompositeDisposable disposable = null;
 
-                ViewModel.WhenAnyValue(vm => vm.LoggedInUser)
-                    .Do(lu =>
+                ViewModel.WhenAnyValue(vm => vm.LoggedInUser, vm => vm.AppLicense)
+                    .Select(changes => new { loggedInUser = changes.Item1, appLicense = changes.Item2 })
+                    .Do(changes =>
                     {
-                        if (lu == null)
+                        if (changes.appLicense is null || changes.appLicense.State != AppLicenseStates.Valid)
+                        {
+                            ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
+                            ViewModel.CreateUpdatePage = new LicenseView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
+                            disposable?.Dispose();
+                        }
+                        else if (changes.loggedInUser == null)
                         {
                             ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
                             ViewModel.CreateUpdatePage = new LoginView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
