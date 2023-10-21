@@ -23,7 +23,12 @@ namespace Zenith.ViewModels
         {
             var mainViewModel = App.MainViewModel;
 
-            GetAppLicenseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ => MapperUtil.Mapper.Map(LicenseUtil.GetLicense(), License));
+            GetAppLicenseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ => 
+                MapperUtil.Mapper.Map(LicenseUtil.GetLicense(), License));
+            
+            CheckAndApplyLicenseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
+                MapperUtil.Mapper.Map(LicenseUtil.CheckAndApplyLicense(LicenseHashString), License),
+                this.WhenAnyValue(vm => vm.LicenseHashString).Select(lhs => !lhs.IsNullOrWhiteSpace()));
 
             CloseCommand = ReactiveCommand.Create<Unit>(_ => App.Current.Shutdown());
         }
@@ -32,9 +37,10 @@ namespace Zenith.ViewModels
         public AppLicenseDto License { get; set; } = new AppLicenseDto();
 
         [Reactive]
-        public string Password { get; set; }
+        public string LicenseHashString { get; set; }
 
         public ReactiveCommand<Unit, Unit> GetAppLicenseCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> CheckAndApplyLicenseCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> CloseCommand { get; private set; }
     }
 }

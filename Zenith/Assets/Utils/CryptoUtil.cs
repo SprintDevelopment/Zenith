@@ -30,6 +30,8 @@ namespace Zenith.Assets.Utils
 
             using (var aesAlg = Aes.Create())
             {
+                aesAlg.Padding = PaddingMode.PKCS7;
+
                 using (var encryptor = aesAlg.CreateEncryptor(key, aesAlg.IV))
                 {
                     using (var msEncrypt = new MemoryStream())
@@ -68,6 +70,7 @@ namespace Zenith.Assets.Utils
 
             using (var aesAlg = Aes.Create())
             {
+                aesAlg.Padding = PaddingMode.PKCS7;
                 using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                 {
                     string result;

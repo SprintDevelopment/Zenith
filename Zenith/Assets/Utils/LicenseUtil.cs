@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReactiveUI.Validation.Extensions;
+using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Management;
 using System.Windows.Controls;
@@ -32,25 +34,39 @@ namespace Zenith.Assets.Utils
         //licenseStringFormat => "serialNumber,startDate,endDate"
         public static AppLicenseDto GetLicense()
         {
-            var license = new AppLicenseDto { State = AppLicenseStates.NotFound, SerialNumber = GetSerialNumber() };
+            return (
+                new ConfigurationRepository().Single($"{ConfigurationKeys.AppLicense}") ?? 
+                new Models.Configuration())
+                .Value.ToLicense();
+        }
 
-            var licenseConfiguration = new ConfigurationRepository().Single($"{ConfigurationKeys.AppLicense}");
-            if (licenseConfiguration is not null)
+        public static AppLicenseDto ToLicense(this string licenseHashedString)
+        {
+            var license = new AppLicenseDto { State = AppLicenseStates.NotFound, SerialNumber = GetSerialNumber() };
+            if (!licenseHashedString.IsNullOrWhiteSpace())
             {
                 license.State = AppLicenseStates.Invalid;
-                var licenseString = CryptoUtil.Decrypt(licenseConfiguration.Value);
-                
+                var licenseString = CryptoUtil.Decrypt(licenseHashedString);
+
                 var licenseParts = licenseString.Split(',');
                 if (licenseParts.Length == 3 && licenseParts[0] == license.SerialNumber && DateTime.TryParse(licenseParts[1], out DateTime startDate) && DateTime.TryParse(licenseParts[2], out DateTime endDate))
                 {
                     license.StartDate = startDate;
                     license.EndDate = endDate;
-
                     license.State = DateTime.Today >= license.StartDate && DateTime.Today <= license.EndDate ?
-                        AppLicenseStates.Valid :
-                        AppLicenseStates.Expired;
+                    AppLicenseStates.Valid :
+                    AppLicenseStates.Expired;
                 }
             }
+
+            return license;
+        }
+
+        public static AppLicenseDto CheckAndApplyLicense(string licenseHashedString)
+        {
+            var license = licenseHashedString.ToLicense();
+            if (license.State == AppLicenseStates.Valid)
+                SetLicense(license);
 
             return license;
         }
@@ -61,7 +77,7 @@ namespace Zenith.Assets.Utils
             var configurationRepository = new ConfigurationRepository();
 
             var licenseConfiguration = configurationRepository.Single($"{ConfigurationKeys.AppLicense}");
-            
+
             if (licenseConfiguration is not null)
             {
                 licenseConfiguration.Value = licenseEncryptedString;

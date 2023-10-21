@@ -26,7 +26,7 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox x:Name="serialNumberTextBox" Text="{Binding License.SerialNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.SerialNumberTextBoxTitle}" IsReadOnly="True" IsReadOnlyCaretVisible="False"/>
-                <baseclasses:JTextBox x:Name="activationCodeTextBox" Text="{Binding ActivationCode, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.ActivationCodeTextBoxTitle}" />
+                <baseclasses:JTextBox x:Name="activationCodeTextBox" Text="{Binding LicenseHashString, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.ActivationCodeTextBoxTitle}" />
                 <baseclasses:JTextBox x:Name="startDateTextBox" Text="{Binding License.StartDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.StartDateTextBoxTitle}" />
                 <baseclasses:JTextBox x:Name="endDateTextBox" Text="{Binding License.EndDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.EndDateTextBoxTitle}" />
 
@@ -34,7 +34,7 @@
                     <TextBlock Text="{DynamicResource LicenseView.InvalidActivationCodeText}" Foreground="Red"/>
                 </Border>
 
-                <Button x:Name="activateButton" Content="{DynamicResource LicenseView.ActivateButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LicenseCommand}"/>
+                <Button x:Name="activateButton" Content="{DynamicResource LicenseView.ActivateButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CheckAndApplyLicenseCommand}"/>
                 <Button x:Name="bottomCloseButton" Content="{DynamicResource LicenseView.CloseButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LicenseCommand}"/>
             </StackPanel>
         </Grid>

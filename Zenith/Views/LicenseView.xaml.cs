@@ -40,11 +40,12 @@ namespace Zenith.Views
                 this.DataContext = ViewModel;
 
                 ViewModel.GetAppLicenseCommand.Execute().Subscribe().Dispose();
-                //ViewModel.LicenseCommand
-                //    .Do(_ => messageBorder.Visibility = Visibility.Visible)
-                //    .Throttle(TimeSpan.FromSeconds(5)).ObserveOn(RxApp.MainThreadScheduler)
-                //    .Do(_ => messageBorder.Visibility = Visibility.Collapsed)
-                //    .Subscribe().DisposeWith(d);
+
+                ViewModel.CheckAndApplyLicenseCommand
+                    .Do(_ => messageBorder.Visibility = Visibility.Visible)
+                    .Throttle(TimeSpan.FromSeconds(5)).ObserveOn(RxApp.MainThreadScheduler)
+                    .Do(_ => messageBorder.Visibility = Visibility.Collapsed)
+                    .Subscribe().DisposeWith(d);
 
                 this.OneWayBind(ViewModel, vm => vm.License.State, v => v.activateButton.Visibility, state => (state != AppLicenseStates.Valid).Viz());
 

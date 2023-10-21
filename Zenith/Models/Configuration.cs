@@ -20,6 +20,6 @@ namespace Zenith.Models
         [Required]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
     }
 }
