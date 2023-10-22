@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Zenith.Assets.Values.Enums
 {
+    [Flags]
     public enum CompanyTypes
     {
         DontCare = -1,
-        Buyer,
-        Seller,
-        Both,
-        Other
+        Buyer = 1,
+        Seller = 2,
+        Both = 4,
+        Other = 8
     }
 }
