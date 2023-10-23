@@ -25,7 +25,7 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             outgoTypeComboBox.ItemsSource = typeof(OutgoTypes).ToCollection();
             cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
-            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
+            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType.HasFlag(CompanyTypes.RelatedToOutgo)).ToList();
 
             this.WhenActivated(d =>
             {

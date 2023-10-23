@@ -38,7 +38,7 @@ namespace Zenith.Assets.UI.UserControls
             get { return (int)GetValue(SelectionValueProperty); }
             set { SetValue(SelectionValueProperty, value); }
         }
-        public static readonly DependencyProperty SelectionValueProperty = DependencyProperty.Register("SelectionValue", typeof(int), typeof(MultiSelectControl), new PropertyMetadata(0));
+        public static readonly DependencyProperty SelectionValueProperty = DependencyProperty.Register("SelectionValue", typeof(int), typeof(MultiSelectControl), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public MultiSelectControl()
         {

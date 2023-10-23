@@ -30,7 +30,8 @@
             <converters:ImageToBinaryConverter x:Key="imageToBianaryConverter"/>
             <converters:NullableBoolToGreenBlackRedColorConverter x:Key="nullableBoolToGreenBlackRedColorConverter"/>
             <converters:DialogTypesToColorConverter x:Key="dialogTypesToColorConverter"/>
-            <converters:EnumConverter x:Key="enumConverter"/>
+            <converters:EnumToDescriptionConverter x:Key="enumToDescriptionConverter"/>
+            <converters:FlaggedEnumConverter x:Key="flaggedEnumConverter"/>
 
             <HierarchicalDataTemplate DataType="{x:Type dtos:TreeViewItemDto}" ItemsSource="{Binding Children}">
                 <Grid VerticalAlignment="Center">

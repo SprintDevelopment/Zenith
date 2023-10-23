@@ -23,7 +23,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             ViewModel = new BaseCreateOrUpdateViewModel<MachineIncome>(new MachineIncomeRepository());
 
             cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
-            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
+            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType.HasFlag(CompanyTypes.RelatedToIncome)).ToList();
 
             this.WhenActivated(d =>
             {

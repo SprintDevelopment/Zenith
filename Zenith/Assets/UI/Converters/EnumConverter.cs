@@ -11,14 +11,14 @@ using Zenith.Assets.Extensions;
 
 namespace Zenith.Assets.UI.Converters
 {
-    public class EnumConverter : IValueConverter
+    public class EnumToDescriptionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var valueAsInt = (int)value;
             var enumType = (Type)parameter;
             if (enumType.GetAttribute<FlagsAttribute>() != null)
-                return string.Join(" ، ", enumType.ToCollection().Where(item => ((int)item.Value | valueAsInt) == valueAsInt).Select(item => item.Description));
+                return string.Join(", ", enumType.ToCollection().Where(item => ((int)item.Value | valueAsInt) == valueAsInt).Select(item => item.Description));
 
             return ((Enum)value).GetDescription();
         }

@@ -13,7 +13,7 @@ namespace Zenith.Assets.Values.Enums
         DontCare = -1,
         Buyer = 1,
         Seller = 2,
-        Both = 4,
-        Other = 8
+        RelatedToOutgo = 4,
+        RelatedToIncome= 8
     }
 }

@@ -100,11 +100,11 @@
                             </Button>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DisplayOrder, StringFormat={}{0:n0}}" VerticalAlignment="Center" Grid.Column="1"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:ChequeTypes}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeType, Converter={StaticResource enumToDescriptionConverter}, ConverterParameter={x:Type enums:ChequeTypes}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeNumber}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeDate, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeState, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:ChequeStates}}" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding ChequeState, Converter={StaticResource enumToDescriptionConverter}, ConverterParameter={x:Type enums:ChequeStates}}" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>

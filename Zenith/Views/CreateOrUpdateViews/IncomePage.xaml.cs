@@ -24,7 +24,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             ViewModel = new BaseCreateOrUpdateViewModel<Income>(new IncomeRepository());
 
             cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
-            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Other).ToList();
+            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType.HasFlag(CompanyTypes.RelatedToIncome)).ToList();
             this.WhenActivated(d =>
             {
                 incomeCategoryComboBox.ItemsSource = new IncomeCategoryRepository().Find(oc => oc.CostCenter != CostCenters.Transportation).ToList();

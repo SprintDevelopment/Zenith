@@ -29,7 +29,7 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             this.WhenActivated(d =>
             {
-                companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType == CompanyTypes.Seller || c.CompanyType == CompanyTypes.Both).ToList();
+                companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType.HasFlag(CompanyTypes.Seller)).ToList();
                 materialListItemsControl.ItemsSource = CastedViewModel.MaterialsActiveList;
                 //itemsListItemsControl.ItemsSource = CastedViewModel.BuyItemsActiveList;
 

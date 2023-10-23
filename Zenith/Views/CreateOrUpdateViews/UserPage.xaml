@@ -78,7 +78,7 @@
                                         <ColumnDefinition Width="80"/>
                                         <ColumnDefinition Width="80"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock HorizontalAlignment="Left" Text="{Binding PermissionType, Converter={StaticResource enumConverter}, ConverterParameter={x:Type enums:PermissionTypes}}" VerticalAlignment="Center" Grid.Column="0" Margin="16,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding PermissionType, Converter={StaticResource enumToDescriptionConverter}, ConverterParameter={x:Type enums:PermissionTypes}}" VerticalAlignment="Center" Grid.Column="0" Margin="16,0,0,0"/>
                                     <CheckBox IsChecked="{Binding HasReadAccess}" Grid.Column="1" />
                                     <CheckBox IsChecked="{Binding HasCreateAccess}" Grid.Column="2" />
                                     <CheckBox IsChecked="{Binding HasUpdateAccess}" Grid.Column="3" />

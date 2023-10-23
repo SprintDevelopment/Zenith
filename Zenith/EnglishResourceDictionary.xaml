@@ -32,8 +32,8 @@
     <system:String x:Key="CompanyTypes.DontCare">_</system:String>
     <system:String x:Key="CompanyTypes.Buyer">Buyer</system:String>
     <system:String x:Key="CompanyTypes.Seller">Seller</system:String>
-    <system:String x:Key="CompanyTypes.Both">Both buyer and seller</system:String>
-    <system:String x:Key="CompanyTypes.Other">Other</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToOutgo">Related to outgo</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToIncome">Related to income</system:String>
 
     <!-- COST CENTERS -->
     <system:String x:Key="CostCenters.DontCare">_</system:String>
