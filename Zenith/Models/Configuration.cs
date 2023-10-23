@@ -18,7 +18,7 @@ namespace Zenith.Models
         public string Key { get; set; }
 
         [Required]
-        [MaxLength(LengthConstants.MEDIUM_STRING)]
+        [MaxLength(LengthConstants.LARGE_STRING)]
         [Reactive]
         public string Value { get; set; } = string.Empty;
     }

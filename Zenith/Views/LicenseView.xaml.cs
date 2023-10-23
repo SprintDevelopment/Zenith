@@ -47,11 +47,17 @@ namespace Zenith.Views
                     .Do(_ => messageBorder.Visibility = Visibility.Collapsed)
                     .Subscribe().DisposeWith(d);
 
-                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.activateButton.Visibility, state => (state != AppLicenseStates.Valid).Viz());
+                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.activateButton.Visibility, state => (state != AppLicenseStates.Valid).Viz()).DisposeWith(d); 
 
-                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.bottomCloseButton.Visibility, state => (state == AppLicenseStates.Valid).Viz());
-                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.startDateTextBox.Visibility, state => (state == AppLicenseStates.Valid).Viz());
-                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.endDateTextBox.Visibility, state => (state == AppLicenseStates.Valid).Viz());
+                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.bottomCloseButton.Visibility, state => (state == AppLicenseStates.Valid).Viz()).DisposeWith(d);
+                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.startDateTextBox.Visibility, state => (state == AppLicenseStates.Valid).Viz()).DisposeWith(d);
+                this.OneWayBind(ViewModel, vm => vm.License.State, v => v.endDateTextBox.Visibility, state => (state == AppLicenseStates.Valid).Viz()).DisposeWith(d);
+
+                ViewModel.WhenAnyValue(vm => vm.License.State)
+                    .Do(x =>
+                    {
+
+                    }).Subscribe().DisposeWith(d);
 
                 var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
                 ((Grid)Content).Children.Insert(0, modalBackRect);

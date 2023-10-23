@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DynamicData;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,71 +25,88 @@ namespace Zenith.Assets.Utils
             }
         }
 
-        public static string Encrypt(string text)
+        public static string Encrypt(string value)
         {
-            var key = Encoding.UTF8.GetBytes(PassPhrase);
-
-            using (var aesAlg = Aes.Create())
+            if (string.IsNullOrEmpty(value)) return value;
+            try
             {
-                aesAlg.Padding = PaddingMode.PKCS7;
+                var key = Encoding.UTF8.GetBytes(PassPhrase);
 
-                using (var encryptor = aesAlg.CreateEncryptor(key, aesAlg.IV))
+                using (var aesAlg = Aes.Create())
                 {
-                    using (var msEncrypt = new MemoryStream())
+                    using (var encryptor = aesAlg.CreateEncryptor(key, aesAlg.IV))
                     {
-                        using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                        using (var swEncrypt = new StreamWriter(csEncrypt))
+                        using (var msEncrypt = new MemoryStream())
                         {
-                            swEncrypt.Write(text);
+                            using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                            using (var swEncrypt = new StreamWriter(csEncrypt))
+                            {
+                                swEncrypt.Write(value);
+                            }
+
+                            var iv = aesAlg.IV;
+
+                            var decryptedContent = msEncrypt.ToArray();
+
+                            var result = new byte[iv.Length + decryptedContent.Length];
+
+                            Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
+                            Buffer.BlockCopy(decryptedContent, 0, result, iv.Length, decryptedContent.Length);
+
+                            var str = Convert.ToBase64String(result);
+                            var fullCipher = Convert.FromBase64String(str);
+                            return str;
                         }
-
-                        var iv = aesAlg.IV;
-
-                        var decryptedContent = msEncrypt.ToArray();
-
-                        var result = new byte[iv.Length + decryptedContent.Length];
-
-                        Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
-                        Buffer.BlockCopy(decryptedContent, 0, result, iv.Length, decryptedContent.Length);
-
-                        return Convert.ToBase64String(result);
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
         }
 
-        public static string Decrypt(string cipherText)
+        public static string Decrypt(string value)
         {
-            var fullCipher = Convert.FromBase64String(cipherText);
-
-            var iv = new byte[16];
-            var cipher = new byte[16];
-
-            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
-            var key = Encoding.UTF8.GetBytes(PassPhrase);
-
-            using (var aesAlg = Aes.Create())
+            if (string.IsNullOrEmpty(value)) return value;
+            try
             {
-                aesAlg.Padding = PaddingMode.PKCS7;
-                using (var decryptor = aesAlg.CreateDecryptor(key, iv))
+                value = value.Replace(" ", "+");
+                var fullCipher = Convert.FromBase64String(value);
+
+                var iv = new byte[16];
+                var cipher = new byte[fullCipher.Length - iv.Length];
+
+                Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+                Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, fullCipher.Length - iv.Length);
+                var key = Encoding.UTF8.GetBytes(PassPhrase);
+
+                using (var aesAlg = Aes.Create())
                 {
-                    string result;
-                    using (var msDecrypt = new MemoryStream(cipher))
+                    using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
-                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        string result;
+                        using (var msDecrypt = new MemoryStream(cipher))
                         {
-                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                             {
-                                result = srDecrypt.ReadToEnd();
+                                using (var srDecrypt = new StreamReader(csDecrypt))
+                                {
+                                    result = srDecrypt.ReadToEnd();
+                                }
                             }
                         }
-                    }
 
-                    return result;
+                        return result;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
         }
+
         private static byte[] Generate256BitsOfRandomEntropy()
         {
             var randomBytes = new byte[32];

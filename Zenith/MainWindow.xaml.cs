@@ -100,14 +100,13 @@ namespace Zenith
                     .Select(changes => new { loggedInUser = changes.Item1, appLicense = changes.Item2 })
                     .Do(changes =>
                     {
-                        //if (changes.appLicense is null || changes.appLicense.State != AppLicenseStates.Valid)
-                        //{
-                        //    ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
-                        //    ViewModel.CreateUpdatePage = new LicenseView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
-                        //    disposable?.Dispose();
-                        //}
-                        //else 
-                        if (changes.loggedInUser == null)
+                        if (changes.appLicense is null || changes.appLicense.State != AppLicenseStates.Valid)
+                        {
+                            ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
+                            ViewModel.CreateUpdatePage = new LicenseView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
+                            disposable?.Dispose();
+                        }
+                        else if (changes.loggedInUser == null)
                         {
                             ViewModel.IsSearchVisible = ViewModel.IsMenuVisible = false;
                             ViewModel.CreateUpdatePage = new LoginView() { FontFamily = this.FontFamily, FontSize = this.FontSize };
