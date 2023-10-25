@@ -23,7 +23,7 @@ namespace Zenith.Repositories.ReportRepositories
 
             IEnumerable<MachineReport> query = Enumerable.Empty<MachineReport>();
 
-            if (reportSearchModel.MachineReportType != Assets.Values.Enums.MachineReportTypes.OnlyOutgoes)
+            if (reportSearchModel.MachineReportType.ExistsIn(MachineReportTypes.All, MachineReportTypes.OnlyDeliveries))
                 query = query.Concat(_context.Set<Delivery>()
                      .Where(d => d.MachineId == reportSearchModel.MachineId)
                      .Include(d => d.Site).ThenInclude(s => s.Company)
@@ -38,7 +38,7 @@ namespace Zenith.Repositories.ReportRepositories
                          MoreInfo = $"Company: {d.Site.Company.Name}, Site : {d.Site.Name}"
                      }).AsEnumerable());
 
-            if (reportSearchModel.MachineReportType != Assets.Values.Enums.MachineReportTypes.OnlyDeliveries)
+            if (reportSearchModel.MachineReportType.ExistsIn(MachineReportTypes.All, MachineReportTypes.OnlyOutgoes))
                 query = query.Concat(_context.Set<MachineOutgo>()
                     .Where(mo => mo.MachineId == reportSearchModel.MachineId)
                     .Include(mo => mo.Company)
@@ -51,6 +51,21 @@ namespace Zenith.Repositories.ReportRepositories
                         Value = mo.Value,
                         DateTime = mo.DateTime,
                         MoreInfo = $"Company: {mo.Company.Name}, Category : {mo.OutgoCategory.Title}"
+                    }).AsEnumerable());
+
+            if (reportSearchModel.MachineReportType.ExistsIn(MachineReportTypes.All, MachineReportTypes.OnlyIncomes))
+                query = query.Concat(_context.Set<MachineIncome>()
+                    .Where(mo => mo.MachineId == reportSearchModel.MachineId)
+                    .Include(mo => mo.Company)
+                    .Include(mo => mo.IncomeCategory)
+                    .Select(mo => new MachineReport
+                    {
+                        MachineName = machineName,
+                        Title = "Machine income",
+                        TransferDirectionSign = +1,
+                        Value = mo.Value,
+                        DateTime = mo.DateTime,
+                        MoreInfo = $"Company: {mo.Company.Name}, Category : {mo.IncomeCategory.Title}"
                     }).AsEnumerable());
 
             var sum = 0f;
