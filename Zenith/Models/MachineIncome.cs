@@ -19,6 +19,13 @@ namespace Zenith.Models
         [Reactive]
         public virtual Machine Machine { get; set; }
 
+        [Reactive]
+        public int? SiteId { get; set; }
+
+        [ForeignKey(nameof(SiteId))]
+        [Reactive]
+        public virtual Site? Site { get; set; }
+
         public int? RelatedOutgoPlusTransportId { get; set; }
 
         public MachineIncome()

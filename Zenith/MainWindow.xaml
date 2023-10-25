@@ -132,7 +132,7 @@
                     <controls:MenuItem.AdditionalContent>
                         <StackPanel>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.NotesSubMenuItem}" Shortcut="Ctrl+Shift+N" Command="{Binding NavigateToNotesCommand}" />
-                            <controls:SubMenuItem Title="{DynamicResource MainWindow.ConfigurationSubMenuItem}" Shortcut="Ctrl+Shift+F" />
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.ConfigurationSubMenuItem}" Shortcut="Ctrl+Shift+F" Command="{Binding NavigateToSettingsCommand}"/>
                             <!--<controls:SubMenuItem Title="{DynamicResource MainWindow.ChangeLanguageSubMenuItem}" Shortcut="Ctrl+Shift+W" Command="{Binding ChangeLanguageCommand}"/>-->
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.OpenLogFileSubMenuItem}" Shortcut="Ctrl+Shift+L" Command="{Binding OpenLogFileCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.BackupSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding BackupCommand}"/>

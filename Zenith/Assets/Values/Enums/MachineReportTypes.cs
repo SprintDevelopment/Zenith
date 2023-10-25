@@ -11,5 +11,6 @@ namespace Zenith.Assets.Values.Enums
         All = 0,
         OnlyDeliveries,
         OnlyOutgoes,
+        OnlyIncomes,
     }
 }

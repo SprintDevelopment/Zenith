@@ -29,6 +29,9 @@ namespace Zenith.Models.ReportModels
         public string InvoiceNo { get; set; }
 
         [Reactive]
+        public string CountUnitTitle { get; set; }
+
+        [Reactive]
         public float TotalAmount { get; set; }
     }
 }

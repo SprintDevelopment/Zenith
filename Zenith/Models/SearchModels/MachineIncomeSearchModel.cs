@@ -12,6 +12,10 @@ namespace Zenith.Models.SearchModels
         [Reactive]
         public int MachineId { get; set; }
 
+        [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(SiteRepository))]
+        [Reactive]
+        public int SiteId { get; set; }
+
         [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(IncomeCategoryRepository))]
         [Reactive]
         public short IncomeCategoryId { get; set; }

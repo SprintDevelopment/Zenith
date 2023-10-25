@@ -40,6 +40,7 @@
                 <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource MachineIncomePage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource MachineIncomePage.RelatedMachineComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource MachineIncomePage.RelatedCompanyComboBoxTitle}"/>
+                <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="SiteId" Tag="{DynamicResource MachineIncomePage.RelatedSiteComboBoxTitle}"/>
                 <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource MachineIncomePage.FactorNumberTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineIncomePage.DateTimeTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineIncomePage.CommentTextBoxTitle}" />

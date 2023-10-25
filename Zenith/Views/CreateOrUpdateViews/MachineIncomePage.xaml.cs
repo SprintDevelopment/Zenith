@@ -31,6 +31,15 @@ namespace Zenith.Views.CreateOrUpdateViews
                 machineComboBox.ItemsSource = new MachineRepository().All().ToList();
 
                 this.OneWayBind(ViewModel, vm => vm.PageModel.RelatedOutgoPlusTransportId.HasValue, v => v.inputControlsStackPanel.IsEnabled).DisposeWith(d);
+
+                ViewModel.WhenAnyValue(vm => vm.PageModel.CompanyId)
+                    .WhereNotNull()
+                    .Do(ci => 
+                    {
+                        siteComboBox.ItemsSource = new SiteRepository().Find(s => s.CompanyId == ci).ToList();
+                        siteComboBox.SelectedIndex = -1;
+                    })
+                    .Subscribe().DisposeWith(d);
             });
         }
     }

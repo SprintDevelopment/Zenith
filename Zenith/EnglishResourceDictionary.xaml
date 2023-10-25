@@ -12,6 +12,14 @@
     <system:String x:Key="AppLanguages.English">English</system:String>
     <system:String x:Key="AppLanguages.Persian">فارسی</system:String>
 
+    <!-- BACKUP INTERVALS -->
+    <system:String x:Key="BackupIntervals.DontCare">_</system:String>
+    <system:String x:Key="BackupIntervals.Never">Never</system:String>
+    <system:String x:Key="BackupIntervals.OneHour">Every 1 hour</system:String>
+    <system:String x:Key="BackupIntervals.TwoHour">Every 2 hour</system:String>
+    <system:String x:Key="BackupIntervals.FourHour">Every 4 hour</system:String>
+    <system:String x:Key="BackupIntervals.EightHour">Every 8 hour</system:String>
+
     <!-- CASH STATES -->
     <system:String x:Key="CashStates.DontCare">_</system:String>
     <system:String x:Key="CashStates.NonCash">Non cash</system:String>
@@ -58,6 +66,7 @@
     <system:String x:Key="MachineReportTypes.All">All</system:String>
     <system:String x:Key="MachineReportTypes.OnlyDeliveries">Only deliveries</system:String>
     <system:String x:Key="MachineReportTypes.OnlyOutgoes">Only outgoes</system:String>
+    <system:String x:Key="MachineReportTypes.OnlyIncomes">Only incomes</system:String>
 
     <!-- MONEY TRANSACTION TYPES -->
     <system:String x:Key="MoneyTransactionTypes.DontCare">_</system:String>
@@ -410,6 +419,7 @@
     <!-- MACHINE INCOME PAGE -->
     <system:String x:Key="MachineIncomePage.RelatedMachineComboBoxTitle">Related machine</system:String>
     <system:String x:Key="MachineIncomePage.RelatedCompanyComboBoxTitle">Related company</system:String>
+    <system:String x:Key="MachineIncomePage.RelatedSiteComboBoxTitle">Related site (optional)</system:String>
     <system:String x:Key="MachineIncomePage.CashStateComboBoxTitle">Cash state</system:String>
     <system:String x:Key="MachineIncomePage.IncomeCategoryComboBoxTitle">Income category</system:String>
     <system:String x:Key="MachineIncomePage.ValueTextBoxTitle">Income value</system:String>
@@ -743,13 +753,24 @@
     <system:String x:Key="LoginView.IcorrectUserPassText">Incorrect username and/or password</system:String>
     <system:String x:Key="LoginView.LoginButtonContent">Login</system:String>
 
-    <!-- LOGIN VIEW -->
+    <!-- LICENSE VIEW -->
     <system:String x:Key="LicenseView.Title">Software license</system:String>
     <system:String x:Key="LicenseView.SerialNumberTextBoxTitle">Serial number</system:String>
     <system:String x:Key="LicenseView.ActivationCodeTextBoxTitle">Activation code</system:String>
     <system:String x:Key="LicenseView.StartDateTextBoxTitle">License start date</system:String>
     <system:String x:Key="LicenseView.EndDateTextBoxTitle">License end date</system:String>
     <system:String x:Key="LicenseView.InvalidActivationCodeText">Invalid activation code</system:String>
+    <system:String x:Key="LicenseView.ValidActivationCodeText">Activation was successful</system:String>
     <system:String x:Key="LicenseView.ActivateButtonContent">Activate</system:String>
     <system:String x:Key="LicenseView.CloseButtonContent">Close</system:String>
+
+    <!-- SETTINGS VIEW -->
+    <system:String x:Key="SettingsView.Title">Settings</system:String>
+    <system:String x:Key="SettingsView.BackupPartButtonContent">Backup</system:String>
+    <system:String x:Key="SettingsView.ReminderPartButtonContent">Reminder</system:String>
+    <system:String x:Key="SettingsView.BackupIntervalComboBoxTitle">Backup interval</system:String>
+    <system:String x:Key="SettingsView.BackupEmailTextBoxTitle">Email for backup</system:String>
+    <system:String x:Key="SettingsView.BackupDefaultLocationTextBoxTitle">Backup default location</system:String>
+    <system:String x:Key="SettingsView.SaveChangesButtonContent">Save</system:String>
+    <system:String x:Key="SettingsView.DiscardChangesButtonContent">Cancel</system:String>
 </ResourceDictionary>

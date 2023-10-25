@@ -5,6 +5,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,7 @@ using Zenith.Assets.Values.Enums;
 using Zenith.Data;
 using Zenith.Models;
 using Zenith.Repositories;
+using Zenith.Views;
 using Zenith.Views.ListViews;
 using Zenith.Views.ReportViews;
 
@@ -165,6 +167,11 @@ namespace Zenith.ViewModels
 
             CreateDatabaseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ => new DbContextFactory().CreateDbContext(null).Database.Migrate());
 
+            GetAppLicenseCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
+            {
+                MapperUtil.Mapper.Map(LicenseUtil.GetLicense(), AppLicense);
+            });
+
             _alerts.Connect()
                 .Bind(out Alerts)
                 .Subscribe();
@@ -208,7 +215,7 @@ namespace Zenith.ViewModels
         public User LoggedInUser { get; set; }
 
         [Reactive]
-        public AppLicenseDto AppLicense { get; set; }
+        public AppLicenseDto AppLicense { get; set; } = new AppLicenseDto();
 
         [Reactive]
         public AppLanguages Language { get; set; } = AppLanguages.English;
@@ -281,5 +288,6 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> BackupCommand { get; set; }
         public ReactiveCommand<Unit, Unit> RestoreCommand { get; set; }
         public ReactiveCommand<Unit, Unit> CreateDatabaseCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> GetAppLicenseCommand { get; private set; }
     }
 }

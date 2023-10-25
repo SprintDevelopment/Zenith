@@ -26,16 +26,20 @@
             </Grid>
             <StackPanel Grid.Row="1">
                 <baseclasses:JTextBox x:Name="serialNumberTextBox" Text="{Binding License.SerialNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.SerialNumberTextBoxTitle}" IsReadOnly="True" IsReadOnlyCaretVisible="False"/>
-                <baseclasses:JTextBox x:Name="activationCodeTextBox" Text="{Binding LicenseHashString, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.ActivationCodeTextBoxTitle}" />
-                <baseclasses:JTextBox x:Name="startDateTextBox" Text="{Binding License.StartDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.StartDateTextBoxTitle}" />
-                <baseclasses:JTextBox x:Name="endDateTextBox" Text="{Binding License.EndDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.EndDateTextBoxTitle}" />
+                <baseclasses:JTextBox x:Name="activationCodeTextBox" Text="{Binding LicenseHashString, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource LicenseView.ActivationCodeTextBoxTitle}" Visibility="{Binding License.IsLicenseValid, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                <baseclasses:JTextBox x:Name="startDateTextBox" Text="{Binding License.StartDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.StartDateTextBoxTitle}" Visibility="{Binding License.IsLicenseValid, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource TrueValue}}"/>
+                <baseclasses:JTextBox x:Name="endDateTextBox" Text="{Binding License.EndDate, StringFormat={}{0:yyyy-MM-dd}}" Title="{DynamicResource LicenseView.EndDateTextBoxTitle}" Visibility="{Binding License.IsLicenseValid, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource TrueValue}}"/>
 
-                <Border x:Name="messageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
+                <Border x:Name="invalidMessageBorder" Background="#FFFFECEC" BorderBrush="Red" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
                     <TextBlock Text="{DynamicResource LicenseView.InvalidActivationCodeText}" Foreground="Red"/>
                 </Border>
 
-                <Button x:Name="activateButton" Content="{DynamicResource LicenseView.ActivateButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CheckAndApplyLicenseCommand}"/>
-                <Button x:Name="bottomCloseButton" Content="{DynamicResource LicenseView.CloseButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LicenseCommand}"/>
+                <Border x:Name="validMessageBorder" Background="#FFECFFEC" BorderBrush="Green" BorderThickness="2" CornerRadius="4" Margin="24,24,24,0" Padding="16" Visibility="Collapsed">
+                    <TextBlock Text="{DynamicResource LicenseView.ValidActivationCodeText}" Foreground="Green"/>
+                </Border>
+
+                <Button x:Name="activateButton" Content="{DynamicResource LicenseView.ActivateButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CheckAndApplyLicenseCommand}" Visibility="{Binding License.IsLicenseValid, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                <Button x:Name="bottomCloseButton" Content="{DynamicResource LicenseView.CloseButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CloseCommand}" Visibility="{Binding License.IsLicenseValid, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource TrueValue}}"/>
             </StackPanel>
         </Grid>
     </Grid>

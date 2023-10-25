@@ -39,8 +39,24 @@ namespace Zenith.Repositories.ReportRepositories
                     Month = reportSearchModel.Month,
                     SiteId = g.Key,
                     InvoiceNo = "12345",
-                    TotalAmount = g.Sum(d => d.DeliveryFee + (d.SaleItem.UnitPrice * d.SaleItem.Count))
-                }).AsEnumerable()
+                    TotalAmount = g.Sum(d => d.DeliveryFee + (d.SaleItem.UnitPrice * d.SaleItem.Count)),
+                    CountUnitTitle = "Trip"
+                })
+                .Union(_context.Set<MachineIncome>().Where(mi => mi.DateTime.Year == reportSearchModel.Year
+                    && mi.DateTime.Month == (int)reportSearchModel.Month
+                    && mi.SiteId != null
+                    && sitesIds.Contains(mi.SiteId.Value)).GroupBy(d => d.SiteId)
+                    .Select(g => new CompanyAggregateReport
+                    {
+                        CompanyName = companyName,
+                        Year = reportSearchModel.Year,
+                        Month = reportSearchModel.Month,
+                        SiteId = g.Key.Value,
+                        InvoiceNo = "12345",
+                        TotalAmount = g.Sum(d => d.Value),
+                        CountUnitTitle = "Hour"
+                    }))
+                .AsEnumerable()
                 .Select(r => { r.SiteName = sites.Single(s => s.SiteId == r.SiteId).Name; return r; });
         }
     }
