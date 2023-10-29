@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
-    <Grid x:Name="titleBarGrid" Background="#FFDEE1E6">
+    <Grid x:Name="titleBarGrid" Background="#FFBBBBBB">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
