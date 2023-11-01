@@ -29,8 +29,9 @@ namespace Zenith.Views.ListViews
                 .WhenAnyPropertyChanged()
                 .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new Func<Buy, bool>(b => 
-                    (s.CompanyId == 0 || b.CompanyId == s.CompanyId)));
+                .Select(s => new Func<Buy, bool>(buy =>
+                    (s.CompanyId == 0 || buy.CompanyId == s.CompanyId) &&
+                    (s.DateRange == DateRanges.DontCare || buy.DateTime.IsInDateRange(s.DateRange))));
 
             ViewModel = new BaseListViewModel<Buy>(new BuyRepository(), searchModel, dynamicFilter, PermissionTypes.Buys)
             {

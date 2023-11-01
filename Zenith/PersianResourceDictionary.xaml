@@ -56,6 +56,23 @@
     <system:String x:Key="CountUnits.Ton.OnlyUnit">تن</system:String>
     <system:String x:Key="CountUnits.Meter.OnlyUnit">متر</system:String>
 
+    <!-- بازه زمانیS -->
+    <system:String x:Key="DateRanges.DontCare">_</system:String>
+    <system:String x:Key="DateRanges.Today">امروز</system:String>
+    <system:String x:Key="DateRanges.Yesterday">دیروز</system:String>
+    <system:String x:Key="DateRanges.PastThreeDays">3 روز اخیر</system:String>
+    <system:String x:Key="DateRanges.ThisWeek">این هفته</system:String>
+    <system:String x:Key="DateRanges.PastWeek">یک هفته اخیر</system:String>
+    <system:String x:Key="DateRanges.PastTwoWeeks">2 هفته اخیر</system:String>
+    <system:String x:Key="DateRanges.ThisMonth">این ماه</system:String>
+    <system:String x:Key="DateRanges.LastMonth">ماه قبل</system:String>
+    <system:String x:Key="DateRanges.PastMonth">یک ماه اخیر</system:String>
+    <system:String x:Key="DateRanges.PastTwoMonths">2 ماه اخیر</system:String>
+    <system:String x:Key="DateRanges.PastThreeMonth">3 ماه اخیر</system:String>
+    <system:String x:Key="DateRanges.ThisYear">امسال</system:String>
+    <system:String x:Key="DateRanges.LastYear">پارسال</system:String>
+    <system:String x:Key="DateRanges.PastYear">یک سال اخیر</system:String>
+
     <!-- JOBS -->
     <system:String x:Key="Jobs.DontCare">_</system:String>
     <system:String x:Key="Jobs.None">مشخص نشده</system:String>
@@ -281,6 +298,7 @@
     <!-- BUY SEARCH CONTROL -->
     <system:String x:Key="BuySearchModel.SearchBarTitle">جستجو در خریدها</system:String>
     <system:String x:Key="BuySearchModel.CompanyId">نام شرکت</system:String>
+    <system:String x:Key="BuySearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- CASH PAGE -->
     <system:String x:Key="CashPage.TransferDirectionComboBoxTitle">جهت انتقال</system:String>
@@ -323,7 +341,7 @@
     <system:String x:Key="ChequeListPage.ChequeDateColumnTextBlockText">تاریخ چک</system:String>
     <system:String x:Key="ChequeListPage.ChequeStateColumnTextBlockText">وضعیت چک</system:String>
 
-    <!-- BUY SEARCH CONTROL -->
+    <!-- CHEAUE SEARCH CONTROL -->
     <system:String x:Key="ChequeSearchModel.SearchBarTitle">جستجو در چک ها</system:String>
     <system:String x:Key="ChequeSearchModel.TransferDirection">جهت انتقال</system:String>
     <system:String x:Key="ChequeSearchModel.CompanyId">نام شرکت</system:String>
@@ -382,6 +400,7 @@
     <system:String x:Key="MachinePage.MachineNameTextBoxTitle">نام ماشین</system:String>
     <system:String x:Key="MachinePage.CapacityTextBoxTitle">ظرفیت (به متر)</system:String>
     <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBoxTitle">قیمت پیشفرض دلیوری</system:String>
+    <system:String x:Key="MachinePage.OwnerCompanyComboBoxTitle">شرکت مالک (برای تاکسی ها)</system:String>
     <system:String x:Key="MachinePage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="MachinePage.ConfirmButtonContent">تایید</system:String>
 
@@ -389,6 +408,7 @@
     <system:String x:Key="MachineListPage.MachineNameColumnTextBlockText">نام ماشین</system:String>
     <system:String x:Key="MachineListPage.CapacityColumnTextBlockText">ظرفیت (به متر)</system:String>
     <system:String x:Key="MachineListPage.DefaultDeliveryFeeColumnTextBlockText">قیمت پیشفرض دلیوری</system:String>
+    <system:String x:Key="MachineListPage.OwnerCompanyColumnTextBlockText">شرکت مالک (برای تاکسی ها)</system:String>
 
     <!-- MACHINE REPORT PAGE -->
     <system:String x:Key="MachineReportPage.MachineNameColumnTextBlockText">نام ماشین</system:String>
@@ -449,12 +469,14 @@
     <system:String x:Key="MachineOutgoSearchModel.MachineId">نام ماشین</system:String>
     <system:String x:Key="MachineOutgoSearchModel.OutgoCategoryId">دسته هزینه</system:String>
     <system:String x:Key="MachineOutgoSearchModel.CompanyId">نام شرکت</system:String>
+    <system:String x:Key="MachineOutgoSearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- MACHINE INCOME SEARCH CONTROL -->
     <system:String x:Key="MachineIncomeSearchModel.SearchBarTitle">جستجو در درآمدهای ماشین</system:String>
     <system:String x:Key="MachineIncomeSearchModel.MachineId">نام ماشین</system:String>
     <system:String x:Key="MachineIncomeSearchModel.IncomeCategoryId">دسته درآمد</system:String>
     <system:String x:Key="MachineIncomeSearchModel.CompanyId">نام شرکت</system:String>
+    <system:String x:Key="MachineIncomeSearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">نام ماده</system:String>
@@ -550,6 +572,7 @@
     <system:String x:Key="OutgoSearchModel.SearchBarTitle">جستجو در هزینه های معمل</system:String>
     <system:String x:Key="OutgoSearchModel.OutgoCategoryId">دسته هزینه</system:String>
     <system:String x:Key="OutgoSearchModel.CompanyId">نام شرکت</system:String>
+    <system:String x:Key="OutgoSearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- INCOME LIST PAGE -->
     <system:String x:Key="IncomeListPage.IncomeCategoryColumnTextBlockText">دسته درآمد</system:String>
@@ -578,6 +601,7 @@
     <system:String x:Key="IncomeSearchModel.SearchBarTitle">جستجو در درآمدهای معمل</system:String>
     <system:String x:Key="IncomeSearchModel.IncomeCategoryId">دسته درآمد</system:String>
     <system:String x:Key="IncomeSearchModel.CompanyId">نام شرکت</system:String>
+    <system:String x:Key="IncomeSearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- OUTGO CATEGORY LIST PAGE -->
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">عنوان دسته بندی</system:String>
@@ -662,6 +686,7 @@
     <system:String x:Key="SalaryPaymentSearchModel.SearchBarTitle">جستجو در پرداخت های حقوق</system:String>
     <system:String x:Key="SalaryPaymentSearchModel.PersonId">نام پرسنل</system:String>
     <system:String x:Key="SalaryPaymentSearchModel.CostCenter">مرکز هزینه</system:String>
+    <system:String x:Key="SalaryPaymentSearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">شرکت خریدار</system:String>
@@ -698,6 +723,7 @@
     <!-- SALE SEARCH CONTROL -->
     <system:String x:Key="SaleSearchModel.SearchBarTitle">جستجو در فروش ها</system:String>
     <system:String x:Key="SaleSearchModel.CompanyId">نام شرکت</system:String>
+    <system:String x:Key="SaleSearchModel.DateRange">بازه زمانی</system:String>
 
     <!-- SALE PROFIT REPORT PAGE -->
     <system:String x:Key="SaleProfitReportPage.YearColumnTextBlockText">سال</system:String>

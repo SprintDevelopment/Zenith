@@ -33,6 +33,9 @@ namespace Zenith.Models
         public float Count { get; set; }
 
         [Reactive]
+        public int? RelatedTaxiMachineOutgoId { get; set; }
+
+        [Reactive]
         public int MachineId { get; set; }
 
         [ForeignKey(nameof(MachineId))]

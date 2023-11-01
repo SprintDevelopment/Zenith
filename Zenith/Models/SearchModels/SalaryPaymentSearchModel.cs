@@ -16,5 +16,9 @@ namespace Zenith.Models.SearchModels
         [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(CostCenters))]
         [Reactive]
         public CostCenters CostCenter { get; set; } = CostCenters.DontCare;
+
+        [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(DateRanges))]
+        [Reactive]
+        public DateRanges DateRange { get; set; } = DateRanges.Today;
     }
 }

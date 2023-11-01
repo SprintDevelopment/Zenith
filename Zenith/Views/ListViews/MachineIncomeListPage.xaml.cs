@@ -29,10 +29,11 @@ namespace Zenith.Views.ListViews
                 .WhenAnyPropertyChanged()
                 .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new Func<MachineIncome, bool>(mo =>
-                    (s.MachineId == 0 || mo.MachineId == s.MachineId) &&
-                    (s.IncomeCategoryId == 0 || mo.IncomeCategoryId == s.IncomeCategoryId) &&
-                    (s.CompanyId == 0 || mo.CompanyId == s.CompanyId)));
+                .Select(s => new Func<MachineIncome, bool>(machineIncome =>
+                    (s.MachineId == 0 || machineIncome.MachineId == s.MachineId) &&
+                    (s.IncomeCategoryId == 0 || machineIncome.IncomeCategoryId == s.IncomeCategoryId) &&
+                    (s.CompanyId == 0 || machineIncome.CompanyId == s.CompanyId) &&
+                    (s.DateRange == DateRanges.DontCare || machineIncome.DateTime.IsInDateRange(s.DateRange))));
 
             ViewModel = new BaseListViewModel<MachineIncome>(new MachineIncomeRepository(), searchModel, dynamicFilter, PermissionTypes.MachineIncomes)
             {

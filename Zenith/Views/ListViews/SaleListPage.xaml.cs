@@ -7,6 +7,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
@@ -30,7 +31,8 @@ namespace Zenith.Views.ListViews
                 .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
                 .Select(s => new Func<Sale, bool>(sale =>
-                    (s.CompanyId == 0 || sale.CompanyId == s.CompanyId)));
+                    (s.CompanyId == 0 || sale.CompanyId == s.CompanyId) &&
+                    (s.DateRange == DateRanges.DontCare || sale.DateTime.IsInDateRange(s.DateRange))));
 
             ViewModel = new SaleListViewModel(new SaleRepository(), searchModel, dynamicFilter)
             {

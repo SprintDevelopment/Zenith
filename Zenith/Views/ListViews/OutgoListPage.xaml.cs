@@ -29,9 +29,10 @@ namespace Zenith.Views.ListViews
                 .WhenAnyPropertyChanged()
                 .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new Func<Outgo, bool>(o =>
-                    (s.OutgoCategoryId == 0 || o.OutgoCategoryId == s.OutgoCategoryId) &&
-                    (s.CompanyId == 0 || o.CompanyId == s.CompanyId)));
+                .Select(s => new Func<Outgo, bool>(outgo =>
+                    (s.OutgoCategoryId == 0 || outgo.OutgoCategoryId == s.OutgoCategoryId) &&
+                    (s.CompanyId == 0 || outgo.CompanyId == s.CompanyId) &&
+                    (s.DateRange == DateRanges.DontCare || outgo.DateTime.IsInDateRange(s.DateRange))));
 
             ViewModel = new OutgoListViewModel(new OutgoRepository(), searchModel, dynamicFilter)
             {

@@ -32,9 +32,11 @@ namespace Zenith.Views.ListViews
                 .WhenAnyPropertyChanged()
                 .WhereNotNull()
                 .Throttle(TimeSpan.FromMilliseconds(250)).ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => new Func<SalaryPayment, bool>(sp =>
-                    (s.PersonId == 0 || sp.PersonId == s.PersonId) &&
-                    (s.CostCenter == CostCenters.DontCare || sp.CostCenter == s.CostCenter)));
+                .Select(s => new Func<SalaryPayment, bool>(salaryPayment =>
+                    (s.PersonId == 0 || salaryPayment.PersonId == s.PersonId) &&
+                    (s.CostCenter == CostCenters.DontCare || salaryPayment.CostCenter == s.CostCenter) &&
+                    (s.DateRange == DateRanges.DontCare || salaryPayment.DateTime.IsInDateRange(s.DateRange))));
+
 
             ViewModel = new SalaryPaymentListViewModel(new SalaryPaymentRepository(), searchModel, dynamicFilter)
             {

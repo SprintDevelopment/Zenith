@@ -1,4 +1,6 @@
-﻿using Zenith.Models;
+﻿using ReactiveUI;
+using System.Linq;
+using Zenith.Models;
 using Zenith.Repositories;
 using Zenith.ViewModels.CreateOrUpdateViewModels;
 
@@ -14,6 +16,11 @@ namespace Zenith.Views.CreateOrUpdateViews
             InitializeComponent();
 
             ViewModel = new BaseCreateOrUpdateViewModel<Machine>(new MachineRepository());
+
+            this.WhenActivated(d =>
+            {
+                companyComboBox.ItemsSource = new CompanyRepository().All().ToList();
+            });
         }
     }
 }

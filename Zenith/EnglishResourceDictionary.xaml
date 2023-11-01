@@ -56,6 +56,23 @@
     <system:String x:Key="CountUnits.Ton.OnlyUnit">Ton</system:String>
     <system:String x:Key="CountUnits.Meter.OnlyUnit">Meter</system:String>
 
+    <!-- DATE RANGES -->
+    <system:String x:Key="DateRanges.DontCare">_</system:String>
+    <system:String x:Key="DateRanges.Today">Today</system:String>
+    <system:String x:Key="DateRanges.Yesterday">Yesterday</system:String>
+    <system:String x:Key="DateRanges.PastThreeDays">Past 3 Days</system:String>
+    <system:String x:Key="DateRanges.ThisWeek">This Week</system:String>
+    <system:String x:Key="DateRanges.PastWeek">Past Week</system:String>
+    <system:String x:Key="DateRanges.PastTwoWeeks">Past 2 Weeks</system:String>
+    <system:String x:Key="DateRanges.ThisMonth">This Month</system:String>
+    <system:String x:Key="DateRanges.LastMonth">Last Month</system:String>
+    <system:String x:Key="DateRanges.PastMonth">Past Month</system:String>
+    <system:String x:Key="DateRanges.PastTwoMonths">Past 2 Months</system:String>
+    <system:String x:Key="DateRanges.PastThreeMonth">Past 3 Month</system:String>
+    <system:String x:Key="DateRanges.ThisYear">This Year</system:String>
+    <system:String x:Key="DateRanges.LastYear">Last Year</system:String>
+    <system:String x:Key="DateRanges.PastYear">Past Year</system:String>
+
     <!-- JOBS -->
     <system:String x:Key="Jobs.DontCare">_</system:String>
     <system:String x:Key="Jobs.None">Not specified</system:String>
@@ -281,6 +298,7 @@
     <!-- BUY SEARCH CONTROL -->
     <system:String x:Key="BuySearchModel.SearchBarTitle">Search in buys</system:String>
     <system:String x:Key="BuySearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="BuySearchModel.DateRange">Date range</system:String>
 
     <!-- CASH PAGE -->
     <system:String x:Key="CashPage.TransferDirectionComboBoxTitle">Transfer direction</system:String>
@@ -323,7 +341,7 @@
     <system:String x:Key="ChequeListPage.ChequeDateColumnTextBlockText">Cheque date</system:String>
     <system:String x:Key="ChequeListPage.ChequeStateColumnTextBlockText">Cheque state</system:String>
 
-    <!-- BUY SEARCH CONTROL -->
+    <!-- CHEQUE SEARCH CONTROL -->
     <system:String x:Key="ChequeSearchModel.SearchBarTitle">Search in cashes</system:String>
     <system:String x:Key="ChequeSearchModel.TransferDirection">Transfer direction</system:String>
     <system:String x:Key="ChequeSearchModel.CompanyId">Company name</system:String>
@@ -382,6 +400,7 @@
     <system:String x:Key="MachinePage.MachineNameTextBoxTitle">Machine name</system:String>
     <system:String x:Key="MachinePage.CapacityTextBoxTitle">Capacity (in meters)</system:String>
     <system:String x:Key="MachinePage.DefaultDeliveryFeeTextBoxTitle">Default delivery fee</system:String>
+    <system:String x:Key="MachinePage.OwnerCompanyComboBoxTitle">Owner company (for taxies)</system:String>
     <system:String x:Key="MachinePage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="MachinePage.ConfirmButtonContent">Confirm</system:String>
     
@@ -389,6 +408,7 @@
     <system:String x:Key="MachineListPage.MachineNameColumnTextBlockText">Machine name</system:String>
     <system:String x:Key="MachineListPage.CapacityColumnTextBlockText">Capacity (in meters)</system:String>
     <system:String x:Key="MachineListPage.DefaultDeliveryFeeColumnTextBlockText">Default delivery fee</system:String>
+    <system:String x:Key="MachineListPage.OwnerCompanyColumnTextBlockText">Owner company (for taxies)</system:String>
 
     <!-- MACHINE REPORT PAGE -->
     <system:String x:Key="MachineReportPage.MachineNameColumnTextBlockText">Machine name</system:String>
@@ -449,12 +469,14 @@
     <system:String x:Key="MachineOutgoSearchModel.MachineId">Machine name</system:String>
     <system:String x:Key="MachineOutgoSearchModel.OutgoCategoryId">Outgo category</system:String>
     <system:String x:Key="MachineOutgoSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="MachineOutgoSearchModel.DateRange">Date range</system:String>
 
     <!-- MACHINE INCOME SEARCH CONTROL -->
     <system:String x:Key="MachineIncomeSearchModel.SearchBarTitle">Search in machine incomes</system:String>
     <system:String x:Key="MachineIncomeSearchModel.MachineId">Machine name</system:String>
     <system:String x:Key="MachineIncomeSearchModel.IncomeCategoryId">Income category</system:String>
     <system:String x:Key="MachineIncomeSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="MachineIncomeSearchModel.DateRange">Date range</system:String>
 
     <!-- MATERIAL PAGE -->
     <system:String x:Key="MaterialPage.MaterialNameTextBoxTitle">Material name</system:String>
@@ -550,6 +572,7 @@
     <system:String x:Key="OutgoSearchModel.SearchBarTitle">Search in outgoes</system:String>
     <system:String x:Key="OutgoSearchModel.OutgoCategoryId">Outgo category</system:String>
     <system:String x:Key="OutgoSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="OutgoSearchModel.DateRange">Date range</system:String>
 
     <!-- INCOME LIST PAGE -->
     <system:String x:Key="IncomeListPage.IncomeCategoryColumnTextBlockText">Income category</system:String>
@@ -578,7 +601,8 @@
     <system:String x:Key="IncomeSearchModel.SearchBarTitle">Search in incomes</system:String>
     <system:String x:Key="IncomeSearchModel.IncomeCategoryId">Income category</system:String>
     <system:String x:Key="IncomeSearchModel.CompanyId">Company name</system:String>
-    
+    <system:String x:Key="IncomeSearchModel.DateRange">Date range</system:String>
+
     <!-- OUTGO CATEGORY LIST PAGE -->
     <system:String x:Key="OutgoCategoryListPage.TitleColumnTextBlockText">Category title</system:String>
     <system:String x:Key="OutgoCategoryListPage.ReservedAmountColumnTextBlockText">Reserved amount</system:String>
@@ -662,6 +686,7 @@
     <system:String x:Key="SalaryPaymentSearchModel.SearchBarTitle">Search in salary payments</system:String>
     <system:String x:Key="SalaryPaymentSearchModel.PersonId">Personnel name</system:String>
     <system:String x:Key="SalaryPaymentSearchModel.CostCenter">Cost center</system:String>
+    <system:String x:Key="SalaryPaymentSearchModel.DateRange">Date range</system:String>
 
     <!-- SALE PAGE -->
     <system:String x:Key="SalePage.BuyerCompanyComboBoxTitle">Buyer company</system:String>
@@ -698,6 +723,7 @@
     <!-- SALE SEARCH CONTROL -->
     <system:String x:Key="SaleSearchModel.SearchBarTitle">Search in sales</system:String>
     <system:String x:Key="SaleSearchModel.CompanyId">Company name</system:String>
+    <system:String x:Key="SaleSearchModel.DateRange">Date range</system:String>
 
     <!-- SALE PROFIT REPORT PAGE -->
     <system:String x:Key="SaleProfitReportPage.YearColumnTextBlockText">Year</system:String>

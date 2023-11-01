@@ -48,6 +48,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding SelectAllCommand}">
                     <Image Source="{Binding SelectionMode, Converter={StaticResource selectionModesToImageSourceConverter}}" Stretch="Fill" Width="22" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -56,7 +57,8 @@
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineListPage.MachineNameColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MachineListPage.CapacityColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
                 <TextBlock HorizontalAlignment="Center" Text="{DynamicResource MachineListPage.DefaultDeliveryFeeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource MachineListPage.OwnerCompanyColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
             </Grid>
             
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" >
@@ -81,6 +83,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource SimpleButtonStyle}" Command="{Binding DataContext.SelectOneCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}">
                                 <Image Source="/Zenith;component/Resources/Images/Common/allSelection.png" Stretch="Fill" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsSelected, Converter={StaticResource boolToVisibilityConverter}}"/>
@@ -89,7 +92,8 @@
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Capacity, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Center" Text="{Binding DefaultDeliveryFee, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding OwnerCompany, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>
                     </DataTemplate>

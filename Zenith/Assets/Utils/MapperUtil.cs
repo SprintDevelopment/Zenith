@@ -80,6 +80,14 @@ namespace Zenith.Assets.Utils
                 .ForMember(cash => cash.Value, opt => opt.MapFrom(order => order.Value))
                 .ForMember(cash => cash.RelatedEntityId, opt => opt.MapFrom(order => order.IncomeId));
 
+            cfg.CreateMap<Delivery, MachineOutgo>()
+                .ForMember(machineOutgo => machineOutgo.OutgoCategoryId, opt => opt.MapFrom(_ => 2))
+                .ForMember(machineOutgo => machineOutgo.Amount, opt => opt.MapFrom(delivery => delivery.Count))
+                .ForMember(machineOutgo => machineOutgo.Value, opt => opt.MapFrom(delivery => delivery.DeliveryFee))
+                .ForMember(machineOutgo => machineOutgo.CashState, opt => opt.MapFrom(_ => CashStates.Cash))
+                .ForMember(machineOutgo => machineOutgo.OutgoType, opt => opt.MapFrom(_ => OutgoTypes.Direct))
+                .ForMember(machineOutgo => machineOutgo.Comment, opt => opt.MapFrom(delivery => $"It's for calculate TAXI loading fee for delivery #{delivery.DeliveryNumber}"));
+
             cfg.CreateMap<Cheque, Cash>()
                 .ForMember(cash => cash.MoneyTransactionType,
                     opt => opt.MapFrom(order => order.ChequeType == ChequeTypes.Paid ?

@@ -23,5 +23,9 @@ namespace Zenith.Models.SearchModels
         [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(CompanyRepository))]
         [Reactive]
         public short CompanyId { get; set; }
+
+        [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(DateRanges))]
+        [Reactive]
+        public DateRanges DateRange { get; set; } = DateRanges.Today;
     }
 }
