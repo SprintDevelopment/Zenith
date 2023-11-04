@@ -33,15 +33,15 @@
                 <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource OutgoPage.CashStateComboBoxTitle}"/>
                 <ComboBox x:Name="outgoCategoryComboBox" SelectedValue="{Binding PageModel.OutgoCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="OutgoCategoryId" Tag="{DynamicResource OutgoPage.OutgoCategoryComboBoxTitle}"/>
                 <Grid>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.AmountTextBoxTitle}"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.AmountTextBoxTitle}"/>
                     <Grid x:Name="countUnitTitleGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24,0,24,0">
                         <TextBlock Text="{Binding SelectedItem.CountUnitTitle, ElementName=outgoCategoryComboBox}" Margin="8,4" Foreground="DarkRed"/>
                     </Grid>
 
                 </Grid>
-                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.ValueTextBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource OutgoPage.RelatedMachineComboBoxTitle}"/>
-                <baseclasses:JTextBox x:Name="machineIncomeValueTextBox" Text="{Binding PageModel.MachineIncomeValue, StringFormat={}{0:n2}}" Title="{DynamicResource OutgoPage.MachineIncomeValueTextBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="machineIncomeValueTextBox" Text="{Binding PageModel.MachineIncomeValue, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.MachineIncomeValueTextBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource OutgoPage.RelatedCompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource OutgoPage.FactorNumberTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource OutgoPage.DateTimeTitle}"/>

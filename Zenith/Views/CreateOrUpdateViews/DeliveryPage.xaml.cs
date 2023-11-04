@@ -40,6 +40,11 @@ namespace Zenith.Views.CreateOrUpdateViews
                         ViewModel.PageModel.Count = m.Capacity;
                         ViewModel.PageModel.DeliveryFee = m.DefaultDeliveryFee;
                     }).Subscribe().DisposeWith(d);
+
+                ViewModel.PageModel.WhenAnyValue(pm => pm.IsIndirectDelivery)
+                    .Select(iid => iid.Viz())
+                    .BindTo(this, v => v.sourceDeliveryInfoStackPanel.Visibility)
+                    .DisposeWith(d);
             });
         }
     }

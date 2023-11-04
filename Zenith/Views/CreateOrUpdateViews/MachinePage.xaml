@@ -30,8 +30,8 @@
             </Grid>
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachinePage.MachineNameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.Capacity, StringFormat={}{0:n2}}" Title="{DynamicResource MachinePage.CapacityTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.DefaultDeliveryFee, StringFormat={}{0:n2}}" Title="{DynamicResource MachinePage.DefaultDeliveryFeeTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.Capacity, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachinePage.CapacityTextBoxTitle}" />
+                <baseclasses:JTextBox Text="{Binding PageModel.DefaultDeliveryFee, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachinePage.DefaultDeliveryFeeTextBoxTitle}" />
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.OwnerCompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource MachinePage.OwnerCompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachinePage.CommentTextBoxTitle}" />
 

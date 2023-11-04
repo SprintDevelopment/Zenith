@@ -101,7 +101,7 @@
                             <TextBlock HorizontalAlignment="Left" Text="{Binding IssueDateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding MoneyTransactionType, Converter={StaticResource enumToDescriptionConverter}, ConverterParameter={x:Type enums:MoneyTransactionTypes}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                             <!--<TextBlock HorizontalAlignment="Left" Text="{Binding TransferDirection, Converter={StaticResource enumToDescriptionConverter}, ConverterParameter={x:Type enums:TransferDirections}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>-->
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Foreground="{Binding TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="6" Foreground="{Binding TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
                             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                             <!---->
                         </baseclasses:JGrid>
@@ -122,7 +122,7 @@
                 <TextBlock HorizontalAlignment="Center" Text="*" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="1" />
                 <TextBlock HorizontalAlignment="Left" Text="Total" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="2" />
                 <!--<TextBlock HorizontalAlignment="Left" Text="{Binding SummaryItem.TransferDirection, Converter={StaticResource enumToDescriptionConverter}, ConverterParameter={x:Type enums:TransferDirections}}" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>-->
-                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Value, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="6" Foreground="{Binding SummaryItem.TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.Value, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="6" Foreground="{Binding SummaryItem.TransferDirectionPlusValueToNullableBool, Converter={StaticResource nullableBoolToGreenBlackRedColorConverter}}" Margin="8,0,0,0"/>
             </Grid>
         </Grid>
     </Grid>

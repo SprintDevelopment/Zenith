@@ -32,13 +32,13 @@
                 <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource IncomePage.CashStateComboBoxTitle}"/>
                 <ComboBox x:Name="incomeCategoryComboBox" SelectedValue="{Binding PageModel.IncomeCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="IncomeCategoryId" Tag="{DynamicResource IncomePage.IncomeCategoryComboBoxTitle}"/>
                 <Grid>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource IncomePage.AmountTextBoxTitle}"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource IncomePage.AmountTextBoxTitle}"/>
                     <Grid x:Name="countUnitTitleGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24,0,24,0">
                         <TextBlock Text="{Binding SelectedItem.CountUnitTitle, ElementName=incomeCategoryComboBox}" Margin="8,4" Foreground="DarkRed"/>
                     </Grid>
 
                 </Grid>
-                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource IncomePage.ValueTextBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource IncomePage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource IncomePage.RelatedCompanyComboBoxTitle}"/>
                 <baseclasses:JTextBox x:Name="factorNumberTextBox" Text="{Binding PageModel.FactorNumber}" Title="{DynamicResource IncomePage.FactorNumberTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource IncomePage.DateTimeTitle}"/>

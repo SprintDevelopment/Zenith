@@ -32,12 +32,12 @@
                 <ComboBox x:Name="cashStatesComboBox" SelectedValue="{Binding PageModel.CashState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MachineIncomePage.CashStateComboBoxTitle}"/>
                 <ComboBox x:Name="incomeCategoryComboBox" SelectedValue="{Binding PageModel.IncomeCategoryId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="IncomeCategoryId" Tag="{DynamicResource MachineIncomePage.IncomeCategoryComboBoxTitle}"/>
                 <Grid>
-                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource IncomePage.AmountTextBoxTitle}"/>
+                    <baseclasses:JTextBox Text="{Binding PageModel.Amount, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource IncomePage.AmountTextBoxTitle}"/>
                     <Grid x:Name="countUnitTitleGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24,0,24,0">
                         <TextBlock Text="{Binding SelectedItem.CountUnitTitle, ElementName=incomeCategoryComboBox}" Margin="8,4" Foreground="DarkRed"/>
                     </Grid>
                 </Grid>
-                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource MachineIncomePage.ValueTextBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="valueTextBox" Text="{Binding PageModel.Value, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineIncomePage.ValueTextBoxTitle}"/>
                 <ComboBox x:Name="machineComboBox" SelectedValue="{Binding PageModel.MachineId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="MachineId" Tag="{DynamicResource MachineIncomePage.RelatedMachineComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="CompanyId" Tag="{DynamicResource MachineIncomePage.RelatedCompanyComboBoxTitle}"/>
                 <ComboBox x:Name="siteComboBox" SelectedValue="{Binding PageModel.SiteId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="SiteId" Tag="{DynamicResource MachineIncomePage.RelatedSiteComboBoxTitle}"/>

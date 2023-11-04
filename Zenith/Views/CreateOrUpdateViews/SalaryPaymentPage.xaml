@@ -52,7 +52,7 @@
                     <TextBlock Text="{Binding SalaryStatistics.OverallString}" VerticalAlignment="Center" Grid.Row="4" Margin="8,0"/>
                 </Grid>
                 <ComboBox x:Name="costCenterComboBox" SelectedValue="{Binding PageModel.CostCenter, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SalaryPaymentPage.CostCenterComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.PaidValue, StringFormat={}{0:n2}}" Title="{DynamicResource SalaryPaymentPage.PaidValueTextBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.PaidValue, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalaryPaymentPage.PaidValueTextBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SalaryPaymentPage.CommentTextBoxTitle}" />
 
                 <CheckBox IsChecked="{Binding StayOpen}" Content="{Binding StayOpenTitle}" Margin="24,24,24,0" Style="{StaticResource SliderCheckBox}" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

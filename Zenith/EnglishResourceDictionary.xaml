@@ -288,6 +288,7 @@
     <system:String x:Key="BuyPage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="BuyPage.MaterialNameColumnTextBlockText">Material name</system:String>
     <system:String x:Key="BuyPage.BuyPriceColumnTextBlockText">Buy price</system:String>
+    <system:String x:Key="BuyPage.DeliveryNumberColumnTextBlockText">Delivery number</system:String>
     <system:String x:Key="BuyPage.CountColumnTextBlockText">Count</system:String>
     <system:String x:Key="BuyPage.TotalPriceColumnTextBlockText">Total price</system:String>
 
@@ -395,6 +396,8 @@
     <system:String x:Key="DeliveryPage.DriverComboBoxTitle">Driver</system:String>
     <system:String x:Key="DeliveryPage.DeliveryNumberTextBoxTitle">Delivery number</system:String>
     <system:String x:Key="DeliveryPage.DeliveryDateTimeTitle">Delivery date time</system:String>
+    <system:String x:Key="DeliveryPage.SourceDeliveryNumberTextBoxTitle">Source delivery number</system:String>
+    <system:String x:Key="DeliveryPage.SourceDeliveryDateTimeTitle">Source delivery date time</system:String>
     <system:String x:Key="DeliveryPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="DeliveryPage.ConfirmButtonContent">Confirm</system:String>
     

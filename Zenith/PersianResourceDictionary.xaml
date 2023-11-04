@@ -289,6 +289,7 @@
     <system:String x:Key="BuyPage.MaterialNameColumnTextBlockText">نام ماده</system:String>
     <system:String x:Key="BuyPage.BuyPriceColumnTextBlockText">قیمت خرید</system:String>
     <system:String x:Key="BuyPage.CountColumnTextBlockText">مقدار</system:String>
+    <system:String x:Key="BuyPage.DeliveryNumberColumnTextBlockText">شماره دلیوری</system:String>
     <system:String x:Key="BuyPage.TotalPriceColumnTextBlockText">قیمت کل</system:String>
 
     <!-- BUY LIST PAGE -->
@@ -395,6 +396,8 @@
     <system:String x:Key="DeliveryPage.DriverComboBoxTitle">راننده</system:String>
     <system:String x:Key="DeliveryPage.DeliveryNumberTextBoxTitle">شماره دلیوری</system:String>
     <system:String x:Key="DeliveryPage.DeliveryDateTimeTitle">تاریخ دلیوری</system:String>
+    <system:String x:Key="DeliveryPage.SourceDeliveryNumberTextBoxTitle">شماره دلیوری مبدا</system:String>
+    <system:String x:Key="DeliveryPage.SourceDeliveryDateTimeTitle">تاریخ دلیوری مبدا</system:String>
     <system:String x:Key="DeliveryPage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="DeliveryPage.ConfirmButtonContent">تایید</system:String>
 

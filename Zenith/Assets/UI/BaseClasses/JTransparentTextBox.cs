@@ -9,14 +9,14 @@ using System.Windows.Media;
 
 namespace Zenith.Assets.UI.BaseClasses
 {
-    public class JTransparentTextBox : TextBox
+    public class JTransparentTextBox : FloatHandledTextBox
     {
         public JTransparentTextBox()
         {
             BorderBrush = Background = Brushes.Transparent;
             BorderThickness = new System.Windows.Thickness(0);
 
-            this.GotFocus += (s, e) => { SelectAll(); };
+            //this.GotFocus += (s, e) => { SelectAll(); };
 
             this.PreviewKeyDown += (s, e) =>
             {

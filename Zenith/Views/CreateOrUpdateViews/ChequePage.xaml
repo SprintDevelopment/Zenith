@@ -31,7 +31,7 @@
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <ComboBox x:Name="chequeTypesComboBox" SelectedValue="{Binding PageModel.ChequeType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" IsEnabled="False" Tag="{DynamicResource ChequePage.ChequeTypeComboBoxTitle}"/>
                 <ComboBox x:Name="companyComboBox" SelectedValue="{Binding PageModel.CompanyId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="CompanyId" Tag="{DynamicResource ChequePage.CompanyComboBoxTitle}"/>
-                <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}}" Title="{DynamicResource ChequePage.ChequeValueTextBoxTitle}"/>
+                <baseclasses:JTextBox Text="{Binding PageModel.Value, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.ChequeValueTextBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.ChequeNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.ChequeNumberTextBoxTitle}"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.ChequeDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource ChequePage.ChequeDateTimeTitle}"/>
                 <ComboBox x:Name="chequeStatesComboBox" SelectedValue="{Binding PageModel.ChequeState, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource ChequePage.ChequeStateComboBoxTitle}"/>

@@ -16,6 +16,7 @@ using Zenith.Assets.Extensions;
 using System.Reactive;
 using Zenith.Assets.Utils;
 using Zenith.Views.CreateOrUpdateViews;
+using System.Diagnostics;
 
 namespace Zenith.ViewModels.CreateOrUpdateViewModels
 {
@@ -84,7 +85,8 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItemId = saleItem.SaleItemId;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.Count = saleItem.Count;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.CashState = PageModel.CashState;
-                deliveryCreateOrUpdatePage.ViewModel.PageModel.DateTime = PageModel.DateTime;
+                deliveryCreateOrUpdatePage.ViewModel.PageModel.IsIndirectDelivery = PageModel.IsIndirectSale;
+                deliveryCreateOrUpdatePage.ViewModel.PageModel.DateTime = deliveryCreateOrUpdatePage.ViewModel.PageModel.SourceDeliveryDateTime = PageModel.DateTime;
 
 
                 App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();

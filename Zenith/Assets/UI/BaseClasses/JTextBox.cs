@@ -3,10 +3,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
+using Zenith.Assets.Extensions;
 
 namespace Zenith.Assets.UI.BaseClasses
 {
-    public class JTextBox : TextBox, INotifyPropertyChanged, IDisposable
+    public class JTextBox : FloatHandledTextBox, INotifyPropertyChanged, IDisposable
     {
         #region NotifyPropertyChanged, Dispose
         public event PropertyChangedEventHandler PropertyChanged;
@@ -34,7 +37,6 @@ namespace Zenith.Assets.UI.BaseClasses
 
         public JTextBox()
         {
-            this.GotFocus += (s, e) => { SelectAll(); };
         }
     }
 }

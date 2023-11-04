@@ -7,7 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices.Marshalling;
 using Zenith.Assets.Attributes;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.UI.UserControls;
+using Zenith.Assets.Values.Constants;
 using Zenith.Assets.Values.Enums;
 
 namespace Zenith.Models
@@ -30,6 +32,11 @@ namespace Zenith.Models
         [ForeignKey(nameof(MaterialId))]
         [Reactive]
         public virtual Material Material { get; set; }
+
+        [Required]
+        [MaxLength(LengthConstants.SMALL_STRING)]
+        [Reactive]
+        public string DeliveryNumber { get; set; } = string.Empty;
 
         [Reactive]
         public float UnitPrice { get; set; }
@@ -69,6 +76,7 @@ namespace Zenith.Models
                     BuyCountUnit = selectedUnit;
                 }).Subscribe();
 
+            this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "Enter delivery number");
             this.ValidationRule(vm => vm.UnitPrice, up => up > 0, "Unit price must be greater than 0");
             this.ValidationRule(vm => vm.Count, c => c > 0, "Count must be greater than 0");
         }

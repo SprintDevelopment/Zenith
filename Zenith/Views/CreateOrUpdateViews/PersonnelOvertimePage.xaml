@@ -30,7 +30,7 @@
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <ComboBox x:Name="personComboBox" SelectedValue="{Binding PageModel.PersonId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource PersonnelOvertimePage.PersonnelComboBoxTitle}" IsEnabled="False"/>
                 <usercontrols:DatePicker DateTime="{Binding PageModel.DateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonnelOvertimePage.DateDateTimeTitle}" IsEnabled="False"/>
-                <baseclasses:JTextBox x:Name="amountTextBox" Text="{Binding PageModel.Amount, StringFormat={}{0:n2}}" Title="{DynamicResource PersonnelOvertimePage.AmountTextBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="amountTextBox" Text="{Binding PageModel.Amount, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonnelOvertimePage.AmountTextBoxTitle}"/>
                 <baseclasses:JTextBox Text="{Binding PageModel.Comment, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource PersonnelOvertimePage.CommentTextBoxTitle}" />
 
                 <Button Content="{DynamicResource PersonnelOvertimePage.ConfirmButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}"  Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}"/>

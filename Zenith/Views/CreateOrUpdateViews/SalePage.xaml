@@ -10,7 +10,7 @@
       xmlns:usercontrols="clr-namespace:Zenith.Assets.UI.UserControls"
       xmlns:projUsercontrols="clr-namespace:Zenith.Assets.UI.UserControls.ProjectSpecificUserControls">
     <Grid>
-        <Grid Width="1100" Height="750" VerticalAlignment="Center">
+        <Grid Width="1200" Height="750" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="2*" />
@@ -151,10 +151,10 @@
                                         <ColumnDefinition Width="40"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, StringFormat={}{0:n2}}" Grid.Column="1" Margin="8,0,0,0"/>
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="8,0,0,0"/>
                                     <usercontrols:UnitSelectorControl DataContext="{Binding UnitSelectorViewModel}" Grid.Column="2"/>
-                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, StringFormat={}{0:n2}}" Grid.Column="3" Margin="8,0,0,0"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                    <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Margin="8,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
                                     <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Remove this item" Grid.Column="5" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
@@ -225,8 +225,8 @@
                                                     <TextBlock HorizontalAlignment="Left" Text="{Binding Machine.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
                                                     <TextBlock HorizontalAlignment="Left" Text="{Binding Driver.FullName}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
                                                     <TextBlock HorizontalAlignment="Center" Text="{Binding DeliveryNumber}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding DeliveryFee, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Count, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding DeliveryFee, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Count, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
                                                     <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
                                                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                                                 </baseclasses:JGrid>
