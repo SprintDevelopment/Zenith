@@ -19,6 +19,7 @@ namespace Zenith.Repositories
         {
             long longId = (long)id;
             return _context.Set<Delivery>()
+                .Include(d => d.SaleItem).ThenInclude(si => si.Sale)
                 .Include(d => d.Site)
                 .Include(d => d.Machine)
                 .Include(d => d.Driver)

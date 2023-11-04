@@ -12,5 +12,8 @@ namespace Zenith.Models
     public class Model : BaseDto
     {
         public Model Clone() => (Model)MemberwiseClone();
+
+        [NotMapped]
+        public bool ShouldCloneAsNew { get; set; } = false;
     }
 }

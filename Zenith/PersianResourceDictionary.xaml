@@ -8,6 +8,8 @@
     <GridLength x:Key="PageHeader.FirstGrid.Length">50</GridLength>
     <GridLength x:Key="PageHeader.SecondGrid.Length">*</GridLength>
 
+    <ImageSource x:Key="MenuItem.IndicatorImage.ImageSource">/Zenith;component/Resources/Images/Common/previous.png</ImageSource>
+
     <!-- APP LANGUAGES TYPES -->
     <system:String x:Key="AppLanguages.English">English</system:String>
     <system:String x:Key="AppLanguages.Persian">فارسی</system:String>

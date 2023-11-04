@@ -19,6 +19,10 @@ namespace Zenith.Models
         [Reactive]
         public long SaleItemId { get; set; }
 
+        [NotMapped]
+        [Reactive]
+        public bool IsSaved { get; set; }
+
         [Reactive]
         public int SaleId { get; set; }
 
@@ -71,6 +75,10 @@ namespace Zenith.Models
 
         public SaleItem()
         {
+            this.WhenAnyValue(m => m.SaleItemId)
+                .Select(sii => sii > 0)
+                .BindTo(this, m => m.IsSaved);
+
             this.WhenAnyValue(m => m.MixtureMaterialId)
                 .Select(x => x is not null)
                 .BindTo(this, m => m.IsFormAMixture);

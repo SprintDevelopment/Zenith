@@ -8,6 +8,8 @@
     <GridLength x:Key="PageHeader.FirstGrid.Length">*</GridLength>
     <GridLength x:Key="PageHeader.SecondGrid.Length">50</GridLength>
 
+    <ImageSource x:Key="MenuItem.IndicatorImage.ImageSource">/Zenith;component/Resources/Images/Common/next.png</ImageSource>
+    
     <!-- APP LANGUAGES TYPES -->
     <system:String x:Key="AppLanguages.English">English</system:String>
     <system:String x:Key="AppLanguages.Persian">فارسی</system:String>
@@ -696,6 +698,7 @@
     <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
     <system:String x:Key="SalePage.CommentTextBoxTitle">Optional comment</system:String>
     <system:String x:Key="SalePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="SalePage.ConfirmAndContinueButtonContent">Confirm &amp; continue</system:String>
     <system:String x:Key="SalePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">Material name</system:String>
     <system:String x:Key="SalePage.SalePriceColumnTextBlockText">Sale price</system:String>

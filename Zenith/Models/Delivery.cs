@@ -44,7 +44,7 @@ namespace Zenith.Models
 
         [NotMapped]
         [Reactive]
-        public bool InfoIsRelatedToMachine { get; set; } = true;
+        public bool InfoIsRelatedToMachine { get; set; } = false;
 
         [Reactive]
         public int DriverId { get; set; }
@@ -71,6 +71,8 @@ namespace Zenith.Models
 
         public Delivery()
         {
+            ShouldCloneAsNew = true;
+
             this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "Enter delivery number");
             this.ValidationRule(vm => vm.SaleItemId, sii => sii > 0, "Select sale item");
             this.ValidationRule(vm => vm.SiteId, si => si > 0, "Select site");

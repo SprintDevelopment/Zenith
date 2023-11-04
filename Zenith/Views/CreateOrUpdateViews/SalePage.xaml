@@ -12,7 +12,7 @@
     <Grid>
         <Grid Width="1100" Height="750" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -89,8 +89,14 @@
                     </ItemsControl>
 
                 </Grid>
-
-                <Button Content="{DynamicResource SalePage.ConfirmButtonContent}" Height="38" Grid.Row="2" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateCommand}" />
+                <Grid Height="38" Grid.Row="2" Margin="24,24,24,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="{DynamicResource SalePage.ConfirmAndContinueButtonContent}" Margin="0,0,4,0" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateAndContinueCommand}" />
+                    <Button Content="{DynamicResource SalePage.ConfirmButtonContent}" Margin="4,0,0,0" Grid.Column="1" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateOrUpdateAndReturnCommand}" />
+                </Grid>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,1,0,4" Background="#FFFAFAFA">
                 <Grid.RowDefinitions>
@@ -152,15 +158,15 @@
                                     <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Remove this item" Grid.Column="5" Command="{Binding DataContext.RemoveFromItemsCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/remove.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
-                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Add new delivery" Grid.Column="6" Command="{Binding DataContext.AddNewDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Add new delivery" Grid.Column="6" Command="{Binding DataContext.AddNewDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}" IsEnabled="{Binding IsSaved}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/send.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
-                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Show/hide deliveries" Grid.Column="7" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
+                                    <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="Show/hide deliveries" Grid.Column="7" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}" IsEnabled="{Binding IsSaved}">
                                         <Image Source="/Zenith;component/Resources/Images/Common/show-list.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Button>
                                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
                                 </baseclasses:JGrid>
-                                
+
                                 <Grid Grid.Row="1" Visibility="{Binding IsDeliveriesVisible, Converter={StaticResource boolToVisibilityConverter}}" Margin="0,0,0,8">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="28"/>
@@ -205,7 +211,7 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <baseclasses:JGrid Height="32" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                                                <baseclasses:JGrid Height="32" Command="{Binding DataContext.UpdateDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="*" />

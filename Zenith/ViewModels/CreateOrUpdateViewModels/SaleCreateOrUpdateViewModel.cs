@@ -78,11 +78,14 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 });
 
                 deliveryCreateOrUpdatePage.ViewModel.PrepareCommand.Execute().Subscribe();
-                
+
                 //Important
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItem = saleItem;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.SaleItemId = saleItem.SaleItemId;
+                deliveryCreateOrUpdatePage.ViewModel.PageModel.Count = saleItem.Count;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.CashState = PageModel.CashState;
+                deliveryCreateOrUpdatePage.ViewModel.PageModel.DateTime = PageModel.DateTime;
+
 
                 App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });
@@ -105,9 +108,24 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });
 
-            //AddNewDeliveryCommand = ReactiveCommand.CreateFromObservable<SaleItem, Unit>(saleItem => 
-            //    CreateCommand.Execute()
-            //    .Do(_ => CreateUpdatePage.ViewModel.PageModel = new Delivery { SaleItem = saleItem, SaleItemId = saleItem.SaleItemId }));
+            this.WhenAnyValue(vm => vm.PageModel).Where(pm => pm != null).Subscribe(pm =>
+            {
+                CreateOrUpdateAndContinueCommand = ReactiveCommand.Create<Unit>(_ =>
+                {
+                    var cuCommandResult = IsNew ? Repository.Add(PageModel) : Repository.Update(PageModel, PageModel.GetKeyPropertyValue());
+                    PageModel = Repository.Single(PageModel.GetKeyPropertyValue());
+                    
+                    ChangeSet.Add(PageModel);
+                }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
+
+                CreateOrUpdateAndReturnCommand = ReactiveCommand.Create<Unit>(_ =>
+                {
+                    var cuCommandResult = IsNew ? Repository.Add(PageModel) : Repository.Update(PageModel, PageModel.GetKeyPropertyValue());
+                    ChangeSet.Add(Repository.Single(PageModel.GetKeyPropertyValue()));
+
+                    ReturnCommand.Execute().Subscribe().Dispose();
+                }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
+            });
         }
 
         public SourceList<Material> MaterialsSourceList { get; set; } = new SourceList<Material>();
@@ -115,7 +133,8 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
         [Reactive]
         public string SearchedMaterialName { get; set; }
-
+        public ReactiveCommand<Unit, Unit> CreateOrUpdateAndContinueCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> CreateOrUpdateAndReturnCommand { get; set; }
         public ReactiveCommand<Material, Unit> AddToItemsCommand { get; set; }
         public ReactiveCommand<SaleItem, Unit> RemoveFromItemsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> RemoveAllItemsCommand { get; set; }

@@ -58,8 +58,11 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 createOrUpdateDisposable?.Dispose();
                 createOrUpdateDisposable = CreateOrUpdateCommand.Subscribe(_ =>
                 {
-                    if (StayOpen) // No need to modelKeyId == 0 or any extra condition because StayOpen can be true only on insert situation
-                        PageModel = new T();
+                    if (StayOpen && IsNew) 
+                    {
+                        PageModel = PageModel.ShouldCloneAsNew ? MapperUtil.Mapper.Map<T>(PageModel) : new T();
+                        modelKeyProperty.SetValue(PageModel, Activator.CreateInstance(modelKeyProperty.PropertyType));
+                    }
                     else
                         ReturnCommand.Execute().Subscribe();
                 });
