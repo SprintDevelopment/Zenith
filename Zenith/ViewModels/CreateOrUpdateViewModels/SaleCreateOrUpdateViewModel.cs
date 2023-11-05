@@ -117,12 +117,15 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                     var cuCommandResult = IsNew ? Repository.Add(PageModel) : Repository.Update(PageModel, PageModel.GetKeyPropertyValue());
                     PageModel = Repository.Single(PageModel.GetKeyPropertyValue());
                     
+                    ChangeSet.Clear();
                     ChangeSet.Add(PageModel);
                 }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
 
                 CreateOrUpdateAndReturnCommand = ReactiveCommand.Create<Unit>(_ =>
                 {
                     var cuCommandResult = IsNew ? Repository.Add(PageModel) : Repository.Update(PageModel, PageModel.GetKeyPropertyValue());
+                    
+                    ChangeSet.Clear();
                     ChangeSet.Add(Repository.Single(PageModel.GetKeyPropertyValue()));
 
                     ReturnCommand.Execute().Subscribe().Dispose();
