@@ -8,3 +8,16 @@
 ~ Add a way for activate product
 ~ Add types instead of type for companies
 ~ Add some configs to AppConfig [configs like Db ConnectionString]
+
+بتوانیم تریپ را که همیشه معلوم است که چند متر هست رو هم داشته باشیم
+مثلا سیکسیویل 20 متر 
+
+4 مدل داریم
+پیکاپ 3 متری
+سیکسویل 20 متری
+تریلری 35
+تریلری 45
+
+تبدیل نان کش به کردیت
+
+شماره دستی و اتوماتیک دلیوری
