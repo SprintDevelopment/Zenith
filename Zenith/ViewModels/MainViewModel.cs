@@ -70,6 +70,7 @@ namespace Zenith.ViewModels
             NavigateToCompanyAggregateReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CompanyAggregateReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.CompanyAggregateReport && p.HasReadAccess)));
             NavigateToUsersCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(UserListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
             NavigateToNotesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(NoteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Notes && p.HasReadAccess)));
+            ShowSettingsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(_ => ShowSecondCreateUpdatePageCommand.Execute(new SettingsPage()), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
 
             TabControlViewModel.WhenAnyValue(vm => vm.SelectedTabViewModel)
                     .Where(stvm => stvm?.RelatedMainPage is not null)
@@ -275,6 +276,7 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> NavigateToCompanyAggregateReportCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToUsersCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToNotesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; set; }
         //
         public ReactiveCommand<Page, Unit> ShowCreateUpdatePageCommand { get; set; }
         public ReactiveCommand<Page, Unit> ShowSecondCreateUpdatePageCommand { get; set; }

@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using System.Reactive.Disposables;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
@@ -23,6 +24,7 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             this.WhenActivated(d =>
             {
+                this.OneWayBind(ViewModel, vm => vm.IsNew, v => v.initialCreditValueTextBox.Visibility, isNew => isNew.Viz()).DisposeWith(d);
             });
         }
     }

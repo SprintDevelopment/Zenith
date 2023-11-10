@@ -49,6 +49,9 @@ namespace Zenith.Models
         public string Address { get; set; } = string.Empty;
 
         [Reactive]
+        public float InitialCreditValue { get; set; }
+
+        [Reactive]
         public float CreditValue { get; set; }
 
         [Required(AllowEmptyStrings = true)]

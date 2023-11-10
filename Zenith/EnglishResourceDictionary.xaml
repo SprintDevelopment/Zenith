@@ -24,7 +24,7 @@
 
     <!-- CASH STATES -->
     <system:String x:Key="CashStates.DontCare">_</system:String>
-    <system:String x:Key="CashStates.NonCash">Non cash</system:String>
+    <system:String x:Key="CashStates.NonCash">Credit</system:String>
     <system:String x:Key="CashStates.Cash">Cash</system:String>
 
     <!-- CHEQUE STATES -->
@@ -91,24 +91,24 @@
     <system:String x:Key="MoneyTransactionTypes.DontCare">_</system:String>
     <system:String x:Key="MoneyTransactionTypes.Recieve">Recieve</system:String>
     <system:String x:Key="MoneyTransactionTypes.Payment">Payment</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashBuy">Non cash buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashBuy">Credit buy</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashBuy">Cash buy</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashSale">Non cash sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashSale">Credit sale</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashSale">Cash sale</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashIndirectSale">Non cash indirect sale</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashIndirectBuy">Non cash indirect buy</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashIndirectSale">Credit indirect sale</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashIndirectBuy">Credit indirect buy</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashIndirectSale">Cash indirect sale</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashDelivery">Non cash delivery</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashDelivery">Credit delivery</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashDelivery">Cash delivery</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashOutgo">Non cash outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashOutgo">Credit outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashOutgo">Cash outgo</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashMachineOutgo">Non cash machine outgo</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashMachineOutgo">Credit machine outgo</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashMachineOutgo">Cash machine outgo</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashBuyConsumables">Non cash buy consumables</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashBuyConsumables">Credit buy consumables</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashBuyConsumables">Cash buy consumables</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashIncome">Non cash income</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashIncome">Credit income</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashIncome">Cash income</system:String>
-    <system:String x:Key="MoneyTransactionTypes.NonCashMachineIncome">Non cash machine income</system:String>
+    <system:String x:Key="MoneyTransactionTypes.NonCashMachineIncome">Credit machine income</system:String>
     <system:String x:Key="MoneyTransactionTypes.CashMachineIncome">Cash machine income</system:String>
     <system:String x:Key="MoneyTransactionTypes.WorkshopSalary">Workshop salary</system:String>
     <system:String x:Key="MoneyTransactionTypes.TransportaionSalary">Transportaion salary</system:String>
@@ -284,7 +284,7 @@
     <system:String x:Key="BuyPage.CashStateComboBoxTitle">Cash state</system:String>
     <system:String x:Key="BuyPage.BuyDateTimeTitle">Buy date time</system:String>
     <system:String x:Key="BuyPage.CommentTextBoxTitle">Optional comment</system:String>
-    <system:String x:Key="BuyPage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="BuyPage.SearchHintTextBlockText">Enter material's name to search ...</system:String>
     <system:String x:Key="BuyPage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="BuyPage.MaterialNameColumnTextBlockText">Material name</system:String>
     <system:String x:Key="BuyPage.BuyPriceColumnTextBlockText">Buy price</system:String>
@@ -354,7 +354,7 @@
     <!-- COMPANY PAGE -->
     <system:String x:Key="CompanyPage.NameTextBoxTitle">Company name</system:String>
     <system:String x:Key="CompanyPage.TRNTextBoxTitle">Tax registration number (TRN)</system:String>
-    <system:String x:Key="CompanyPage.CriditValueTextBoxTitle">Credit value</system:String>
+    <system:String x:Key="CompanyPage.CriditValueTextBoxTitle">Initial credit value (can set only once)</system:String>
     <system:String x:Key="CompanyPage.TypeComboBoxTitle">Type</system:String>
     <system:String x:Key="CompanyPage.TelTextBoxTitle">Tel</system:String>
     <system:String x:Key="CompanyPage.FaxTextBoxTitle">Fax</system:String>
@@ -512,7 +512,7 @@
     <system:String x:Key="MixturePage.CommonSaleUnitComboBoxTitle">Common sale unit</system:String>
     <system:String x:Key="MixturePage.SalePriceTextBoxTitle">Sale price</system:String>
     <system:String x:Key="MixturePage.CommentTextBoxTitle">Optional Comment</system:String>
-    <system:String x:Key="MixturePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="MixturePage.SearchHintTextBlockText">Enter material's name to search ...</system:String>
     <system:String x:Key="MixturePage.MaterialNameColumnTextBlockText">Mixed material name</system:String>
     <system:String x:Key="MixturePage.MixturePercentColumnTextBlockText">Mixed percent</system:String>
     <system:String x:Key="MixturePage.ConfirmButtonContent">Confirm</system:String>
@@ -700,7 +700,7 @@
     <system:String x:Key="SalePage.IndirectSellerCompanyComboBoxTitle">Seller company (Indirect)</system:String>
     <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
     <system:String x:Key="SalePage.CommentTextBoxTitle">Optional comment</system:String>
-    <system:String x:Key="SalePage.SearchHintTextBlockText">Enter the name of material to search ...</system:String>
+    <system:String x:Key="SalePage.SearchHintTextBlockText">Enter material's name to search ...</system:String>
     <system:String x:Key="SalePage.ConfirmAndContinueButtonContent">Confirm &amp; continue</system:String>
     <system:String x:Key="SalePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">Material name</system:String>

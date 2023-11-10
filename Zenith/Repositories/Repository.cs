@@ -69,6 +69,10 @@ namespace Zenith.Repositories
 
         //public virtual void Remove(T entity) { _context.Set<T>().Remove(entity); _context.SaveChanges(); }
         public virtual void AddRange(IEnumerable<T> entities) { _context.Set<T>().AddRange(entities.Select(e => e.LightClone())); _context.SaveChanges(); }
-        public virtual void RemoveRange(IEnumerable<T> entities) { _context.Set<T>().RemoveRange(entities); _context.SaveChanges(); }
+        public virtual void RemoveRange(IEnumerable<T> entities) 
+        {
+            _context.Set<T>().RemoveRange(entities);
+            _context.SaveChanges(); 
+        }
     }
 }

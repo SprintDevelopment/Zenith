@@ -54,9 +54,9 @@
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Top" Height="1"/>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1"/>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Height="1" Grid.Row="1"/>
-                    <Grid Margin="24,12">
-                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" Text="{DynamicResource MixturePage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
-                        <baseclasses:JTransparentTextBox x:Name="searchTextBox" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Grid Height="46" Margin="8,0">
+                        <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
+                        <baseclasses:JTransparentTextBox x:Name="searchTextBox" HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <ItemsControl x:Name="materialListItemsControl" Grid.Row="1" Margin="1" >
                         <ItemsControl.Template>

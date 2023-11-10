@@ -115,19 +115,23 @@
 
             <Style TargetType="{x:Type baseclasses:JTransparentTextBox}">
                 <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type baseclasses:JTransparentTextBox}">
                             <Grid x:Name="border">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" BorderThickness="0"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="false">
                                     <Setter Property="Opacity" TargetName="border" Value="0.56"/>
                                 </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
+                                <!--<Trigger Property="IsMouseOver" Value="true">
                                     <Setter Property="Background" TargetName="border" Value="WhiteSmoke"/>
                                 </Trigger>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="WhiteSmoke"/>
+                                </Trigger>-->
                                 <Trigger Property="Validation.HasError" Value="true">
                                     <Setter Property="Background" TargetName="border" Value="LightPink"/>
                                     <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>

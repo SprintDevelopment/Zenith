@@ -32,7 +32,7 @@
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.NameTextBoxTitle}" />
                 <baseclasses:JTextBox Text="{Binding PageModel.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.TRNTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.CreditValue, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.CriditValueTextBoxTitle}"/>
+                <baseclasses:JTextBox x:Name="initialCreditValueTextBox" Text="{Binding PageModel.InitialCreditValue, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.CriditValueTextBoxTitle}"/>
                 <usercontrols:MultiSelectControl x:Name="companyTypeComboBox" SelectionValue="{Binding PageModel.CompanyType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource flaggedEnumConverter}, ConverterParameter={x:Type enums:CompanyTypes}}" Title="{DynamicResource CompanyPage.TypeComboBoxTitle}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

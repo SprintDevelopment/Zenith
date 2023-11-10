@@ -701,6 +701,7 @@
     <system:String x:Key="SalePage.SaleDateTimeTitle">تاریخ فروش</system:String>
     <system:String x:Key="SalePage.CommentTextBoxTitle">توضیحات اختیاری</system:String>
     <system:String x:Key="SalePage.SearchHintTextBlockText">برای جستجو، نام ماده را وارد کنید . . .</system:String>
+    <system:String x:Key="SalePage.ConfirmAndContinueButtonContent">تایید و ادامه</system:String>
     <system:String x:Key="SalePage.ConfirmButtonContent">تایید</system:String>
     <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">نام ماده</system:String>
     <system:String x:Key="SalePage.SalePriceColumnTextBlockText">قیمت فروش</system:String>

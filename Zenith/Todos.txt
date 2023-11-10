@@ -21,3 +21,18 @@
 تبدیل نان کش به کردیت
 
 شماره دستی و اتوماتیک دلیوری
+
+
+Hareka . . .
+~0 set a property for company as PreCredit - 5m
+~1 change company page and allow setting credit only once - 8m
+~2 change the name of non cash to credit in all places - 5m
+#3 check insert and update delivery for correctness of delivery price
+#4 think about automatic and manual delivery numbers
+#5 reapply settings
+#6 enter some data in 20 minutes
+#7 take 10+ images and send to Farzad Rasooli
+#8 set a simple text file for active instances of Zenith beside LisenceCreator
+#9 think about Taxies and print factors
+#A think about statements
+#B think about salaries
