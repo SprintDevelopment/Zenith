@@ -34,10 +34,7 @@ namespace Zenith.Assets.Utils
         //licenseStringFormat => "serialNumber,startDate,endDate"
         public static AppLicenseDto GetLicense()
         {
-            return (
-                new ConfigurationRepository().Single($"{ConfigurationKeys.AppLicense}") ?? 
-                new Models.Configuration())
-                .Value.ToLicense();
+            return (new ConfigurationRepository().Single($"{ConfigurationKeys.AppLicense}")).Value.ToLicense();
         }
 
         public static AppLicenseDto ToLicense(this string licenseHashedString)

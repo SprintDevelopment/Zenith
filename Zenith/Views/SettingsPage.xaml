@@ -45,12 +45,17 @@
                 <StackPanel Grid.Row="1" Margin="0,8">
                     <StackPanel x:Name="backupSettingsStackPanel">
                         <ComboBox x:Name="backupIntervalComboBox" SelectedValue="{Binding BackupInterval, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SettingsView.BackupIntervalComboBoxTitle}"/>
-                        <baseclasses:JTextBox x:Name="backupLocationTextBox" Text="{Binding BackupDefaultLocation, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SettingsView.BackupDefaultLocationTextBoxTitle}" />
+                        <Grid>
+                            <baseclasses:JTextBox x:Name="backupLocationTextBox" Text="{Binding BackupDefaultLocation, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SettingsView.BackupDefaultLocationTextBoxTitle}" />
+                            <Button x:Name="selectPathButton" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,28,0" Style="{StaticResource SimpleButtonStyle}">
+                                <Image Source="/Zenith;component/Resources/Images/Common/folder.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button>
+                        </Grid>
                         <baseclasses:JTextBox x:Name="backupEmailTextBox" Text="{Binding BackupEmail, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SettingsView.BackupEmailTextBoxTitle}" />
 
                     </StackPanel>
                 </StackPanel>
-                <Button Content="{DynamicResource SettingsView.SaveChangesButtonContent}" Grid.Row="2" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding LoginCommand}"/>
+                <Button Content="{DynamicResource SettingsView.SaveChangesButtonContent}" Grid.Row="2" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding SaveSettingsCommand}"/>
 
             </Grid>
         </Grid>

@@ -17,6 +17,7 @@ using Zenith.Assets.Values.Enums;
 using System.Reactive.Disposables;
 using Zenith.Assets.UI.Helpers;
 using Zenith.ViewModels;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Zenith.Views
 {
@@ -34,9 +35,20 @@ namespace Zenith.Views
 
             this.WhenActivated(d =>
             {
+                this.DataContext = ViewModel;
 
                 var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
                 ((Grid)Content).Children.Insert(0, modalBackRect);
+
+                Observable.FromEventPattern(selectPathButton, nameof(Button.Click))
+                    .Select(_ => Observable.Using(() => new CommonOpenFileDialog() { IsFolderPicker = true, Title = "Select default backup folder ..." },
+                                                    ofd => ofd.ShowDialog() != CommonFileDialogResult.Ok
+                                                        ? Observable.Empty<string>()
+                                                        : Observable.Return(ofd.FileName)))
+                    .Switch()
+                    .WhereNotNull()
+                    .BindTo(ViewModel, vm => vm.BackupDefaultLocation)
+                    .DisposeWith(d);
             });
         }
 
