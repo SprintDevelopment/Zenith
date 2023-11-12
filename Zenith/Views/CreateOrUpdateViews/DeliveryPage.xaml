@@ -32,13 +32,14 @@
 
                 <Border x:Name="messageBorder" BorderBrush="DeepSkyBlue" BorderThickness="1" CornerRadius="4" Margin="24,24,24,0" Padding="16">
                     <Grid>
-                        <TextBlock TextWrapping="Wrap">
-                            <Run Text="Delivery of " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Material.Name}"/>
-                            <Run Text="to " Foreground="#FF505050"/>
-                            <Run Text="{Binding PageModel.SaleItem.Sale.Company.Name}"/>
-                            <Run Text="company " Foreground="#FF505050"/>
-                        </TextBlock>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding PageModel.SaleItem.Material.Name}" Grid.Column="1"/>
+                            <TextBlock Text="{Binding PageModel.SaleItem.Sale.Company.Name}" Grid.Column="3"/>
                     </Grid>
                 </Border>
                 <StackPanel x:Name="inputControlsStackPanel">
