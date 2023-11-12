@@ -44,7 +44,7 @@
                 </Grid>
                 <StackPanel Grid.Row="1" Margin="0,8">
                     <StackPanel x:Name="backupSettingsStackPanel">
-                        <ComboBox x:Name="backupIntervalComboBox" SelectedValue="{Binding BackupInterval, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SettingsView.BackupIntervalComboBoxTitle}"/>
+                        <ComboBox x:Name="backupIntervalComboBox" SelectedValue="{Binding BackupInterval, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SettingsView.BackupIntervalComboBoxTitle}"/>
                         <Grid>
                             <baseclasses:JTextBox x:Name="backupLocationTextBox" Text="{Binding BackupDefaultLocation, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SettingsView.BackupDefaultLocationTextBoxTitle}" />
                             <Button x:Name="selectPathButton" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,28,0" Style="{StaticResource SimpleButtonStyle}">
