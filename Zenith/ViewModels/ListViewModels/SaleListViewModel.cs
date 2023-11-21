@@ -25,6 +25,8 @@ namespace Zenith.ViewModels.ListViewModels
                 CreateCommand.Execute()
                 .Do(_ => CreateUpdatePage.ViewModel.PageModel.IsIndirectSale = isIndirectSale));
 
+            HidePrePrintGridCommand = ReactiveCommand.Create<Unit>(_ => IsInPrePrintMode = false);
+
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
                 WordUtil.PrintFactor(IncludeTRN, repository.Single(sale.SaleId));
@@ -39,10 +41,14 @@ namespace Zenith.ViewModels.ListViewModels
         }
        
         public ReactiveCommand<bool, Unit> AddNewCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> HidePrePrintGridCommand { get; set; }
         public ReactiveCommand<Sale, Unit> PrintFactorCommand { get; set; }
         public ReactiveCommand<Unit, Unit> PrintAggregateFactorCommand { get; set; }
 
         [Reactive]
         public bool IncludeTRN { get; set; }
+
+        [Reactive]
+        public bool IsInPrePrintMode { get; set; }
     }
 }

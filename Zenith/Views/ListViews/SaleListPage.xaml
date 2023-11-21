@@ -53,9 +53,9 @@
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
-                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding PrintAggregateFactorCommand}">
+                <ToggleButton Width="50" BorderThickness="1,0,0,0" IsChecked="{Binding IsInPrePrintMode}">
                     <Image Source="/Zenith;component/Resources/Images/Common/print.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
+                </ToggleButton>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding RemoveCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/delete.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -160,5 +160,62 @@
                 <TextBlock HorizontalAlignment="Center" Text="{Binding SummaryItem.DeliveryFee, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkRed" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
             </Grid>
         </Grid>
+
+        <Rectangle x:Name="modalBackRect" Grid.RowSpan="2" Fill="#60000000" Visibility="{Binding IsInPrePrintMode, Converter={StaticResource boolToVisibilityConverter}}"/>
+        <Grid Grid.RowSpan="2" Visibility="{Binding IsInPrePrintMode, Converter={StaticResource boolToVisibilityConverter}}">
+            <Grid Width="450" Height="auto" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Rectangle RadiusX="4" RadiusY="4" Grid.RowSpan="3" Fill="White" Effect="{StaticResource CommonShadow}"/>
+                <Grid Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{DynamicResource PageHeader.FirstGrid.Length}"/>
+                        <ColumnDefinition Width="{DynamicResource PageHeader.SecondGrid.Length}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="HeaderTextBlock" Text="{DynamicResource SaleListPage.PrePrintGridTileTextBlockText}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                    <Button x:Name="closeButton" Style="{StaticResource CircularButtonStyle}" Command="{Binding HidePrePrintGridCommand}" Grid.Column="{DynamicResource PageHeader.CloseButton.Grid.Column}" IsCancel="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30">
+                        <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
+                    </Button>
+                    <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
+                    <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
+                </Grid>
+                <StackPanel Grid.Row="1">
+                    <Grid Margin="16,16,24,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="56" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton IsChecked="{Binding filterBySite}" ToolTip="Enable/Disable tax in print" Margin="8,0">
+                            <Grid>
+                                <Image Source="/Zenith;component/Resources/Images/Common/by-site.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IncludeTRN, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/not-by-site.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IncludeTRN, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                            </Grid>
+                        </ToggleButton>
+                        <ComboBox x:Name="siteFilterComboBox" SelectedValue="{Binding SearchModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Grid.Column="1" Margin="0" Tag="{DynamicResource SaleListPage.FilterBySiteTextBoxTitle}"/>
+                    </Grid>
+                    <Grid>
+                        <ComboBox x:Name="materialFilterComboBox" SelectedValue="{Binding SearchModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Grid.Column="1" Tag="{DynamicResource SaleListPage.FilterByMaterialTextBoxTitle}"/>
+                    </Grid>
+                    <Grid Margin="16,16,24,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="56" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton IsChecked="{Binding filterBySite}" ToolTip="Enable/Disable tax in print" Margin="8,0">
+                            <Grid>
+                                <Image Source="/Zenith;component/Resources/Images/Common/by-lpo.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IncludeTRN, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/not-by-lpo.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IncludeTRN, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                            </Grid>
+                        </ToggleButton>
+                        <ComboBox x:Name="lpoFilterComboBox" SelectedValue="{Binding SearchModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Grid.Column="1" Margin="0" Tag="{DynamicResource SaleListPage.FilterByLpoTextBoxTitle}"/>
+                    </Grid>
+
+                    <Button Content="{DynamicResource SaleListPage.PrintButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateReportCommand}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
     </Grid>
 </local:BaseListPage>

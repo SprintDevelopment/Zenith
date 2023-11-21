@@ -6,11 +6,15 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Shapes;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Models.SearchModels;
 using Zenith.Repositories;
+using Zenith.ViewModels.CreateOrUpdateViewModels;
 using Zenith.ViewModels.ListViewModels;
 using Zenith.Views.CreateOrUpdateViews;
 
@@ -39,9 +43,14 @@ namespace Zenith.Views.ListViews
                 CreateUpdatePage = new SalePage()
             };
 
+            var CastedViewModel = (SaleListViewModel)ViewModel;
+
             this.WhenActivated(d =>
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
+                
+                var modalBackRect = ((Grid)Content).Children.OfType<Rectangle>().Single(r => r.Name == "modalBackRect");
+                modalBackRect.InputBindings.Add(new MouseBinding(CastedViewModel.HidePrePrintGridCommand, new MouseGesture(MouseAction.LeftClick)));
 
                 ViewModel.SummaryItem = new Sale();
                 Observable.FromEventPattern(ViewModel.ActiveList, nameof(ViewModel.ActiveList.CollectionChanged))

@@ -14,6 +14,9 @@
     <None Remove="Resources\Images\Common\add-tab.png" />
     <None Remove="Resources\Images\Common\allSelection.png" />
     <None Remove="Resources\Images\Common\buy-consumable.png" />
+    <None Remove="Resources\Images\Common\by-lpo.png" />
+    <None Remove="Resources\Images\Common\by-material.png" />
+    <None Remove="Resources\Images\Common\by-site.png" />
     <None Remove="Resources\Images\Common\close.png" />
     <None Remove="Resources\Images\Common\collapse.png" />
     <None Remove="Resources\Images\Common\delete.png" />
@@ -35,6 +38,9 @@
     <None Remove="Resources\Images\Common\next.png" />
     <None Remove="Resources\Images\Common\no-tax.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
+    <None Remove="Resources\Images\Common\not-by-lpo.png" />
+    <None Remove="Resources\Images\Common\not-by-material.png" />
+    <None Remove="Resources\Images\Common\not-by-site.png" />
     <None Remove="Resources\Images\Common\overtime.png" />
     <None Remove="Resources\Images\Common\partialSelection.png" />
     <None Remove="Resources\Images\Common\payment.png" />
@@ -89,6 +95,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PDFsharp" Version="6.0.0" />
     <PackageReference Include="ReactiveUI" Version="19.4.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
     <PackageReference Include="ReactiveUI.Validation" Version="3.1.7" />
@@ -108,6 +115,9 @@
     <Resource Include="Resources\Images\Common\add-tab.png" />
     <Resource Include="Resources\Images\Common\allSelection.png" />
     <Resource Include="Resources\Images\Common\buy-consumable.png" />
+    <Resource Include="Resources\Images\Common\by-lpo.png" />
+    <Resource Include="Resources\Images\Common\by-material.png" />
+    <Resource Include="Resources\Images\Common\by-site.png" />
     <Resource Include="Resources\Images\Common\close.png" />
     <Resource Include="Resources\Images\Common\collapse.png" />
     <Resource Include="Resources\Images\Common\delete.png" />
@@ -128,6 +138,9 @@
     <Resource Include="Resources\Images\Common\next.png" />
     <Resource Include="Resources\Images\Common\no-tax.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />
+    <Resource Include="Resources\Images\Common\not-by-lpo.png" />
+    <Resource Include="Resources\Images\Common\not-by-material.png" />
+    <Resource Include="Resources\Images\Common\not-by-site.png" />
     <Resource Include="Resources\Images\Common\overtime.png" />
     <Resource Include="Resources\Images\Common\partialSelection.png" />
     <Resource Include="Resources\Images\Common\payment.png" />

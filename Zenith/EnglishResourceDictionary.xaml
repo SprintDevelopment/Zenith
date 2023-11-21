@@ -725,6 +725,11 @@
     <system:String x:Key="SaleListPage.StateColumnTextBlockText">State</system:String>
     <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
     <system:String x:Key="SaleListPage.SummaryTotalColumnTextBlockText">Total</system:String>
+    <system:String x:Key="SaleListPage.PrePrintGridTileTextBlockText">Filter print data</system:String>
+    <system:String x:Key="SaleListPage.FilterBySiteTextBoxTitle">Filter by site</system:String>
+    <system:String x:Key="SaleListPage.FilterByMaterialTextBoxTitle">Filter by material</system:String>
+    <system:String x:Key="SaleListPage.FilterByLpoTextBoxTitle">Filter by lpo</system:String>
+    <system:String x:Key="SaleListPage.PrintButtonContent">Print</system:String>
 
     <!-- SALE SEARCH CONTROL -->
     <system:String x:Key="SaleSearchModel.SearchBarTitle">Search in sales</system:String>

@@ -1,39 +1,25 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Zenith.Assets.UI.BaseClasses;
 using Zenith.Assets.UI.CustomEventArgs;
 using ZenithControls = Zenith.Assets.UI.UserControls;
 using Zenith.ViewModels;
-using Zenith.ViewModels.ListViewModels;
-using Zenith.Views.ListViews;
 using Zenith.Assets.Extensions;
-using System.Collections;
 using DynamicData.Binding;
 using Zenith.Assets.UI.UserControls;
 using DynamicData;
 using Zenith.Views;
-using Zenith.Repositories;
-using Zenith.Repositories.ReportRepositories;
-using Zenith.Models.ReportModels;
-using Zenith.Models.ReportModels.ReportSearchModels;
-using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Enums;
+using Zenith.Assets.Utils;
+using PdfSharp.Fonts;
+using PdfSharp.Snippets.Font;
 
 namespace Zenith
 {
@@ -45,6 +31,8 @@ namespace Zenith
         public MainWindow()
         {
             InitializeComponent();
+            //GlobalFontSettings.FontResolver = new JetBrainsFontResolver();
+            //new DocumentUtil().GeneratePdfReport("Title", new string[] { "1234", "12345343", "sfda;ljfasdf" });
 
             var blankPage = new BlankPage();
 
