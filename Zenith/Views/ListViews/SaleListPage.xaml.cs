@@ -48,7 +48,7 @@ namespace Zenith.Views.ListViews
             this.WhenActivated(d =>
             {
                 listItemsControl.ItemsSource = ViewModel.ActiveList;
-                
+
                 var modalBackRect = ((Grid)Content).Children.OfType<Rectangle>().Single(r => r.Name == "modalBackRect");
                 modalBackRect.InputBindings.Add(new MouseBinding(CastedViewModel.HidePrePrintGridCommand, new MouseGesture(MouseAction.LeftClick)));
 

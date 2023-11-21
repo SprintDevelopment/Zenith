@@ -73,6 +73,10 @@ namespace Zenith.Models
         [Reactive]
         public string? SourceDeliveryNumber { get; set; } = string.Empty;
 
+        [MaxLength(LengthConstants.SMALL_STRING)]
+        [Reactive]
+        public string? LpoNumber { get; set; } = string.Empty;
+
         [Reactive]
         public DateTime SourceDeliveryDateTime { get; set; } = DateTime.Now;
 

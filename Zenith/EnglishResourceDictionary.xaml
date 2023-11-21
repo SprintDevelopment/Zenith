@@ -393,6 +393,7 @@
     <system:String x:Key="DeliveryPage.MachineComboBoxTitle">Machine</system:String>
     <system:String x:Key="DeliveryPage.CountTextBoxTitle">Count</system:String>
     <system:String x:Key="DeliveryPage.DeliveryFeeTextBoxTitle">Delivery fee</system:String>
+    <system:String x:Key="DeliveryPage.LpoNumberTextBoxTitle">Lpo number</system:String>
     <system:String x:Key="DeliveryPage.DriverComboBoxTitle">Driver</system:String>
     <system:String x:Key="DeliveryPage.DeliveryNumberTextBoxTitle">Delivery number</system:String>
     <system:String x:Key="DeliveryPage.DeliveryDateTimeTitle">Delivery date time</system:String>
@@ -726,9 +727,11 @@
     <system:String x:Key="SaleListPage.SaleDateTimeColumnTextBlockText">Date time</system:String>
     <system:String x:Key="SaleListPage.SummaryTotalColumnTextBlockText">Total</system:String>
     <system:String x:Key="SaleListPage.PrePrintGridTileTextBlockText">Filter print data</system:String>
-    <system:String x:Key="SaleListPage.FilterBySiteTextBoxTitle">Filter by site</system:String>
-    <system:String x:Key="SaleListPage.FilterByMaterialTextBoxTitle">Filter by material</system:String>
-    <system:String x:Key="SaleListPage.FilterByLpoTextBoxTitle">Filter by lpo</system:String>
+    <system:String x:Key="SaleListPage.FilterBySiteAndOrMaterialCheckBoxContent">Filter by site and/or material</system:String>
+    <system:String x:Key="SaleListPage.FilterBySiteCheckBoxContent">Filter by site</system:String>
+    <system:String x:Key="SaleListPage.FilterByMaterialCheckBoxContent">Filter by material</system:String>
+    <system:String x:Key="SaleListPage.FilterByLpoCheckBoxContent">Filter by lpo</system:String>
+    <system:String x:Key="SaleListPage.PrintResultButtonContent">Show result</system:String>
     <system:String x:Key="SaleListPage.PrintButtonContent">Print</system:String>
 
     <!-- SALE SEARCH CONTROL -->

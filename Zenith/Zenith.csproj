@@ -36,12 +36,14 @@
     <None Remove="Resources\Images\Common\minimize.png" />
     <None Remove="Resources\Images\Common\mixed.png" />
     <None Remove="Resources\Images\Common\next.png" />
+    <None Remove="Resources\Images\Common\no-page-break.png" />
     <None Remove="Resources\Images\Common\no-tax.png" />
     <None Remove="Resources\Images\Common\noSelection.png" />
     <None Remove="Resources\Images\Common\not-by-lpo.png" />
     <None Remove="Resources\Images\Common\not-by-material.png" />
     <None Remove="Resources\Images\Common\not-by-site.png" />
     <None Remove="Resources\Images\Common\overtime.png" />
+    <None Remove="Resources\Images\Common\page-break.png" />
     <None Remove="Resources\Images\Common\partialSelection.png" />
     <None Remove="Resources\Images\Common\payment.png" />
     <None Remove="Resources\Images\Common\previous.png" />
@@ -136,12 +138,14 @@
     <Resource Include="Resources\Images\Common\minimize.png" />
     <Resource Include="Resources\Images\Common\mixed.png" />
     <Resource Include="Resources\Images\Common\next.png" />
+    <Resource Include="Resources\Images\Common\no-page-break.png" />
     <Resource Include="Resources\Images\Common\no-tax.png" />
     <Resource Include="Resources\Images\Common\noSelection.png" />
     <Resource Include="Resources\Images\Common\not-by-lpo.png" />
     <Resource Include="Resources\Images\Common\not-by-material.png" />
     <Resource Include="Resources\Images\Common\not-by-site.png" />
     <Resource Include="Resources\Images\Common\overtime.png" />
+    <Resource Include="Resources\Images\Common\page-break.png" />
     <Resource Include="Resources\Images\Common\partialSelection.png" />
     <Resource Include="Resources\Images\Common\payment.png" />
     <Resource Include="Resources\Images\Common\previous.png" />
@@ -274,6 +278,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Views\SpecialViews\" />
   </ItemGroup>
 
 </Project>

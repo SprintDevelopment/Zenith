@@ -1,7 +1,9 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -21,11 +23,24 @@ namespace Zenith.ViewModels.ListViewModels
         public SaleListViewModel(Repository<Sale> repository, SearchBaseDto searchModel, IObservable<Func<Sale, bool>> criteria)
             : base(repository, searchModel, criteria, PermissionTypes.Sales)
         {
+            SalesPrePrintDto = new SalesPrePrintDto
+            {
+                Materials = new MaterialRepository().All().Select(m => (Material)m.Clone()).ToList(),
+                Sites = new SiteRepository().All().Select(s => (Site)s.Clone()).ToList()
+            };
+
             AddNewCommand = ReactiveCommand.CreateFromObservable<bool, Unit>(isIndirectSale =>
                 CreateCommand.Execute()
                 .Do(_ => CreateUpdatePage.ViewModel.PageModel.IsIndirectSale = isIndirectSale));
 
             HidePrePrintGridCommand = ReactiveCommand.Create<Unit>(_ => IsInPrePrintMode = false);
+            
+            PrintAggregateFactorPreviewCommand = ReactiveCommand.Create<Unit>(_ =>
+            {
+                PrintableDeliveries.Clear();
+
+                PrintableDeliveries.AddRange( ActiveList.SelectMany(s => s.Items.SelectMany(si => si.Deliveries).Where(d => SalesPrePrintDto.Sites.Any(site => site.IsSelected && site.SiteId ==  d.Site.SiteId)).ToList()));
+            });
 
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
@@ -44,11 +59,20 @@ namespace Zenith.ViewModels.ListViewModels
         public ReactiveCommand<Unit, Unit> HidePrePrintGridCommand { get; set; }
         public ReactiveCommand<Sale, Unit> PrintFactorCommand { get; set; }
         public ReactiveCommand<Unit, Unit> PrintAggregateFactorCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> PrintAggregateFactorPreviewCommand { get; set; }
 
         [Reactive]
         public bool IncludeTRN { get; set; }
 
+        #region Print Filter
         [Reactive]
         public bool IsInPrePrintMode { get; set; }
+
+        [Reactive]
+        public SalesPrePrintDto SalesPrePrintDto { get; set; }
+
+        [Reactive]
+        public ObservableCollection<Delivery> PrintableDeliveries { get; set; } = new ObservableCollection<Delivery>();
+        #endregion
     }
 }
