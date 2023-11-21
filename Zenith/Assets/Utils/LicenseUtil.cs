@@ -1,5 +1,6 @@
 ﻿using ReactiveUI.Validation.Extensions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Management;
@@ -7,6 +8,7 @@ using System.Windows.Controls;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
+using Zenith.Models;
 using Zenith.Repositories;
 
 namespace Zenith.Assets.Utils
@@ -71,23 +73,10 @@ namespace Zenith.Assets.Utils
         public static void SetLicense(AppLicenseDto license)
         {
             var licenseEncryptedString = CryptoUtil.Encrypt($"{license.SerialNumber},{license.StartDate:yyyy-MM-dd},{license.EndDate:yyyy-MM-dd}");
-            var configurationRepository = new ConfigurationRepository();
-
-            var licenseConfiguration = configurationRepository.Single($"{ConfigurationKeys.AppLicense}");
-
-            if (licenseConfiguration is not null)
+            new ConfigurationRepository().AddOrUpdateRange(new List<Configuration>
             {
-                licenseConfiguration.Value = licenseEncryptedString;
-                configurationRepository.Update(licenseConfiguration, $"{ConfigurationKeys.AppLicense}");
-            }
-            else
-            {
-                configurationRepository.Add(new Models.Configuration
-                {
-                    Key = $"{ConfigurationKeys.AppLicense}",
-                    Value = licenseEncryptedString,
-                });
-            }
+                new Configuration { Key = $"{ConfigurationKeys.AppLicense}", Value = licenseEncryptedString},
+            });
         }
     }
 }

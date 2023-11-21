@@ -55,7 +55,7 @@
                         <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
                     </Grid>
 
-                    <ItemsControl ItemsSource="{Binding PageModel.Permissions}" Grid.Row="1" Height="200" Margin="0,1,0,0" >
+                    <ItemsControl ItemsSource="{Binding PageModel.Permissions}" Grid.Row="1" Height="300" Margin="0,1,0,0" >
                         <ItemsControl.Template>
                             <ControlTemplate TargetType="{x:Type ItemsControl}">
                                 <ScrollViewer CanContentScroll="True">

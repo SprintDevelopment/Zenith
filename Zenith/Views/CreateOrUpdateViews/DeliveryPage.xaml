@@ -33,13 +33,15 @@
                 <Border x:Name="messageBorder" BorderBrush="DeepSkyBlue" BorderThickness="1" CornerRadius="4" Margin="24,24,24,0" Padding="16">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition />
+                            <!--<ColumnDefinition Width="40"/>-->
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <!--<ColumnDefinition Width="40"/>-->
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding PageModel.SaleItem.Material.Name}" Grid.Column="1"/>
-                            <TextBlock Text="{Binding PageModel.SaleItem.Sale.Company.Name}" Grid.Column="3"/>
+                            <TextBlock Text="{Binding PageModel.SaleItem.Material.Name}" Grid.Column="0"/>
+                            <TextBlock Text=" To " Grid.Column="1"/>
+                            <TextBlock Text="{Binding PageModel.SaleItem.Sale.Company.Name}" Grid.Column="2"/>
                     </Grid>
                 </Border>
                 <StackPanel x:Name="inputControlsStackPanel">
