@@ -18,7 +18,7 @@ namespace Zenith.Assets.Utils
     public class WordUtil
     {
         public static Word.Application wordApp;
-        public static OperationResultDto PrintFactor(bool includeCustomerTRN = false, params Sale[] sales)
+        public static OperationResultDto PrintFactor(List<int> sitesIds, List<int> materialsIds, bool includeCustomerTRN = false, params Sale[] sales)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
@@ -44,7 +44,9 @@ namespace Zenith.Assets.Utils
 
                 var deliveriesTable = document.Tables[2];
 
-                sales.SelectMany(s => s.Items).Where(si => si.Deliveries.Any()).SelectMany(si => si.Deliveries)
+                sales.SelectMany(s => s.Items).Where(si => si.Deliveries.Any()).SelectMany(si => 
+                    si.Deliveries.Where(d => (sitesIds.IsNullOrEmpty() || sitesIds.Any(sid => sid == d.Site.SiteId)) &&
+                                            (materialsIds.IsNullOrEmpty() || materialsIds.Any(mid => mid == d.SaleItem.MaterialId))))
                     .GroupBy(d => new { d.SiteId, d.DeliveryNumber })
                     .Select((deliveries, i) =>
                     {

@@ -53,7 +53,7 @@
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
-                <ToggleButton Width="50" BorderThickness="1,0,0,0" IsChecked="{Binding IsInPrePrintMode}">
+                <ToggleButton x:Name="showFilterPrintButton" Width="50" BorderThickness="1,0,0,0" IsChecked="{Binding IsInPrePrintMode}">
                     <Image Source="/Zenith;component/Resources/Images/Common/print.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </ToggleButton>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding RemoveCommand}">
@@ -179,29 +179,23 @@
                         <Image Source="/Zenith;component/Resources/Images/Common/mini-close.png" Width="12" Height="12"/>
                     </Button>
                     <Rectangle Fill="#FFF8F8F8" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1"/>
-                    <Rectangle Width="{Binding ActualWidth, ElementName=HeaderTextBlock}" Stroke="Blue" VerticalAlignment="Bottom" Height="0.5" Grid.ColumnSpan="2"/>
                 </Grid>
                 <StackPanel Grid.Row="1">
                     <Grid Margin="24,4">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32" />
+                            <ColumnDefinition Width="8" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Rectangle Grid.ColumnSpan="2" Stroke="#FFCD0000" StrokeThickness="2" RadiusX="4" RadiusY="4" />
-                        <Border CornerRadius="4,0,0,4" Background="#FFCD0000">
-                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Ellipse Fill="White" Width="20" Height="20"/>
-                                <Ellipse Fill="#FFCD0000" Width="12" Height="12"/>
-                            </Grid>
-                        </Border>
+                        <Rectangle x:Name="siteAndMaterialRectangle" Grid.ColumnSpan="2" Stroke="#FFCD0000" StrokeThickness="2" RadiusX="4" RadiusY="4" />
+                        <Border x:Name="siteAndMaterialBorder" CornerRadius="4,0,0,4" />
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
                                 <RowDefinition Height="150" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -216,8 +210,8 @@
                                     </Grid>
                                 </ToggleButton>
                                 <Grid Height="46" Grid.Column="1" Margin="8,0">
-                                    <TextBlock x:Name="searchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
-                                    <baseclasses:JTransparentTextBox x:Name="searchTextBox" HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock x:Name="siteSearchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SiteHintTextBlockText}" Foreground="#FFD1D1D1" />
+                                    <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SearchedSiteName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <ToggleButton IsChecked="{Binding SalesPrePrintDto.SeparatedBySite}" ToolTip="Enable/Disable tax in print" Margin="0,2" Grid.Column="2">
                                     <Grid>
@@ -241,8 +235,8 @@
                                     </Grid>
                                 </ToggleButton>
                                 <Grid Height="46" Grid.Column="1" Margin="8,0">
-                                    <TextBlock x:Name="search32HintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
-                                    <baseclasses:JTransparentTextBox x:Name="search23TextBox" HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock x:Name="materialSearchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.MaterialHintTextBlockText}" Foreground="#FFD1D1D1" />
+                                    <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <ToggleButton IsChecked="{Binding SalesPrePrintDto.SeparatedByMaterial}" ToolTip="Enable/Disable tax in print" Margin="0,2,2,2" Grid.Column="2">
                                     <Grid>
@@ -270,10 +264,12 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="60"/>
                                                 <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="2*"/>
                                             </Grid.ColumnDefinitions>
                                             <CheckBox IsChecked="{Binding IsSelected}" />
                                             <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="4" StrokeThickness="0.5"/>
+                                            <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
                                         </baseclasses:JGrid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -302,7 +298,7 @@
                                             <CheckBox IsChecked="{Binding IsSelected}" />
                                             <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
                                             <Image Source="/Zenith;component/Resources/Images/Common/mixed.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="16" Height="16" Grid.Column="2" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsMixed, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="4" StrokeThickness="0.5"/>
+                                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
                                         </baseclasses:JGrid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -312,37 +308,48 @@
                     </Grid>
                     <Grid Margin="24,4">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32" />
+                            <ColumnDefinition Width="8" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Rectangle Grid.ColumnSpan="2" Stroke="#FFCBCBCB" StrokeThickness="2" RadiusX="4" RadiusY="4" />
-                        <Border CornerRadius="4,0,0,4" Background="#FFCBCBCB">
-                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Ellipse Fill="White" Width="20" Height="20"/>
-                                <Ellipse Fill="White" Width="12" Height="12"/>
-                            </Grid>
-                        </Border>
+                        <Rectangle x:Name="lpoRectangle" Grid.ColumnSpan="2" Stroke="#FFCBCBCB" StrokeThickness="2" RadiusX="4" RadiusY="4" />
+                        <Border x:Name="lpoBorder" CornerRadius="4,0,0,4" />
                         <Grid Grid.Column="1" Height="50">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="64" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.FilterByLpo}" ToolTip="Enable/Disable tax in print" Margin="0,2">
+                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.FilteredByLpo}" ToolTip="Enable/Disable tax in print" Margin="0,3">
                                     <Grid>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/by-lpo.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilterByLpo, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/not-by-lpo.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilterByLpo, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                                        <Image Source="/Zenith;component/Resources/Images/Common/by-lpo.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredByLpo, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                        <Image Source="/Zenith;component/Resources/Images/Common/not-by-lpo.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredByLpo, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
                                     </Grid>
                                 </ToggleButton>
                                 <Grid Height="46" Grid.Column="1" Margin="8,0">
-                                    <TextBlock x:Name="searchHintTdextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SearchHintTextBlockText}" Foreground="#FFD1D1D1" />
-                                    <baseclasses:JTransparentTextBox x:Name="searchTdextBox" HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock x:Name="lpoNumberHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.LpoNumberHintTextBlockText}" Foreground="#FFD1D1D1" />
+                                    <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SalesPrePrintDto.LpoNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid/>
-                    <ItemsControl x:Name="deliveryListItemsControl" ItemsSource="{Binding PrintableDeliveries}" Grid.Row="1" Margin="24,1,24,0" Height="300">
+                    <Grid Background="White" Height="40" Margin="24,1,24,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.MaterialColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.RelatedSiteColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource DeliveryListPage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DeliveryNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.LpoNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                    </Grid>
+                    <ItemsControl x:Name="deliveryListItemsControl" ItemsSource="{Binding PrintableDeliveries}" Margin="24,1,24,0" Height="300">
                         <ItemsControl.Template>
                             <ControlTemplate TargetType="{x:Type ItemsControl}">
                                 <ScrollViewer CanContentScroll="True">
@@ -367,15 +374,17 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="150"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock HorizontalAlignment="Left" Text="{Binding SaleItem.Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
                                         <TextBlock HorizontalAlignment="Left" Text="{Binding Site.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding Count}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding DeliveryNumber}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding DeliveryNumber}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding LpoNumber}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
                                     </baseclasses:JGrid>
                                 </Grid>
                             </DataTemplate>
@@ -384,7 +393,7 @@
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="24,16">
                         <Button Content="{DynamicResource SaleListPage.PrintResultButtonContent}" Height="38" Padding="32,0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8,0" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding PrintAggregateFactorPreviewCommand}" />
-                    <Button Content="{DynamicResource SaleListPage.PrintButtonContent}" Height="38" Padding="32,0" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateReportCommand}" />
+                        <Button Content="{DynamicResource SaleListPage.PrintButtonContent}" Height="38" Padding="32,0" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding PrintAggregateFactorCommand}" />
                         
                     </StackPanel>
                 </StackPanel>

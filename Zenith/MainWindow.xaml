@@ -67,6 +67,7 @@
                         <StackPanel>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.BuysSubMenuItem}" Shortcut="Ctrl+Shift+B" Command="{Binding NavigateToBuysCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.SalesSubMenuItem}" Shortcut="Ctrl+Shift+S" Command="{Binding NavigateToSalesCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.DeliveriesSubMenuItem}" Shortcut="Ctrl+Shift+S" Command="{Binding NavigateToDeliveriesCommand}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>
                 </controls:MenuItem>

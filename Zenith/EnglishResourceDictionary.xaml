@@ -183,8 +183,8 @@
     <system:String x:Key="MultipleResources.Cash">Cashes</system:String>
     <system:String x:Key="SingleResources.Cheque">Cheque</system:String>
     <system:String x:Key="MultipleResources.Cheque">Cheques</system:String>
-    <system:String x:Key="SingleResources.Delivey">Delivery</system:String>
-    <system:String x:Key="MultipleResources.Delivey">Deliveries</system:String>
+    <system:String x:Key="SingleResources.Delivery">Delivery</system:String>
+    <system:String x:Key="MultipleResources.Delivery">Deliveries</system:String>
     <system:String x:Key="SingleResources.Machine">Machine</system:String>
     <system:String x:Key="MultipleResources.Machine">Machines</system:String>
     <system:String x:Key="SingleResources.MachineOutgo">Machine outgo</system:String>
@@ -234,6 +234,7 @@
     <system:String x:Key="MainWindow.BuySaleMenuItem">Buy and sale</system:String>
     <system:String x:Key="MainWindow.BuysSubMenuItem">Buys</system:String>
     <system:String x:Key="MainWindow.SalesSubMenuItem">Sales</system:String>
+    <system:String x:Key="MainWindow.DeliveriesSubMenuItem">Deliveries</system:String>
     <system:String x:Key="MainWindow.AccountsAndTransactionsMenuItem">Accounts and transactions</system:String>
     <system:String x:Key="MainWindow.AccountsSubMenuItem">Accounts</system:String>
     <system:String x:Key="MainWindow.CashesSubMenuItem">Cash</system:String>
@@ -401,7 +402,29 @@
     <system:String x:Key="DeliveryPage.SourceDeliveryDateTimeTitle">Source delivery date time</system:String>
     <system:String x:Key="DeliveryPage.CommentTextBoxTitle">Optional Comment</system:String>
     <system:String x:Key="DeliveryPage.ConfirmButtonContent">Confirm</system:String>
-    
+
+    <!-- DELIVERY LIST PAGE -->
+    <system:String x:Key="DeliveryListPage.MaterialColumnTextBlockText">Material</system:String>
+    <system:String x:Key="DeliveryListPage.RelatedCompanyColumnTextBlockText">Company</system:String>
+    <system:String x:Key="DeliveryListPage.RelatedSiteColumnTextBlockText">Site</system:String>
+    <system:String x:Key="DeliveryListPage.MachineColumnTextBlockText">Machine</system:String>
+    <system:String x:Key="DeliveryListPage.DriverColumnTextBlockText">Driver</system:String>
+    <system:String x:Key="DeliveryListPage.CountColumnTextBlockText">Count</system:String>
+    <system:String x:Key="DeliveryListPage.DeliveryNumberColumnTextBlockText">Delivery number</system:String>
+    <system:String x:Key="DeliveryListPage.LpoNumberColumnTextBlockText">Lpo number</system:String>
+    <system:String x:Key="DeliveryListPage.DateColumnTextBlockText">Date</system:String>
+
+    <!-- DELIVERY SEARCH CONTROL -->
+    <system:String x:Key="DeliverySearchModel.SearchBarTitle">Search in deliveries</system:String>
+    <system:String x:Key="DeliverySearchModel.DeliveryNumber">Delivery number</system:String>
+    <system:String x:Key="DeliverySearchModel.LpoNumber">Lpo number</system:String>
+    <system:String x:Key="DeliverySearchModel.MaterialId">Material</system:String>
+    <system:String x:Key="DeliverySearchModel.CompanyId">Company</system:String>
+    <system:String x:Key="DeliverySearchModel.SiteId">Site</system:String>
+    <system:String x:Key="DeliverySearchModel.MachineId">Machine</system:String>
+    <system:String x:Key="DeliverySearchModel.DriverId">Driver</system:String>
+    <system:String x:Key="DeliverySearchModel.DateRange">Date range</system:String>
+
     <!-- MACHINE PAGE -->
     <system:String x:Key="MachinePage.MachineNameTextBoxTitle">Machine name</system:String>
     <system:String x:Key="MachinePage.CapacityTextBoxTitle">Capacity (in meters)</system:String>
@@ -701,7 +724,9 @@
     <system:String x:Key="SalePage.IndirectSellerCompanyComboBoxTitle">Seller company (Indirect)</system:String>
     <system:String x:Key="SalePage.SaleDateTimeTitle">Sale date time</system:String>
     <system:String x:Key="SalePage.CommentTextBoxTitle">Optional comment</system:String>
-    <system:String x:Key="SalePage.SearchHintTextBlockText">Enter material's name to search ...</system:String>
+    <system:String x:Key="SalePage.SiteHintTextBlockText">Enter site's name to search ...</system:String>
+    <system:String x:Key="SalePage.MaterialHintTextBlockText">Enter material's name to search ...</system:String>
+    <system:String x:Key="SalePage.LpoNumberHintTextBlockText">Enter lpo number to search ...</system:String>
     <system:String x:Key="SalePage.ConfirmAndContinueButtonContent">Confirm &amp; continue</system:String>
     <system:String x:Key="SalePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">Material name</system:String>

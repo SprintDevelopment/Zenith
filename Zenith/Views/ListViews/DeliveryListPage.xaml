@@ -24,14 +24,8 @@
                 <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
-                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding CreateCommand}">
-                    <Image Source="/Zenith;component/Resources/Images/Common/add-new.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
-                </Button>
-                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding RemoveCommand}">
-                    <Image Source="/Zenith;component/Resources/Images/Common/delete.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
             <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StrokeThickness="0.5"/>
@@ -45,20 +39,24 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="32"/>
-                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Text="نام محصول" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Left" Text="سایت مورد نظر" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="تعداد" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                <TextBlock HorizontalAlignment="Center" Text="تحویل داده شده" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="مانده" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <TextBlock HorizontalAlignment="Center" Text="وضعیت" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.MaterialColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.RelatedCompanyColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.RelatedSiteColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.MachineColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DriverColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Center" Text="{DynamicResource DeliveryListPage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DeliveryNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.LpoNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="8" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="9" StrokeThickness="0.5"/>
             </Grid>
 
             <ItemsControl x:Name="listItemsControl" Grid.Row="1" Margin="0,1,0,0" >
@@ -81,70 +79,29 @@
                                 <RowDefinition Height="32" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <baseclasses:JGrid MinHeight="32" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                            <baseclasses:JGrid MinHeight="32" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="32"/>
-                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="150"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding Site.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding Count}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Center" Text="0" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                <TextBlock HorizontalAlignment="Center" Text="0" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                                <Border Background="WhiteSmoke" CornerRadius="4" VerticalAlignment="Center" Height="8" Grid.Column="5" Margin="32,0">
-                                    <Border Background="#FFCB0000" CornerRadius="4" HorizontalAlignment="Left" Width="100"/>
-                                </Border>
-                                <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="افزودن تحویل جدید" Grid.Column="6" Command="{Binding DataContext.AddNewDeliveryCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
-                                    <Image Source="/Zenith;component/Resources/Images/Common/new-send.png" Stretch="Fill" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                </Button>
-                                <Button Style="{StaticResource SimpleButtonStyle}" ToolTip="لیست تحویل ها" Grid.Column="7" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding .}">
-                                    <Image Source="/Zenith;component/Resources/Images/Common/sub-list.png" Stretch="Fill" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                </Button>
-                                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding SaleItem.Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Site.Company.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Site.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Machine.Name}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Driver.FullName}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Count, StringFormat={}{0:n2}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding DeliveryNumber}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding LpoNumber}" VerticalAlignment="Center" Grid.Column="7" Margin="8,0,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" VerticalAlignment="Center" Grid.Column="8" Margin="8,0,0,0"/>
+                                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="9" StrokeThickness="0.5"/>
                             </baseclasses:JGrid>
-
-                            <!-- to display SaleItem's deliveries -->
-                            <Grid Grid.Row="1" Visibility="{Binding IsDeliveriesVisible, Converter={StaticResource boolToVisibilityConverter}}">
-                                <ItemsControl ItemsSource="{Binding Deliveries}" Grid.Row="1" Margin="8,1">
-                                    <ItemsControl.Template>
-                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                            <ScrollViewer CanContentScroll="True">
-                                                <ItemsPresenter/>
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </ItemsControl.Template>
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <baseclasses:JGrid Height="32" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=Page}}">
-                                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0" FontSize="13">
-                                                <Run Text="{Binding Count}" Foreground="DarkRed" FontWeight="Bold"/>
-                                                <Run Text=" : تحویل توسط " Foreground="#FF505050"/>
-                                                <Run Text="{Binding Driver.FullName, Mode=OneWay}"/>
-                                                <Run Text="با ماشین " Foreground="#FF505050"/>
-                                                <Run Text="{Binding Machine.Name}"/>
-                                                <Run Text="با شماره بارنامه " Foreground="#FF505050"/>
-                                                <Run Text="{Binding BillNumber}"/>
-                                                <Run Text="در تاریخ " Foreground="#FF505050"/>
-                                                <Run Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH-mm}}"/>
-                                                </TextBlock>
-                                                <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" StrokeThickness="0.5"/>
-                                            </baseclasses:JGrid>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                                <Rectangle Stroke="Red" Grid.Row="1"/>
-                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

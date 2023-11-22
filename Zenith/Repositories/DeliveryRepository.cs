@@ -33,6 +33,13 @@ namespace Zenith.Repositories
                 .Include(d => d.Driver)
                 .Where(predicate).AsEnumerable();
 
+        public override IEnumerable<Delivery> All() =>
+            _context.Set<Delivery>()
+                .Include(d => d.SaleItem).ThenInclude(si => si.Material)
+                .Include(d => d.Site).ThenInclude(s => s.Company)
+                .Include(d => d.Machine)
+                .Include(d => d.Driver).AsEnumerable();
+
         public override Delivery Add(Delivery delivery)
         {
             var machine = MachineRepository.Single(delivery.MachineId);

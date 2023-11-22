@@ -9,6 +9,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
@@ -25,36 +26,52 @@ namespace Zenith.ViewModels.ListViewModels
         {
             SalesPrePrintDto = new SalesPrePrintDto
             {
-                Materials = new MaterialRepository().All().Select(m => (Material)m.Clone()).ToList(),
-                Sites = new SiteRepository().All().Select(s => (Site)s.Clone()).ToList()
+                Materials = new MaterialRepository().All().Select(m => (Material)m.Clone()).ToObservableCollection(),
             };
 
             AddNewCommand = ReactiveCommand.CreateFromObservable<bool, Unit>(isIndirectSale =>
                 CreateCommand.Execute()
                 .Do(_ => CreateUpdatePage.ViewModel.PageModel.IsIndirectSale = isIndirectSale));
 
+            this.WhenAnyValue(vm => vm.IsInPrePrintMode)
+                .Where(iipm => iipm)
+                .Do(_ =>
+                {
+                    SalesPrePrintDto.Sites = new SiteRepository()
+                        .Find(s => s.CompanyId == ActiveList.Select(s => s.CompanyId).FirstOrDefault())
+                        .Select(s => (Site)s.Clone())
+                        .ToObservableCollection();
+                }).Subscribe();
+
             HidePrePrintGridCommand = ReactiveCommand.Create<Unit>(_ => IsInPrePrintMode = false);
-            
+
             PrintAggregateFactorPreviewCommand = ReactiveCommand.Create<Unit>(_ =>
             {
                 PrintableDeliveries.Clear();
 
-                PrintableDeliveries.AddRange( ActiveList.SelectMany(s => s.Items.SelectMany(si => si.Deliveries).Where(d => SalesPrePrintDto.Sites.Any(site => site.IsSelected && site.SiteId ==  d.Site.SiteId)).ToList()));
+                if (SalesPrePrintDto.FilteredBySite || SalesPrePrintDto.FilteredByMaterial)
+                    PrintableDeliveries.AddRange(
+                        ActiveList.SelectMany(s =>
+                            s.Items.SelectMany(si => si.Deliveries)
+                                .Where(d => (!SalesPrePrintDto.Sites.Any(site => site.IsSelected) || SalesPrePrintDto.Sites.Any(site => site.IsSelected && site.SiteId == d.Site.SiteId)) &&
+                                            (!SalesPrePrintDto.Materials.Any(m => m.IsSelected) || SalesPrePrintDto.Materials.Any(m => m.IsSelected && m.MaterialId == d.SaleItem.MaterialId))).ToList()));
+
+                else if (SalesPrePrintDto.FilteredByLpo)
+                    PrintableDeliveries.AddRange(new DeliveryRepository().Find(d => d.LpoNumber == SalesPrePrintDto.LpoNumber));
             });
 
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
-                WordUtil.PrintFactor(IncludeTRN, repository.Single(sale.SaleId));
+                WordUtil.PrintFactor( null, null, IncludeTRN,repository.Single(sale.SaleId));
             });
 
             PrintAggregateFactorCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
-                WordUtil.PrintFactor(IncludeTRN, ActiveList.Where(item => item.IsSelected).Select(s => repository.Single(s.SaleId)).ToArray());
-            }, this.WhenAnyValue(vm => vm.SelectionMode)
-                .Select(selectionMode => selectionMode != SelectionModes.NoItemSelected));
+                WordUtil.PrintFactor(SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), IncludeTRN, ActiveList.Select(s => repository.Single(s.SaleId)).ToArray());
+            });
 
         }
-       
+
         public ReactiveCommand<bool, Unit> AddNewCommand { get; set; }
         public ReactiveCommand<Unit, Unit> HidePrePrintGridCommand { get; set; }
         public ReactiveCommand<Sale, Unit> PrintFactorCommand { get; set; }

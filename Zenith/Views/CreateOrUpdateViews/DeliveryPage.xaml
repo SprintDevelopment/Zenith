@@ -55,12 +55,7 @@
                         <baseclasses:JTextBox Text="{Binding PageModel.Count, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.CountTextBoxTitle}" Margin="24,16,8,0"/>
                         <baseclasses:JTextBox Text="{Binding PageModel.DeliveryFee, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryFeeTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>
                     </Grid>
-                    
                     <ComboBox x:Name="driverComboBox" SelectedValue="{Binding PageModel.DriverId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedValuePath="PersonId" Tag="{DynamicResource DeliveryPage.DriverComboBoxTitle}"/>
-
-                    <Grid>
-                        <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryNumberTextBoxTitle}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                    </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

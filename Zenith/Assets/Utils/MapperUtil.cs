@@ -19,6 +19,7 @@ namespace Zenith.Assets.Utils
             cfg.CreateMap<Cash, Cash>();
             cfg.CreateMap<Cheque, Cheque>();
             cfg.CreateMap<Company, Company>();
+            cfg.CreateMap<Delivery, Delivery>();
             cfg.CreateMap<Machine, Machine>();
             cfg.CreateMap<Material, Material>();
             cfg.CreateMap<Note, Note>();
