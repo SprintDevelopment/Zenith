@@ -46,15 +46,6 @@ namespace Zenith.Assets.Values.Dtos
 
         public SalesPrePrintDto()
         {
-            this.WhenAnyValue(dto => dto.FilteredBySite, dto => dto.FilteredByMaterial)
-                .Where(x => x.Item1 || x.Item2)
-                .Do(_ => FilteredByLpo = false)
-                .Subscribe();
-
-            this.WhenAnyValue(dto => dto.FilteredByLpo)
-                .Where(x => x)
-                .Do(_ => FilteredBySite = FilteredByMaterial = false)
-                .Subscribe();
         }
     }
 }

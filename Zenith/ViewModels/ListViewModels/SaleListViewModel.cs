@@ -26,7 +26,7 @@ namespace Zenith.ViewModels.ListViewModels
         {
             SalesPrePrintDto = new SalesPrePrintDto
             {
-                Materials = new MaterialRepository().All().Select(m => (Material)m.Clone()).ToObservableCollection(),
+                Materials = new MaterialRepository().AllIncludeMixed().Select(m => (Material)m.Clone()).ToObservableCollection(),
             };
 
             AddNewCommand = ReactiveCommand.CreateFromObservable<bool, Unit>(isIndirectSale =>
@@ -49,25 +49,26 @@ namespace Zenith.ViewModels.ListViewModels
             {
                 PrintableDeliveries.Clear();
 
-                if (SalesPrePrintDto.FilteredBySite || SalesPrePrintDto.FilteredByMaterial)
+                var salesToPrint = SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() ? ActiveList.AsEnumerable() : ((SaleRepository)repository).FindByLpo(SalesPrePrintDto.LpoNumber);
+
                     PrintableDeliveries.AddRange(
-                        ActiveList.SelectMany(s =>
+                        salesToPrint.SelectMany(s =>
                             s.Items.SelectMany(si => si.Deliveries)
                                 .Where(d => (!SalesPrePrintDto.Sites.Any(site => site.IsSelected) || SalesPrePrintDto.Sites.Any(site => site.IsSelected && site.SiteId == d.Site.SiteId)) &&
-                                            (!SalesPrePrintDto.Materials.Any(m => m.IsSelected) || SalesPrePrintDto.Materials.Any(m => m.IsSelected && m.MaterialId == d.SaleItem.MaterialId))).ToList()));
-
-                else if (SalesPrePrintDto.FilteredByLpo)
-                    PrintableDeliveries.AddRange(new DeliveryRepository().Find(d => d.LpoNumber == SalesPrePrintDto.LpoNumber));
+                                            (!SalesPrePrintDto.Materials.Any(m => m.IsSelected) || SalesPrePrintDto.Materials.Any(m => m.IsSelected && m.MaterialId == d.SaleItem.MaterialId)) &&
+                                            (SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() || d.LpoNumber == SalesPrePrintDto.LpoNumber))).ToList());
             });
 
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
-                WordUtil.PrintFactor( null, null, IncludeTRN,repository.Single(sale.SaleId));
+                WordUtil.PrintFactor( null, null, null, IncludeTRN,repository.Single(sale.SaleId));
             });
 
             PrintAggregateFactorCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
-                WordUtil.PrintFactor(SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), IncludeTRN, ActiveList.Select(s => repository.Single(s.SaleId)).ToArray());
+                var salesToPrint = SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() ? ActiveList.AsEnumerable() : ((SaleRepository)repository).FindByLpo(SalesPrePrintDto.LpoNumber);
+               
+                WordUtil.PrintFactor(SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), null, IncludeTRN, salesToPrint.Select(s => repository.Single(s.SaleId)).ToArray());
             });
 
         }

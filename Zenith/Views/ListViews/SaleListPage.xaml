@@ -53,7 +53,7 @@
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
-                <ToggleButton x:Name="showFilterPrintButton" Width="50" BorderThickness="1,0,0,0" IsChecked="{Binding IsInPrePrintMode}">
+                <ToggleButton x:Name="showFilterPrintButton" Width="50" BorderThickness="1,0,0,0" IsEnabled="False" IsChecked="{Binding IsInPrePrintMode}">
                     <Image Source="/Zenith;component/Resources/Images/Common/print.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </ToggleButton>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding RemoveCommand}">
@@ -182,129 +182,128 @@
                 </Grid>
                 <StackPanel Grid.Row="1">
                     <Grid Margin="24,4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="8" />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle x:Name="siteAndMaterialRectangle" Grid.ColumnSpan="2" Stroke="#FFCD0000" StrokeThickness="2" RadiusX="4" RadiusY="4" />
-                        <Border x:Name="siteAndMaterialBorder" CornerRadius="4,0,0,4" />
+                        <Rectangle x:Name="siteRectangle" Grid.ColumnSpan="2" Grid.RowSpan="2" Stroke="#FFCD0000" StrokeThickness="2" RadiusX="4" RadiusY="4" />
+                        <Border x:Name="siteBorder" CornerRadius="4,0,0,4"  Grid.RowSpan="2"/>
+                        <Rectangle x:Name="materialRectangle" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Stroke="#FFCD0000" StrokeThickness="2" RadiusX="4" RadiusY="4" />
+                        <Border x:Name="materialBorder" CornerRadius="4,0,0,4" Grid.Column="3" Grid.RowSpan="2"/>
                         <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="150" />
-                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="64" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="64" />
                             </Grid.ColumnDefinitions>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="64" />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="64" />
-                                </Grid.ColumnDefinitions>
-                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.FilteredBySite}" ToolTip="Enable/Disable tax in print" Margin="0,2">
-                                    <Grid>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/by-site.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredBySite, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/not-by-site.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredBySite, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                                    </Grid>
-                                </ToggleButton>
-                                <Grid Height="46" Grid.Column="1" Margin="8,0">
-                                    <TextBlock x:Name="siteSearchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SiteHintTextBlockText}" Foreground="#FFD1D1D1" />
-                                    <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SearchedSiteName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ToggleButton IsChecked="{Binding SalesPrePrintDto.FilteredBySite}" ToolTip="Enable/Disable tax in print" Margin="0,2">
+                                <Grid>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/by-site.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredBySite, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/not-by-site.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredBySite, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
                                 </Grid>
-                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.SeparatedBySite}" ToolTip="Enable/Disable tax in print" Margin="0,2" Grid.Column="2">
-                                    <Grid>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedBySite, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/no-page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedBySite, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                                    </Grid>
-                                </ToggleButton>
+                            </ToggleButton>
+                            <Grid Height="46" Grid.Column="1" Margin="8,0">
+                                <TextBlock x:Name="siteSearchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.SiteHintTextBlockText}" Foreground="#FFD1D1D1" />
+                                <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SearchedSiteName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
-                            <Rectangle Stroke="#FFCBCBCB" VerticalAlignment="Stretch" Width="1" HorizontalAlignment="Right" Grid.RowSpan="2" Margin="0,2"/>
-                            <Rectangle Stroke="#FFCBCBCB" VerticalAlignment="Bottom" Height="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="2,0"/>
-                            <Grid Grid.Column="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="64" />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="64" />
-                                </Grid.ColumnDefinitions>
-                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.FilteredByMaterial}" ToolTip="Enable/Disable tax in print" Margin="0,2">
-                                    <Grid>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/by-material.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredByMaterial, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/not-by-material.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredByMaterial, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                                    </Grid>
-                                </ToggleButton>
-                                <Grid Height="46" Grid.Column="1" Margin="8,0">
-                                    <TextBlock x:Name="materialSearchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.MaterialHintTextBlockText}" Foreground="#FFD1D1D1" />
-                                    <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <!--<ToggleButton IsChecked="{Binding SalesPrePrintDto.SeparatedBySite}" ToolTip="Enable/Disable tax in print" Margin="0,2" Grid.Column="2">
+                                <Grid>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedBySite, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/no-page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedBySite, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
                                 </Grid>
-                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.SeparatedByMaterial}" ToolTip="Enable/Disable tax in print" Margin="0,2,2,2" Grid.Column="2">
-                                    <Grid>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedByMaterial, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                        <Image Source="/Zenith;component/Resources/Images/Common/no-page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedByMaterial, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                                    </Grid>
-                                </ToggleButton>
-                            </Grid>
-                            <ItemsControl ItemsSource="{Binding SalesPrePrintDto.Sites}" Grid.Row="1" Margin="4" >
-                                <ItemsControl.Template>
-                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                        <ScrollViewer CanContentScroll="True">
-                                            <ItemsPresenter/>
-                                        </ScrollViewer>
-                                    </ControlTemplate>
-                                </ItemsControl.Template>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="2*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <CheckBox IsChecked="{Binding IsSelected}" />
-                                            <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                                            <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
-                                        </baseclasses:JGrid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <ItemsControl ItemsSource="{Binding SalesPrePrintDto.Materials}" Grid.Row="1" Grid.Column="1" Margin="4" >
-                                <ItemsControl.Template>
-                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                        <ScrollViewer CanContentScroll="True">
-                                            <ItemsPresenter/>
-                                        </ScrollViewer>
-                                    </ControlTemplate>
-                                </ItemsControl.Template>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="60"/>
-                                            </Grid.ColumnDefinitions>
-                                            <CheckBox IsChecked="{Binding IsSelected}" />
-                                            <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
-                                            <Image Source="/Zenith;component/Resources/Images/Common/mixed.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="16" Height="16" Grid.Column="2" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsMixed, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                            <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
-                                        </baseclasses:JGrid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
+                            </ToggleButton>-->
+                            <Rectangle Stroke="{Binding Stroke, ElementName=siteRectangle}" VerticalAlignment="Bottom" Height="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" />
                         </Grid>
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="64" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="64" />
+                            </Grid.ColumnDefinitions>
+                            <ToggleButton IsChecked="{Binding SalesPrePrintDto.FilteredByMaterial}" ToolTip="Enable/Disable tax in print" Margin="0,2">
+                                <Grid>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/by-material.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredByMaterial, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/not-by-material.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FilteredByMaterial, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                                </Grid>
+                            </ToggleButton>
+                            <Grid Height="46" Grid.Column="1" Margin="8,0">
+                                <TextBlock x:Name="materialSearchHintTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{DynamicResource SalePage.MaterialHintTextBlockText}" Foreground="#FFD1D1D1" />
+                                <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SearchedMaterialName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </Grid>
+                            <!--<ToggleButton IsChecked="{Binding SalesPrePrintDto.SeparatedByMaterial}" ToolTip="Enable/Disable tax in print" Margin="0,2,2,2" Grid.Column="2">
+                                <Grid>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedByMaterial, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                    <Image Source="/Zenith;component/Resources/Images/Common/no-page-break.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.SeparatedByMaterial, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                                </Grid>
+                            </ToggleButton>-->
+                        <Rectangle Stroke="{Binding Stroke, ElementName=materialRectangle}" VerticalAlignment="Bottom" Height="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" />
+                        </Grid>
+                        <ItemsControl ItemsSource="{Binding SalesPrePrintDto.Sites}" IsEnabled="{Binding SalesPrePrintDto.FilteredBySite}" Grid.Row="1" Grid.Column="1" Margin="4" >
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer CanContentScroll="True">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox IsChecked="{Binding IsSelected}" />
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding Company.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
+                                    </baseclasses:JGrid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl ItemsSource="{Binding SalesPrePrintDto.Materials}" IsEnabled="{Binding SalesPrePrintDto.FilteredByMaterial}" Grid.Row="1" Grid.Column="4" Margin="4" >
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer CanContentScroll="True">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <baseclasses:JGrid Height="32" IsSelected="{Binding IsSelected}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox IsChecked="{Binding IsSelected}" />
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" TextTrimming="WordEllipsis" />
+                                        <Image Source="/Zenith;component/Resources/Images/Common/mixed.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="16" Height="16" Grid.Column="2" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsMixed, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="3" StrokeThickness="0.5"/>
+                                    </baseclasses:JGrid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
                     </Grid>
                     <Grid Margin="24,4">
                         <Grid.ColumnDefinitions>
@@ -369,7 +368,7 @@
                                         <RowDefinition Height="32" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <baseclasses:JGrid MinHeight="32" Command="{Binding DataContext.ShowHideDeliveriesCommand, RelativeSource={RelativeSource AncestorType=Page}}">
+                                    <baseclasses:JGrid MinHeight="32">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
@@ -394,7 +393,7 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="24,16">
                         <Button Content="{DynamicResource SaleListPage.PrintResultButtonContent}" Height="38" Padding="32,0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8,0" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding PrintAggregateFactorPreviewCommand}" />
                         <Button Content="{DynamicResource SaleListPage.PrintButtonContent}" Height="38" Padding="32,0" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding PrintAggregateFactorCommand}" />
-                        
+
                     </StackPanel>
                 </StackPanel>
             </Grid>

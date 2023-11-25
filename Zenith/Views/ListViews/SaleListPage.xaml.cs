@@ -63,24 +63,32 @@ namespace Zenith.Views.ListViews
                 var modalBackRect = ((Grid)Content).Children.OfType<Rectangle>().Single(r => r.Name == "modalBackRect");
                 modalBackRect.InputBindings.Add(new MouseBinding(CastedViewModel.HidePrePrintGridCommand, new MouseGesture(MouseAction.LeftClick)));
 
+                CastedViewModel.SalesPrePrintDto.WhenAnyValue(dto => dto.FilteredBySite)
+                    .Select(fbl => fbl ? new SolidColorBrush(Color.FromArgb(255, 205, 0, 0)) : new SolidColorBrush(Color.FromArgb(255, 203, 203, 203)))
+                    .Do(color =>
+                    {
+                        siteRectangle.Stroke = color;
+                        siteBorder.Background = color;
+                    })
+                    .Subscribe()
+                    .DisposeWith(d);
+
+                CastedViewModel.SalesPrePrintDto.WhenAnyValue(dto => dto.FilteredByMaterial)
+                    .Select(fbl => fbl ? new SolidColorBrush(Color.FromArgb(255, 205, 0, 0)) : new SolidColorBrush(Color.FromArgb(255, 203, 203, 203)))
+                    .Do(color =>
+                    {
+                        materialRectangle.Stroke = color;
+                        materialBorder.Background = color;
+                    })
+                    .Subscribe()
+                    .DisposeWith(d);
+
                 CastedViewModel.SalesPrePrintDto.WhenAnyValue(dto => dto.FilteredByLpo)
                     .Select(fbl => fbl ? new SolidColorBrush(Color.FromArgb(255, 205, 0, 0)) : new SolidColorBrush(Color.FromArgb(255, 203, 203, 203)))
                     .Do(color =>
                     {
                         lpoRectangle.Stroke = color;
                         lpoBorder.Background = color;
-                        //lpoSelectionIndicatorEllipse.Fill = color;
-                    })
-                    .Subscribe()
-                    .DisposeWith(d);
-
-                CastedViewModel.SalesPrePrintDto.WhenAnyValue(dto => dto.FilteredBySite, dto => dto.FilteredByMaterial)
-                    .Select(x => (x.Item1 || x.Item2) ? new SolidColorBrush(Color.FromArgb(255, 205, 0, 0)) : new SolidColorBrush(Color.FromArgb(255, 203, 203, 203)))
-                    .Do(color =>
-                    {
-                        siteAndMaterialRectangle.Stroke = color;
-                        siteAndMaterialBorder.Background = color;
-                        //siteAndMaterialSelectionIndicatorEllipse.Fill = color;
                     })
                     .Subscribe()
                     .DisposeWith(d);

@@ -18,7 +18,7 @@ namespace Zenith.Assets.Utils
     public class WordUtil
     {
         public static Word.Application wordApp;
-        public static OperationResultDto PrintFactor(List<int> sitesIds, List<int> materialsIds, bool includeCustomerTRN = false, params Sale[] sales)
+        public static OperationResultDto PrintFactor(List<int> sitesIds, List<int> materialsIds, string lpo, bool includeCustomerTRN = false, params Sale[] sales)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
@@ -43,10 +43,12 @@ namespace Zenith.Assets.Utils
                     companyTable.Cell(5, 1).Range.Text = $"TRN: {sales[0].Company.TaxRegistrationNumber}";
 
                 var deliveriesTable = document.Tables[2];
+                var totalPrice = 0f;
 
                 sales.SelectMany(s => s.Items).Where(si => si.Deliveries.Any()).SelectMany(si => 
                     si.Deliveries.Where(d => (sitesIds.IsNullOrEmpty() || sitesIds.Any(sid => sid == d.Site.SiteId)) &&
-                                            (materialsIds.IsNullOrEmpty() || materialsIds.Any(mid => mid == d.SaleItem.MaterialId))))
+                                            (materialsIds.IsNullOrEmpty() || materialsIds.Any(mid => mid == d.SaleItem.MaterialId)) &&
+                                            (lpo.IsNullOrWhiteSpace() || d.LpoNumber == lpo)))
                     .GroupBy(d => new { d.SiteId, d.DeliveryNumber })
                     .Select((deliveries, i) =>
                     {
@@ -63,10 +65,12 @@ namespace Zenith.Assets.Utils
                         newRow.Cells[8].Range.Text = $"{deliveries.Sum(d => d.Count):n2} (m)";
                         newRow.Cells[9].Range.Text = $"{(deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice):n2}";
 
+                        totalPrice += deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice;
+                        
                         return deliveries;
                     }).ToList();
 
-                var totalPrice = sales.Sum(s => s.Items.Where(si => si.Deliveries.Any()).Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
+                //var totalPrice = sales.Sum(s => s.Items.Where(si => si.Deliveries.Any()).Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
 
                 var rowsContents = new Tuple<string, string>[]
                 {
@@ -95,7 +99,7 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 
@@ -127,7 +131,7 @@ namespace Zenith.Assets.Utils
                 companyTable.Cell(2, 3).Range.Text = $"{payment.DateTime:yyyy-MMM-dd}";
                 companyTable.Cell(3, 1).Range.Text = $"Amount: {payment.PaidValue:n2}";
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 
@@ -204,7 +208,7 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
                 //wordApp.Visible = true;
                 document.Close(false);
 

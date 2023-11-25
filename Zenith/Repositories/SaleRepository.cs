@@ -23,6 +23,16 @@ namespace Zenith.Repositories
                 .AsEnumerable();
         }
 
+        public IEnumerable<Sale> FindByLpo(string lpoNumber)
+        {
+            return _context.Set<Sale>()
+                .Include(s => s.Company)
+                .Include(s => s.Items).ThenInclude(si => si.Material)
+                .Include(s => s.Items).ThenInclude(si => si.Deliveries)
+                .Where(s => s.Items.Any(i => i.Deliveries.Any(d => d.LpoNumber == lpoNumber)))
+                .AsEnumerable();
+        }
+
         public override Sale Single(dynamic id)
         {
             int intId = (int)id;
