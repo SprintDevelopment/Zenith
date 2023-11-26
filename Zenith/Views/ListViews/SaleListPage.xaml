@@ -333,6 +333,7 @@
                     </Grid>
                     <Grid Background="White" Height="40" Margin="24,1,24,0">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="100"/>
@@ -340,13 +341,13 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.MaterialColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.RelatedSiteColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource DeliveryListPage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
-                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DeliveryNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.LpoNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.MaterialColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.RelatedSiteColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource DeliveryListPage.CountColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="3" Foreground="#FF3AB05A" Margin="8,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DeliveryNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.LpoNumberColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource DeliveryListPage.DateColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
+                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                     </Grid>
                     <ItemsControl x:Name="deliveryListItemsControl" ItemsSource="{Binding PrintableDeliveries}" Margin="24,1,24,0" Height="300">
                         <ItemsControl.Template>
@@ -364,12 +365,9 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="32" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
                                     <baseclasses:JGrid MinHeight="32">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="100"/>
@@ -377,13 +375,14 @@
                                             <ColumnDefinition Width="150"/>
                                             <ColumnDefinition Width="150"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding SaleItem.Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding Site.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Count}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding DeliveryNumber}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding LpoNumber}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
-                                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="6" StrokeThickness="0.5"/>
+                                        <CheckBox IsChecked="{Binding IsSelected}" />
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding SaleItem.Material.Name}" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding Site.Name}" VerticalAlignment="Center" Grid.Column="2" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Count}" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding DeliveryNumber}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding LpoNumber}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0"/>
+                                        <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="7" StrokeThickness="0.5"/>
                                     </baseclasses:JGrid>
                                 </Grid>
                             </DataTemplate>

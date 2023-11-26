@@ -60,8 +60,11 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 {
                     if (StayOpen && IsNew) 
                     {
-                        PageModel = PageModel.ShouldCloneAsNew ? MapperUtil.Mapper.Map<T>(PageModel) : new T();
-                        modelKeyProperty.SetValue(PageModel, Activator.CreateInstance(modelKeyProperty.PropertyType));
+                        PageModel = PageModel.ShouldCloneAsNew ? 
+                            MapperUtil.Mapper.Map<T>(PageModel, opt => opt.AfterMap((src, dest) => 
+                            { 
+                                modelKeyProperty.SetValue(dest, Activator.CreateInstance(modelKeyProperty.PropertyType)); 
+                            })) : new T();
                     }
                     else
                         ReturnCommand.Execute().Subscribe();
