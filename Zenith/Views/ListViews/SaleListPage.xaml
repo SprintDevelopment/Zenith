@@ -388,6 +388,31 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <Grid Margin="24,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.ColumnSpan="2" Stroke="#FF3DBCFF" StrokeThickness="2" RadiusX="4" RadiusY="4" />
+                        <Border Background="#FF3DBCFF" CornerRadius="4,0,0,4" />
+                        <Grid Grid.Column="1" Height="50">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="64" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton IsChecked="{Binding SalesPrePrintDto.FactorNumberRequired}" ToolTip="Enable/Disable tax in print" Margin="0,3">
+                                    <Grid>
+                                        <Image Source="/Zenith;component/Resources/Images/Common/factor-number-manual.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FactorNumberRequired, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                        <Image Source="/Zenith;component/Resources/Images/Common/factor-number-auto.png" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding SalesPrePrintDto.FactorNumberRequired, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                                    </Grid>
+                                </ToggleButton>
+                                <Grid Height="46" Grid.Column="1" Margin="8,0">
+                                    <baseclasses:JTransparentTextBox HorizontalContentAlignment="Left" Text="{Binding SalesPrePrintDto.FactorNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding SalesPrePrintDto.FactorNumberRequired}" FontSize="18"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="24,16">
                         <Button Content="{DynamicResource SaleListPage.PrintResultButtonContent}" Height="38" Padding="32,0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8,0" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding PrintAggregateFactorPreviewCommand}" />

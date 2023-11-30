@@ -39,6 +39,12 @@ namespace Zenith.Assets.Values.Dtos
         public string LpoNumber { get; set; }
 
         [Reactive]
+        public bool FactorNumberRequired { get; set; }
+
+        [Reactive]
+        public int FactorNumber { get; set; }
+
+        [Reactive]
         public string SearchedSiteName { get; set; }
 
         [Reactive]

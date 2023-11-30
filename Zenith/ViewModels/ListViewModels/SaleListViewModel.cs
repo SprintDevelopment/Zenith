@@ -24,10 +24,17 @@ namespace Zenith.ViewModels.ListViewModels
         public SaleListViewModel(Repository<Sale> repository, SearchBaseDto searchModel, IObservable<Func<Sale, bool>> criteria)
             : base(repository, searchModel, criteria, PermissionTypes.Sales)
         {
+            var configurationRepository = new ConfigurationRepository();
+
             SalesPrePrintDto = new SalesPrePrintDto
             {
                 Materials = new MaterialRepository().AllIncludeMixed().Select(m => (Material)m.Clone()).ToObservableCollection(),
             };
+
+            if (int.TryParse(configurationRepository.Single(ConfigurationKeys.LastPrintedFactorNumber).Value, out int lastPrintedFactorNo))
+                SalesPrePrintDto.FactorNumber = lastPrintedFactorNo + 1;
+            else
+                SalesPrePrintDto.FactorNumber = 100301;
 
             AddNewCommand = ReactiveCommand.CreateFromObservable<bool, Unit>(isIndirectSale =>
                 CreateCommand.Execute()
@@ -51,24 +58,40 @@ namespace Zenith.ViewModels.ListViewModels
 
                 var salesToPrint = SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() ? ActiveList.AsEnumerable() : ((SaleRepository)repository).FindByLpo(SalesPrePrintDto.LpoNumber);
 
-                    PrintableDeliveries.AddRange(
-                        salesToPrint.SelectMany(s =>
-                            s.Items.SelectMany(si => si.Deliveries)
-                                .Where(d => (!SalesPrePrintDto.Sites.Any(site => site.IsSelected) || SalesPrePrintDto.Sites.Any(site => site.IsSelected && site.SiteId == d.Site.SiteId)) &&
-                                            (!SalesPrePrintDto.Materials.Any(m => m.IsSelected) || SalesPrePrintDto.Materials.Any(m => m.IsSelected && m.MaterialId == d.SaleItem.MaterialId)) &&
-                                            (SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() || d.LpoNumber == SalesPrePrintDto.LpoNumber))).ToList());
+                PrintableDeliveries.AddRange(
+                    salesToPrint.SelectMany(s =>
+                        s.Items.SelectMany(si => si.Deliveries)
+                            .Where(d => (!SalesPrePrintDto.Sites.Any(site => site.IsSelected) || SalesPrePrintDto.Sites.Any(site => site.IsSelected && site.SiteId == d.Site.SiteId)) &&
+                                        (!SalesPrePrintDto.Materials.Any(m => m.IsSelected) || SalesPrePrintDto.Materials.Any(m => m.IsSelected && m.MaterialId == d.SaleItem.MaterialId)) &&
+                                        (SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() || d.LpoNumber == SalesPrePrintDto.LpoNumber))).ToList());
             });
 
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
-                WordUtil.PrintFactor(null, null, null, null, IncludeTRN, repository.Single(sale.SaleId));
+                WordUtil.PrintFactor(null, null, null, null, null, IncludeTRN, repository.Single(sale.SaleId));
             });
 
             PrintAggregateFactorCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
                 var salesToPrint = SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() ? ActiveList.AsEnumerable() : ((SaleRepository)repository).FindByLpo(SalesPrePrintDto.LpoNumber);
-               
-                WordUtil.PrintFactor(SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), SalesPrePrintDto.LpoNumber, PrintableDeliveries.Where(d => d.IsSelected).Select(d => d.DeliveryId).ToList(), IncludeTRN, salesToPrint.Select(s => repository.Single(s.SaleId)).ToArray());
+
+                WordUtil.PrintFactor(SalesPrePrintDto.FactorNumber, SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), SalesPrePrintDto.LpoNumber, PrintableDeliveries.Where(d => d.IsSelected).Select(d => d.DeliveryId).ToList(), IncludeTRN, salesToPrint.Select(s => repository.Single(s.SaleId)).ToArray());
+
+                if (SalesPrePrintDto.FactorNumber > lastPrintedFactorNo)
+                {
+                    configurationRepository.AddOrUpdateRange(new List<Configuration>
+                    {
+                        new Configuration 
+                        {
+                            Key = $"{ConfigurationKeys.LastPrintedFactorNumber}",
+                            Value = $"{SalesPrePrintDto.FactorNumber}"
+                        }
+                    });
+
+                    lastPrintedFactorNo = SalesPrePrintDto.FactorNumber;
+                }
+
+                SalesPrePrintDto.FactorNumber = lastPrintedFactorNo + 1;
             });
 
         }

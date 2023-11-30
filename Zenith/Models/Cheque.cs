@@ -17,7 +17,7 @@ namespace Zenith.Models
         public string ChequeNumber { get; set; }
 
         [Reactive]
-        public DateTime ChequeDate { get; set; }
+        public DateTime ChequeDate { get; set; } = DateTime.Today;
 
         [Reactive]
         public ChequeTypes ChequeType { get; set; } = ChequeTypes.Recieved;

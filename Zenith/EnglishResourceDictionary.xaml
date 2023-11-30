@@ -727,6 +727,7 @@
     <system:String x:Key="SalePage.SiteHintTextBlockText">Enter site's name to search ...</system:String>
     <system:String x:Key="SalePage.MaterialHintTextBlockText">Enter material's name to search ...</system:String>
     <system:String x:Key="SalePage.LpoNumberHintTextBlockText">Enter lpo number to search ...</system:String>
+    <system:String x:Key="SalePage.FactorNumberHintTextBlockText">Enter factor number to search ...</system:String>
     <system:String x:Key="SalePage.ConfirmAndContinueButtonContent">Confirm &amp; continue</system:String>
     <system:String x:Key="SalePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">Material name</system:String>

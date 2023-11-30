@@ -27,6 +27,8 @@
     <None Remove="Resources\Images\Common\down.png" />
     <None Remove="Resources\Images\Common\edit.png" />
     <None Remove="Resources\Images\Common\expand.png" />
+    <None Remove="Resources\Images\Common\factor-number-auto.png" />
+    <None Remove="Resources\Images\Common\factor-number-manual.png" />
     <None Remove="Resources\Images\Common\filter.png" />
     <None Remove="Resources\Images\Common\folder.png" />
     <None Remove="Resources\Images\Common\indirect-sale.png" />
@@ -129,6 +131,8 @@
     <Resource Include="Resources\Images\Common\down.png" />
     <Resource Include="Resources\Images\Common\edit.png" />
     <Resource Include="Resources\Images\Common\expand.png" />
+    <Resource Include="Resources\Images\Common\factor-number-auto.png" />
+    <Resource Include="Resources\Images\Common\factor-number-manual.png" />
     <Resource Include="Resources\Images\Common\filter.png" />
     <Resource Include="Resources\Images\Common\folder.png" />
     <Resource Include="Resources\Images\Common\indirect-sale.png" />

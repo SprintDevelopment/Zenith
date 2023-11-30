@@ -18,7 +18,7 @@ namespace Zenith.Assets.Utils
     public class WordUtil
     {
         public static Word.Application wordApp;
-        public static OperationResultDto PrintFactor(List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, bool includeCustomerTRN = false, params Sale[] sales)
+        public static OperationResultDto PrintFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, bool includeCustomerTRN = false, params Sale[] sales)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
@@ -34,7 +34,7 @@ namespace Zenith.Assets.Utils
 
                 var companyTable = document.Tables[1];
                 companyTable.Cell(1, 1).Range.Text = $"Customer Code: {sales[0].Company.CompanyId:CPY0000}";
-                companyTable.Cell(1, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].SaleId:INV0000}" : "";
+                companyTable.Cell(1, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].SaleId:INV0000}" : $"{factorNumber}";
                 companyTable.Cell(2, 1).Range.Text = sales[0].Company.Name;
                 companyTable.Cell(2, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].DateTime:yyyy-MMM-dd}" : $"{sales[0].DateTime:yyyy-MMM}";
                 companyTable.Cell(3, 1).Range.Text = $"Tel: {sales[0].Company.Tel}";
