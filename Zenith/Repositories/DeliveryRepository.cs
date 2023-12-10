@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Policy;
 using Zenith.Assets.Utils;
+using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 
@@ -14,6 +15,7 @@ namespace Zenith.Repositories
     {
         MachineRepository MachineRepository = new MachineRepository();
         MachineOutgoRepository MachineOutgoRepository = new MachineOutgoRepository();
+        ConfigurationRepository ConfigurationRepository = new ConfigurationRepository();
 
         public override Delivery Single(dynamic id)
         {
@@ -52,6 +54,18 @@ namespace Zenith.Repositories
                 MachineOutgoRepository.Add(addedMachineOutgo);
 
                 delivery.RelatedTaxiMachineOutgoId = addedMachineOutgo.OutgoId;
+            }
+
+            if(delivery.AutoDeliveryNumberEnabled)
+            {
+                ConfigurationRepository.AddOrUpdateRange(new List<Configuration>
+                    {
+                        new Configuration
+                        {
+                            Key = $"{ConfigurationKeys.LastAutoDeliveryNumber}",
+                            Value = $"{delivery.DeliveryNumber}"
+                        }
+                    });
             }
 
             base.Add(delivery);

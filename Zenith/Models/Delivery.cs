@@ -46,7 +46,7 @@ namespace Zenith.Models
 
         [NotMapped]
         [Reactive]
-        public bool InfoIsRelatedToMachine { get; set; } = false;
+        public bool AutoDeliveryNumberEnabled { get; set; } = true;
 
         [Reactive]
         public int DriverId { get; set; }

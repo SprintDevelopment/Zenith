@@ -61,11 +61,11 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryNumberTextBoxTitle}" IsEnabled="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Margin="24,16,8,0"/>
-                        <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.InfoIsRelatedToMachine}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,28,0">
+                        <baseclasses:JTextBox Text="{Binding PageModel.DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.DeliveryNumberTextBoxTitle}" IsEnabled="{Binding PageModel.AutoDeliveryNumberEnabled, Converter={StaticResource boolConverter}, ConverterParameter={StaticResource FalseValue}}" Margin="24,16,8,0"/>
+                        <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.AutoDeliveryNumberEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,28,0" Visibility="{Binding IsNew, Converter={StaticResource boolToVisibilityConverter}}">
                             <Grid>
-                                <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}}"/>
-                                <Image Source="/Zenith;component/Resources/Images/Common/unlock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.InfoIsRelatedToMachine, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.AutoDeliveryNumberEnabled, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Image Source="/Zenith;component/Resources/Images/Common/unlock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.AutoDeliveryNumberEnabled, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
                             </Grid>
                         </ToggleButton>
                         <baseclasses:JTextBox Text="{Binding PageModel.LpoNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource DeliveryPage.LpoNumberTextBoxTitle}" Margin="8,16,24,0" Grid.Column="1"/>

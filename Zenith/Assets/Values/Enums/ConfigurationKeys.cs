@@ -9,6 +9,7 @@ namespace Zenith.Assets.Values.Enums
     public enum ConfigurationKeys
     {
         AppLicense,
-        LastPrintedFactorNumber
+        LastPrintedFactorNumber,
+        LastAutoDeliveryNumber
     }
 }

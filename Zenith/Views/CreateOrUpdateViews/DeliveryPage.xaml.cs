@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Dtos;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 using Zenith.Repositories;
@@ -20,6 +21,9 @@ namespace Zenith.Views.CreateOrUpdateViews
         {
             InitializeComponent();
 
+            //Should refactor, but temporary
+            var configurationRepository = new ConfigurationRepository();
+
             ViewModel = new BaseCreateOrUpdateViewModel<Delivery>(new DeliveryRepository());
 
             this.WhenActivated(d =>
@@ -28,18 +32,24 @@ namespace Zenith.Views.CreateOrUpdateViews
                 driverComboBox.ItemsSource = new PersonRepository().All().ToList();
                 siteComboBox.ItemsSource = new SiteRepository().Find(s => s.CompanyId == ViewModel.PageModel.SaleItem.Sale.CompanyId).ToList();
 
-                ViewModel.PageModel.WhenAnyValue(pm => pm.InfoIsRelatedToMachine)
-                    .Where(relation => relation)
-                    .Select(_ => 
-                        ViewModel.PageModel.WhenAnyValue(pm => pm.MachineId)
-                            .Select(mi => machineComboBox.Items.OfType<Machine>().FirstOrDefault(m => m.MachineId == mi))
-                            .WhereNotNull())
-                    .Switch()
-                    .Do(m =>
-                    {
-                        ViewModel.PageModel.Count = m.Capacity;
-                        ViewModel.PageModel.DeliveryFee = m.DefaultDeliveryFee;
-                    }).Subscribe().DisposeWith(d);
+                if (ViewModel.IsNew)
+                {
+                    ViewModel.WhenAnyValue(vm => vm.PageModel)
+                        .Select(pm => pm.WhenAnyValue(pm => pm.AutoDeliveryNumberEnabled))
+                        .Switch()
+                        .Do(autoDeliveryEnabled =>
+                        {
+                            if (autoDeliveryEnabled)
+                            {
+                                if (int.TryParse(configurationRepository.Single(ConfigurationKeys.LastAutoDeliveryNumber).Value, out int lastAutoDeliveryNumber))
+                                    ViewModel.PageModel.DeliveryNumber = $"{lastAutoDeliveryNumber + 1}";
+                                else
+                                    ViewModel.PageModel.DeliveryNumber = "800401";
+                            }
+                            else
+                                ViewModel.PageModel.DeliveryNumber = "";
+                        }).Subscribe().DisposeWith(d);
+                }
 
                 ViewModel.PageModel.WhenAnyValue(pm => pm.IsIndirectDelivery)
                     .Select(iid => iid.Viz())
