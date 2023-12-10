@@ -88,12 +88,6 @@
                 <TextBlock HorizontalAlignment="Left" Text="{DynamicResource SaleListPage.SaleDateTimeColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="4" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SaleListPage.MaterialsPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
                 <TextBlock HorizontalAlignment="Center" Text="{DynamicResource SaleListPage.DeliveriesPriceColumnTextBlockText}" VerticalAlignment="Center" Grid.Column="6" Margin="8,0,0,0" Foreground="#FF3AB05A"/>
-                <ToggleButton IsChecked="{Binding IncludeTRN}" ToolTip="Enable/Disable tax in print" Grid.Column="7">
-                    <Grid>
-                        <Image Source="/Zenith;component/Resources/Images/Common/tax.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IncludeTRN, Converter={StaticResource boolToVisibilityConverter}}"/>
-                        <Image Source="/Zenith;component/Resources/Images/Common/no-tax.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IncludeTRN, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-                    </Grid>
-                </ToggleButton>
 
                 <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="8" StrokeThickness="0.5"/>
             </Grid>

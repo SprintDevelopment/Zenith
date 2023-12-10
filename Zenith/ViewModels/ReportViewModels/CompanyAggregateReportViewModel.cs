@@ -23,7 +23,7 @@ namespace Zenith.ViewModels.ReportViewModels
 
             PrintCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
-                WordUtil.PrintCompanyAggregateReport(((CompanyAggregateReportSearchModel)searchModel).CompanyId, ActiveList.ToObservableCollection(), true);
+                WordUtil.PrintCompanyAggregateReport(((CompanyAggregateReportSearchModel)searchModel).CompanyId, ActiveList.ToObservableCollection());
             });
         }
     }

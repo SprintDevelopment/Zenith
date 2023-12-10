@@ -31,7 +31,15 @@
             </Grid>
             <StackPanel x:Name="inputControlsStackPanel" Grid.Row="1">
                 <baseclasses:JTextBox Text="{Binding PageModel.Name, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.NameTextBoxTitle}" />
-                <baseclasses:JTextBox Text="{Binding PageModel.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.TRNTextBoxTitle}" />
+                <Grid>
+                    <baseclasses:JTextBox Text="{Binding PageModel.TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.TRNTextBoxTitle}" IsEnabled="{Binding PageModel.IsTaxPayer, Converter={StaticResource boolConverter}}"/>
+                    <ToggleButton x:Name="lockToggleButton" IsChecked="{Binding PageModel.IsTaxPayer}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Margin="24,16,28,0">
+                        <Grid>
+                            <Image Source="/Zenith;component/Resources/Images/Common/tax.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.IsTaxPayer, Converter={StaticResource boolToVisibilityConverter}}"/>
+                            <Image Source="/Zenith;component/Resources/Images/Common/no-tax.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding PageModel.IsTaxPayer, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                        </Grid>
+                    </ToggleButton>
+                </Grid>
                 <baseclasses:JTextBox x:Name="initialCreditValueTextBox" Text="{Binding PageModel.InitialCreditValue, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource CompanyPage.CriditValueTextBoxTitle}"/>
                 <usercontrols:MultiSelectControl x:Name="companyTypeComboBox" SelectionValue="{Binding PageModel.CompanyType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource flaggedEnumConverter}, ConverterParameter={x:Type enums:CompanyTypes}}" Title="{DynamicResource CompanyPage.TypeComboBoxTitle}"/>
                 <Grid>

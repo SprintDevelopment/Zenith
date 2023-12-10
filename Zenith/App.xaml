@@ -24,6 +24,7 @@
 
             <!--Converters-->
             <converters:BoolConverter x:Key="boolConverter"/>
+            <converters:BoolToColorConverter x:Key="boolToColorConverter"/>
             <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
             <converters:SelectionModesToImageSourceConverter x:Key="selectionModesToImageSourceConverter"/>
             <converters:CountToVisibilityConverter x:Key="countToVisibilityConverter"/>

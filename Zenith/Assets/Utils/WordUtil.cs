@@ -18,13 +18,13 @@ namespace Zenith.Assets.Utils
     public class WordUtil
     {
         public static Word.Application wordApp;
-        public static OperationResultDto PrintFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, bool includeCustomerTRN = false, params Sale[] sales)
+        public static OperationResultDto PrintFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, params Sale[] sales)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
 
             var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var templateFileFullName = Path.Combine(currentDirectory, includeCustomerTRN ? @"Factors\Template.docx" : @"Factors\Template-Without-TRN.docx");
+            var templateFileFullName = Path.Combine(currentDirectory, sales[0].Company.IsTaxPayer ? @"Factors\Template.docx" : @"Factors\Template-Without-TRN.docx");
 
             if (File.Exists(templateFileFullName))
             {
@@ -39,13 +39,13 @@ namespace Zenith.Assets.Utils
                 companyTable.Cell(2, 3).Range.Text = sales.Count() == 1 ? $"{sales[0].DateTime:yyyy-MMM-dd}" : $"{sales[0].DateTime:yyyy-MMM}";
                 companyTable.Cell(3, 1).Range.Text = $"Tel: {sales[0].Company.Tel}";
                 companyTable.Cell(4, 1).Range.Text = $"Fax: {sales[0].Company.Fax}";
-                if (includeCustomerTRN)
+                if (sales[0].Company.IsTaxPayer)
                     companyTable.Cell(5, 1).Range.Text = $"TRN: {sales[0].Company.TaxRegistrationNumber}";
 
                 var deliveriesTable = document.Tables[2];
                 var totalPrice = 0f;
 
-                sales.SelectMany(s => s.Items).Where(si => si.Deliveries.Any()).SelectMany(si => 
+                sales.SelectMany(s => s.Items).Where(si => si.Deliveries.Any()).SelectMany(si =>
                     si.Deliveries.Where(d => (sitesIds.IsNullOrEmpty() || sitesIds.Any(sid => sid == d.Site.SiteId)) &&
                                             (materialsIds.IsNullOrEmpty() || materialsIds.Any(mid => mid == d.SaleItem.MaterialId)) &&
                                             (lpo.IsNullOrWhiteSpace() || d.LpoNumber == lpo) &&
@@ -67,7 +67,7 @@ namespace Zenith.Assets.Utils
                         newRow.Cells[9].Range.Text = $"{(deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice):n2}";
 
                         totalPrice += deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice;
-                        
+
                         return deliveries;
                     }).ToList();
 
@@ -80,7 +80,7 @@ namespace Zenith.Assets.Utils
                     new Tuple<string, string>("Total", $"{totalPrice * 1.05:n2}")
                 };
 
-                for (int i = 0; i < (includeCustomerTRN ? 3 : 1); i++)
+                for (int i = 0; i < (sales[0].Company.IsTaxPayer ? 3 : 1); i++)
                 {
                     var newRow = deliveriesTable.Rows.Add();
 
@@ -143,13 +143,15 @@ namespace Zenith.Assets.Utils
             return null;
         }
 
-        public static OperationResultDto PrintCompanyAggregateReport(short companyId, ObservableCollection<CompanyAggregateReport> reportItems, bool includeCustomerTRN = false)
+        public static OperationResultDto PrintCompanyAggregateReport(short companyId, ObservableCollection<CompanyAggregateReport> reportItems)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
 
+            var company = new CompanyRepository().Single(companyId);
+
             var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var templateFileFullName = Path.Combine(currentDirectory, includeCustomerTRN ? @"Factors\Statement.docx" : @"Factors\Statement-Without-TRN.docx");
+            var templateFileFullName = Path.Combine(currentDirectory, company.IsTaxPayer ? @"Factors\Statement.docx" : @"Factors\Statement-Without-TRN.docx");
 
             if (File.Exists(templateFileFullName))
             {
@@ -157,7 +159,6 @@ namespace Zenith.Assets.Utils
 
                 var document = wordApp.ActiveDocument;
 
-                var company = new CompanyRepository().Single(companyId);
 
                 var companyTable = document.Tables[1];
                 companyTable.Cell(1, 1).Range.Text = $"Customer Code: {company.CompanyId:CPY0000}";
@@ -166,7 +167,7 @@ namespace Zenith.Assets.Utils
                 companyTable.Cell(2, 3).Range.Text = $"{DateTime.Today:yyyy-MMM-dd}";
                 companyTable.Cell(3, 1).Range.Text = $"Tel: {company.Tel}";
                 companyTable.Cell(4, 1).Range.Text = $"Fax: {company.Fax}";
-                if (includeCustomerTRN)
+                if (company.IsTaxPayer)
                     companyTable.Cell(5, 1).Range.Text = $"TRN: {company.TaxRegistrationNumber}";
 
                 var deliveriesTable = document.Tables[2];
@@ -193,7 +194,7 @@ namespace Zenith.Assets.Utils
                     new Tuple<string, string>("Total", $"{totalPrice * 1.05:n2}")
                 };
 
-                for (int i = 0; i < (includeCustomerTRN ? 3 : 1); i++)
+                for (int i = 0; i < (company.IsTaxPayer ? 3 : 1); i++)
                 {
                     var newRow = deliveriesTable.Rows.Add();
 

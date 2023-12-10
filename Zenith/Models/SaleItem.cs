@@ -84,7 +84,7 @@ namespace Zenith.Models
                 .BindTo(this, m => m.IsFormAMixture);
 
             this.WhenAnyValue(m => m.UnitPrice, m => m.Count)
-                .Select(x => x.Item1 * x.Item2)
+                .Select(x => Math.Floor(x.Item1 * x.Item2))
                 .BindTo(this, m => m.TotalPrice);
 
             this.WhenAnyValue(m => m.SaleCountUnit)

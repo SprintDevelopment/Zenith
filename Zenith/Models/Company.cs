@@ -20,10 +20,13 @@ namespace Zenith.Models
         [Reactive]
         public string Name { get; set; }
 
+        [Reactive]
+        public bool  IsTaxPayer { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         [MaxLength(LengthConstants.MEDIUM_STRING)]
         [Reactive]
-        public string TaxRegistrationNumber { get; set; }
+        public string TaxRegistrationNumber { get; set; } = string.Empty;
 
         [Reactive]
         public CompanyTypes CompanyType { get; set; }
@@ -62,8 +65,8 @@ namespace Zenith.Models
         public Company()
         {
             this.ValidationRule(vm => vm.Name, name => !name.IsNullOrWhiteSpace(), "Enter name");
-            this.ValidationRule(vm => vm.TaxRegistrationNumber, trn => !trn.IsNullOrWhiteSpace(), "Enter trn");
-            ////this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
+            //this.ValidationRule(vm => vm.TaxRegistrationNumber, trn => !trn.IsNullOrWhiteSpace(), "Enter trn");
+            //this.ValidationRule(vm => vm.NotifyType, notifyType => notifytType > 0, "روش(های) اطلاعرسانی را انتخاب کنید");
         }
 
         public override string ToString()
