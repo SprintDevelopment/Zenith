@@ -54,9 +54,11 @@
     <None Remove="Resources\Images\Common\receive.png" />
     <None Remove="Resources\Images\Common\remove.png" />
     <None Remove="Resources\Images\Common\search.png" />
+    <None Remove="Resources\Images\Common\select-mode.png" />
     <None Remove="Resources\Images\Common\send.png" />
     <None Remove="Resources\Images\Common\show-list.png" />
     <None Remove="Resources\Images\Common\tax.png" />
+    <None Remove="Resources\Images\Common\type-mode.png" />
     <None Remove="Resources\Images\Common\unlock.png" />
     <None Remove="Resources\Images\Common\use-consumable.png" />
     <None Remove="Resources\Images\Menu\configs.png" />
@@ -158,9 +160,11 @@
     <Resource Include="Resources\Images\Common\receive.png" />
     <Resource Include="Resources\Images\Common\remove.png" />
     <Resource Include="Resources\Images\Common\search.png" />
+    <Resource Include="Resources\Images\Common\select-mode.png" />
     <Resource Include="Resources\Images\Common\send.png" />
     <Resource Include="Resources\Images\Common\show-list.png" />
     <Resource Include="Resources\Images\Common\tax.png" />
+    <Resource Include="Resources\Images\Common\type-mode.png" />
     <Resource Include="Resources\Images\Common\unlock.png" />
     <Resource Include="Resources\Images\Common\use-consumable.png" />
     <Resource Include="Resources\Images\Menu\configs.png" />

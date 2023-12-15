@@ -137,6 +137,9 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
         public ReadOnlyObservableCollection<Material> MaterialsActiveList;
 
         [Reactive]
+        public bool IsCountSelectorVisible { get; set; }
+
+        [Reactive]
         public string SearchedMaterialName { get; set; }
         public ReactiveCommand<Unit, Unit> CreateOrUpdateAndContinueCommand { get; set; }
         public ReactiveCommand<Unit, Unit> CreateOrUpdateAndReturnCommand { get; set; }

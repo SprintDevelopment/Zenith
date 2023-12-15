@@ -95,7 +95,7 @@ namespace Zenith.Models
             this.ValidationRule(vm => vm.MachineId, mi => mi > 0, "Select machine");
             this.ValidationRule(vm => vm.DriverId, di => di > 0, "Select driver");
             this.ValidationRule(vm => vm.Count, c => c > 0, "Delivered count must be greater than 0");
-            this.ValidationRule(vm => vm.DeliveryFee, df => df > 0, "Delivery fee must be greater than 0");
+            //this.ValidationRule(vm => vm.DeliveryFee, df => df > 0, "Delivery fee must be greater than 0");
 
             this.WhenAnyValue(m => m.IsIndirectDelivery)
                 .Skip(1)

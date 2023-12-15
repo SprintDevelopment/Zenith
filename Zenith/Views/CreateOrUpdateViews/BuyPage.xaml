@@ -142,7 +142,8 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock HorizontalAlignment="Left" Text="{Binding Material.Name}" VerticalAlignment="Center" Grid.Column="0" Margin="8,0,0,0"/>
                                 <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding DeliveryNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="8,0,0,0"/>
-                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Margin="8,0,0,0"/>
+                                <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding Count, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Margin="8,0,0,0" Visibility="{Binding DataContext.IsCountSelectorVisible, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+                                <usercontrols:CountSelectorControl DataContext="{Binding CountSelectorViewModel}" Grid.Column="2" Visibility="{Binding DataContext.IsCountSelectorVisible, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource boolToVisibilityConverter}}"/>
                                 <usercontrols:UnitSelectorControl DataContext="{Binding UnitSelectorViewModel}" Grid.Column="3"/>
                                 <baseclasses:JTransparentTextBox HorizontalAlignment="Stretch" Text="{Binding UnitPrice, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="4" Margin="8,0,0,0"/>
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding TotalPrice, StringFormat={}{0:n2}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="5" Margin="8,0,0,0"/>

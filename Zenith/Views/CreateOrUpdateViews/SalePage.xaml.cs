@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
+using System.Windows.Input;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Enums;
 using Zenith.Models;
@@ -31,6 +32,13 @@ namespace Zenith.Views.CreateOrUpdateViews
 
             this.WhenActivated(d =>
             {
+                Observable.FromEventPattern(this, nameof(PreviewKeyDown))
+                    .Merge(Observable.FromEventPattern(this, nameof(PreviewKeyUp)))
+                    .Select(x => x.EventArgs as KeyEventArgs)
+                    .Select(e => (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) && e.KeyStates.HasFlag(KeyStates.Down))
+                    .BindTo(CastedViewModel, vm => vm.IsCountSelectorVisible)
+                    .DisposeWith(d);
+
                 materialListItemsControl.ItemsSource = CastedViewModel.MaterialsActiveList;
                 //itemsListItemsControl.ItemsSource = CastedViewModel.SaleItemsActiveList;
 
