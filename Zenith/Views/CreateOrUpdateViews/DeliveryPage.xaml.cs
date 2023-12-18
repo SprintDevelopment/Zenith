@@ -50,6 +50,8 @@ namespace Zenith.Views.CreateOrUpdateViews
                                 ViewModel.PageModel.DeliveryNumber = "";
                         }).Subscribe().DisposeWith(d);
                 }
+                else
+                    ViewModel.PageModel.AutoDeliveryNumberEnabled = false;
 
                 ViewModel.PageModel.WhenAnyValue(pm => pm.IsIndirectDelivery)
                     .Select(iid => iid.Viz())
