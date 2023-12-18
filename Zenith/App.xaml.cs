@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows;
 using Zenith.Assets.Utils;
@@ -23,6 +25,7 @@ namespace Zenith
         {
             Exit += (s, e) => { if (WordUtil.wordApp != null && !WordUtil.wordApp.Visible) WordUtil.wordApp.Quit(false); };
 
+            RxApp.DefaultExceptionHandler = Observer.Create<Exception>(exp => MessageBox.Show(exp.Message));
             DispatcherUnhandledException += (s, ee) => { MessageBox.Show(ee.Exception.Message); ee.Handled = true; };
         }
     }

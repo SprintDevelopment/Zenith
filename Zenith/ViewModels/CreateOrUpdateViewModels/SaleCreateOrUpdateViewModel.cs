@@ -64,12 +64,12 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
             var deliveryCreateOrUpdatePage = new DeliveryPage();
 
-            IDisposable createUpdateDisposable = null;
+            IDisposable deliveryCreateUpdateDisposable = null;
             AddNewDeliveryCommand = ReactiveCommand.Create<SaleItem>(saleItem =>
             {
-                createUpdateDisposable?.Dispose();
+                deliveryCreateUpdateDisposable?.Dispose();
 
-                createUpdateDisposable = deliveryCreateOrUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
+                deliveryCreateUpdateDisposable = deliveryCreateOrUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
                 {
                     if (!changeSet.IsNullOrEmpty())
                     {
@@ -94,9 +94,9 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
             UpdateDeliveryCommand = ReactiveCommand.Create<Delivery>(deliveryToUpdate =>
             {
-                createUpdateDisposable?.Dispose();
+                deliveryCreateUpdateDisposable?.Dispose();
 
-                createUpdateDisposable = deliveryCreateOrUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
+                deliveryCreateUpdateDisposable = deliveryCreateOrUpdatePage.ViewModel.ReturnCommand.Subscribe(changeSet =>
                 {
                     if (!changeSet.IsNullOrEmpty())
                     {
@@ -141,7 +141,11 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
 
         [Reactive]
         public string SearchedMaterialName { get; set; }
+        
+        [Reactive]
         public ReactiveCommand<Unit, Unit> CreateOrUpdateAndContinueCommand { get; set; }
+        
+        [Reactive]
         public ReactiveCommand<Unit, Unit> CreateOrUpdateAndReturnCommand { get; set; }
         public ReactiveCommand<Material, Unit> AddToItemsCommand { get; set; }
         public ReactiveCommand<SaleItem, Unit> RemoveFromItemsCommand { get; set; }

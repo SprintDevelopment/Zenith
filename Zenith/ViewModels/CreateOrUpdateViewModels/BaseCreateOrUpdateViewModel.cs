@@ -53,7 +53,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                     var cuCommandResult = IsNew ? Repository.Add(pm) : Repository.Update(pm, modelKeyId);
                     //Repository.SaveChanges();
                     ChangeSet.Add(Repository.Single(pm.GetKeyPropertyValue()));
-                }, PageModel.ValidationContext.WhenAnyValue(context => context.IsValid));
+                }, pm.ValidationContext.WhenAnyValue(context => context.IsValid));
 
                 createOrUpdateDisposable?.Dispose();
                 createOrUpdateDisposable = CreateOrUpdateCommand.Subscribe(_ =>
