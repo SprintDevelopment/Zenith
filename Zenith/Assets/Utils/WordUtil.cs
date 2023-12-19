@@ -3,6 +3,7 @@ using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,23 @@ namespace Zenith.Assets.Utils
         public static Word.Application wordApp;
         public static OperationResultDto PrintFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, params Sale[] sales)
         {
-            if (wordApp == null)
-                wordApp = new Word.Application();
-
             var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             var templateFileFullName = Path.Combine(currentDirectory, sales[0].Company.IsTaxPayer ? @"Factors\Template.docx" : @"Factors\Template-Without-TRN.docx");
 
             if (File.Exists(templateFileFullName))
             {
-                wordApp.Documents.Open(templateFileFullName);
+                if (wordApp == null)
+                    wordApp = new Word.Application();
+                
+                try
+                {
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    wordApp = new Word.Application();
+                    wordApp.Documents.Open(templateFileFullName);
+                }
 
                 var document = wordApp.ActiveDocument;
 
@@ -100,7 +109,11 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                //document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                var fileName = $@"D:\{Guid.NewGuid()}.docx";
+                document.SaveAs2(fileName);
+
+                Process.Start("explorer.exe", $"/select, \"{fileName}\"");
                 //wordApp.Visible = true;
                 document.Close(false);
 
@@ -113,14 +126,24 @@ namespace Zenith.Assets.Utils
 
         public static OperationResultDto PrintSalaryReceipt(SalaryPayment payment)
         {
-            if (wordApp == null)
-                wordApp = new Word.Application();
-
             var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             var templateFileFullName = Path.Combine(currentDirectory, @"Factors\SalaryTemplate.docx");
 
             if (File.Exists(templateFileFullName))
             {
+                if (wordApp == null)
+                    wordApp = new Word.Application();
+
+                try
+                {
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    wordApp = new Word.Application();
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+
                 wordApp.Documents.Open(templateFileFullName);
 
                 var document = wordApp.ActiveDocument;
@@ -132,7 +155,11 @@ namespace Zenith.Assets.Utils
                 companyTable.Cell(2, 3).Range.Text = $"{payment.DateTime:yyyy-MMM-dd}";
                 companyTable.Cell(3, 1).Range.Text = $"Amount: {payment.PaidValue:n2}";
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                //document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                var fileName = $@"D:\{Guid.NewGuid()}.docx";
+                document.SaveAs2(fileName);
+
+                Process.Start("explorer.exe", $"/select, \"{fileName}\"");
                 //wordApp.Visible = true;
                 document.Close(false);
 
@@ -145,9 +172,6 @@ namespace Zenith.Assets.Utils
 
         public static OperationResultDto PrintCompanyAggregateReport(short companyId, ObservableCollection<CompanyAggregateReport> reportItems)
         {
-            if (wordApp == null)
-                wordApp = new Word.Application();
-
             var company = new CompanyRepository().Single(companyId);
 
             var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -155,6 +179,19 @@ namespace Zenith.Assets.Utils
 
             if (File.Exists(templateFileFullName))
             {
+                if (wordApp == null)
+                    wordApp = new Word.Application();
+
+                try
+                {
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    wordApp = new Word.Application();
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+
                 wordApp.Documents.Open(templateFileFullName);
 
                 var document = wordApp.ActiveDocument;
@@ -210,7 +247,11 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                //document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                var fileName = $@"D:\{Guid.NewGuid()}.docx";
+                document.SaveAs2(fileName);
+
+                Process.Start("explorer.exe", $"/select, \"{fileName}\"");
                 //wordApp.Visible = true;
                 document.Close(false);
 
