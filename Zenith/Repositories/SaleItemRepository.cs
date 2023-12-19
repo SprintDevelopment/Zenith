@@ -94,11 +94,11 @@ namespace Zenith.Repositories
 
         public override void RemoveRange(IEnumerable<SaleItem> saleItems)
         {
-            saleItems.Where(si => !si.IsForIndirectSale).Select(si => new { si.MaterialId, si.SaleCountUnit, si.Count })
+            saleItems.Where(si => !si.IsForIndirectSale).GroupBy(si => si.MaterialId).Select(g => new { materialId = g.Key, count = g.Sum(si => si.Count) })
                 .ToList()
                 .ForEach(m =>
                 {
-                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count);
+                    MaterialRepository.UpdateAmount(m.materialId, m.count);
                 });
 
             //base.RemoveRange(saleItems);
