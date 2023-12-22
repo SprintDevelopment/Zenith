@@ -13,6 +13,7 @@ namespace Zenith.Repositories
     {
         MaterialRepository MaterialRepository = new MaterialRepository();
         MixtureRepository MixtureRepository = new MixtureRepository();
+        DeliveryRepository DeliveryRepository = new DeliveryRepository();
 
         public override void AddRange(IEnumerable<SaleItem> saleItems)
         {
@@ -101,7 +102,10 @@ namespace Zenith.Repositories
                     MaterialRepository.UpdateAmount(m.materialId, m.count);
                 });
 
-            //base.RemoveRange(saleItems);
+            var saleItemsIds = saleItems.Select(s => s.SaleItemId).ToList();
+            var deliveriesToRemove = DeliveryRepository.Find(d => saleItemsIds.Contains(d.SaleItemId)).ToList();
+
+            DeliveryRepository.RemoveRange(deliveriesToRemove);
         }
     }
 }

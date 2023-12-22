@@ -73,6 +73,28 @@ namespace Zenith.Repositories
             return delivery;
         }
 
+        public override Delivery Update(Delivery delivery, dynamic deliveryId)
+        {
+            var relatedMachineOutgoes = _context.Set<MachineOutgo>().Where(mo => mo.OutgoId == delivery.RelatedTaxiMachineOutgoId).ToList();
+            MachineOutgoRepository.RemoveRange(relatedMachineOutgoes);
+
+            var machine = MachineRepository.Single(delivery.MachineId);
+
+            if (machine.OwnerCompanyId.HasValue)
+            {
+                var addedMachineOutgo = MapperUtil.Mapper.Map<MachineOutgo>(delivery);
+                addedMachineOutgo.CompanyId = machine.OwnerCompanyId;
+
+                MachineOutgoRepository.Add(addedMachineOutgo);
+
+                delivery.RelatedTaxiMachineOutgoId = addedMachineOutgo.OutgoId;
+            }
+
+            base.Update(delivery, delivery.DeliveryId);
+
+            return delivery;
+        }
+
         public override void RemoveRange(IEnumerable<Delivery> deliveries)
         {
             var relatedMachineOutgoesIds = deliveries
@@ -80,10 +102,10 @@ namespace Zenith.Repositories
                 .Select(d => d.RelatedTaxiMachineOutgoId.Value)
                 .ToList();
 
-            base.RemoveRange(deliveries);
-
-            var relatedMachineOutgoes = _context.Set<MachineOutgo>().Where(mo => relatedMachineOutgoesIds.Contains(mo.OutgoId));
+            var relatedMachineOutgoes = _context.Set<MachineOutgo>().Where(mo => relatedMachineOutgoesIds.Contains(mo.OutgoId)).ToList();
             MachineOutgoRepository.RemoveRange(relatedMachineOutgoes);
+
+            base.RemoveRange(deliveries);
         }
     }
 }

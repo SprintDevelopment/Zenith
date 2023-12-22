@@ -133,6 +133,7 @@ namespace Zenith.Repositories
                     (sale.IsIndirectSale ? MoneyTransactionTypes.CashIndirectSale : MoneyTransactionTypes.CashSale);
                 workshopCash.Value = sale.Items.Where(si => si.MixtureMaterialId is null).Sum(si => si.TotalPrice);
                 workshopCash.IssueDateTime = sale.DateTime;
+                workshopCash.CompanyId = sale.CompanyId;
 
                 CashRepository.Update(workshopCash, workshopCash.CashId);
             }
@@ -173,6 +174,7 @@ namespace Zenith.Repositories
                 transportationCash.MoneyTransactionType = sale.CashState == CashStates.NonCash ? MoneyTransactionTypes.NonCashDelivery : MoneyTransactionTypes.CashDelivery;
                 transportationCash.Value = sale.Items.Sum(si => si.Deliveries.Sum(d => d.DeliveryFee));
                 transportationCash.IssueDateTime = sale.DateTime;
+                transportationCash.CompanyId = sale.CompanyId;
 
                 CashRepository.Update(transportationCash, transportationCash.CashId);
             }

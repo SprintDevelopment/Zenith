@@ -17,6 +17,8 @@ using System.Reactive;
 using Zenith.Assets.Utils;
 using Zenith.Views.CreateOrUpdateViews;
 using System.Diagnostics;
+using PdfSharp.Pdf.Content.Objects;
+using System.Reactive.Joins;
 
 namespace Zenith.ViewModels.CreateOrUpdateViewModels
 {
@@ -87,7 +89,8 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.CashState = PageModel.CashState;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.IsIndirectDelivery = PageModel.IsIndirectSale;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.DateTime = deliveryCreateOrUpdatePage.ViewModel.PageModel.SourceDeliveryDateTime = PageModel.DateTime;
-
+                مشکل زمانی که یک دلیوری را ویرایش میکنیم
+Create a plan for adding trip -15m
 
                 App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });
