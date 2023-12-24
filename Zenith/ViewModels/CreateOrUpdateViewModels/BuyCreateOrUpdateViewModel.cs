@@ -61,7 +61,7 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
         public ReadOnlyObservableCollection<Material> MaterialsActiveList;
 
         [Reactive]
-        public bool IsCountSelectorVisible { get; set; }
+        public bool IsUnitSelectorVisible { get; set; }
 
         [Reactive]
         public string SearchedMaterialName { get; set; }

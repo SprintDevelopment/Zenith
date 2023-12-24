@@ -1,22 +1,13 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Zenith.Assets.Extensions;
+using Zenith.Assets.UI.BaseClasses;
 using Zenith.Assets.UI.Helpers;
 using Zenith.Assets.Values.Enums;
 
@@ -27,6 +18,13 @@ namespace Zenith.Assets.UI.UserControls
     /// </summary>
     public partial class UnitSelectorControl : ActivatableUserControl, IViewFor<UnitSelectorViewModel>
     {
+        public Visibility SelectionGridVisibility
+        {
+            get { return (Visibility)base.GetValue(SelectionGridVisibilityProperty); }
+            set { base.SetValue(SelectionGridVisibilityProperty, value); }
+        }
+        public static readonly DependencyProperty SelectionGridVisibilityProperty = DependencyProperty.Register("SelectionGridVisibility", typeof(Visibility), typeof(UnitSelectorControl), new PropertyMetadata(Visibility.Collapsed));
+
         public UnitSelectorControl()
         {
             InitializeComponent();
@@ -35,23 +33,32 @@ namespace Zenith.Assets.UI.UserControls
             {
                 ViewModel = DataContext as UnitSelectorViewModel;
 
-                this.OneWayBind(ViewModel, vm => vm.SelectedCountUnit, v => v.selectionButton.Content, su => $"{App.Current.Resources[$"{su.GetType().Name}.{su}.OnlyUnit"]}").DisposeWith(d);
+                this.OneWayBind(ViewModel, vm => vm.SelectedCountUnit, v => v.selectedUnitTextBlock.Text, su => $"{App.Current.Resources[$"{su.GetType().Name}.{su}"]}").DisposeWith(d);
 
-                Observable.FromEventPattern(selectionButton, nameof(Button.Click))
-                    .Do(_ => ViewModel.SelectedCountUnit = ViewModel.SelectedCountUnit == CountUnits.Meter ? CountUnits.Ton : CountUnits.Meter)
+                Observable.Merge(
+                Observable.FromEventPattern(select1MeterButton, nameof(Button.Click)).Select(_ => CountUnits.Meter),
+                Observable.FromEventPattern(select3MeterButton, nameof(Button.Click)).Select(_ => CountUnits._3MeterTrip),
+                Observable.FromEventPattern(select20MeterButton, nameof(Button.Click)).Select(_ => CountUnits._20MeterTrip),
+                Observable.FromEventPattern(select35MeterButton, nameof(Button.Click)).Select(_ => CountUnits._35MeterTrip),
+                Observable.FromEventPattern(select45MeterButton, nameof(Button.Click)).Select(_ => CountUnits._45MeterTrip))
+                    .Do(scu => ViewModel.SelectedCountUnit = scu)
                     .Subscribe().DisposeWith(d);
-                //this.Bind(ViewModel, vm => vm.IsLocked, v => v.lockToggleButton.IsChecked).DisposeWith(d);
 
-                //Observable.Merge(
-                //    Observable.FromEventPattern(selectTonButton, nameof(Button.Click)).Select(_ => CountUnits.Ton),
-                //    Observable.FromEventPattern(selectMeterButton, nameof(Button.Click)).Select(_ => CountUnits.Meter))
-                //    .Do(countUnit => ViewModel.SelectedCountUnit = countUnit)
-                //    .Subscribe().DisposeWith(d);
-
-                //ViewModel.WhenAnyValue(vm => vm.SelectedCountUnit)
-                //    .Select(scu => (int)scu)
-                //    .Do(intCu => unitIndentifierRect.SetValue(Grid.ColumnProperty, intCu))
-                //    .Subscribe().DisposeWith(d);
+                ViewModel.WhenAnyValue(vm => vm.SelectedCountUnit)
+                    .Select(scu =>
+                    {
+                        return scu switch
+                        {
+                            CountUnits.Meter => 0,
+                            CountUnits._3MeterTrip => 1,
+                            CountUnits._20MeterTrip => 2,
+                            CountUnits._35MeterTrip => 3,
+                            CountUnits._45MeterTrip => 4,
+                            _ => 0,
+                        };
+                    })
+                    .Do(col => unitIndentifierRect.SetValue(Grid.ColumnProperty, col))
+                    .Subscribe().DisposeWith(d);
             });
         }
 
@@ -68,8 +75,5 @@ namespace Zenith.Assets.UI.UserControls
     {
         [Reactive]
         public CountUnits SelectedCountUnit { get; set; }
-
-        //[Reactive]
-        //public bool IsLocked { get; set; } = true;
     }
 }

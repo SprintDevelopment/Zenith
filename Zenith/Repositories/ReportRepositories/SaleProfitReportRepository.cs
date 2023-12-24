@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Media3D;
+using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Models;
 using Zenith.Models.ReportModels;
@@ -20,9 +21,10 @@ namespace Zenith.Repositories.ReportRepositories
             var reportSearchModel = (SaleProfitReportSearchModel)searchModel;
 
             return _context.Set<Sale>()
-                .Where(s => !s.IsIndirectSale && s.DateTime < new DateTime(reportSearchModel.Year, (int)reportSearchModel.Month + 1, 1))
+                .Where(s => !s.IsIndirectSale && s.DateTime < new DateTime(reportSearchModel.Year + ((int)reportSearchModel.Month + 1) / 12, ((int)reportSearchModel.Month % 12) + 1, 1))
                 .Include(s => s.Items).ThenInclude(si => si.Material)
-                .SelectMany(s => s.Items.Where(si => !si.Material.IsMixed).Select(si => new { si.MaterialId, si.Material.Name, si.Count, si.UnitPrice, isForPrevSales = s.DateTime < new DateTime(reportSearchModel.Year, (int)reportSearchModel.Month, 1) }))
+                .AsEnumerable()
+                .SelectMany(s => s.Items.Where(si => !si.Material.IsMixed).Select(si => new { si.MaterialId, si.Material.Name, Count = si.Count * si.SaleCountUnit.ToInt(), UnitPrice = si.UnitPrice / si.SaleCountUnit.ToInt(), isForPrevSales = s.DateTime < new DateTime(reportSearchModel.Year, (int)reportSearchModel.Month, 1) }))
                 .GroupBy(si => new { si.MaterialId })
                 .Select(g => new
                 {
@@ -32,7 +34,6 @@ namespace Zenith.Repositories.ReportRepositories
                     thisMonthSoldCount = g.Where(i => !i.isForPrevSales).Sum(x => x.Count),
                     thisMonthSoldPrice = g.Where(i => !i.isForPrevSales).Sum(x => x.UnitPrice * x.Count)
                 })
-                .AsEnumerable()
                 .SelectMany(x =>
                 {
                     var oldCount = x.prevSoldCount;

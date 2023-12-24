@@ -9,7 +9,10 @@ namespace Zenith.Assets.Values.Enums
 {
     public enum CountUnits
     {
-        Ton,
-        Meter
+        Meter,
+        _3MeterTrip,
+        _20MeterTrip,
+        _35MeterTrip,
+        _45MeterTrip
     }
 }

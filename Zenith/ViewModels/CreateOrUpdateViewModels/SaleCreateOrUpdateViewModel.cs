@@ -89,8 +89,6 @@ namespace Zenith.ViewModels.CreateOrUpdateViewModels
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.CashState = PageModel.CashState;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.IsIndirectDelivery = PageModel.IsIndirectSale;
                 deliveryCreateOrUpdatePage.ViewModel.PageModel.DateTime = deliveryCreateOrUpdatePage.ViewModel.PageModel.SourceDeliveryDateTime = PageModel.DateTime;
-                مشکل زمانی که یک دلیوری را ویرایش میکنیم
-Create a plan for adding trip -15m
 
                 App.MainViewModel.ShowSecondCreateUpdatePageCommand.Execute(deliveryCreateOrUpdatePage).Subscribe();
             });
@@ -140,7 +138,7 @@ Create a plan for adding trip -15m
         public ReadOnlyObservableCollection<Material> MaterialsActiveList;
 
         [Reactive]
-        public bool IsCountSelectorVisible { get; set; }
+        public bool IsUnitSelectorVisible { get; set; }
 
         [Reactive]
         public string SearchedMaterialName { get; set; }

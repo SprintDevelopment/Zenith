@@ -6,23 +6,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="32" d:DesignWidth="50">
+             mc:Ignorable="d" x:Name="owner"
+             d:DesignHeight="32" d:DesignWidth="100">
     <Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>-->
-        <Button x:Name="selectionButton" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}"/>
-        <!--<Button x:Name="selectTonButton" Content="T" Style="{StaticResource SimpleCenteredButtonStyle}" />
-        <Button x:Name="selectMeterButton" Content="M" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}" Grid.Column="1"/>-->
-        <!--<ToggleButton x:Name="lockToggleButton" Grid.Column="2">
-            <Grid>
-                <Image Source="/Zenith;component/Resources/Images/Common/lock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}, Converter={StaticResource boolToVisibilityConverter}}"/>
-                <Image Source="/Zenith;component/Resources/Images/Common/unlock.png" Width="20" Height="20" RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={StaticResource FalseValue}}"/>
-            </Grid>
-        </ToggleButton>-->
-        <!--<Rectangle Name="unitIndentifierRect" Stroke="#FF3CA3F4" StrokeThickness="1" Grid.Row="1"/>-->
+        <TextBlock x:Name="selectedUnitTextBlock" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <Grid x:Name="selectionGrid" Background="White" Visibility="{Binding SelectionGridVisibility, ElementName=owner}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="select1MeterButton" Content="1" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}" />
+            <Button x:Name="select3MeterButton" Content="3" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}" Grid.Column="1"/>
+            <Button x:Name="select20MeterButton" Content="20" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}" Grid.Column="2"/>
+            <Button x:Name="select35MeterButton" Content="35" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}" Grid.Column="3"/>
+            <Button x:Name="select45MeterButton" Content="45" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}" Grid.Column="4"/>
+            <Rectangle Name="unitIndentifierRect" Stroke="#FF3CA3F4" StrokeThickness="1"/>
+        </Grid>
     </Grid>
 </helpers:ActivatableUserControl>

@@ -59,7 +59,7 @@ namespace Zenith.Repositories
 
         public virtual T Update(T entity, dynamic entityId)
         {
-            var old = Single(entityId);
+            var old = this.Single(entityId);
             _context.Entry(old).State = EntityState.Detached;
             _context.Entry(entity.LightClone()).State = EntityState.Modified;
 

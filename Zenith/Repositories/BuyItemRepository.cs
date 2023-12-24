@@ -21,7 +21,7 @@ namespace Zenith.Repositories
                 .ToList()
                 .ForEach(m =>
                 {
-                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count);
+                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count, m.BuyCountUnit);
                     //MaterialAvailabilityRepository.AddOrUpdate(m.MaterialId, m.UnitPrice, m.Count);
                 });
         }
@@ -29,12 +29,12 @@ namespace Zenith.Repositories
         public override BuyItem Update(BuyItem buyItem, dynamic buyItemId)
         {
             var preBuyItem = Single((long)buyItemId);
-            MaterialRepository.UpdateAmount(preBuyItem.MaterialId, preBuyItem.Count * -1);
+            MaterialRepository.UpdateAmount(preBuyItem.MaterialId, preBuyItem.Count * -1, preBuyItem.BuyCountUnit);
             //MaterialAvailabilityRepository.AddOrUpdate(preBuyItem.MaterialId, preBuyItem.UnitPrice, preBuyItem.Count * -1);
 
             base.Update(buyItem, buyItem.BuyItemId);
 
-            MaterialRepository.UpdateAmount(buyItem.MaterialId, buyItem.Count);
+            MaterialRepository.UpdateAmount(buyItem.MaterialId, buyItem.Count, buyItem.BuyCountUnit);
             //MaterialAvailabilityRepository.AddOrUpdate(buyItem.MaterialId, buyItem.UnitPrice, buyItem.Count);
 
             return buyItem;
@@ -46,7 +46,7 @@ namespace Zenith.Repositories
                 .ToList()
                 .ForEach(m =>
                 {
-                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1);
+                    MaterialRepository.UpdateAmount(m.MaterialId, m.Count * -1, m.BuyCountUnit);
                 });
         }
     }

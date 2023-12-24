@@ -51,10 +51,6 @@ namespace Zenith.Models
         [NotMapped]
         public UnitSelectorViewModel UnitSelectorViewModel { get; set; } = new UnitSelectorViewModel();
 
-        [Reactive]
-        [NotMapped]
-        public CountSelectorViewModel CountSelectorViewModel { get; set; } = new CountSelectorViewModel();
-
         [NotMapped]
         [Reactive]
         public float TotalPrice { get; set; }
@@ -78,18 +74,6 @@ namespace Zenith.Models
                 .Do(selectedUnit =>
                 {
                     BuyCountUnit = selectedUnit;
-                }).Subscribe();
-
-            this.WhenAnyValue(m => m.Count)
-                .BindTo(this, m => m.CountSelectorViewModel.SelectedCount);
-
-            this.WhenAnyValue(m => m.CountSelectorViewModel)
-                .WhereNotNull()
-                .Select(usvm => usvm.WhenAnyValue(vm => vm.SelectedCount))
-                .Switch()
-                .Do(selectedCount =>
-                {
-                    Count = selectedCount;
                 }).Subscribe();
 
             this.ValidationRule(vm => vm.DeliveryNumber, dn => !dn.IsNullOrWhiteSpace(), "Enter delivery number");

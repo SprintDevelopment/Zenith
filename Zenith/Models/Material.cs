@@ -27,22 +27,16 @@ namespace Zenith.Models
         public string Name { get; set; }
 
         [Reactive]
-        public CountUnits CommonBuyUnit { get; set; } = CountUnits.Ton;
+        public CountUnits CommonBuyUnit { get; set; } = CountUnits.Meter;
 
         [Reactive]
         public float BuyPrice { get; set; }
-
-        [NotMapped]
-        public string BuyPriceWithUnit => $"{BuyPrice} ({App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
 
         [Reactive]
         public CountUnits CommonSaleUnit { get; set; } = CountUnits.Meter;
 
         [Reactive]
         public float SalePrice { get; set; }
-
-        [NotMapped]
-        public string SalePriceWithUnit => $"{SalePrice} ({App.Current.Resources[$"{CommonSaleUnit.GetType().Name}.{CommonSaleUnit}"]})";
 
         [Reactive]
         public float AvailableAmount { get; set; }

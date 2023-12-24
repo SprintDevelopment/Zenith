@@ -6,8 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reactive.Linq;
-using System.Runtime.InteropServices.Marshalling;
-using Zenith.Assets.Attributes;
 using Zenith.Assets.UI.UserControls;
 using Zenith.Assets.Values.Enums;
 
@@ -39,6 +37,9 @@ namespace Zenith.Models
         [Reactive]
         public float UnitPrice { get; set; }
 
+        //[NotMapped]
+        //public float PackedCount { get; set; }
+
         [Reactive]
         public float Count { get; set; }
 
@@ -48,10 +49,6 @@ namespace Zenith.Models
         [Reactive]
         [NotMapped]
         public UnitSelectorViewModel UnitSelectorViewModel { get; set; } = new UnitSelectorViewModel();
-
-        [Reactive]
-        [NotMapped]
-        public CountSelectorViewModel CountSelectorViewModel { get; set; } = new CountSelectorViewModel();
 
         [NotMapped]
         [Reactive]
@@ -101,18 +98,6 @@ namespace Zenith.Models
                 .Do(selectedUnit =>
                 {
                     SaleCountUnit = selectedUnit;
-                }).Subscribe();
-
-            this.WhenAnyValue(m => m.Count)
-                .BindTo(this, m => m.CountSelectorViewModel.SelectedCount);
-
-            this.WhenAnyValue(m => m.CountSelectorViewModel)
-                .WhereNotNull()
-                .Select(usvm => usvm.WhenAnyValue(vm => vm.SelectedCount))
-                .Switch()
-                .Do(selectedCount =>
-                {
-                    Count = selectedCount;
                 }).Subscribe();
 
             //this.WhenAnyValue(m => m.UnitSelectorViewModel)

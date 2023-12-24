@@ -53,10 +53,11 @@
     <system:String x:Key="CostCenters.Both">Both workshop and transportation</system:String>
 
     <!-- COUNT UNITS -->
-    <system:String x:Key="CountUnits.Ton">Per ton</system:String>
-    <system:String x:Key="CountUnits.Meter">Per meter</system:String>
-    <system:String x:Key="CountUnits.Ton.OnlyUnit">Ton</system:String>
-    <system:String x:Key="CountUnits.Meter.OnlyUnit">Meter</system:String>
+    <system:String x:Key="CountUnits.Meter">Meter</system:String>
+    <system:String x:Key="CountUnits._3MeterTrip">3M Trip</system:String>
+    <system:String x:Key="CountUnits._20MeterTrip">20M Trip</system:String>
+    <system:String x:Key="CountUnits._35MeterTrip">35M Trip</system:String>
+    <system:String x:Key="CountUnits._45MeterTrip">45M Trip</system:String>
 
     <!-- DATE RANGES -->
     <system:String x:Key="DateRanges.DontCare">_</system:String>

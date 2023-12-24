@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith.Assets.Extensions;
+using Zenith.Assets.Values.Enums;
 using Zenith.Models;
 
 namespace Zenith.Repositories
@@ -23,13 +25,13 @@ namespace Zenith.Repositories
                 .AsEnumerable();
         }
 
-        public void UpdateAmount(int materialId, float addedAmount)
+        public void UpdateAmount(int materialId, float addedAmount, CountUnits countUnits)
         {
             var material = Single(materialId);
 
             if (!material.IsMixed)
             {
-                material.AvailableAmount += addedAmount;
+                material.AvailableAmount += addedAmount * countUnits.ToInt();
                 _context.Set<Material>()
                     .Update(material);
 

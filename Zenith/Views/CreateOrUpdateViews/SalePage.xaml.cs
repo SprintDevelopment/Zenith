@@ -36,7 +36,7 @@ namespace Zenith.Views.CreateOrUpdateViews
                     .Merge(Observable.FromEventPattern(this, nameof(PreviewKeyUp)))
                     .Select(x => x.EventArgs as KeyEventArgs)
                     .Select(e => (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) && e.KeyStates.HasFlag(KeyStates.Down))
-                    .BindTo(CastedViewModel, vm => vm.IsCountSelectorVisible)
+                    .BindTo(CastedViewModel, vm => vm.IsUnitSelectorVisible)
                     .DisposeWith(d);
 
                 materialListItemsControl.ItemsSource = CastedViewModel.MaterialsActiveList;
