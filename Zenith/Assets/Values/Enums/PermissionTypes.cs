@@ -32,6 +32,7 @@ namespace Zenith.Assets.Values.Enums
         MachineReport,
         SaleProfitReport,
         CompanyAggregateReport,
+        TaxReport,
         Users,
         Notes,
     }

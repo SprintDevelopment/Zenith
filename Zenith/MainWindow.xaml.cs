@@ -211,7 +211,6 @@ namespace Zenith
             });
         }
 
-
         object IViewFor.ViewModel
         {
             get { return ViewModel; }

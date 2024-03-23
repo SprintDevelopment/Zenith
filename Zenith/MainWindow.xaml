@@ -117,6 +117,7 @@
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.MachineReportSubMenuItem}" Command="{Binding NavigateToMachineReportCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.SaleProfitReportSubMenuItem}" Command="{Binding NavigateToSaleProfitReportCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.CompanyAggregateReportSubMenuItem}" Command="{Binding NavigateToCompanyAggregateReportCommand}"/>
+                            <controls:SubMenuItem Title="{DynamicResource MainWindow.TaxReportSubMenuItem}" Command="{Binding NavigateToTaxReportCommand}"/>
                             <controls:SubMenuItem Title="{DynamicResource MainWindow.ReportsSubMenuItem}"/>
                         </StackPanel>
                     </controls:MenuItem.AdditionalContent>

@@ -168,6 +168,7 @@
     <system:String x:Key="PermissionTypes.MachineReport">Machine report</system:String>
     <system:String x:Key="PermissionTypes.CompanyAggregateReport">Company aggregate report</system:String>
     <system:String x:Key="PermissionTypes.SaleProfitReport">Sale profit report</system:String>
+    <system:String x:Key="PermissionTypes.TaxReport">Tax report</system:String>
     <system:String x:Key="PermissionTypes.Users">Users</system:String>
     <system:String x:Key="PermissionTypes.Notes">Notes</system:String>
 
@@ -228,6 +229,8 @@
     <system:String x:Key="ReportSearchGridTitleResources.MachineReport">Filter machine report</system:String>
     <system:String x:Key="ReportViewTitleResources.SaleProfitReport">Sale profit report</system:String>
     <system:String x:Key="ReportSearchGridTitleResources.SaleProfitReport">Filter sale profit report</system:String>
+    <system:String x:Key="ReportViewTitleResources.TaxReport">Tax report</system:String>
+    <system:String x:Key="ReportSearchGridTitleResources.TaxReport">Filter tax report</system:String>
     <system:String x:Key="ReportViewTitleResources.CompanyAggregateReport">Company aggregate report</system:String>
     <system:String x:Key="ReportSearchGridTitleResources.CompanyAggregateReport">Filter company aggregate report</system:String>
 
@@ -260,6 +263,7 @@
     <system:String x:Key="MainWindow.MachineReportSubMenuItem">Machine report</system:String>
     <system:String x:Key="MainWindow.SaleProfitReportSubMenuItem">Sale profit report</system:String>
     <system:String x:Key="MainWindow.CompanyAggregateReportSubMenuItem">Company aggregate report</system:String>
+    <system:String x:Key="MainWindow.TaxReportSubMenuItem">Tax report</system:String>
     <system:String x:Key="MainWindow.ReportsSubMenuItem">Reports</system:String>
     <system:String x:Key="MainWindow.UsersPermissionsMenuItem">User and permissions</system:String>
     <system:String x:Key="MainWindow.UsersSubMenuItem">Users</system:String>
@@ -389,6 +393,16 @@
     <system:String x:Key="CompanyAggregateReportPage.SearchMonthComboBoxTitle">Month</system:String>
     <system:String x:Key="CompanyAggregateReportPage.SearchSiteComboBoxTitle">Site</system:String>
     <system:String x:Key="CompanyAggregateReportPage.CreateReportButtonContent">Create report</system:String>
+
+    <!-- TAX REPORT PAGE -->
+    <system:String x:Key="TaxReportPage.TaxedSaleAmountColumnTextBlockText">Sale</system:String>
+    <system:String x:Key="TaxReportPage.TaxedBuyAmountColumnTextBlockText">Buy</system:String>
+    <system:String x:Key="TaxReportPage.TaxedOutgoAmountColumnTextBlockText">Outgo</system:String>
+    <system:String x:Key="TaxReportPage.OverallAmountColumnTextBlockText">Overall</system:String>
+    <system:String x:Key="TaxReportPage.TaxColumnTextBlockText">Tax</system:String>
+    <system:String x:Key="TaxReportPage.SearchStartDateDatePickerTitle">Start date</system:String>
+    <system:String x:Key="TaxReportPage.SearchEndDateDatePickerTitle">End date</system:String>
+    <system:String x:Key="TaxReportPage.CreateReportButtonContent">Create report</system:String>
 
     <!-- DELIVERY PAGE -->
     <system:String x:Key="DeliveryPage.SiteComboBoxTitle">Site for delivery</system:String>

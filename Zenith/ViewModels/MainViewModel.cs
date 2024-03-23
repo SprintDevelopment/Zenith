@@ -69,6 +69,7 @@ namespace Zenith.ViewModels
             NavigateToMachineReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(MachineReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.MachineReport && p.HasReadAccess)));
             NavigateToSaleProfitReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(SaleProfitReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.SaleProfitReport && p.HasReadAccess)));
             NavigateToCompanyAggregateReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(CompanyAggregateReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.CompanyAggregateReport && p.HasReadAccess)));
+            NavigateToTaxReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(TaxReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.TaxReport && p.HasReadAccess)));
             NavigateToUsersCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(UserListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
             NavigateToNotesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(NoteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Notes && p.HasReadAccess)));
             ShowSettingsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(_ => ShowSecondCreateUpdatePageCommand.Execute(new SettingsPage()), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
@@ -276,6 +277,7 @@ namespace Zenith.ViewModels
         public ReactiveCommand<Unit, Unit> NavigateToMachineReportCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToSaleProfitReportCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToCompanyAggregateReportCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> NavigateToTaxReportCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToUsersCommand { get; set; }
         public ReactiveCommand<Unit, Unit> NavigateToNotesCommand { get; set; }
         public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; set; }
