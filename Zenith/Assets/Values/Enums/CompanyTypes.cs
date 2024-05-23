@@ -11,8 +11,8 @@ namespace Zenith.Assets.Values.Enums
     public enum CompanyTypes
     {
         DontCare = -1,
-        Buyer = 1,
-        Seller = 2,
+        RelatedToSale = 1,
+        RelatedToBuy = 2,
         RelatedToOutgo = 4,
         RelatedToIncome= 8
     }

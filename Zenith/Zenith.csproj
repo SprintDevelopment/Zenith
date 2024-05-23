@@ -31,6 +31,7 @@
     <None Remove="Resources\Images\Common\factor-number-manual.png" />
     <None Remove="Resources\Images\Common\filter.png" />
     <None Remove="Resources\Images\Common\folder.png" />
+    <None Remove="Resources\Images\Common\gray-search.png" />
     <None Remove="Resources\Images\Common\indirect-sale.png" />
     <None Remove="Resources\Images\Common\lock.png" />
     <None Remove="Resources\Images\Common\menu.png" />
@@ -106,6 +107,8 @@
     <PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
     <PackageReference Include="ReactiveUI.Validation" Version="3.1.7" />
     <PackageReference Include="ReactiveUI.WPF" Version="19.4.1" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.Management" Version="7.0.2" />
   </ItemGroup>
 
@@ -137,6 +140,7 @@
     <Resource Include="Resources\Images\Common\factor-number-manual.png" />
     <Resource Include="Resources\Images\Common\filter.png" />
     <Resource Include="Resources\Images\Common\folder.png" />
+    <Resource Include="Resources\Images\Common\gray-search.png" />
     <Resource Include="Resources\Images\Common\indirect-sale.png" />
     <Resource Include="Resources\Images\Common\lock.png" />
     <Resource Include="Resources\Images\Common\menu.png" />

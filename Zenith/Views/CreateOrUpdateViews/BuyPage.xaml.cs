@@ -25,7 +25,7 @@ namespace Zenith.Views.CreateOrUpdateViews
             ViewModel = new BuyCreateOrUpdateViewModel(new BuyRepository());
             
             cashStatesComboBox.ItemsSource = typeof(CashStates).ToCollection();
-            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType.HasFlag(CompanyTypes.Seller)).ToList();
+            companyComboBox.ItemsSource = new CompanyRepository().Find(c => c.CompanyType.HasFlag(CompanyTypes.RelatedToBuy)).ToList();
            
             var CastedViewModel = (BuyCreateOrUpdateViewModel)ViewModel;
 

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Zenith.Assets.UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
-    <Grid x:Name="titleBarGrid" Background="#FFBBBBBB">
+    <Grid x:Name="titleBarGrid" Background="#FFDDDDDD">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -15,7 +15,7 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <local:TabStackPanel x:Name="tabStackPanel"/>
+        <TextBlock Text="Zenith" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="15" Margin="12,0"/>
         <!--<Button x:Name="addNewTabButton" Style="{StaticResource CircularButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="28" Height="28" Grid.Column="1">
             <Image Source="/Zenith;component/Resources/Images/Common/add-tab.png" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" />
         </Button>-->

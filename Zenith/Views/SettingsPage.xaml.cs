@@ -39,6 +39,16 @@ namespace Zenith.Views
 
                 var modalBackRect = new Rectangle { Fill = new SolidColorBrush(Color.FromArgb(96, 0, 0, 0)) };
                 ((Grid)Content).Children.Insert(0, modalBackRect);
+                
+                Observable.FromEventPattern(backupSettingsButton, nameof(Button.Click)).Select(_ => 0)
+                    .Merge(Observable.FromEventPattern(reminderSettingsButton, nameof(Button.Click)).Select(_ => 1))
+                    .Do(clickedIndex =>
+                    {
+                        ViewModel.IsBackupSettingsSectionVisible = clickedIndex == 0;
+                        ViewModel.IsReminderSettingsSectionVisible = clickedIndex == 1;
+
+                        selectedTabIndentifierBorder.SetValue(Grid.ColumnProperty, clickedIndex);
+                    }).Subscribe().DisposeWith(d);
 
                 Observable.FromEventPattern(selectPathButton, nameof(Button.Click))
                     .Select(_ => Observable.Using(() => new CommonOpenFileDialog() { IsFolderPicker = true, Title = "Select default backup folder ..." },

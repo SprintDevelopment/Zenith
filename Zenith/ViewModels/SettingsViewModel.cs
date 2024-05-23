@@ -34,7 +34,15 @@ namespace Zenith.ViewModels
                     new Configuration { Key = nameof(BackupEmail), Value = BackupEmail}
                 });
             });
+
+            CloseCommand = ReactiveCommand.CreateFromObservable<Unit>(() => App.MainViewModel.CreateUpdatePageReturnedCommand.Execute());
         }
+
+        [Reactive]
+        public bool IsBackupSettingsSectionVisible { get; set; } = true;
+
+        [Reactive]
+        public bool IsReminderSettingsSectionVisible { get; set; }
 
         [Reactive]
         public BackupIntervals BackupInterval { get; set; }
@@ -46,5 +54,6 @@ namespace Zenith.ViewModels
         public string BackupEmail { get; set; } = "";
 
         public ReactiveCommand<Unit, Unit> SaveSettingsCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> CloseCommand { get; private set; }
     }
 }

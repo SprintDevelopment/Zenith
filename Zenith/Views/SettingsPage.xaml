@@ -40,10 +40,10 @@
                     <Button x:Name="backupSettingsButton" Content="{DynamicResource SettingsView.BackupPartButtonContent}" Padding="16,0" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}"/>
                     <Button x:Name="reminderSettingsButton" Content="{DynamicResource SettingsView.ReminderPartButtonContent}" Padding="16,0" Grid.Column="1" BorderThickness="0" Style="{StaticResource SimpleCenteredButtonStyle}"/>
                     <Rectangle Stroke="WhiteSmoke" VerticalAlignment="Bottom" Grid.ColumnSpan="5" StrokeThickness="0.5"/>
-                    <Rectangle Margin="4,-1" VerticalAlignment="Bottom" Height="2" Fill="#FF3CA3F4"/>
+                    <Border x:Name="selectedTabIndentifierBorder" Margin="1" BorderThickness="0,0,0,2" Background="#01FFFFFF" BorderBrush="#FF3CA3F4" />
                 </Grid>
                 <StackPanel Grid.Row="1" Margin="0,8">
-                    <StackPanel x:Name="backupSettingsStackPanel">
+                    <StackPanel x:Name="backupSettingsStackPanel" Visibility="{Binding IsBackupSettingsSectionVisible, Converter={StaticResource boolToVisibilityConverter}}">
                         <ComboBox x:Name="backupIntervalComboBox" SelectedValue="{Binding BackupInterval, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource SettingsView.BackupIntervalComboBoxTitle}"/>
                         <Grid>
                             <baseclasses:JTextBox x:Name="backupLocationTextBox" Text="{Binding BackupDefaultLocation, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SettingsView.BackupDefaultLocationTextBoxTitle}" />
@@ -53,6 +53,9 @@
                         </Grid>
                         <baseclasses:JTextBox x:Name="backupEmailTextBox" Text="{Binding BackupEmail, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource SettingsView.BackupEmailTextBoxTitle}" />
 
+                    </StackPanel>
+                    <StackPanel x:Name="reminderSettingsSectionVisible" Visibility="{Binding IsReminderSettingsSectionVisible, Converter={StaticResource boolToVisibilityConverter}}">
+                        <TextBlock Text="Reminder Section" FontSize="50" />
                     </StackPanel>
                 </StackPanel>
                 <Button Content="{DynamicResource SettingsView.SaveChangesButtonContent}" Grid.Row="2" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding SaveSettingsCommand}"/>

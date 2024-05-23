@@ -40,10 +40,10 @@
 
     <!-- COMPANY TYPES -->
     <system:String x:Key="CompanyTypes.DontCare">_</system:String>
-    <system:String x:Key="CompanyTypes.Buyer">خریدار</system:String>
-    <system:String x:Key="CompanyTypes.Seller">فروشنده</system:String>
-    <system:String x:Key="CompanyTypes.RelatedToOutgo">مرتبط با هزینه ها</system:String>
-    <system:String x:Key="CompanyTypes.RelatedToIncome">مرتبط با درآمدها</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToSale">فروش</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToBuy">خرید</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToOutgo">هزینه</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToIncome">درآمد</system:String>
 
     <!-- COST CENTERS -->
     <system:String x:Key="CostCenters.DontCare">_</system:String>
@@ -53,10 +53,11 @@
     <system:String x:Key="CostCenters.Both">معمل و ماشین</system:String>
 
     <!-- COUNT UNITS -->
-    <system:String x:Key="CountUnits.Ton">در هر تن</system:String>
-    <system:String x:Key="CountUnits.Meter">در هر متر</system:String>
-    <system:String x:Key="CountUnits.Ton.OnlyUnit">تن</system:String>
-    <system:String x:Key="CountUnits.Meter.OnlyUnit">متر</system:String>
+    <system:String x:Key="CountUnits.Meter">متر</system:String>
+    <system:String x:Key="CountUnits._3MeterTrip">تریپ 3 متری</system:String>
+    <system:String x:Key="CountUnits._20MeterTrip">تریپ 20 متری</system:String>
+    <system:String x:Key="CountUnits._35MeterTrip">تریپ 35 متری</system:String>
+    <system:String x:Key="CountUnits._45MeterTrip">تریپ 45 متری</system:String>
 
     <!-- بازه زمانیS -->
     <system:String x:Key="DateRanges.DontCare">_</system:String>
@@ -355,7 +356,7 @@
     <system:String x:Key="CompanyPage.NameTextBoxTitle">نام شرکت</system:String>
     <system:String x:Key="CompanyPage.TRNTextBoxTitle">شماره مالیاتی (TRN)</system:String>
     <system:String x:Key="CompanyPage.CriditValueTextBoxTitle">میزان طلب</system:String>
-    <system:String x:Key="CompanyPage.TypeComboBoxTitle">نوع</system:String>
+    <system:String x:Key="CompanyPage.TypeComboBoxTitle">مرتبط با</system:String>
     <system:String x:Key="CompanyPage.TelTextBoxTitle">شماره تلفن</system:String>
     <system:String x:Key="CompanyPage.FaxTextBoxTitle">فکس</system:String>
     <system:String x:Key="CompanyPage.EmailTextBoxTitle">ایمیل</system:String>
@@ -366,7 +367,7 @@
     <!-- COMPANY LIST PAGE -->
     <system:String x:Key="CompanyListPage.NameColumnTextBlockText">نام شرکت</system:String>
     <system:String x:Key="CompanyListPage.TRNColumnTextBlockText">TRN</system:String>
-    <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">نوع</system:String>
+    <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">مرتبط با</system:String>
     <system:String x:Key="CompanyListPage.TelColumnTextBlockText">شماره تلفن</system:String>
     <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">فکس</system:String>
     <system:String x:Key="CompanyListPage.CreditValueColumnTextBlockText">میزان طلب</system:String>

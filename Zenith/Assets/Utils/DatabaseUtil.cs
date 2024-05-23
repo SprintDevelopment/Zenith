@@ -79,8 +79,10 @@ namespace Zenith.Assets.Utils
 
             var sqlConnection = new SqlConnection(connectionString);
 
+            var dataFileLocation = @"C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\Zenith.mdf";
+            var logFileLocation = @"C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\Zenith_log.ldf";
 
-            var restoreCommand = new SqlCommand("Restore Database @databaseName From disk = @backupPath With Replace", sqlConnection);
+            var restoreCommand = new SqlCommand($"Restore Database @databaseName From disk = @backupPath With REPLACE, MOVE 'Zenith' TO '{dataFileLocation}', MOVE 'Zenith_log' TO '{logFileLocation}'", sqlConnection);
 
             restoreCommand.Parameters.AddRange(new SqlParameter[]
             {

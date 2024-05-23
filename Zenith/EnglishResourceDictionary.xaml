@@ -40,10 +40,10 @@
 
     <!-- COMPANY TYPES -->
     <system:String x:Key="CompanyTypes.DontCare">_</system:String>
-    <system:String x:Key="CompanyTypes.Buyer">Buyer</system:String>
-    <system:String x:Key="CompanyTypes.Seller">Seller</system:String>
-    <system:String x:Key="CompanyTypes.RelatedToOutgo">Related to outgo</system:String>
-    <system:String x:Key="CompanyTypes.RelatedToIncome">Related to income</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToSale">Sale</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToBuy">Buy</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToOutgo">Outgo</system:String>
+    <system:String x:Key="CompanyTypes.RelatedToIncome">Income</system:String>
 
     <!-- COST CENTERS -->
     <system:String x:Key="CostCenters.DontCare">_</system:String>
@@ -361,7 +361,7 @@
     <system:String x:Key="CompanyPage.NameTextBoxTitle">Company name</system:String>
     <system:String x:Key="CompanyPage.TRNTextBoxTitle">Tax registration number (TRN)</system:String>
     <system:String x:Key="CompanyPage.CriditValueTextBoxTitle">Initial credit value (can set only once)</system:String>
-    <system:String x:Key="CompanyPage.TypeComboBoxTitle">Type</system:String>
+    <system:String x:Key="CompanyPage.TypeComboBoxTitle">Related to</system:String>
     <system:String x:Key="CompanyPage.TelTextBoxTitle">Tel</system:String>
     <system:String x:Key="CompanyPage.FaxTextBoxTitle">Fax</system:String>
     <system:String x:Key="CompanyPage.EmailTextBoxTitle">Email</system:String>
@@ -372,7 +372,7 @@
     <!-- COMPANY LIST PAGE -->
     <system:String x:Key="CompanyListPage.NameColumnTextBlockText">Company name</system:String>
     <system:String x:Key="CompanyListPage.TRNColumnTextBlockText">TRN</system:String>
-    <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">Type</system:String>
+    <system:String x:Key="CompanyListPage.TypeColumnTextBlockText">Related to</system:String>
     <system:String x:Key="CompanyListPage.TelColumnTextBlockText">Tel</system:String>
     <system:String x:Key="CompanyListPage.FaxColumnTextBlockText">Fax</system:String>
     <system:String x:Key="CompanyListPage.CreditValueColumnTextBlockText">Credit</system:String>
@@ -743,6 +743,7 @@
     <system:String x:Key="SalePage.MaterialHintTextBlockText">Enter material's name to search ...</system:String>
     <system:String x:Key="SalePage.LpoNumberHintTextBlockText">Enter lpo number to search ...</system:String>
     <system:String x:Key="SalePage.FactorNumberHintTextBlockText">Enter factor number to search ...</system:String>
+    <system:String x:Key="SalePage.SearchHintTextBlockText">Enter material's name to search ...</system:String>
     <system:String x:Key="SalePage.ConfirmAndContinueButtonContent">Confirm &amp; continue</system:String>
     <system:String x:Key="SalePage.ConfirmButtonContent">Confirm</system:String>
     <system:String x:Key="SalePage.MaterialNameColumnTextBlockText">Material name</system:String>

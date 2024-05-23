@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Serilog;
+using Serilog.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -40,11 +42,7 @@ namespace Zenith.ViewModels
 
             NavigateCommand = ReactiveCommand.Create<Type>(type =>
             {
-                var tabForPage = TabControlViewModel._tabs.Items.FirstOrDefault(tab => tab.RelatedMainPage.GetType() == type);
-                if (tabForPage is not null)
-                    tabForPage.IsSelected = true;
-                else
-                    TabControlViewModel._tabs.Add(new TabViewModel { RelatedMainPage = (Page)Activator.CreateInstance(type), IsSelected = true });
+                ListPage = (Page)Activator.CreateInstance(type);
             });
 
             NavigateToBuysCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(BuyListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Buys && p.HasReadAccess)));
@@ -72,12 +70,7 @@ namespace Zenith.ViewModels
             NavigateToTaxReportCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(TaxReportPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.TaxReport && p.HasReadAccess)));
             NavigateToUsersCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(UserListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
             NavigateToNotesCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(listPage => NavigateCommand.Execute(typeof(NoteListPage)), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin" || u.Permissions.Any(p => p.PermissionType == PermissionTypes.Notes && p.HasReadAccess)));
-            ShowSettingsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(_ => ShowSecondCreateUpdatePageCommand.Execute(new SettingsPage()), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
-
-            TabControlViewModel.WhenAnyValue(vm => vm.SelectedTabViewModel)
-                    .Where(stvm => stvm?.RelatedMainPage is not null)
-                    .Do(stvm => ListPage = stvm.RelatedMainPage)
-                    .Subscribe();
+            ShowSettingsCommand = ReactiveCommand.CreateFromObservable<Unit, Unit>(_ => ShowCreateUpdatePageCommand.Execute(new SettingsPage()), this.WhenAnyValue(vm => vm.LoggedInUser).WhereNotNull().Select(u => u.Username == "admin"));
 
             ShowCreateUpdatePageCommand = ReactiveCommand.Create<Page>(page =>
             {
@@ -106,7 +99,9 @@ namespace Zenith.ViewModels
 
             OpenLogFileCommand = ReactiveCommand.Create<string>(_ =>
             {
-                Process.Start("notepad.exe", $"C:\\{_}");
+                var currentLogName = $@"Logs\ZLog-{DateTime.Today:yyyyMMdd}.log";
+                if (File.Exists(currentLogName))
+                    System.Diagnostics.Process.Start("explorer", currentLogName);
             });
 
             //ChangeLanguageCommand = ReactiveCommand.Create<Unit>(_ => Language = Language == AppLanguages.English ? AppLanguages.Persian : AppLanguages.English);
@@ -252,7 +247,6 @@ namespace Zenith.ViewModels
 
         public SourceList<AlertViewModel> _alerts { get; private set; } = new SourceList<AlertViewModel>();
         public ReadOnlyObservableCollection<AlertViewModel> Alerts;
-        public TabControlViewModel TabControlViewModel { get; set; } = new TabControlViewModel();
         public ReactiveCommand<Type, Unit> NavigateCommand { get; set; }
         //
         public ReactiveCommand<Unit, Unit> NavigateToBuysCommand { get; set; }
