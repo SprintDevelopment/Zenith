@@ -125,8 +125,8 @@
                 <StackPanel Grid.Row="1">
                     <ComboBox x:Name="machineComboBox" SelectedValue="{Binding SearchModel.MachineId, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="MachineId" Tag="{DynamicResource MachineReportPage.SearchMachineComboBoxTitle}"/>
                     <ComboBox x:Name="machineReportTypeComboBox" SelectedValue="{Binding SearchModel.MachineReportType, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" SelectedValuePath="Value" Tag="{DynamicResource MachineReportPage.SearchReportTypeComboBoxTitle}"/>
-                    <usercontrols:DatePicker DateTime="{Binding SearchModel.StartDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineReportPage.SearchStartDateTimeTitle}"/>
-                    <usercontrols:DatePicker DateTime="{Binding SearchModel.EndDateTime, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineReportPage.SearchEndDateTimeTitle}"/>
+                    <usercontrols:DatePicker DateTime="{Binding SearchModel.StartDate, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineReportPage.SearchStartDateTimeTitle}"/>
+                    <usercontrols:DatePicker DateTime="{Binding SearchModel.EndDate, UpdateSourceTrigger=PropertyChanged}" Title="{DynamicResource MachineReportPage.SearchEndDateTimeTitle}"/>
 
                     <Button Content="{DynamicResource MachineReportPage.CreateReportButtonContent}" Height="38" VerticalAlignment="Top" Margin="24,24,24,16" Style="{StaticResource ConfirmButtonStyle}" IsDefault="True" Command="{Binding CreateReportCommand}" />
                 </StackPanel>

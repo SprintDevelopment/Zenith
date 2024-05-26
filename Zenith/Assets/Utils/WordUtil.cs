@@ -18,7 +18,7 @@ namespace Zenith.Assets.Utils
     public class WordUtil
     {
         public static Word.Application wordApp;
-        public static OperationResultDto PrintFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, params Sale[] sales)
+        public static OperationResultDto PrintSaleFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, params Sale[] sales)
         {
             if (wordApp == null)
                 wordApp = new Word.Application();
@@ -110,6 +110,94 @@ namespace Zenith.Assets.Utils
 
             return null;
         }
+
+        //public static OperationResultDto PrintBuyFactor(int? factorNumber, params Buy[] buys)
+        //{
+        //    if (wordApp == null)
+        //        wordApp = new Word.Application();
+
+        //    var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //    var templateFileFullName = Path.Combine(currentDirectory, buys[0].Company.IsTaxPayer ? @"Factors\BuyTemplate.docx" : @"Factors\BuyTemplate-Without-TRN.docx");
+
+        //    if (File.Exists(templateFileFullName))
+        //    {
+        //        wordApp.Documents.Open(templateFileFullName);
+
+        //        var document = wordApp.ActiveDocument;
+
+        //        var companyTable = document.Tables[1];
+        //        companyTable.Cell(1, 1).Range.Text = $"Customer Code: {buys[0].Company.CompanyId:CPY0000}";
+        //        companyTable.Cell(1, 3).Range.Text = buys.Count() == 1 ? $"{buys[0].BuyId:INV0000}" : $"{factorNumber}";
+        //        companyTable.Cell(2, 1).Range.Text = buys[0].Company.Name;
+        //        companyTable.Cell(2, 3).Range.Text = buys.Count() == 1 ? $"{buys[0].DateTime:yyyy-MMM-dd}" : $"{buys[0].DateTime:yyyy-MMM}";
+        //        companyTable.Cell(3, 1).Range.Text = $"Tel: {buys[0].Company.Tel}";
+        //        companyTable.Cell(4, 1).Range.Text = $"Fax: {buys[0].Company.Fax}";
+        //        if (buys[0].Company.IsTaxPayer)
+        //            companyTable.Cell(5, 1).Range.Text = $"TRN: {buys[0].Company.TaxRegistrationNumber}";
+
+        //        var deliveriesTable = document.Tables[2];
+        //        var totalPrice = 0f;
+
+        //        buys.SelectMany(s => s.Items)
+        //            .GroupBy(d => new { d.DeliveryNumber })
+        //            .Select((deliveries, i) =>
+        //            {
+        //                var deliveriesCount = deliveries.Count();
+
+        //                var newRow = deliveriesTable.Rows.Add();
+        //                newRow.Cells[1].Range.Text = $"{i + 1}";
+        //                newRow.Cells[2].Range.Text = deliveries.First().Material.Name;
+        //                newRow.Cells[4].Range.Text = deliveriesCount == 1 ? "1 Trip" : $"{deliveriesCount} Trips";
+        //                newRow.Cells[5].Range.Text = deliveriesCount == 1 ? deliveries.First().Machine.Name : "";
+        //                newRow.Cells[6].Range.Text = deliveries.First().DeliveryNumber;
+        //                newRow.Cells[7].Range.Text = $"{deliveries.First().DateTime:yyyy-MM-dd}";
+        //                newRow.Cells[8].Range.Text = $"{deliveries.Sum(d => d.Count):n2} (m)";
+        //                newRow.Cells[9].Range.Text = $"{(deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice):n2}";
+
+        //                totalPrice += deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice;
+
+        //                return deliveries;
+        //            }).ToList();
+
+        //        //var totalPrice = sales.Sum(s => s.Items.Where(si => si.Deliveries.Any()).Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
+
+        //        var rowsContents = new Tuple<string, string>[]
+        //        {
+        //            new Tuple<string, string>("Sub Total", $"{totalPrice:n2}"),
+        //            new Tuple<string, string>("VAT 5%", $"{totalPrice * 0.05:n2}"),
+        //            new Tuple<string, string>("Total", $"{totalPrice * 1.05:n2}")
+        //        };
+
+        //        for (int i = 0; i < (buys[0].Company.IsTaxPayer ? 3 : 1); i++)
+        //        {
+        //            var newRow = deliveriesTable.Rows.Add();
+
+        //            if (i == 0)
+        //            {
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //                newRow.Cells[1].Merge(newRow.Cells[2]);
+        //            }
+
+        //            newRow.Cells[1].Range.Text = rowsContents[i].Item1;
+        //            newRow.Cells[2].Range.Text = rowsContents[i].Item2;
+        //            newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
+        //        }
+
+        //        document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+        //        //wordApp.Visible = true;
+        //        document.Close(false);
+
+        //        //wordApp.Visible = true;
+
+        //    }
+
+        //    return null;
+        //}
 
         public static OperationResultDto PrintSalaryReceipt(SalaryPayment payment)
         {

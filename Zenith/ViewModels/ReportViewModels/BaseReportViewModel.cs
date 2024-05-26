@@ -84,7 +84,7 @@ namespace Zenith.ViewModels.ReportViewModels
                 SourceList.AddRange(Repository.Find(searchModel));
 
                 IsInSearchMode = false;
-            });
+            }, searchModel.ValidationContext.WhenAnyValue(context => context.IsValid));
 
             HideSearchGridCommand = ReactiveCommand.Create<Unit>(_ => IsInSearchMode = false);
 

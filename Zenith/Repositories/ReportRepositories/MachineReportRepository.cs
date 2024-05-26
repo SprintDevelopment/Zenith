@@ -25,7 +25,7 @@ namespace Zenith.Repositories.ReportRepositories
 
             if (reportSearchModel.MachineReportType.ExistsIn(MachineReportTypes.All, MachineReportTypes.OnlyDeliveries))
                 query = query.Concat(_context.Set<Delivery>()
-                     .Where(d => d.MachineId == reportSearchModel.MachineId)
+                     .Where(d => d.MachineId == reportSearchModel.MachineId && d.DateTime >= reportSearchModel.StartDate && d.DateTime <= reportSearchModel.EndDate)
                      .Include(d => d.Site).ThenInclude(s => s.Company)
                      .Include(d => d.SaleItem).ThenInclude(si => si.Material)
                      .Select(d => new MachineReport
@@ -40,7 +40,7 @@ namespace Zenith.Repositories.ReportRepositories
 
             if (reportSearchModel.MachineReportType.ExistsIn(MachineReportTypes.All, MachineReportTypes.OnlyOutgoes))
                 query = query.Concat(_context.Set<MachineOutgo>()
-                    .Where(mo => mo.MachineId == reportSearchModel.MachineId)
+                    .Where(mo => mo.MachineId == reportSearchModel.MachineId && mo.DateTime >= reportSearchModel.StartDate && mo.DateTime <= reportSearchModel.EndDate)
                     .Include(mo => mo.Company)
                     .Include(mo => mo.OutgoCategory)
                     .Select(mo => new MachineReport
@@ -55,7 +55,7 @@ namespace Zenith.Repositories.ReportRepositories
 
             if (reportSearchModel.MachineReportType.ExistsIn(MachineReportTypes.All, MachineReportTypes.OnlyIncomes))
                 query = query.Concat(_context.Set<MachineIncome>()
-                    .Where(mo => mo.MachineId == reportSearchModel.MachineId)
+                    .Where(mo => mo.MachineId == reportSearchModel.MachineId && mo.DateTime >= reportSearchModel.StartDate && mo.DateTime <= reportSearchModel.EndDate)
                     .Include(mo => mo.Company)
                     .Include(mo => mo.IncomeCategory)
                     .Select(mo => new MachineReport
