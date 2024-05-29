@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Zenith.Assets.Extensions;
 using Zenith.Assets.Utils;
 using Zenith.Data;
+using Zenith.Migrations;
 using Zenith.Models;
 
 namespace Zenith.Repositories
@@ -20,13 +21,20 @@ namespace Zenith.Repositories
         public ApplicationDbContext _context;
         public Repository()
         {
-            if (App.Context is null)
-                App.Context = new DbContextFactory().CreateDbContext(null);
+            //if (App.Context is null)
+                //App.Context = new DbContextFactory().CreateDbContext(null);
 
-            _context = App.Context;
+            _context = new DbContextFactory().CreateDbContext(null);
         }
 
         public virtual IEnumerable<T> All() => _context.Set<T>().AsEnumerable();
+        public virtual async IAsyncEnumerable<T> AllAsync()
+        {
+            await foreach (var item in _context.Set<T>().AsAsyncEnumerable())
+            {
+                yield return item;
+            }  
+        }
         public virtual IEnumerable<T> AllForSearch()
         {
             var all = _context.Set<T>().AsEnumerable().ToList();

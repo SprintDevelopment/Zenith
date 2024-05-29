@@ -15,9 +15,9 @@ namespace Zenith.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                         .UseSqlServer(@"Data Source=.;Initial Catalog=Zenith;Integrated Security=True;Encrypt=False"
-                                        , providerOptions => providerOptions.EnableRetryOnFailure())
-                        .EnableSensitiveDataLogging().EnableThreadSafetyChecks(false)
-                        .LogTo((message) => Debug.WriteLine(message));
+                                        , providerOptions => providerOptions.EnableRetryOnFailure());
+                        //.EnableSensitiveDataLogging().EnableThreadSafetyChecks(false)
+                        //.LogTo((message) => Debug.WriteLine(message));
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

@@ -68,14 +68,14 @@ namespace Zenith.ViewModels.ListViewModels
 
             PrintFactorCommand = ReactiveCommand.CreateRunInBackground<Sale>(sale =>
             {
-                WordUtil.PrintFactor(null, null, null, null, null, repository.Single(sale.SaleId));
+                WordUtil.PrintSaleFactor(null, null, null, null, null, repository.Single(sale.SaleId));
             });
 
             PrintAggregateFactorCommand = ReactiveCommand.CreateRunInBackground<Unit>(_ =>
             {
                 var salesToPrint = SalesPrePrintDto.LpoNumber.IsNullOrWhiteSpace() ? ActiveList.AsEnumerable() : ((SaleRepository)repository).FindByLpo(SalesPrePrintDto.LpoNumber);
 
-                WordUtil.PrintFactor(SalesPrePrintDto.FactorNumber, SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), SalesPrePrintDto.LpoNumber, PrintableDeliveries.Where(d => d.IsSelected).Select(d => d.DeliveryId).ToList(), salesToPrint.Select(s => repository.Single(s.SaleId)).ToArray());
+                WordUtil.PrintSaleFactor(SalesPrePrintDto.FactorNumber, SalesPrePrintDto.Sites.Where(s => s.IsSelected).Select(s => s.SiteId).ToList(), SalesPrePrintDto.Materials.Where(m => m.IsSelected).Select(m => m.MaterialId).ToList(), SalesPrePrintDto.LpoNumber, PrintableDeliveries.Where(d => d.IsSelected).Select(d => d.DeliveryId).ToList(), salesToPrint.Select(s => repository.Single(s.SaleId)).ToArray());
 
                 if (SalesPrePrintDto.FactorNumber > lastPrintedFactorNo)
                 {

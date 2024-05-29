@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Zenith.Assets.Values.Enums;
 using AutoMapper;
 using Zenith.Assets.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Zenith.Repositories
 {
@@ -21,6 +22,22 @@ namespace Zenith.Repositories
                 .Include(s => s.Items).ThenInclude(si => si.Material)
                 .Include(s => s.Items).ThenInclude(si => si.Deliveries)
                 .AsEnumerable();
+        }
+
+        public override async IAsyncEnumerable<Sale> AllAsync()
+        {
+            var asyncEnumerable = _context.Set<Sale>()
+                .Include(s => s.Company)
+                .Include(s => s.Items)
+                .Include(s => s.Items).ThenInclude(si => si.Deliveries)
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public IEnumerable<Sale> FindByLpo(string lpoNumber)

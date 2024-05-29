@@ -17,6 +17,7 @@ using ReactiveUI.Fody.Helpers;
 using AutoMapper;
 using Zenith.Assets.Utils;
 using DynamicData.Binding;
+using System.Threading.Tasks;
 
 namespace Zenith.ViewModels.ListViewModels
 {
@@ -36,10 +37,10 @@ namespace Zenith.ViewModels.ListViewModels
 
             repository._context.ChangeTracker.DetectedEntityChanges += (s, e) =>
             {
-                if(e.Entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified && e.Entry.Entity.GetType() == typeof(T)) 
+                if (e.Entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified && e.Entry.Entity.GetType() == typeof(T))
                 {
                     //e.Entry.Reload();
-                    RefreshSourceList(((T)e.Entry.Entity).GetKeyPropertyValue()); 
+                    RefreshSourceList(((T)e.Entry.Entity).GetKeyPropertyValue());
                 }
             };
 
@@ -49,32 +50,15 @@ namespace Zenith.ViewModels.ListViewModels
             var nItemsSelectedStringFormat = App.MainViewModel.Language == AppLanguages.English ?
                 " , {0:n0} item(s) selected)" : " ، {0:n0} مورد انتخاب شده)";
 
-            void calculate()
-            {
-                var itemsCount = ActiveList.Count();
-                var selectedItemsCount = ActiveList.Count(item => item.IsSelected);
-
-                ItemsStatistics = $"({itemsCount:n0} {singleMultipleTitles.single}";
-                if (itemsCount == selectedItemsCount || selectedItemsCount == 0)
-                {
-                    ItemsStatistics += selectedItemsCount > 0 ? allItemsSelectedString : ")";
-                    SelectionMode = selectedItemsCount == 0 ? SelectionModes.NoItemSelected : SelectionModes.AllItemsSelected;
-                }
-                else
-                {
-                    ItemsStatistics += string.Format(nItemsSelectedStringFormat, selectedItemsCount);
-                    SelectionMode = SelectionModes.SomeItemsSelected;
-                }
-            };
-
             SourceList.Connect()
                 .Filter(criteria, ListFilterPolicy.ClearAndReplace)
                 .Transform((item, i) => { item.DisplayOrder = i + 1; return item; })
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Bind(ActiveList)
-                .Do(_ => calculate())
+                .Do(changeSet => { if (IsBusy) ItemsStatistics = $"({ActiveList.Count:n0} {singleMultipleTitles.single})"; })
                 .Subscribe();
 
-            SourceList.AddRange(Repository.All());
+            //SourceList.AddRange(Repository.All());
 
             SelectAllCommand = ReactiveCommand.Create<Unit>(_ =>
             {
@@ -94,7 +78,20 @@ namespace Zenith.ViewModels.ListViewModels
             {
                 searchModel.OnlyForRefreshAfterUpdate++;
 
-                calculate();
+                var itemsCount = ActiveList.Count();
+                var selectedItemsCount = ActiveList.Count(item => item.IsSelected);
+
+                ItemsStatistics = $"({itemsCount:n0} {singleMultipleTitles.single}";
+                if (itemsCount == selectedItemsCount || selectedItemsCount == 0)
+                {
+                    ItemsStatistics += selectedItemsCount > 0 ? allItemsSelectedString : ")";
+                    SelectionMode = selectedItemsCount == 0 ? SelectionModes.NoItemSelected : SelectionModes.AllItemsSelected;
+                }
+                else
+                {
+                    ItemsStatistics += string.Format(nItemsSelectedStringFormat, selectedItemsCount);
+                    SelectionMode = SelectionModes.SomeItemsSelected;
+                }
             });
 
             IDisposable removeDisposable = null;
@@ -193,6 +190,17 @@ namespace Zenith.ViewModels.ListViewModels
                 SearchCommand?.Dispose();
                 removeDisposable?.Dispose();
             });
+
+            LoadAll = ReactiveCommand.CreateRunInBackground<Unit>(async _ =>
+            {
+                IsBusy = true;
+                if (Repository is SaleRepository saleRepository)
+                    await foreach (var item in Repository.AllAsync())
+                    {
+                        SourceList.Add(item);
+                    }
+                IsBusy = false;
+            });
         }
 
         private void RefreshSourceList(dynamic entityId)
@@ -202,25 +210,29 @@ namespace Zenith.ViewModels.ListViewModels
             //{
             //    var changeSetKeyValues = changeSet.Select(c =>
             //    {
-                    var itemToUpdate = SourceList.Items.FirstOrDefault(item => item.GetKeyPropertyValue().ToString() == updatedEntity.GetKeyPropertyValue().ToString());
-                    if (itemToUpdate != null)
-                    {
+            var itemToUpdate = SourceList.Items.FirstOrDefault(item => item.GetKeyPropertyValue().ToString() == updatedEntity.GetKeyPropertyValue().ToString());
+            if (itemToUpdate != null)
+            {
                 //changeSet.FirstOrDefault().IsSelected = itemToUpdate.IsSelected;
                 //SourceList.Replace(itemToUpdate, changeSet.FirstOrDefault());
                 updatedEntity.IsSelected = itemToUpdate.IsSelected;
-                        SourceList.Replace(itemToUpdate, updatedEntity);
-                    }
+                SourceList.Replace(itemToUpdate, updatedEntity);
+            }
 
-                //    return c;
-                //}).ToList();
+            //    return c;
+            //}).ToList();
 
-                SearchModel.OnlyForRefreshAfterUpdate++;
+            SearchModel.OnlyForRefreshAfterUpdate++;
             //}
         }
+
+        [Reactive]
+        public bool IsBusy { get; set; }
 
         public SourceList<T> SourceList { get; set; } = new SourceList<T>();
         public IObservableCollection<T> ActiveList { get; } = new ObservableCollectionExtended<T>();
 
+        public ReactiveCommand<Unit, Unit> LoadAll { get; set; }
         public ReactiveCommand<Unit, Unit> SelectAllCommand { get; set; }
         public ReactiveCommand<T, Unit> SelectOneCommand { get; set; }
         public ReactiveCommand<Unit, Unit> CreateCommand { get; set; }

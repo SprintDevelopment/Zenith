@@ -31,6 +31,8 @@ namespace Zenith.Views.ListViews
                 ViewModel.SearchModel.OnlyForRefreshAfterUpdate++;
 
                 this.DataContext = ViewModel;
+
+                ViewModel.LoadAll.Execute().Subscribe().Dispose();
             });
             //WindowPreviewKeyDownEventHandler = (s, e) => { ListBasePage_PreviewKeyDown(s, e); };
             //this.Loaded += (s, e) => { window.PreviewKeyDown += WindowPreviewKeyDownEventHandler; };

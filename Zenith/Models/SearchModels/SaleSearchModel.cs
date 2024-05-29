@@ -14,6 +14,6 @@ namespace Zenith.Models.SearchModels
 
         [Search(ControlType = SearchItemControlTypes.ComboBox, ValueSourceType = typeof(DateRanges))]
         [Reactive]
-        public DateRanges DateRange { get; set; } = DateRanges.ThisWeek;
+        public DateRanges DateRange { get; set; } = DateRanges.ThisMonth;
     }
 }
