@@ -13,12 +13,27 @@ namespace Zenith.Repositories
         BuyItemRepository BuyItemRepository = new BuyItemRepository();
         CashRepository CashRepository = new CashRepository();
 
-        public override IEnumerable<Buy> All()
+        //public override IEnumerable<Buy> All()
+        //{
+        //    return _context.Set<Buy>()
+        //        .Include(b => b.Company)
+        //        .Include(b => b.Items).ThenInclude(bi => bi.Material)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<Buy> AllAsync()
         {
-            return _context.Set<Buy>()
-                .Include(b => b.Company)
+            var asyncEnumerable = _context.Set<Buy>()
+                .Include(s => s.Company)
                 .Include(b => b.Items).ThenInclude(bi => bi.Material)
-                .AsEnumerable();
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override Buy Single(dynamic id)

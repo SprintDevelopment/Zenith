@@ -35,14 +35,14 @@ namespace Zenith.ViewModels.ListViewModels
             Repository = repository;
             SearchModel = searchModel;
 
-            repository._context.ChangeTracker.DetectedEntityChanges += (s, e) =>
-            {
-                if (e.Entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified && e.Entry.Entity.GetType() == typeof(T))
-                {
-                    //e.Entry.Reload();
-                    RefreshSourceList(((T)e.Entry.Entity).GetKeyPropertyValue());
-                }
-            };
+            //repository._context.ChangeTracker.DetectedEntityChanges += (s, e) =>
+            //{
+            //    if (e.Entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified && e.Entry.Entity.GetType() == typeof(T))
+            //    {
+            //        //e.Entry.Reload();
+            //        RefreshSourceList(((T)e.Entry.Entity).GetKeyPropertyValue());
+            //    }
+            //};
 
             var allItemsSelectedString = App.MainViewModel.Language == AppLanguages.English ?
                 " , all items selected)" : " ، تمامی موارد انتخاب شده)";
@@ -194,11 +194,10 @@ namespace Zenith.ViewModels.ListViewModels
             LoadAll = ReactiveCommand.CreateRunInBackground<Unit>(async _ =>
             {
                 IsBusy = true;
-                if (Repository is SaleRepository saleRepository)
-                    await foreach (var item in Repository.AllAsync())
-                    {
-                        SourceList.Add(item);
-                    }
+
+                await foreach (var item in Repository.AllAsync())
+                    SourceList.Add(item);
+
                 IsBusy = false;
             });
         }

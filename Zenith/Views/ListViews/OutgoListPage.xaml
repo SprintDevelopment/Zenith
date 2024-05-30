@@ -24,6 +24,9 @@
                 <TextBlock Margin="16,0,0,0" Text="{Binding ItemsStatistics}" FontSize="15" Foreground="#FF328332"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,1">
+                <Grid Width="50">
+                    <usercontrols:WaitingIndicator VerticalAlignment="Center" Margin="4" Width="20" Height="20" Visibility="{Binding IsBusy, Converter={StaticResource boolToVisibilityConverter}}"/>
+                </Grid>
                 <usercontrols:MoreControl Icon="/Zenith;component/Resources/Images/Common/add-new.png">
                     <usercontrols:MoreControl.MoreContent>
                         <StackPanel>

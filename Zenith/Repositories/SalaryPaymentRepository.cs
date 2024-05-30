@@ -11,11 +11,25 @@ namespace Zenith.Repositories
     {
         CashRepository CashRepository = new CashRepository();
 
-        public override IEnumerable<SalaryPayment> All()
+        //public override IEnumerable<SalaryPayment> All()
+        //{
+        //    return _context.Set<SalaryPayment>()
+        //        .Include(o => o.Personnel)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<SalaryPayment> AllAsync()
         {
-            return _context.Set<SalaryPayment>()
-                .Include(o => o.Personnel)
-                .AsEnumerable();
+            var asyncEnumerable = _context.Set<SalaryPayment>()
+                .Include(s => s.Personnel)
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override SalaryPayment Single(dynamic id)

@@ -15,14 +15,14 @@ namespace Zenith.Repositories
         SaleItemRepository SaleItemRepository = new SaleItemRepository();
         CashRepository CashRepository = new CashRepository();
 
-        public override IEnumerable<Sale> All()
-        {
-            return _context.Set<Sale>()
-                .Include(s => s.Company)
-                .Include(s => s.Items).ThenInclude(si => si.Material)
-                .Include(s => s.Items).ThenInclude(si => si.Deliveries)
-                .AsEnumerable();
-        }
+        //public override IEnumerable<Sale> All()
+        //{
+        //    return _context.Set<Sale>()
+        //        .Include(s => s.Company)
+        //        .Include(s => s.Items).ThenInclude(si => si.Material)
+        //        .Include(s => s.Items).ThenInclude(si => si.Deliveries)
+        //        .AsEnumerable();
+        //}
 
         public override async IAsyncEnumerable<Sale> AllAsync()
         {

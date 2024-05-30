@@ -20,6 +20,21 @@ namespace Zenith.Repositories
                 .AsEnumerable();
         }
 
+        public override async IAsyncEnumerable<Income> AllAsync()
+        {
+            var asyncEnumerable = _context.Set<Income>()
+                .Include(o => o.IncomeCategory)
+                .Include(o => o.Company)
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
+        }
+
         public override Income Single(dynamic id)
         {
             int intId = (int)id;

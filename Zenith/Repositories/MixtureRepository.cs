@@ -13,11 +13,24 @@ namespace Zenith.Repositories
         MixtureItemRepository MixtureItemRepository = new MixtureItemRepository();
         MaterialRepository MaterialRepository = new MaterialRepository();
 
-        public override IEnumerable<Mixture> All()
+        //public override IEnumerable<Mixture> All()
+        //{
+        //    return _context.Set<Mixture>()
+        //        .Include(b => b.Items).ThenInclude(bi => bi.Material)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<Mixture> AllAsync()
         {
-            return _context.Set<Mixture>()
+            var asyncEnumerable = _context.Set<Mixture>()
                 .Include(b => b.Items).ThenInclude(bi => bi.Material)
-                .AsEnumerable();
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override Mixture Single(dynamic id)

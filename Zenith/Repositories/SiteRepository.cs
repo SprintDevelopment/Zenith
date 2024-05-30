@@ -9,11 +9,24 @@ namespace Zenith.Repositories
 {
     public class SiteRepository : Repository<Site>
     {
-        public override IEnumerable<Site> All()
+        //public override IEnumerable<Site> All()
+        //{
+        //    return _context.Set<Site>()
+        //        .Include(s => s.Company)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<Site> AllAsync()
         {
-            return _context.Set<Site>()
+            var asyncEnumerable = _context.Set<Site>()
                 .Include(s => s.Company)
-                .AsEnumerable();
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override Site Single(dynamic id)

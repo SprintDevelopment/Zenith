@@ -14,13 +14,29 @@ namespace Zenith.Repositories
         AccountRepository AccountRepository = new AccountRepository();
         OutgoCategoryRepository OutgoCategoryRepository = new OutgoCategoryRepository();
 
-        public override IEnumerable<MachineOutgo> All()
+        //public override IEnumerable<MachineOutgo> All()
+        //{
+        //    return _context.Set<MachineOutgo>()
+        //        .Include(o => o.OutgoCategory)
+        //        .Include(o => o.Machine)
+        //        .Include(o => o.Company)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<MachineOutgo> AllAsync()
         {
-            return _context.Set<MachineOutgo>()
+            var asyncEnumerable = _context.Set<MachineOutgo>()
                 .Include(o => o.OutgoCategory)
                 .Include(o => o.Machine)
                 .Include(o => o.Company)
-                .AsEnumerable();
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override MachineOutgo Single(dynamic id)

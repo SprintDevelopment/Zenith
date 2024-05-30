@@ -10,11 +10,24 @@ namespace Zenith.Repositories
 {
     public class MachineRepository : Repository<Machine>
     {
-        public override IEnumerable<Machine> All()
+        //public override IEnumerable<Machine> All()
+        //{
+        //    return _context.Set<Machine>()
+        //        .Include(s => s.OwnerCompany)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<Machine> AllAsync()
         {
-            return _context.Set<Machine>()
+            var asyncEnumerable = _context.Set<Machine>()
                 .Include(s => s.OwnerCompany)
-                .AsEnumerable();
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override Machine Single(dynamic id)

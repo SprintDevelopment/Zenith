@@ -17,6 +17,30 @@ namespace Zenith.Repositories
         MachineOutgoRepository MachineOutgoRepository = new MachineOutgoRepository();
         ConfigurationRepository ConfigurationRepository = new ConfigurationRepository();
 
+        //public override IEnumerable<Delivery> All() =>
+        //    _context.Set<Delivery>()
+        //        .Include(d => d.SaleItem).ThenInclude(si => si.Material)
+        //        .Include(d => d.Site).ThenInclude(s => s.Company)
+        //        .Include(d => d.Machine)
+        //        .Include(d => d.Driver).AsEnumerable();
+
+        public override async IAsyncEnumerable<Delivery> AllAsync()
+        {
+            var asyncEnumerable = _context.Set<Delivery>()
+                .Include(d => d.SaleItem).ThenInclude(si => si.Material)
+                .Include(d => d.Site).ThenInclude(s => s.Company)
+                .Include(d => d.Machine)
+                .Include(d => d.Driver)
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
+        }
+
         public override Delivery Single(dynamic id)
         {
             long longId = (long)id;
@@ -34,13 +58,6 @@ namespace Zenith.Repositories
                 .Include(d => d.Machine)
                 .Include(d => d.Driver)
                 .Where(predicate).AsEnumerable();
-
-        public override IEnumerable<Delivery> All() =>
-            _context.Set<Delivery>()
-                .Include(d => d.SaleItem).ThenInclude(si => si.Material)
-                .Include(d => d.Site).ThenInclude(s => s.Company)
-                .Include(d => d.Machine)
-                .Include(d => d.Driver).AsEnumerable();
 
         public override Delivery Add(Delivery delivery)
         {

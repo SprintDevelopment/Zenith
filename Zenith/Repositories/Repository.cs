@@ -35,6 +35,7 @@ namespace Zenith.Repositories
                 yield return item;
             }  
         }
+
         public virtual IEnumerable<T> AllForSearch()
         {
             var all = _context.Set<T>().AsEnumerable().ToList();

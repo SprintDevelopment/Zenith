@@ -18,13 +18,29 @@ namespace Zenith.Repositories
         OutgoCategoryRepository OutgoCategoryRepository = new OutgoCategoryRepository();
         MachineIncomeRepository MachineIncomeRepository = new MachineIncomeRepository();
 
-        public override IEnumerable<Outgo> All()
+        //public override IEnumerable<Outgo> All()
+        //{
+        //    return _context.Set<Outgo>()
+        //        .Include(o => o.OutgoCategory)
+        //        .Include(o => o.Company)
+        //        .Where(o => !o.RelatedOutgoPlusTransportId.HasValue)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<Outgo> AllAsync()
         {
-            return _context.Set<Outgo>()
+            var asyncEnumerable = _context.Set<Outgo>()
                 .Include(o => o.OutgoCategory)
                 .Include(o => o.Company)
                 .Where(o => !o.RelatedOutgoPlusTransportId.HasValue)
-                .AsEnumerable();
+                .OrderByDescending(s => s.DateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public override Outgo Single(dynamic id)

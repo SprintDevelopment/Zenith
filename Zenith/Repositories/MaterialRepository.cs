@@ -12,11 +12,23 @@ namespace Zenith.Repositories
 {
     public class MaterialRepository : Repository<Material>
     {
-        public override IEnumerable<Material> All()
+        //public override IEnumerable<Material> All()
+        //{
+        //    return _context.Set<Material>()
+        //        .Where(m => !m.IsMixed)
+        //        .AsEnumerable();
+        //}
+
+        public override async IAsyncEnumerable<Material> AllAsync()
         {
-            return _context.Set<Material>()
+            var asyncEnumerable = _context.Set<Material>()
                 .Where(m => !m.IsMixed)
-                .AsEnumerable();
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
         }
 
         public IEnumerable<Material> AllIncludeMixed()

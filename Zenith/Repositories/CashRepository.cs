@@ -20,6 +20,20 @@ namespace Zenith.Repositories
                 .AsEnumerable();
         }
 
+        public override async IAsyncEnumerable<Cash> AllAsync()
+        {
+            var asyncEnumerable = _context.Set<Cash>()
+                .Include(s => s.Company)
+                .OrderByDescending(s => s.IssueDateTime)
+                .AsSplitQuery()
+                .AsAsyncEnumerable();
+
+            await foreach (var item in asyncEnumerable)
+            {
+                yield return item;
+            }
+        }
+
         public override Cash Add(Cash cash)
         {
             base.Add(cash);
