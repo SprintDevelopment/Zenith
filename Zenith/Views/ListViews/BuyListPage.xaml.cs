@@ -33,7 +33,7 @@ namespace Zenith.Views.ListViews
                     (s.CompanyId == 0 || buy.CompanyId == s.CompanyId) &&
                     (s.DateRange == DateRanges.DontCare || buy.DateTime.IsInDateRange(s.DateRange))));
 
-            ViewModel = new BaseListViewModel<Buy>(new BuyRepository(), searchModel, dynamicFilter, PermissionTypes.Buys)
+            ViewModel = new BuyListViewModel(new BuyRepository(), searchModel, dynamicFilter)
             {
                 CreateUpdatePage = new BuyPage()
             };

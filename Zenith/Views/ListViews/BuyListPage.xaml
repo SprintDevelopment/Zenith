@@ -33,6 +33,9 @@
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding SearchCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/filter.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
+                <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding PrintCommand}">
+                    <Image Source="/Zenith;component/Resources/Images/Common/print.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
                 <Button Width="50" Style="{StaticResource SimpleButtonStyle}" BorderThickness="1,0,0,0" Command="{Binding RemoveCommand}">
                     <Image Source="/Zenith;component/Resources/Images/Common/delete.png" Stretch="Fill" Width="24" Height="24" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>

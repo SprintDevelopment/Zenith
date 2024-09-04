@@ -36,7 +36,7 @@ namespace Zenith.Views.ReportViews
             InitializeComponent();
             var searchModel = new MachineReportSearchModel();
 
-            ViewModel = new BaseReportViewModel<MachineReport>(new MachineReportRepository(), searchModel, PermissionTypes.MachineReport)
+            ViewModel = new MachineReportViewModel(new MachineReportRepository(), searchModel, PermissionTypes.MachineReport)
             {
                 //CreateUpdatePage = new BuyPage()
             };

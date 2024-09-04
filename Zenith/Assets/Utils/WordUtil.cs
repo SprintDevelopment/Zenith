@@ -3,6 +3,8 @@ using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,7 @@ using Zenith.Assets.Extensions;
 using Zenith.Assets.Values.Dtos;
 using Zenith.Models;
 using Zenith.Models.ReportModels;
+using Zenith.Models.ReportModels.ReportSearchModels;
 using Zenith.Repositories;
 using Word = Microsoft.Office.Interop.Word;
 namespace Zenith.Assets.Utils
@@ -20,15 +23,23 @@ namespace Zenith.Assets.Utils
         public static Word.Application wordApp;
         public static OperationResultDto PrintSaleFactor(int? factorNumber, List<int>? sitesIds, List<int>? materialsIds, string? lpo, List<long>? deliveriesIds, params Sale[] sales)
         {
-            if (wordApp == null)
-                wordApp = new Word.Application();
-
             var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             var templateFileFullName = Path.Combine(currentDirectory, sales[0].Company.IsTaxPayer ? @"Factors\Template.docx" : @"Factors\Template-Without-TRN.docx");
 
             if (File.Exists(templateFileFullName))
             {
-                wordApp.Documents.Open(templateFileFullName);
+                if (wordApp == null)
+                    wordApp = new Word.Application();
+
+                try
+                {
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    wordApp = new Word.Application();
+                    wordApp.Documents.Open(templateFileFullName);
+                }
 
                 var document = wordApp.ActiveDocument;
 
@@ -100,7 +111,11 @@ namespace Zenith.Assets.Utils
                     newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                 }
 
-                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                //document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                var fileName = $@"E:\{Guid.NewGuid()}.docx";
+                document.SaveAs2(fileName);
+
+                Process.Start("explorer.exe", $"/select, \"{fileName}\"");
                 //wordApp.Visible = true;
                 document.Close(false);
 
@@ -111,93 +126,102 @@ namespace Zenith.Assets.Utils
             return null;
         }
 
-        //public static OperationResultDto PrintBuyFactor(int? factorNumber, params Buy[] buys)
-        //{
-        //    if (wordApp == null)
-        //        wordApp = new Word.Application();
+        public static OperationResultDto PrintBuyFactor(params Buy[] buys)
+        {
+            var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var templateFileFullName = Path.Combine(currentDirectory, buys[0].Company.IsTaxPayer ? @"Factors\BuyTemplate.docx" : @"Factors\BuyTemplate-Without-TRN.docx");
 
-        //    var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        //    var templateFileFullName = Path.Combine(currentDirectory, buys[0].Company.IsTaxPayer ? @"Factors\BuyTemplate.docx" : @"Factors\BuyTemplate-Without-TRN.docx");
+            if (File.Exists(templateFileFullName))
+            {
+                if (wordApp == null)
+                    wordApp = new Word.Application();
 
-        //    if (File.Exists(templateFileFullName))
-        //    {
-        //        wordApp.Documents.Open(templateFileFullName);
+                try
+                {
+                    wordApp.Documents.Open(templateFileFullName);
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    wordApp = new Word.Application();
+                    wordApp.Documents.Open(templateFileFullName);
+                }
 
-        //        var document = wordApp.ActiveDocument;
+                var document = wordApp.ActiveDocument;
 
-        //        var companyTable = document.Tables[1];
-        //        companyTable.Cell(1, 1).Range.Text = $"Customer Code: {buys[0].Company.CompanyId:CPY0000}";
-        //        companyTable.Cell(1, 3).Range.Text = buys.Count() == 1 ? $"{buys[0].BuyId:INV0000}" : $"{factorNumber}";
-        //        companyTable.Cell(2, 1).Range.Text = buys[0].Company.Name;
-        //        companyTable.Cell(2, 3).Range.Text = buys.Count() == 1 ? $"{buys[0].DateTime:yyyy-MMM-dd}" : $"{buys[0].DateTime:yyyy-MMM}";
-        //        companyTable.Cell(3, 1).Range.Text = $"Tel: {buys[0].Company.Tel}";
-        //        companyTable.Cell(4, 1).Range.Text = $"Fax: {buys[0].Company.Fax}";
-        //        if (buys[0].Company.IsTaxPayer)
-        //            companyTable.Cell(5, 1).Range.Text = $"TRN: {buys[0].Company.TaxRegistrationNumber}";
+                var companyTable = document.Tables[1];
+                companyTable.Cell(1, 1).Range.Text = $"Customer Code: {buys[0].Company.CompanyId:CPY0000}";
+                companyTable.Cell(1, 3).Range.Text = buys.Count() == 1 ? $"{buys[0].BuyId:INV0000}" : $"";
+                companyTable.Cell(2, 1).Range.Text = buys[0].Company.Name;
+                companyTable.Cell(2, 3).Range.Text = buys.Count() == 1 ? $"{buys[0].DateTime:yyyy-MMM-dd}" : $"{buys[0].DateTime:yyyy-MMM}";
+                companyTable.Cell(3, 1).Range.Text = $"Tel: {buys[0].Company.Tel}";
+                companyTable.Cell(4, 1).Range.Text = $"Fax: {buys[0].Company.Fax}";
+                if (buys[0].Company.IsTaxPayer)
+                    companyTable.Cell(5, 1).Range.Text = $"TRN: {buys[0].Company.TaxRegistrationNumber}";
 
-        //        var deliveriesTable = document.Tables[2];
-        //        var totalPrice = 0f;
+                var deliveriesTable = document.Tables[2];
+                var totalPrice = 0f;
 
-        //        buys.SelectMany(s => s.Items)
-        //            .GroupBy(d => new { d.DeliveryNumber })
-        //            .Select((deliveries, i) =>
-        //            {
-        //                var deliveriesCount = deliveries.Count();
+                buys.SelectMany(s => s.Items.Select(si => new { si, dateTime = s.DateTime}))
+                    .GroupBy(d => new { d.si.DeliveryNumber })
+                    .Select((deliveries, i) =>
+                    {
+                        var deliveriesCount = deliveries.Count();
 
-        //                var newRow = deliveriesTable.Rows.Add();
-        //                newRow.Cells[1].Range.Text = $"{i + 1}";
-        //                newRow.Cells[2].Range.Text = deliveries.First().Material.Name;
-        //                newRow.Cells[4].Range.Text = deliveriesCount == 1 ? "1 Trip" : $"{deliveriesCount} Trips";
-        //                newRow.Cells[5].Range.Text = deliveriesCount == 1 ? deliveries.First().Machine.Name : "";
-        //                newRow.Cells[6].Range.Text = deliveries.First().DeliveryNumber;
-        //                newRow.Cells[7].Range.Text = $"{deliveries.First().DateTime:yyyy-MM-dd}";
-        //                newRow.Cells[8].Range.Text = $"{deliveries.Sum(d => d.Count):n2} (m)";
-        //                newRow.Cells[9].Range.Text = $"{(deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice):n2}";
+                        var newRow = deliveriesTable.Rows.Add();
+                        newRow.Cells[1].Range.Text = $"{i + 1}";
+                        newRow.Cells[2].Range.Text = deliveries.First().si.Material.Name;
+                        newRow.Cells[3].Range.Text = deliveriesCount == 1 ? "1 Trip" : $"{deliveriesCount} Trips";
+                        newRow.Cells[4].Range.Text = deliveries.First().si.DeliveryNumber;
+                        newRow.Cells[5].Range.Text = $"{deliveries.First().dateTime:yyyy-MM-dd}";
+                        newRow.Cells[6].Range.Text = $"{deliveries.Sum(d => d.si.Count):n2} (m)";
+                        newRow.Cells[7].Range.Text = $"{deliveries.Sum(d => d.si.TotalPrice):n2}";
 
-        //                totalPrice += deliveries.Sum(d => d.DeliveryFee) + deliveries.First().SaleItem.TotalPrice;
+                        totalPrice += deliveries.Sum(d => d.si.TotalPrice);
 
-        //                return deliveries;
-        //            }).ToList();
+                        return deliveries;
+                    }).ToList();
 
-        //        //var totalPrice = sales.Sum(s => s.Items.Where(si => si.Deliveries.Any()).Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
+                //var totalPrice = sales.Sum(s => s.Items.Where(si => si.Deliveries.Any()).Sum(si => si.TotalPrice + si.Deliveries.Sum(d => d.DeliveryFee)));
 
-        //        var rowsContents = new Tuple<string, string>[]
-        //        {
-        //            new Tuple<string, string>("Sub Total", $"{totalPrice:n2}"),
-        //            new Tuple<string, string>("VAT 5%", $"{totalPrice * 0.05:n2}"),
-        //            new Tuple<string, string>("Total", $"{totalPrice * 1.05:n2}")
-        //        };
+                var rowsContents = new Tuple<string, string>[]
+                {
+                    new Tuple<string, string>("Sub Total", $"{totalPrice:n2}"),
+                    new Tuple<string, string>("VAT 5%", $"{totalPrice * 0.05:n2}"),
+                    new Tuple<string, string>("Total", $"{totalPrice * 1.05:n2}")
+                };
 
-        //        for (int i = 0; i < (buys[0].Company.IsTaxPayer ? 3 : 1); i++)
-        //        {
-        //            var newRow = deliveriesTable.Rows.Add();
+                for (int i = 0; i < (buys[0].Company.IsTaxPayer ? 3 : 1); i++)
+                {
+                    var newRow = deliveriesTable.Rows.Add();
 
-        //            if (i == 0)
-        //            {
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //                newRow.Cells[1].Merge(newRow.Cells[2]);
-        //            }
+                    if (i == 0)
+                    {
+                        newRow.Cells[1].Merge(newRow.Cells[2]);
+                        newRow.Cells[1].Merge(newRow.Cells[2]);
+                        newRow.Cells[1].Merge(newRow.Cells[2]);
+                        newRow.Cells[1].Merge(newRow.Cells[2]);
+                        newRow.Cells[1].Merge(newRow.Cells[2]);
+                    }
 
-        //            newRow.Cells[1].Range.Text = rowsContents[i].Item1;
-        //            newRow.Cells[2].Range.Text = rowsContents[i].Item2;
-        //            newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
-        //        }
+                    newRow.Cells[1].Range.Text = rowsContents[i].Item1;
+                    newRow.Cells[2].Range.Text = rowsContents[i].Item2;
+                    newRow.Cells[1].Range.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
+                }
 
-        //        document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
-        //        //wordApp.Visible = true;
-        //        document.Close(false);
+                //document.ExportAsFixedFormat(@"D:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                var fileName = $@"E:\{Guid.NewGuid()}.docx";
+                document.SaveAs2(fileName);
 
-        //        //wordApp.Visible = true;
+                Process.Start("explorer.exe", $"/select, \"{fileName}\"");
+                //wordApp.Visible = true;
+                document.Close(false);
 
-        //    }
+                //wordApp.Visible = true;
 
-        //    return null;
-        //}
+            }
+
+            return null;
+        }
 
         public static OperationResultDto PrintSalaryReceipt(SalaryPayment payment)
         {
@@ -306,6 +330,53 @@ namespace Zenith.Assets.Utils
 
             }
 
+            return null;
+        }
+
+        public static OperationResultDto PrintMachineReport(MachineReportSearchModel searchModel, ObservableCollection<MachineReport> reportItems)
+        {
+            if (wordApp == null)
+                wordApp = new Word.Application();
+
+            var machine = new MachineRepository().Single(searchModel.MachineId);
+
+            var currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var templateFileFullName = Path.Combine(currentDirectory, @"Factors\MachineReport.docx");
+
+            if (File.Exists(templateFileFullName))
+            {
+                wordApp.Documents.Open(templateFileFullName);
+
+                var document = wordApp.ActiveDocument;
+
+
+                var machineTable = document.Tables[1];
+                machineTable.Cell(1, 1).Range.Text = $"Report For {machine.Name}";
+                machineTable.Cell(1, 2).Range.Text = $"Report Date {DateTime.Today:yyyy-MMM-dd}";
+                machineTable.Cell(2, 1).Range.Text = $"Report From {searchModel.StartDate:yyyy-MMM-dd} To {searchModel.EndDate:yyyy-MMM-dd}";
+
+                var resultTable = document.Tables[2];
+
+                reportItems
+                    .Select((ri, i) =>
+                    {
+                        var newRow = resultTable.Rows.Add();
+                        newRow.Cells[1].Range.Text = $"{i + 1}";
+                        newRow.Cells[2].Range.Text = ri.Title;
+                        newRow.Cells[3].Range.Text = $"{ri.DateTime:yyyy-MMM-dd}";
+                        newRow.Cells[4].Range.Text = $"{(ri.Value * ri.TransferDirectionSign):n2}";
+                        newRow.Cells[5].Range.Text = $"{ri.Remained:n2}";
+
+                        return ri;
+                    }).ToList();
+
+                document.ExportAsFixedFormat(@"E:\newPdfFileName.Pdf", Word.WdExportFormat.wdExportFormatPDF, true);
+                //wordApp.Visible = true;
+                document.Close(false);
+
+                //wordApp.Visible = true;
+
+            }
             return null;
         }
     }
